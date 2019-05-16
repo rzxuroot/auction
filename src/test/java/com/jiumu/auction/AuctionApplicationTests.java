@@ -1,6 +1,6 @@
 package com.jiumu.auction;
 
-import com.jiumu.auction.test1.TestClasss;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mybatis.spring.annotation.MapperScan;
@@ -15,8 +15,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 public class AuctionApplicationTests {
     @Autowired
     private StringRedisTemplate redisTemplate;
-    @Autowired
-    private TestClasss testClasss;
+
     @Test
     public void contextLoads() {
 //        StringRedisTemplate redisTemplate= new StringRedisTemplate();
@@ -24,9 +23,6 @@ public class AuctionApplicationTests {
         String au = redisTemplate.boundValueOps("au").get();
         System.out.println(au);
     }
-    @Test
-    public void test1(){
-        testClasss.test1();
-    }
+
 
 }

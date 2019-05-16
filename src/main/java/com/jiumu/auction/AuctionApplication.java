@@ -5,7 +5,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-@MapperScan("com.jiumu.auction.test1.mapper")
+@MapperScan("com.jiumu.auction.dataile")
 public class AuctionApplication {
 
     public static void main(String[] args) {

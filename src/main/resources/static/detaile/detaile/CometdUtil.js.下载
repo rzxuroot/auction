@@ -1,0 +1,161 @@
+/**
+ * 类名：com.fwzx.core.cometd.CometdUtil
+ * 描述：本工具类提供所有cometd的JS API调用
+ * 作者：rqf
+ * 时间：2016-08-10
+ */
+var com = window.com || {};
+com.fwzx = window.com.fwzx || {};
+com.fwzx.core = window.com.fwzx.core || {};
+com.fwzx.core.cometd = window.com.fwzx.core.cometd || {};
+com.fwzx.core.cometd.CometdUtil = function(){
+	
+	//使用闭包创建CometdUtil对象
+	var self = {};
+	var username = null;//当前订阅者信息
+	var channelAndCallbackObjArr = [];//调用join连接方法时指定的频道和频道回调函数，可指定多个频道。
+    var _disconnecting;
+    var _connected = false;
+	
+	/**
+	 * 判断浏览器是否为safari
+	 */
+	var isSafari;
+	var projectPath;
+    if ( navigator.userAgent.indexOf("AppleWebKit") > 0 && navigator.userAgent.indexOf("Chrome") < 0) {
+        isSafari = true;
+        projectPath = "http://www.artrade.com";
+    }
+	else {
+		isSafari = false;
+		projectPath = "http://ecp.artrade.com"
+	}
+	/*
+	 * @method name   : metaHandshakeFn
+	 * @method scope  : 私有方法
+	 * @method desc   : 当使用join方法与服务器建立连接并注册了监听后，回调此方法，对频道进行订阅。
+	 * @method param1 : （json Object类型）_message,返回是否与服务器连接成功等信息，可通过org.cometd.JSON.toJSON(_message)查看其具体内容。
+	 */
+	var metaHandshakeFn = function(_message){
+		if (_message.successful){
+			$.cometd.batch(function(){
+				$.each(channelAndCallbackObjArr,function(___index,___value){
+					___value.callbackP = $.cometd.subscribe(___value.channel, ___value.callback);
+				});
+            });
+		}
+	}
+	
+	//暂不使用
+	var metaConnectFn = function(message){
+		if (_disconnecting){
+			_connected = false;
+			_connectionClosed();
+		}else{
+			var wasConnected = _connected;
+			_connected = message.successful === true;
+			if (!wasConnected && _connected){
+				_connectionEstablished();
+			}else if (wasConnected && !_connected){
+				_connectionBroken();
+			}
+		}
+	}
+	function _connectionBroken(){
+		//alert("服务器坏啦！");
+		_showMessageBox("竞价消息服务器连接中断！");
+	}
+	function _connectionEstablished(){
+		//alert("重新连接！");
+		_showMessageBox("竞价消息服务器已连接！");
+	}
+	
+	function _connectionClosed(){
+		//alert("断开连接！");
+		_showMessageBox("竞价消息服务器已断开！");
+	}
+	
+	function _showMessageBox(_message){
+		$.messager.show(_message, '', 2000);
+	}
+	
+	/*
+	 * @method name   : self.join
+	 * @method scope  : 公有方法
+	 * @method desc   : 向服务器建立连接，建立连接后可使用send方法向频道订阅者广播发送消息。
+	 * @method param1 : （String类型）_userName,连接时，指定连接的用户名
+	 * @method param2 : （Array类型）_channelAndCallbackObjArr,连接时，指定订阅的频道和该频道接收到消息后的回调函数
+	 * @method return : （void类型）
+	 * @method exam1  : com.fwzx.core.cometd.CometdUtil.join("rqf",[{
+							channel:"/test/rqf",
+							callback:function(_message){
+								alert(org.cometd.JSON.toJSON(_message));	
+							}
+						}]);
+	
+	 */
+	self.join = function(_userName,_channelAndCallbackObjArr){
+
+		self.leave();
+		username = _userName;
+		channelAndCallbackObjArr = _channelAndCallbackObjArr;
+		$.cometd.configure({ 
+			url: projectPath+"/cometd/",
+			logLevel: 'debug' 
+		});
+		if (isSafari) {
+			$.cometd.websocketEnabled = false;
+		}
+		$.cometd.handshake();
+	};
+	
+	/*
+	 * @method name   : self.leave
+	 * @method scope  : 公有方法
+	 * @method desc   : 向服务器断开连接，断开连接后将无法接收到所有频道消息。
+	 * @method return : （void类型）
+     * @method exam1  : com.fwzx.core.cometd.CometdUtil.leave();
+	 */
+	self.leave = function(){
+		if(username != null){
+			$.cometd.batch(function(){
+				if (channelAndCallbackObjArr.length != 0){
+					$.each(channelAndCallbackObjArr,function(___index,___value){
+						$.cometd.unsubscribe(___value.callbackP);
+						___value.callbackP = null;
+					});
+					channelAndCallbackObjArr = null;
+				}
+			});
+			$.cometd.disconnect();
+			username = null;
+		}
+	}
+	
+	
+	/*
+	 * @method name   : self.send
+	 * @method scope  : 公有方法
+	 * @method desc   : 向频道订阅者广播发送消息，所有订阅了该频道的浏览器用户都能收到此消息
+	 * @method param1 : （any 类型）_chatMsg,可以是任意类型的消息信息，通常为字符串。此处传入何种类型，频道订阅时的回调函数接收时的参数就是此种类型。
+	 * @method param2 : （String类型）_channel,发送信息到此指定的频道上。
+	 * @method return : （void类型）
+	 * @method exam1  : com.fwzx.core.cometd.CometdUtil.send("hello everyone","/test/rqf");
+	 * @method exam2  : com.fwzx.core.cometd.CometdUtil.send({name:"rqf",sayMsg:"hello everyone"},"/test/rqf");
+	 * @method exam3  : com.fwzx.core.cometd.CometdUtil.send(["hello everyone"],"/test/rqf");
+	 */
+	self.send = function(_chatMsg,_channel){
+		$.cometd.publish(_channel, {
+			user: username,
+           	membership: 'send',
+			chat: _chatMsg
+		});
+	};
+	
+	//监听元数据频道，所有此种channel都以/meta开头
+	$.cometd.addListener('/meta/handshake', metaHandshakeFn);
+   	$.cometd.addListener('/meta/connect', metaConnectFn);
+	return self;
+}();
+ 
+ 

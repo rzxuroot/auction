@@ -1,0 +1,275 @@
+
+/*
+ * @desc 该对象或获取组合阶梯或固定阶梯的上一口价、下一口价、上N口价、下N口价
+ *       
+ */
+function StepPriceService(){
+	var stepPriceDataList = [
+		{
+			id:1,minStep:0,maxStep:2000,stepValue:100,stepType:"default"
+		},{
+			id:2,minStep:2000,maxStep:10000,stepValue:0,stepType:"default"
+		},{
+			id:3,minStep:10000,maxStep:20000,stepValue:1000,stepType:"default"
+		},{
+			id:4,minStep:20000,maxStep:100000,stepValue:0,stepType:"default"
+		},{
+			id:5,minStep:100000,maxStep:200000,stepValue:10000,stepType:"default"
+		},{
+			id:6,minStep:200000,maxStep:1000000,stepValue:0,stepType:"default"
+		}
+	];
+	
+	
+	
+	 //判断出价是否落在固定阶梯上
+	this.isBidOnStep3 = function(bid,step,startPrice){
+		if (bid > 0 && step > 0 && startPrice >= 0 && bid >= startPrice) {
+            return (bid - startPrice) % step == 0;
+        } else return false;
+	}
+
+    //判断出价是否落在组合阶梯上
+    this.isBidOnStep = function(bid){
+		var stepPrices = this.getIncrementsByDefaultType();
+		for(var i=0;i<stepPrices.length;i++){
+			var stepPrice = stepPrices[i];
+            if (bid >= stepPrice.minStep && bid < stepPrice.maxStep) {
+				if (stepPrice.stepValue != null && stepPrice.stepValue > 0){
+                    return this.isBidOnStep3(bid, stepPrice.stepValue, stepPrice.minStep);
+                } else {
+                    return _isBidOn258Step(bid);
+                }
+            }
+        }
+        return false;
+	}
+
+    // 获取固定阶梯上一口价
+    this.getLastStep3 = function(bid,step,startPrice){
+		if (bid > 0 && step > 0 && startPrice >= 0 && bid > startPrice) {
+            if ((bid - startPrice) % step == 0) {
+                return bid - (bid - startPrice) % step - step;
+            } else return bid - (bid - startPrice) % step;
+        }
+        return startPrice;
+	}
+
+    // 获取组合阶梯上一口价
+    this.getLastStep = function(bid){
+		bid = (bid > 0) ? bid : 0;
+        var lastBid = bid;
+        var stepPrices = this.getIncrementsByDefaultType();
+        for (var i = 0; i < stepPrices.length; i++) {
+            var stepPrice = stepPrices[i];
+            if (bid > stepPrice.minStep && bid <= stepPrice.maxStep) {
+                if (stepPrice.stepValue != null && stepPrice.stepValue > 0) {
+                    lastBid = this.getLastStep3(bid, stepPrice.stepValue, stepPrice.minStep);
+                } else {
+                    lastBid = _get258LastStep(bid);
+                }
+            }
+        }
+        return lastBid;
+	}
+
+
+
+    // 获取固定阶梯下一口价
+    this.getNextStep3 = function(bid,step,startPrice){
+		if (bid >= 0 && step > 0 && startPrice >= 0 && bid >= startPrice) {
+            return bid - (bid - startPrice) % step + step;
+        } else
+            return startPrice;
+	}
+
+    // 获取组合阶梯下一口价
+    this.getNextStep = function(bid){
+		bid = (bid > 0) ? bid : 0;
+        var nextBid = bid;
+        var stepPrices = this.getIncrementsByDefaultType();
+        for (var i = 0; i < stepPrices.length; i++) {
+            var stepPrice = stepPrices[i];
+            if (bid >= stepPrice.minStep && bid < stepPrice.maxStep) {
+                if (stepPrice.stepValue != null && stepPrice.stepValue > 0) {
+                    nextBid = this.getNextStep3(bid, stepPrice.stepValue, stepPrice.minStep);
+                } else {
+                    nextBid = _get258NextStep(bid);
+                }
+            }
+        }
+        return nextBid;
+	}
+
+    // 获取固定阶梯上N口价
+    this.getLastSteps3 = function(bid,step,startPrice,count){
+		var listPrices = [];
+        for (var i = 0; i < count; i++) {
+            var lastBid = this.getLastStep3(bid, step, startPrice);
+            listPrices.push(lastBid);
+            bid = lastBid;
+        }
+        return listPrices;
+	}
+
+    //获取组合阶梯上N口价
+   	this.getLastSteps = function(bid,count){
+	   var listPrices = [];
+        for (var i = 0; i < count; i++) {
+            var lastBid = this.getLastStep(bid);
+            listPrices.push(lastBid);
+            bid = lastBid;
+        }
+        return listPrices;
+	}
+
+    // 获取固定阶梯下N口价
+    this.getNextSteps3 = function(bid,step,startPrice,count){
+		var listPrices = [];
+        for (var i = 0; i < count; i++) {
+            var nextBid = this.getNextStep3(bid, step, startPrice);
+            listPrices.push(nextBid);
+            bid = nextBid;
+        }
+        return listPrices;
+	}
+
+    //获取组合阶梯下N口价
+    this.getNextSteps = function(bid,count){
+		var listPrices = [];
+        for (var i = 0; i < count; i++) {
+            var nextBid = this.getNextStep(bid);
+            listPrices.push(nextBid);
+            bid = nextBid;
+        }
+        return listPrices;
+	}
+
+
+    this.getIncrementsByDefaultType = function(){
+		return stepPriceDataList;
+	}
+	
+	//判断出价是否落在258阶梯上
+	_isBidOn258Step = function(bid) {
+        if (bid > 0) {
+            //当出价尾数为0时,出价除以10,循环
+            while (bid % 10 == 0) {
+            	if(bid.toString().length()==2)break;
+                bid = bid / 10;
+            }
+            //当处理后的出价尾数为2/5/8时,为真
+            return bid % 10 == 2 || bid % 10 == 5 || bid % 10 == 8|| bid % 10 == 0;
+        } else return false;
+    }
+	
+	//获取258阶梯上一口价
+    _get258LastStep = function(bid) {
+        bid = (bid > 0) ? bid : 0;
+        //n=当前价的位数-1(以10为底的对数，向下取整)
+        var n = bid > 0 ? Math.floor(Math.log(bid)/Math.LN10) : 0;
+        //取当前价的n位余数,例如3690取690
+        var bidMod = bid % Math.pow(10, n);
+        //取当前价的近似数,例如3690取3000
+        var bidRound = bid - bidMod;
+        //如果余数为0并且近似数大于10
+        if (bidMod == 0 && bidRound > 10) {
+            //如果近似价是10的n次方则退位
+            if (bidRound / Math.pow(10, n) == 1) {
+                bidRound = bidRound - Math.pow(10, (n - 1));
+                bidMod = 8 * Math.pow(10, (n - 2));
+            } else {
+                bidRound = bidRound - Math.pow(10, n);
+                bidMod = 8 * Math.pow(10, (n - 1));
+            }
+        }
+
+        //如果余数为0并且近似数小于等于10
+        else if (bidMod == 0 && bidRound <= 10) {
+            if (bidRound >= 0 && bidRound <= 2) {
+                bidRound = 0;
+            } else if (bidRound > 2 && bidRound <= 5) {
+                bidRound = 2;
+            } else if (bidRound > 5 && bidRound <= 8) {
+                bidRound = 5;
+            } else if (bidRound > 8) {
+                bidRound = 8;
+            }
+        }
+
+        //如果余数<2阶,则退位0阶
+        else if (bidMod > 0 && bidMod <= 2 * Math.pow(10, n - 1)) {
+            bidMod = 0;
+        }
+        //如果余数>2阶并且<5阶,则退位2阶
+        else if (bidMod > 2 * Math.pow(10, (n - 1)) && bidMod <= 5 * Math.pow(10, (n - 1))) {
+            bidMod = 2 * Math.pow(10, (n - 1));
+        }
+        //如果余数>5阶并且<8阶,则退位5阶
+        else if (bidMod > 5 * Math.pow(10, n - 1) && bidMod <= 8 * Math.pow(10, n - 1)) {
+            bidMod = 5 * Math.pow(10, n - 1);
+        }
+        //如果余数>8阶,则退位8阶
+        else if (bidMod > 8 * Math.pow(10, n - 1)) {
+            bidMod = 8 * Math.pow(10, n - 1);
+        }
+        //小于10时为0
+        else {
+            bidMod = 0;
+            bidRound = 0;
+        }
+        //下口价为当前价的近似数+进位后的阶梯
+        var nextBid = (bidRound + bidMod);
+        return nextBid;
+    }
+	
+	
+    //获取258阶梯下一口价
+    _get258NextStep = function(bid) {
+        bid = (bid >= 0) ? bid : 0;
+        //n=当前价的位数-1(以10为底的对数，向下取整)
+        var n = bid > 0 ? Math.floor(Math.log(bid)/Math.LN10) : 0;
+        //取当前价的n位余数,例如3690取690
+        var bidMod = bid % Math.pow(10, n);
+        //取当前价的近似数,例如3690取3000
+        var bidRound = bid - bidMod;
+
+        //如果余数为0并且近似数小于等于10
+        if (bidMod == 0 && bidRound < 10) {
+            if (bidRound >= 0 && bidRound < 2) {
+                bidRound = 2;
+            } else if (bidRound >= 2 && bidRound < 5) {
+                bidRound = 5;
+            } else if (bidRound >= 5 && bidRound < 8) {
+                bidRound = 8;
+            } else if (bidRound >= 8) {
+                bidRound = 10;
+            }
+        }
+        //如果余数<2阶,则进位2阶
+        else if (bidMod >= 0 && bidMod < 2 * Math.pow(10, n - 1)) {
+            bidMod = 2 * Math.pow(10, (n - 1));
+        }
+        //如果余数>2阶并且<5阶,则进位5阶
+        else if (bidMod >= 2 * Math.pow(10, (n - 1)) && bidMod < 5 * Math.pow(10, (n - 1))) {
+            bidMod = 5 * Math.pow(10, (n - 1));
+        }
+        //如果余数>5阶并且<8阶,则进位8阶
+        else if (bidMod >= 5 * Math.pow(10, n - 1) && bidMod < 8 * Math.pow(10, n - 1)) {
+            bidMod = 8 * Math.pow(10, n - 1);
+        }
+        //如果余数>8阶,则进位0阶
+        else if (bidMod >= 8 * Math.pow(10, n - 1)) {
+            bidMod = Math.pow(10, n);
+        }
+        //小于10时为10
+        else {
+            bidMod = 0;
+            bidRound = 10;
+        }
+        //下口价为当前价的近似数+进位后的阶梯
+        var nextBid =  (bidRound + bidMod);
+        return nextBid;
+    }
+}
+var stepPriceService = new StepPriceService();

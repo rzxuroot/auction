@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jiumu.auction.dataile.mapper.GoodsMapper">
+    <resultMap id="goodsResultMap" type="com.jiumu.auction.dataile.vo.GoodsVO">
+        <id property="goodsId" column="goods_id"/>
+        <result property="goodsContentId" column="goods_content_id"/>
+        <result property="goodsNo" column="goods_no"/>
+        <result property="goodsName" column="goods_name"/>
+        <result property="explainNote" column="explain_note"/>
+        <result property="explainInfo" column="explain_info"/>
+        <result property="explainAdd" column="explain_add"/>
+        <result property="goodsImg" column="goods_img"/>
+        <result property="askingPrice" column="asking_price"/>
+        <result property="biddingSteps" column="bidding_steps"/>
+        <result property="preStartTime" column="pre_start_time"/>
+        <result property="preDeadline" column="pre_deadline"/>
+        <result property="auctionStartTime" column="auction_start_time"/>
+        <result property="auctionDeadline" column="auction_deadline"/>
+        <result property="authorId" column="author_id"/>
+        <result property="authorName" column="author_name"/>
+        <result property="authorInfo" column="author_info"/>
+        <result property="itemName" column="item_name"/>
+    </resultMap>
+    <!--  private long goodsId;
+  private long goodsContentId;
+  private String goodsNo;
+  private String goodsName;
+  private String explainNote;
+  private String explainInfo;
+  private String explainAdd;
+  private String goodsImg;
+  private long askingPrice;
+  private long biddingSteps;
+  private long bout;
+  private long author;
+  private long year;
+  private long texture;
+  private String shape;
+  private String length;
+  private String width;
+  private String height;
+  private String diameter;
+  private java.sql.Timestamp preStartTime;
+  private java.sql.Timestamp preDeadline;
+  private java.sql.Timestamp auctionStartTime;
+  private java.sql.Timestamp auctionDeadline;
+  private String obligate1;
+  private String obligate2;
+   private String itemName;
+-->
+    <sql id="goods">
+         goods_id,goods_content_id,goods_no,goods_name,explain_note,explain_info,explain_add,
+        goods_img, asking_price, bidding_steps, bout, author, year, texture, shape, length, width, height, diameter
+        author_id,author_name,author_info
+    </sql>
+    <select id="queryGoodsById" resultMap="goodsResultMap">
+        select * from tb_goods join tb_author join db_auction.tb_item where author=author_id and item_id=texture and goods_id = #{goodsId}
+    </select>
+
+</mapper>

@@ -1,0 +1,112 @@
+/**
+ * 类名：com.fwzx.core.ueditorUtil.UeditorUtil
+ * 描述：本工具类提供所有Ueditor的JS API调用
+ * 作者：rqf
+ * 时间：2016-08-10
+ */
+var com = window.com || {};
+com.fwzx = window.com.fwzx || {};
+com.fwzx.core = window.com.fwzx.core || {};
+com.fwzx.core.ueditorUtil = window.com.fwzx.core.ueditorUtil || {};
+com.fwzx.core.ueditorUtil.UeditorUtil = function(){
+	
+	//使用闭包创建UeditorUtil对象
+	var self = {};
+	
+	/*
+	 * @method name   : self.init
+	 * @method scope  : 公有方法
+	 * @method desc   : 初始化一个百度编辑器，需执行容器的ID
+	 * @method return : self 
+     * @method exam1  : com.fwzx.core.ueditorUtil.UeditorUtil.init('containerDiv');
+     * @method exam2  : com.fwzx.core.ueditorUtil.UeditorUtil.init('containerDiv',{});
+	 */
+	self.init = function(_containerId,_config){
+		//1:创建ueditor容器
+		var _containerScript = $('<script id="container" name="content" type="text/plain">'+(_config.content||'')+'</script>');
+		//2:将ueditor容器放到页面的指定dom对象里
+		$("#" + _containerId).append(_containerScript);
+		
+		//3:改变ueditor的初始化配置
+		_config = _config||{};
+		window.UEDITOR_CONFIG.toolbars = _config.toolbars || [
+			['source','fullscreen', 'bold', 'italic', 'underline', 'fontborder', 'strikethrough', 'removeformat', 'formatmatch', 'pasteplain', '|', 'forecolor', 'backcolor', 'insertorderedlist', 'insertunorderedlist', 'selectall', 'cleardoc', '|','customstyle', 'paragraph', 'fontfamily', 'fontsize', '|', 'justifyleft', 'justifycenter', 'justifyright', 'justifyjustify','|','undo', 'redo'] 
+		];
+		window.UEDITOR_CONFIG.initialFrameWidth = _config.initialFrameWidth || window.UEDITOR_CONFIG.initialFrameWidth;
+		window.UEDITOR_CONFIG.initialFrameHeight = _config.initialFrameHeight || window.UEDITOR_CONFIG.initialFrameHeight;
+		
+		//4:渲染ueditor
+		self.ueObject = UE.getEditor('container');
+	}
+	
+	/*
+	 * @method name   : self.getContent
+	 * @method scope  : 公有方法
+	 * @method desc   : 获取在线编辑器的内容
+	 * @method return : String 
+     * @method exam1  : com.fwzx.core.ueditorUtil.UeditorUtil.getContent();
+	 */
+	self.getContent = function(){
+		return self.ueObject.getContent();
+	}
+
+	/*
+	 * @method name   : self.getAllHtml
+	 * @method scope  : 公有方法
+	 * @method desc   : 获取在线编辑器的html格式内容
+	 * @method return : String 
+     * @method exam1  : com.fwzx.core.ueditorUtil.UeditorUtil.getAllHtml();
+	 */
+	self.getAllHtml = function(){
+		return self.ueObject.getAllHtml();
+	}
+	
+	/*
+	 * @method name   : self.getContentHTML
+	 * @method scope  : 公有方法
+	 * @method desc   : 设置在线编辑器的html格式内容
+	 * @method param1 : String html格式的内容
+     * @method exam1  : com.fwzx.core.ueditorUtil.UeditorUtil.setContent(‘sdfsdf’);
+	 */
+	self.setContent = function(_html){
+		
+		self.ueObject.ready(function(){
+			self.ueObject.setContent(_html);
+			
+		});
+	}
+	
+	
+	/*
+	 * @method name   : self.getContentHTML
+	 * @method scope  : 公有方法
+	 * @method desc   : 设置在线编辑器的html格式内容
+	 * @method param1 : String html格式的内容
+     * @method exam1  : com.fwzx.core.ueditorUtil.UeditorUtil.setContent(‘sdfsdf’);
+	 */
+	self.setContent = function(_html){
+	
+		self.ueObject.ready(function(){
+			_html = (_html == null ? "" : _html);
+			self.ueObject.setContent(_html);
+		});
+	}
+	
+	/*
+	 * @method name   : self.appendContent
+	 * @method scope  : 公有方法
+	 * @method desc   : 在焦点位置插入html信息
+	 * @method param1 : String html格式的内容
+     * @method exam1  : com.fwzx.core.ueditorUtil.UeditorUtil.appendContent('sdfsdf');
+	 */
+	self.appendContent = function(_html){
+		self.ueObject.ready(function(){
+			self.ueObject.focus();
+			self.ueObject.execCommand('inserthtml',_html,true);
+		});
+	}
+	
+	return self;
+}();
+ 
+ 

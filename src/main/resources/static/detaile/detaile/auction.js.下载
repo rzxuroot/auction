@@ -1,0 +1,2346 @@
+var biddingLadderPrice = 0;// 竞价阶梯价格
+var biddingCurrentPrice = 0;// 当前价格
+var isFirstLoadFlag = true;// 页面第一次加载标示
+var biddingStartTime = null;//拍卖开始时间
+var biddingEndTime = null;// 拍卖结束时间
+var tempCurrentBid = null;// 当前出价信息,用于判断是否有人出价，若无人出价，允许出底价
+var bidmode =null;//竞价方式
+var incrmode=null;//阶梯方式
+var setIntervalP = null;
+var lotStatus=null;//图录表中的lot_status状态
+var rsrvPrice = null;
+var commission=0;//佣金比例
+var cookieItemName = "";
+var cookieGlideMark = "";
+var curItemGlideMark = "";
+var cookieMajorItemPic = "";
+var postponeFlag = false; //延时字样显示标识
+var lotWthdr="";
+/**
+ * （初始化）加载拍品信息
+ */
+
+function initItemInfo() {
+	var obj = {
+		"lotId" : lotId,
+		"saleRoomId" : saleRoomId,
+		"showRoom" : showRoom
+	}
+	doController("ecp/catalogueinfo/getcatalogueinfobylotid.action", {"dataStr":$.toJSON(obj)},function(_response) {
+		if (_response.result) {
+
+
+				if (_response.data.SRTYPE != '0001' && _response.data.SRTYPE != "0003")
+				{
+					if (_response.data.SRTYPE == '0002')
+					{
+						window.location.href="/jsp/ecp/public/auctionInquriy.jsp?lotid="+lotId;
+						return false;
+					}
+				}
+
+
+			 	commission=_response.data.commission;
+				lotStatus=_response.data.LOTSTATUS;
+				bidmode =_response.data.BIDMODE;//竞价方式
+				incrmode=_response.data.INCRMODE;//阶梯方式
+				// 1:设置当前位置标题文字
+				setCurrLocalTitleSpan(_response.data);
+				// 2:设置当前拍品基本信息
+				setCurrItemInfo(_response.data);
+				setItemPic(_response.data);
+				// 3:设置当前最新的出价信息
+				var currentBid = {
+					bidNumber:_response.data.BIDCOUNT,
+					bidderName:_response.data.CRRNTBUYERNAME
+				}
+				setCurrentBid(currentBid,false);
+				
+				// 4:设置当前拍品描述信息Tab页内容
+				setCurrItemDescInfo(_response.data);
+				// 5:设置最新出价信息Tab页内容
+				// setBidPriceInfo(_response.data.BidList);
+				// 5:设置开拍倒计时
+				if (isFirstLoadFlag) {
+					biddingStartTime = _response.data.STARTTIME;
+					isFirstLoadFlag = false;
+					setStartTimeCountDown();
+				}
+				// 6:快速出价滑块初始化
+				setQuickBidPrice(biddingCurrentPrice, biddingLadderPrice);
+				// 7:设置代理标志
+				setProxyFlag(_response.data.proxyFlag);
+				// 8:隐藏委托方信息
+				var isShowSeller = _response.data.isShowSeller;
+				if(!isShowSeller){
+					$(".sellerInfoDivBoxCls").css("display","none");
+				}
+				if(_response.data.CURRENTPRICE==0 && _response.data.STARTPRICE==0 ){
+					changeSelfPrice('+',incrmode,clearFormatMoney($("#currentPrice").text()),clearFormatMoney($("#currentPrice").text()),clearFormatMoney($("#incrPrice").text()));	
+				}
+
+			    //设置 以z开头的拍品的含佣金的价格
+  			    if (curItemGlideMark.substring(0,1) == "z")
+			    {
+
+			        if(bidmode == "0002")
+					{
+						$("#chargePrice").css('display','block');
+						//var lastprice = Math.round(clearFormatMoney($("#selfPrice").text())*1.1).toFixed(2);
+						//alert($("#chargePrice").html())
+						//formatMoney(lastprice, 2);
+					}
+				}
+
+		}
+	},false);
+	
+}
+/**
+ * 设置当前拍品描述信息Tab页内容
+ */
+var preBidderId = "";
+function setCurrentBid(currentBid,flag) {
+	if (currentBid != null) {
+		$("#bidNumber").html(currentBid.bidNumber);
+		$("#bidderName").html(currentBid.bidderName);
+		$("#bidderName").attr("title",currentBid.bidderName);
+		$("#bidderId").html(currentBid.bidderId);
+		if(flag){
+			if(chatId == currentBid.bidderId){
+				$("#blink").html("您已领先");
+				$("#blink").fadeOut(500).fadeIn(500);
+			}else if(chatId == preBidderId){
+				$("#blink").html("您已出局");
+				$("#blink").fadeOut(500).fadeIn(500);
+			}
+		}
+		preBidderId=currentBid.bidderId;
+	}
+}
+/**
+ * 设置前十条出价信息
+ * @param bids
+ */
+function setBidList() {
+	
+	
+	var _obj = {
+		lotId : lotId
+	};
+	doController("common/itemlot/getbidtop10bylotid.action", _obj, function(_response) {
+		if (_response.result) {
+			var bids = _response.data.bids;
+			var table_html = "<tr><th>竞买人</th><th>竞买价</th><th>出价时间</th></tr>";
+			if (bids != null && bids.length > 0) {
+				var len = (bids.length > 10 ? 10 : bids.length);
+				for(var i=0 ; i<len ; i++){
+					var isProxy = (bids[i].isAbsentee == "Y" ?"<font color='red'>(代理)</font>":"");
+					
+					table_html += "<tr><td class='bidName'>"+bids[i].bidderName
+						+"</td><td class='bidPrice'>"+bids[i].bidPrice.toFixed(2)
+						+"元"+isProxy+"</td>"
+						+"<td class='bidTime'>"+new Date(bids[i].bidTime).format("yyyy-MM-dd hh:mm:ss")
+						+"</td></tr>";
+				}
+			}else{
+				table_html = "<span style='font-size:14px;'>暂时没有出价！</span>";
+			}
+			$("#price_table").html(table_html);
+		} 
+	});
+	
+	
+}
+/**
+ * 设置前十条勘误信息
+ * @param corrDataList
+ */
+function setCorrList() {
+	
+	var _obj = {
+		lotId : lotId
+	};
+	doController("common/itemlot/getcorrlistbylotid.action", _obj, function(_response) {
+		if (_response.result) {
+			var corrDataList = _response.data.corrdataList;
+			var table_html = "<tr><th>勘误人</th><th>勘误内容</th><th>勘误时间</th></tr>";
+			if (corrDataList != null && corrDataList.length > 0) {
+				var len = (corrDataList.length > 10 ? 10 : corrDataList.length);
+				for(var i=0 ; i<len ; i++){
+					table_html += "<tr><td class='bidName'>"+corrDataList[i].ADDBY+"</td><td class='bidPrice'>"+corrDataList[i].CRCONTENT+"</td>"
+					+"<td class='bidTime'>"+corrDataList[i].ADDTIME+"</td></tr>";
+				}
+			}else{
+				table_html = "<span style='font-size:14px;'>暂时没有勘误信息！</span>";
+			}
+			$("#corr_table").html(table_html);
+		} 
+	});
+	
+	
+}
+/**
+ * 设置是否是代理
+ */
+function setProxyFlag(Flag) {
+	   $("input[name='bidType']").removeAttr('checked');
+	   $("input[name='bidType']").get(0).checked=true; 
+}
+/**
+ * 设置当前拍品描述信息Tab页内容
+ */
+function setCurrItemDescInfo(catalogueInfoDTO) {
+	// 1:获取拍品信息div对象
+	var itemDescDetailContentInfoEl = $("#itemDescDetailContentInfo");
+	// 2:拼接显示内容
+	var itemInfo = catalogueInfoDTO.itemInfo;
+	var itemDescContentText = "";
+	itemDescContentText += ($.null2Str(itemInfo.authorName,true) != "" ? "作者："
+			+ itemInfo.authorName + "" + createNbsp(6) : "");
+	itemDescContentText += ($.null2Str(itemInfo.itemAge,true) != "" ? "年代："
+			+ itemInfo.itemAge + "" + createNbsp(6) : "");
+	itemDescContentText += ($.null2Str(itemDescContentText,true) != "" ? "</br>"
+			: "");
+	itemDescContentText += ($.null2Str(itemInfo.material,true) != "" ? "质地："
+			+ itemInfo.material + "" + createNbsp(6) : "");
+	itemDescContentText += ($.null2Str(itemInfo.style,true) != "" ? "形式："
+			+ itemInfo.style + "" + createNbsp(6) : "");
+	itemDescContentText += ($.null2Str(itemDescContentText,true) != "" ? "</br>"
+			: "");
+	itemDescContentText += ($.nullZero2Str(itemInfo.length,true) != "" ? "长度："
+			+ itemInfo.length + "厘米" + createNbsp(6) : "");
+	itemDescContentText += ($.nullZero2Str(itemInfo.width,true) != "" ? "宽度："
+			+ itemInfo.width + "厘米" + createNbsp(6) : "");
+	itemDescContentText += ($.nullZero2Str(itemInfo.height,true) != "" ? "高度："
+			+ itemInfo.height + "厘米" + createNbsp(6) : "");
+	itemDescContentText += ($.nullZero2Str(itemInfo.diameter,true) != "" ? "直径："
+			+ itemInfo.diameter + "厘米" + createNbsp(6) : "");
+	itemDescContentText += ($.nullZero2Str(itemInfo.weight,true) != "" ? "重量："
+			+ itemInfo.weight + "克" + createNbsp(6) : "");
+	itemDescContentText += ($.null2Str(itemDescContentText,true) != "" ? "</br>"
+			: "");
+	itemDescContentText = itemDescContentText.replace("</br></br>","</br>").replace("</br></br>","</br>");
+	// 3:填充内容
+	itemDescDetailContentInfoEl.html(itemDescContentText);
+	// 4:获取拍品说明div对象
+	var itemExplainDetailContentInfoEl = $("#itemExplainDetailContentInfo");
+	// 5:填充内容
+	itemExplainDetailContentInfoEl.html(itemInfo.itemDesc);
+	//itemExplainDetailContentInfoEl.html(itemInfo.itemDesc + "<br>" + "临时的数据测试。");
+
+	var showartradesdEl = $("#showartradesd");
+	showartradesdEl.html("<img src='/image/ecp/artrsd.jpg'>")
+
+}
+/**
+ * 设置开拍倒计时
+ */
+function setStartTimeCountDown() {
+	sDate = null;
+	var startTimeStep = 0;
+	var biddingEndTimeStep = 0;
+	setIntervalP = setInterval(function() {
+		var currDate = countDownTime(new Date(biddingStartTime
+				- startTimeStep).format("yyyy-MM-dd hh:mm:ss"));
+		startTimeStep += 1000;
+		if (fixMath(fixMath(fixMath(currDate.day, currDate.hour, "+"),
+				currDate.minute, "+"), currDate.second, "+") == 0) {
+			if(biddingEndTimeStep==0){
+				sDate =null;	
+			}	
+			currDate = countDownTime(new Date(fixMath(biddingEndTime,biddingEndTimeStep,"-")).format("yyyy-MM-dd hh:mm:ss"));
+			biddingEndTimeStep += 1000;
+			if (fixMath(fixMath(fixMath(currDate.day, currDate.hour, "+"),
+					currDate.minute, "+"), currDate.second, "+") == 0) {
+				
+				setPageStatus("actioned");
+			} else {
+				setPageStatus("actioning");
+			}
+		} else {
+			setPageStatus("noAction");
+		}
+		if($("div.notBeginPaiDivCls").html()=="已撤拍"){
+			$("#toDay").html(0);// 距开拍几天
+			$("#toHour").html(0);// 距开拍几时
+			$("#toMinute").html(0);// 距开拍几分
+			$("#toSecond").html(0);
+		}else{
+			$("#toDay").html(currDate.day);// 距开拍几天
+			$("#toHour").html(currDate.hour);// 距开拍几时
+			$("#toMinute").html(currDate.minute);// 距开拍几分	
+			if(currDate.day==0&&currDate.hour==0&&currDate.minute==0&&currDate.second<30){
+				var cssSecond="<font style='font-size:16px;'>"+currDate.second+"</font>";
+				$("#toSecond").html(cssSecond);// 距开拍几秒	
+			}else{
+				$("#toSecond").html(currDate.second);// 距开拍几秒
+			}
+		}
+		
+		
+	}, 1000);
+
+}
+/**
+ * 设置当前页面的拍卖状态
+ * 
+ * @param statusType:拍卖状态【noAction:预展;actioning:竞拍中actioned:已结束;】
+ */
+function setPageStatus(statusType) {
+	switch (statusType) {
+	case "noAction":
+		if(lotStatus=="0008"||lotWthdr=='Y'){
+			$("div.notBeginPaiDivCls").html("已撤拍");
+			clearInterval(setIntervalP);
+			$("#timeTitleSpan").html("距结束");
+			$("#addPriceBtn").hide(300);
+			$("#myBidBandDiv").hide(300);
+			break;
+		}else if(lotStatus=="0002"){
+			$("div.notBeginPaiDivCls").html("已结束");
+			$("#timeTitleSpan").html("距结束");
+			$("#addPriceBtn").hide(300);
+			$("#myBidBandDiv").hide(300);
+			break;
+		}else{
+			$("div.notBeginPaiDivCls").html("预展中");
+			$("#timeTitleSpan").html("距开拍");
+			$("#addPriceBtn").hide(300);
+			$("#myBidBandDiv").hide(300);
+			break;
+		}
+	case "actioning":
+		if(lotStatus=="0008"||lotWthdr=='Y'){
+			$("div.notBeginPaiDivCls").html("已撤拍");
+			clearInterval(setIntervalP);
+			$("#timeTitleSpan").html("距结束");
+			$("#addPriceBtn").hide(300);
+			$("#myBidBandDiv").hide(300);
+			break;
+		}else if(lotStatus=="0002"){
+			$("div.notBeginPaiDivCls").html("已结束");
+			$("#timeTitleSpan").html("距结束");
+			$("#addPriceBtn").hide(300);
+			$("#myBidBandDiv").hide(300);
+			break;
+		}else{
+			joinServer();
+			$("div.notBeginPaiDivCls").html("竞拍中");
+			$("#timeTitleSpan").html("距结束");
+			$("#addPriceBtn").show(300);
+			$("#myBidBandDiv").show(300);
+			break;
+		}
+	case "actioned":
+		if(lotStatus=="0008"||lotWthdr=='Y'){
+			$("div.notBeginPaiDivCls").html("已撤拍");
+			clearInterval(setIntervalP);
+			$("#timeTitleSpan").html("距结束");
+			$("#addPriceBtn").hide(300);
+			$("#myBidBandDiv").hide(300);
+			break;
+		}else{
+			$("div.notBeginPaiDivCls").html("已结束");
+			$("#timeTitleSpan").html("距结束");
+			$("#addPriceBtn").hide(300);
+			$("#myBidBandDiv").hide(300);
+			break;
+		}
+		
+	}
+}
+
+/**
+ * 根据拍品开始时间和结束时间判断拍品是否在竞拍中,若在则显示"最新出价"tab页
+ */
+function showTab(startTime,endTime){
+	var sDate = getSystemDate().format("yyyy-MM-dd hh:mm:ss"); //当前时间
+//	var startTime = $("#startTime").text(); // 开始时间
+//	var endTime = $("#endTime").text(); // 结束时间
+	
+	if(startTime < sDate && sDate < endTime){
+		var priceClass = $("#price").attr("class");
+		if(priceClass.indexOf("itemDetailTabSelCls") < 0){
+			var curIndex = $("#tabul li").index($("#price"));
+			$("#price").removeClass("itemDetailTabCls").addClass(
+					"itemDetailTabSelCls").siblings("li:not(:last)")
+					.removeClass("itemDetailTabSelCls").addClass(
+							"itemDetailTabCls");
+			$("#auctdiv_" + curIndex).show().siblings(
+					".itemDetailTabContentBoxCls").hide();
+					
+			setBidList(); //设置前十条出价信息
+			$("#auctdiv_3").attr("isload","true");	
+		}
+	}
+
+}
+
+/**
+ * 设置当前拍品基本信息
+ */
+function setCurrItemInfo(catalogueInfoDTO) {
+	if(catalogueInfoDTO.BIDMODE=='0003'){
+		$('#jianHao').click(function(){changeSelfPrice('-',incrmode,clearFormatMoney($("#currentPrice").text()),clearFormatMoney($("#currentPrice").text()),clearFormatMoney($("#incrPrice").text()));});
+		$('#jiaHao').click(function(){changeSelfPrice('+',incrmode,clearFormatMoney($("#currentPrice").text()),clearFormatMoney($("#currentPrice").text()),clearFormatMoney($("#incrPrice").text()));});
+	}
+	$("#c_" + catalogueInfoDTO.LOTID).val(formatMoney(catalogueInfoDTO.CURRENTPRICE, 2));
+	//显示的拍品名称-动态拼将lotId改为glideMark
+	var name=getItemTitle(catalogueInfoDTO.GLIDEMARK,catalogueInfoDTO.AUTHORNAME,catalogueInfoDTO.ITEMAGE,catalogueInfoDTO.ITEMNAME);
+	
+ 	document.title="嘉德在线-"+name; 
+//	cookieItemName = catalogueInfoDTO.itemInfo.itemName;
+	cookieItemName = name;
+	cookieGlideMark = catalogueInfoDTO.GLIDEMARK;
+	curItemGlideMark = catalogueInfoDTO.GLIDEMARK;
+
+	if(catalogueInfoDTO.majorItemPic != undefined){
+		cookieMajorItemPic = catalogueInfoDTO.majorItemPic.filepath + "_s.jpg";
+	}else{
+		cookieMajorItemPic = "../../../image/ecp/auct_pic1.png";
+	}
+	handleCookie();
+	$("#itemName").html(name);// 拍品名称
+	$("#startTime").html(
+			new Date(catalogueInfoDTO.STARTTIME).format("yyyy-MM-dd hh:mm:ss"));// 开始时间
+
+	$("#endTime").html(
+			new Date(catalogueInfoDTO.ENDTIME).format("yyyy-MM-dd hh:mm:ss"));// 结束时间
+	biddingEndTime = catalogueInfoDTO.ENDTIME;// 保存结束时间到临时变量中
+	lotWthdr = catalogueInfoDTO.LOTWTHDR;
+	//根据拍品开始时间和结束时间判断拍品是否在竞拍中,若在则显示"最新出价"tab页(暂时屏蔽掉)
+	//showTab(new Date(catalogueInfoDTO.STARTTIME).format("yyyy-MM-dd hh:mm:ss"),new Date(catalogueInfoDTO.ENDTIME).format("yyyy-MM-dd hh:mm:ss"));
+	$("#currentPrice").html(formatMoney(catalogueInfoDTO.CURRENTPRICE, 2));// 当前价格
+	//var cmmssnValue= Math.round(catalogueInfoDTO.CURRENTPRICE/10);
+	//$("#cmmssn").html(formatMoney(cmmssnValue, 2));//当前拥金
+	biddingCurrentPrice = catalogueInfoDTO.CURRENTPRICE;// 保存当前价格到临时变量中
+	rsrvPrice = catalogueInfoDTO.UNDERRSRVPRICE;
+	// 未到保留价提示
+	if (catalogueInfoDTO.UNDERRSRVPRICE == 'Y') {
+		$("#underRsrvPrice").show();
+	} else {
+		$("#underRsrvPrice").hide();
+	}
+	$("#startPrice").html(formatMoney(catalogueInfoDTO.STARTPRICE, 2));// 起拍价格
+	$("#incrPrice").html(formatMoney(catalogueInfoDTO.INCRPRICE, 2));// 竞价阶梯（阶梯价格）
+	biddingLadderPrice = catalogueInfoDTO.INCRPRICE;// 保存进价阶梯价格到临时变量中
+	if(catalogueInfoDTO.BIDMODE == "0001"){
+		$("#bidMode").html("一口价");// 拍卖方式
+	}else if(catalogueInfoDTO.BIDMODE == "0002"){
+		$("#bidMode").html("速胜");// 拍卖方式
+	}else if(catalogueInfoDTO.BIDMODE == "0003"){
+		$("#bidMode").html("英式");// 拍卖方式
+	}
+//	$("#bidMode").html($.dict.getDictText("bid_mode", catalogueInfoDTO.BIDMODE));// 拍卖方式
+	hiddenChangePriceTool(catalogueInfoDTO.BIDMODE);
+	if(catalogueInfoDTO.INCRMODE == "0001"){
+		$("#incrMode").html("增量阶梯竞价");// 拍卖方式
+	}else if(catalogueInfoDTO.INCRMODE == "0002"){
+		$("#incrMode").html("固定阶梯竞价");// 拍卖方式
+	}
+//	$("#incrMode").html($.dict.getDictText("incr_mode", catalogueInfoDTO.INCRMODE));// 阶梯方式
+	// 第一次进入该页面，计算当前出价
+	if (catalogueInfoDTO.BIDCOUNT == 0) {
+		var cmmssnValue= catalogueInfoDTO.CURRENTPRICE/commission;
+		$("#cmmssn").html(formatMoney(cmmssnValue, 2));//当前拥金
+		var chargeprice=cmmssnValue+Number(catalogueInfoDTO.CURRENTPRICE);
+		$("#chargePrice").html(formatMoney(chargeprice, 2));
+		// 未有人出过价，当前出价为底价
+		if (isFirstLoadFlag) {
+			$("#selfPrice").html(formatMoney(catalogueInfoDTO.CURRENTPRICE, 2));// 当前出价
+			// 这个如果有问题要修改
+			doController("common/itemlot/auctitem.action", {
+				"lotId" : lotId,
+				"priceType" : 1,
+				"inputValue" : catalogueInfoDTO.CURRENTPRICE
+			}, function(_response) {
+				if (_response.data != null) {
+					$("#i_" + catalogueInfoDTO.LOTID).val(_response.data);
+				}
+			});
+		}
+	} else {
+		// 有人出过价，当前出价为底价+加竞价阶梯
+		if(catalogueInfoDTO.BIDMODE=='0003'){
+			$("#selfPrice").text($("#currentPrice").text());
+			changeSelfPrice('+',incrmode,clearFormatMoney($("#currentPrice").text()),clearFormatMoney($("#currentPrice").text()),clearFormatMoney($("#incrPrice").text()));	
+		}
+	}
+}
+
+function setItemPic(catalogueInfoDTO){
+	if(!isFirstLoadFlag)return;
+	
+	if (catalogueInfoDTO.majorItemPic != undefined) {
+		// 设置主图信息
+		if (isFirstLoadFlag) {
+			$("img.majorImgCls").parent()[0].href = catalogueInfoDTO.majorItemPic.filepath
+					+ ".jpg";
+			$("img.majorImgCls").attr("src",
+					catalogueInfoDTO.majorItemPic.filepath + ".jpg");// 主图信息
+					
+		}		
+	}
+	
+	if (catalogueInfoDTO.otherItemPicList != undefined) {
+		
+		// 设置非主图信息
+		
+		for (var i = 0; i < catalogueInfoDTO.otherItemPicList.length; i++) {
+			var otherItemPic = catalogueInfoDTO.otherItemPicList[i];
+			var oImgEl = $('<img class="smallImgCls" src="'
+					+ otherItemPic.filepath + '_s.jpg"/>');
+			//var oImgEl = $('<img class="smallImgCls" src="'
+			//	+ otherItemPic.filepath + '.jpg"/>');
+
+			$("#otherImg").append(oImgEl);
+			oImgEl.unbind("click");
+			oImgEl.bind("click", function() {
+				$("img.majorImgCls").prop("src",
+						$(this).prop("src").replace("_s", ""));
+			});
+		}
+	}
+
+}
+
+/**
+ * 点击首页跳转
+ * @returns
+ */
+function doClickIndex(){
+	window.location = baseUrl + "/index.jsp";
+}
+/**
+ * 点击分类跳转
+ * @param catalogueInfoDTO
+ */
+function doClickCatg(_this){
+	var _id = $(_this).attr("id");
+	var catgId = _id.split("_")[0];
+	var catgLev = _id.split("_")[1];
+	var setting={
+			"action":baseUrl+"/jsp/ecp/item/manage/itemquerylist.jsp",
+			"datas":[{"name":"categoryId","value":catgId},{"name":"lev","value":catgLev}],	
+			"target":"_self"
+	};	
+   simulateFormSubmit(setting);
+}
+/**
+ * 点击专场跳转
+ * @returns
+ */
+function doClickSr(_this){
+	var srId = $(_this).attr("id");
+	window.location = baseUrl + "/jsp/ecp/item/manage/auctroomitemquerylist.jsp?saleroomid="+srId;
+}
+/**
+ * 设置当前位置标题文字
+ */
+function setCurrLocalTitleSpan(catalogueInfoDTO) {
+	tempCurrentBid = catalogueInfoDTO.currentBid;
+	$("#currLocalTitleSpan").html("<span class='ahover' onclick='doClickIndex();'>首页</span>"
+		+ " > "
+		+ "<span class='ahover' id='"+catalogueInfoDTO.FIRSTCATGID+"_1' onclick='doClickCatg(this);'>"+catalogueInfoDTO.FIRSTCATGNAME+"</span>"
+		+ " > "
+		+ "<span class='ahover' id='"+catalogueInfoDTO.SECONDCATGID+"_2' onclick='doClickCatg(this);'>"+catalogueInfoDTO.SECONDCATGNAME+"</span>"
+		+ "<span class='lot_span'>"+" LOT "+lotId+"</span>"
+	    + "<span class='sr_span' id='"+catalogueInfoDTO.SALEROOMID+"' onclick='doClickSr(this);'><img class='sr_png' src='"+baseUrl+"/image/ecp/sr_2.png' /></span>");
+}
+/**
+ * 改变当前用户的出价价格（增加或减少）
+ */
+function changeSelfPrice(nextOrLast,incrMode,currentPrice, startPrice,incrPrice) {
+	
+	
+	var selfPriceEl = $("#selfPrice");
+	var inputPrice = parseInt(clearFormatMoney(selfPriceEl.text()));
+	incrPrice = parseInt(incrPrice);
+	startPrice = parseInt(startPrice);
+	currentPrice = parseInt(currentPrice);
+	incrPrice = parseInt(incrPrice);
+
+	//1:判断是固定阶梯还是组合阶梯
+	var nextPriceValue = "";	
+	if(incrMode=="0001"){//增量阶梯
+		if(nextOrLast=="+"){//获取下一口价
+			nextPriceValue = stepPriceService.getNextStep(inputPrice);
+		}else{
+			nextPriceValue = stepPriceService.getLastStep(inputPrice);
+		}
+	}else{//固定阶梯
+		if(nextOrLast=="+"){//获取下一口价
+			nextPriceValue = stepPriceService.getNextStep3(inputPrice,incrPrice,startPrice);
+		}else{
+			nextPriceValue = stepPriceService.getLastStep3(inputPrice,incrPrice,startPrice);
+		}
+	}
+	if (parseInt(nextPriceValue)<=parseInt(currentPrice)) {
+		ecpBase.alert("所出价格应高于当前价格，否则无效");
+	} else {
+		var cmmssnValue= nextPriceValue/commission;
+		$("#cmmssn").html(formatMoney(cmmssnValue, 2));//当前佣金
+		var chargeprice=cmmssnValue+Number(nextPriceValue);
+		$("#chargePrice").html(formatMoney(chargeprice, 2));
+		selfPriceEl.html(formatMoney(nextPriceValue, 2));
+	}
+	
+	
+	
+}
+/**
+ * 判断出价价格是否合法 合法返回true;不合法返回false
+ * 
+ * @param1:nextPriceValue 即将出价的价格
+ * @param2:biddingCurrentPrice 当前拍品的价格
+ */
+function addPriceValid(nextPriceValue, biddingCurrentPrice) {
+	// 出价价格小于等于当前拍品价格，无法出价
+	if (parseFloat(nextPriceValue) < parseFloat(biddingCurrentPrice)) {
+		ecpBase.tip("出价不能小于当前价格！", 1000);
+		return false;
+	} else if (tempCurrentBid != null
+			&& parseFloat(nextPriceValue) == parseFloat(biddingCurrentPrice)) {
+		ecpBase.tip("出价不能等于当前价格！", 1000);
+		return false;
+	}
+	return true;
+}
+/**
+ * 翻页移动显示拍品小图片信息
+ * 
+ * @param1:_displacement 位移量
+ */
+function moveSmallImg(_displacement) {
+	// 1:获取小图片集合DIV框
+	var otherImgEl = $("#otherImg");
+	// 2:获取当前显示的第一张图片下标
+	var currentShowImgIndex = otherImgEl.attr("currentShowImgIndex");
+	// 3:判断是否可以移动
+	if (_displacement == "-" && currentShowImgIndex == "0")
+		return;
+	if (_displacement == "+"
+			&& parseInt(fixMath(fixMath(currentShowImgIndex, "1", "+"),
+					otherImgEl.children().length, "-")) >= 0)
+		return;
+	// 4:移动当前小图片集合Div框
+	var _tmpIndex = (_displacement == "+" ? currentShowImgIndex : fixMath(
+			currentShowImgIndex, "1", "-"));
+	otherImgEl.find("img").eq(_tmpIndex).animate({
+		width : (_displacement == "+" ? 0 : 86),
+		marginLeft : (_displacement == "+" ? 0 : 10)
+	}, 100);
+	// 5:修改当前显示的第一张图片下标
+	currentShowImgIndex = fixMath(currentShowImgIndex, "1", _displacement);
+	$("#otherImg").attr("currentShowImgIndex", currentShowImgIndex);
+}
+/**
+ * 出价方法
+ */
+function addPrice() {
+ var bidType = $("input[name='bidType']:checked").val();
+	if (chatName == '') {
+		ecpBase.alert("您还没有登陆，请先登陆再出价！",function(){
+			window.location = baseUrl + "/jsp/ecp/login.jsp";
+		});
+		doBindAddPriceButtonClickListener();
+		return;
+	} else {
+		// 1:防止重复提交，出价后，先屏蔽单击事件
+		$("#addPriceBtn").find("a").addClass("addPriceDisableBtn");
+		// 2:判断出价是否合法
+		var selfPriceEl = $("#selfPrice");
+		var selfPriceValue = clearFormatMoney(selfPriceEl.html());
+		var nextPriceValue = selfPriceValue;
+		// 出价价格小于等于当前拍品价格，无法出价
+		if (!addPriceValid(nextPriceValue, biddingCurrentPrice)) {
+			// 恢复出价按钮的单击事件
+			doBindAddPriceButtonClickListener();
+			return;
+		}
+		var obj={
+				"lot_id":lotId,	
+				"price":clearFormatMoney($("#selfPrice").text()),
+				"type":bidType
+		}
+		// 出价
+		var doaddprice=function(obj){
+
+			var aprice=clearFormatMoney($("#selfPrice").text());
+            var cmisaprice = Math.round(aprice*1.1).toFixed(2);
+
+			//判断用户是否确认出价
+			//您的出价行为表明已经认同了嘉德在线的拍卖规则。不论成功与否，你都承担与之相应的法律行为。<br>
+            //将在这里判断是否为z开头的拍品 是的话 要进行不同处理
+			if (curItemGlideMark.substring(0,1) == "z")
+			{
+				GenerateHtmlDiv("请确认是否提交您的竞价？<br>您的出价：" + aprice +"元;&nbsp;含佣金价:" + cmisaprice + "元<br><div style='text-align: left'><font style='color:#f60;font-size:15px;text-align: left'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;您出价成功后,请在15分钟内付款(系统将自动跳转到“生成订单”的页面)。如果您15分钟内未付款,系统将取消您的出价,将拍品重新上拍。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;买受人通过竞买取得的拍品为特殊属性之商品，属于2014年3月15日起施行的《中华人民共和国消费者权益保护法》规定的“其他根据商品性质并经消费者在购买时确认不宜退货的商品，不适用7天无理由退货”.</font></div>",	function(){
+					doController("ecp/bid/addGLprice.action", obj, function(_response) {
+						if(!_response.result){
+							ecpBase.alert(_response.data);
+						}
+						else
+						{
+							if(_response.data == "出价成功")
+							{
+
+								doController("ecp/transaction/precheckGLorder.action",{"lotids":lotId},function(_response_gl) {
+									if (_response_gl.result) {
+										GenerateHtmlDivForShow("正在跳转至订单页面,请稍等...")
+										window.location=baseUrl + "/ecp/transaction/gotocheckorder.action?lotids="+lotId;
+									}else {
+										ecpBase.error(_response_gl.data);
+									}
+
+								}, false);
+							}
+						}
+					}, false);
+				},function(){
+					doBindAddPriceButtonClickListener();
+					return;
+				});
+
+			}
+			else
+			{
+				GenerateHtmlDiv("请确认是否提交您的竞价？<br>您的出价：" + aprice +"元<br><div style='text-align: left'><font style='color:#f60;font-size:15px;text-align: left'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;买受人须在成功竞买到拍品后的10个自然日付款，如果买受人未足额支付成交价款，逾期系统将自动扣除相当于拍品落槌价20%的保证金。<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;买受人通过竞买取得的拍品为特殊属性之商品，属于2014年3月15日起施行的《中华人民共和国消费者权益保护法》规定的“其他根据商品性质并经消费者在购买时确认不宜退货的商品，不适用7天无理由退货”.</font></div>",	function(){
+					doController("ecp/bid/addprice.action", obj, function(_response) {
+						doBindAddPriceButtonClickListener();
+						if(!_response.result){
+							if(_response.data=="保证金额度不足，无法出价！"){
+								ecpBase.customConfirm(_response.data,"去交保证金","取消",function(){
+									window.open(baseUrl + "/jsp/ecp/buyer/myasset/cpitacntmng.jsp",'_self');
+								});
+							}else{
+								ecpBase.alert(_response.data);
+							}
+						}else{
+							if(_response.data!="出价成功")
+								ecpBase.alert(_response.data);
+							//$("input[name='bidType']").removeAttr('checked');
+							$("input[name='bidType']").get(0).checked=true;
+						}
+					}, false);
+				},function(){
+					doBindAddPriceButtonClickListener();
+					return;
+				});
+			}
+		}
+
+
+		var _leadId = $("#bidderId").text();
+
+		if(_leadId && chatId && chatId==_leadId && bidType==1){
+			ecpBase.confirm("您的出价已领先，是否再次出价?",function(){
+				doaddprice(obj);
+			},function(){
+				doBindAddPriceButtonClickListener();
+			});
+		}else{
+			    doaddprice(obj);
+		}
+		
+	}
+}
+/**
+ * 绑定出价方法事件
+ */
+function doBindAddPriceButtonClickListener() {
+	$("#addPriceBtn").one("click", addPrice);
+	$("#addPriceBtn").find("a").removeClass("addPriceDisableBtn");
+}
+/**
+ * 绑定“加入竞拍助手”方法事件
+ */
+function doBindAddBidderHelpButtonClickListener() {
+	$("#addBidderHelpDivBtn").one("click", doAddMyConcern);
+}
+/**
+ * 调用该方法，从数据库中将拍品加入竞拍助手
+ */
+function doAddMyConcern() {
+	doController("ecp/buyer/myconcern/dosavemyconcern.action",{
+		"cncrnCont" : lotId
+	},function(_response) {
+		if (_response.result) {
+			if ("true" == _response.data) {
+				ecpBase.tip("当前拍品已成功加入竞拍助手！", 1000);
+				doBindAddBidderHelpButtonClickListener();
+			} else {
+				ecpBase.error("已经收藏过该商品");
+			}
+		}
+	});
+}
+/**
+ * 拍卖tab管理
+ * 
+ * @type
+ */
+var Auction = {
+	initPageInfo : function() {
+		this.itemAdvice(); // 初始化拍品咨询管理
+	},
+
+	/**
+	 * 拍品咨询管理
+	 */
+	itemAdvice : function() {
+		$("#tabul li:not(:last)").mouseover(
+			function() {
+				var curIndex = $("#tabul li").index(this);
+				$(this).removeClass("itemDetailTabCls").addClass("itemDetailTabSelCls").siblings("li:not(:last)").removeClass("itemDetailTabSelCls").addClass("itemDetailTabCls");
+				if(curIndex==1&& $(this).attr("isload")=="false"){
+					setAuthorDesc();
+					$("#auctdiv_1").attr("isload","true");
+					$(this).attr("isload","true");
+				}else if(curIndex==3&& $(this).attr("isload")=="false"){
+					setBidList(); //设置前十条出价信息
+					$("#auctdiv_3").attr("isload","true");	
+					$(this).attr("isload","true");
+				}else if(curIndex==5 && $(this).attr("isload")=="false"){
+					QuestionQueryList.doQuery();
+					$("#auctdiv_5").attr("isload","true");	
+					$(this).attr("isload","true");
+				}else if(curIndex==6 && $(this).attr("isload")=="false"){
+					//queryAuctCorrigendum({"lotId":lotId});
+					setCorrList();
+					$("#auctdiv_6").attr("isload","true");
+					$(this).attr("isload","true");
+				}
+				$("#auctdiv_" + curIndex).show().siblings(".itemDetailTabContentBoxCls").hide();
+			}
+		);
+
+	},
+	// 绑定邀请专家弹出框   邀请专家要修改 不在传glideMark
+	doInvitedMavins : function() {
+		$("#invitedBtn").bind("click",
+						function() {
+			               ecpBase.alert("暂缓开放");
+			               return;
+							top.showEcpWinForm({
+										header : {
+											height : 35,
+											background : "#e8e8e8"
+										},
+										title : "邀请专家",
+										width : 850,
+										height : 550,
+										url : baseUrl
+												+ "/jsp/ecp/mavin/trade/invitedmavins.jsp?" +
+														//"itemId="+ itemId + 
+														"lotId=" + lotId,
+												//+ "&glidemark=" + glideMark,
+										listeners : {
+											"sure" : {
+												text : "邀请",
+												execute : function(_val, _obj) {
+													if (_val != null) {
+														// 跳转订单预览页面,提醒用户去支付
+														_val.itemId = itemId;
+														var setting = {
+															"action" : baseUrl
+																	+ "/ecp/mavin/inviteorder/addinviteorder.action",
+															"datas" : [ {
+																"name" : "inviteorder",
+																"value" : $
+																		.toJSON(_val)
+															} ]
+														};
+														simulateFormSubmit(setting);
+													}
+													return _val.flag;
+												}
+											},
+											"clear" : {
+												text : "取消",
+												execute : function(_val, _obj) {
+													return true;
+												}
+											}
+										}
+									});
+						});
+	}
+}
+var QuestionQueryList = {
+	doQuery : function() {
+		$.scsd.Table.createTable({
+			id : "questionLists",
+			queryId : "questionQuery",
+			autoLoad : false,
+			columnLayout : "4*1",
+			width : "910px",
+			render : "questionListsQueryRender"
+		}, function() {
+			var obj = {
+				lotId : lotId,
+				isOpen : 'Y'
+			}
+			doQueryQuestionLists(obj);
+		});
+	}
+}
+var questionListsQueryRender = function(rowData, key, rowNum, colNum) {
+	var replyCont = rowData.REPLYCONT;
+	var replyTime = rowData.REPLYTIME;
+	if (replyCont == null || replyCont == "" || replyCont == undefined) {
+		replyCont = "";
+	}
+	if (replyTime == null || replyTime == "" || replyTime == undefined) {
+		replyTime = "";
+	}
+	var str = $("<div class='buyerWrapper'>"
+			+ "<span>网&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;友 :</span>"
+			+ "<span class='buyer_name'>"
+			+ rowData.NICKNAME
+			+ "</span>"
+			+ "<span class='buyer_time'>"
+			+ rowData.QUTIME
+			+ "</span>"
+			+ "</div>"
+			+ "<div class='buyerWrapper'>"
+			+ "<div class='buyer_queTitle'>咨询内容 :</div>"
+			+ "<div class='buyer_queCont'>"
+			+ rowData.QUCONT
+			+ "</div>"
+			+ "</div>"
+			+ "<div class='buyerWrapper'>"
+			+ "<div class='seller_repTitle'>卖家回复 :</div>"
+			+ "<div class='seller_repWrap'>"
+			+ "<div class='seller_repCont'>"
+			+ replyCont
+			+ "</div>"
+			+ "<div class='seller_repTime'>"
+			+ replyTime
+			+ "</div>" + "</div>" + "</div>" + "<div class='fenxian'></div>");
+	return str;
+}
+// 渲染勘误表格
+function auctCorrigendumRender(rowData, key, rowNum, colNum) {
+	$("#auctdiv_5 .tableToolElCls").css("display", "none");
+	var addby = rowData.ADDBY;
+	var addtime = rowData.ADDTIME;
+	var crcontent = rowData.CRCONTENT;
+	if (addby == null || addby == "" || addby == undefined) {
+		addby = "";
+	}
+	if (addtime == null || addtime == "" || addtime == undefined) {
+		addtime = "";
+	}
+	if (crcontent == null || crcontent == "" || crcontent == undefined) {
+		crcontent = "";
+	}
+	var str = $("<div class='auctCorrigendum' style='width:100px;'>"
+			+ "<div class='content'>" + addby + "</div>" + "</div>"
+			+ "<div class='auctCorrigendum' style='width:600px;'>"
+			+ "<div class='content'>" + crcontent + "</div>" + "</div>"
+			+ "<div class='auctCorrigendum' style='width:200px;'>"
+			+ "<div class='content'>" + addtime + "</div>" + "</div>"
+			+ "<div class='fenxian'></div>");
+	return str;
+}
+// 渲染最新出价表格
+function bidListRender(rowData, key, rowNum, colNum) {
+	$("#auctdiv_2 .tableToolElCls").css("display", "none");
+	var bidderName = rowData.BIDDERNAME;
+	var bidPrice = rowData.BIDPRICE;
+	var bidTime = rowData.BIDTIME;
+	var bidAbst=rowData.BIDABST;
+	if (bidderName == null || bidderName == "" || bidderName == undefined) {
+		bidderName = "";
+	}
+	if (bidPrice == null || bidPrice == "" || bidPrice == undefined) {
+		bidPrice = "";
+	}
+	if (bidTime == null || bidTime == "" || bidTime == undefined) {
+		bidTime = "";
+	}
+	if(bidAbst == 'N'){
+		bidAbst='否';
+	}else{
+		bidAbst='是';
+	}
+	var str = $("<div class='auctCorrigendum' style='width:100px;'>"
+			+ "<div class='content'>" + bidderName + "</div>" + "</div>"
+			+ "<div class='auctCorrigendum' style='width:300px;'>"
+			+ "<div class='content'>" + bidPrice + "</div>" + "</div>"
+			+ "<div class='auctCorrigendum' style='width:300px;'>"
+			+ "<div class='content'>" + bidAbst + "</div>" + "</div>"
+			+ "<div class='auctCorrigendum' style='width:200px;'>"
+			+ "<div class='content'>" + bidTime + "</div>" + "</div>"
+			+ "<div class='fenxian'></div>");
+	return str;
+}
+/**
+ * 查询表格
+ * 
+ * @param {}
+ *            _val
+ */
+function doQueryQuestionLists(_val) {
+	$.scsd.Table.query("questionLists", _val);
+}
+// 查询勘误信息
+function queryAuctCorrigendum(_val) {
+	$.scsd.Table.query("auctCorrigendumLists", _val);
+}
+// 查询出价信息
+/*function queryBidList(_val) {
+	$.scsd.Table.query("queryItemBidList", _val);
+}*/
+function questionSubmit() {
+	var _askerId = $("#askerId").val();
+	var _quCont = $("#quCont").val();
+	var _obj = {
+		lotId : lotId,
+		askerId : _askerId,
+		quCont : _quCont,
+		addBy : _askerId
+	};
+	doController("ecp/buyer/question/addquestion.action", _obj, function(_response) {
+		if (_response.result) {
+			doQueryQuestionLists({
+				"lotId" : lotId
+			});
+			$(".addquestion").hide();
+			$("#quCont").val("");
+		} else {
+			ecpBase.alert("咨询失败");
+		}
+	});
+}
+
+//获取作者简介
+function setAuthorDesc() {
+	var _obj = {
+		lotId : lotId
+	};
+	doController("common/itemlot/getauthordesc.action", _obj, function(_response) {
+		if (_response.result) {
+			var shortDesc = (_response.data==null||_response.data.artistShortDesc==null)?"无":_response.data.artistShortDesc;
+		
+			if(_response.data!=null&&_response.data.artistDesc!=null){
+				shortDesc += "<a id='authorDescShowMoreA' show='false' href='javascript:showMoreAuthorDesc()'>...更多</a>";	
+				$("#authorFullDescContentInfo").html(_response.data.artistDesc);
+			}
+			
+			$("#authorDescContentInfo").html(shortDesc);
+		} 
+	});
+}
+
+function showMoreAuthorDesc(){
+	if($("#authorDescShowMoreA").attr("show")=="false"){
+		$("#authorFullDescContentInfoDiv").show();
+		$("#authorDescShowMoreA").attr("show","true");
+	}else{
+		$("#authorFullDescContentInfoDiv").hide();
+		$("#authorDescShowMoreA").attr("show","false");
+	}
+	
+}
+
+
+function showquestion() {
+	$(".addquestion").show();
+}
+/**
+ * 快速出价滑块初始化 向右滑
+ */
+function setQuickBidPrice(start, increment) {
+	$(".quickBidMiddleCls").empty();
+	if(bidmode=='0003'){
+		if (incrmode=='0001') {// 默认最少每次加100
+			var arr = new Array();
+			arr = stepPriceService.getNextSteps(start,5);
+			for (var j = 0; j <= 4; j++) {
+				var tempDiv = "<div class='priceClass' onClick='setSelfPrice($(this).text())'>"
+					+ arr[j] + "</div>";
+				$(".quickBidMiddleCls").append(tempDiv);
+			}
+		} else {
+			for (var i = 1; i <= 5; i++) {
+				var tempDiv = "<div class='priceClass' onClick='setSelfPrice($(this).text())'>"
+					+ ((Number(start) + Number(increment) * i)) + "</div>";
+				$(".quickBidMiddleCls").append(tempDiv);
+			}
+		}
+	}else{
+		for (var i = 1; i <= 5; i++) {
+			var tempDiv = "<div class='priceClass' onClick='setSelfPrice($(this).text())'>"
+				+ Number(start) + "</div>";
+			$(".quickBidMiddleCls").append(tempDiv);
+		}
+	}
+}
+// 2 5 8 加js
+function next258Value(intValue, lengthSize) {
+	var returnValue = 0;
+	if (lengthSize > 3) {
+		var gw = Math.floor(intValue / Math.pow(10, lengthSize - 1));
+		var cw = Math.floor(intValue / Math.pow(10, lengthSize - 2) - gw * 10);
+		if (cw >= 0 && cw < 2) {
+			cw = 2;
+		} else if (cw >= 2 && cw < 5) {
+			cw = 5;
+		} else if (cw >= 5 && cw < 8) {
+			cw = 8;
+		} else if (cw >= 8) {
+			if (gw == 9) {
+				gw = 10;
+				cw = 0;
+			} else {
+				gw = gw + 1;
+				cw = 0;
+			}
+		}
+		var constructValue = gw * 10 + cw;
+		returnValue = constructValue * Math.pow(10, lengthSize - 2);
+	} else if (lengthSize == 3) {
+		var gw = intValue / Math.pow(10, lengthSize - 1);
+		if (gw >= 1 && gw < 2) {
+			gw = 2;
+		} else if (gw >= 2 && gw < 5) {
+			gw = 5;
+		} else if (gw >= 5 && gw < 8) {
+			gw = 8;
+		} else {
+			gw = 10;
+		}
+		returnValue = gw * Math.pow(10, lengthSize - 1);
+	} else {
+		returnValue = 200;
+	}
+	return returnValue;
+}
+/**
+ * 快速出价选择价格后更新
+ */
+function setSelfPrice(value) {
+	var cmmssnValue= value/commission;
+	$("#cmmssn").html(formatMoney(cmmssnValue, 2));//当前佣金
+	var chargeprice=cmmssnValue+Number(value);
+	$("#chargePrice").html(formatMoney(chargeprice, 2));
+	$("#selfPrice").html(formatMoney(value, 2));// 选中出价
+	setQuickBidPrice(value, biddingLadderPrice);// 更新快速出价栏
+}
+/**
+ * 快速出价向左按钮点击事件
+ */
+function quickBidGoLeft() {
+	var increment = biddingLadderPrice;
+	if (incrmode=='0001') {// 2 5 8 方式
+		var start = ($(".quickBidMiddleCls").find("div").eq(0).text());
+		var startPrice = Number(clearFormatMoney($("#currentPrice").text()));
+		var lengthNum = start.toString().length;
+		var arr = new Array();
+		var priceFlag = last258Value(start, lengthNum)
+		if (startPrice >=priceFlag) {
+		} else {
+			arr = stepPriceService.getLastSteps(start,5);
+			if (arr.length == 5) {
+				$(".quickBidMiddleCls").empty();
+				for (var j = arr.length-1; j >= 0; j--) {
+					var tempDiv = "<div class='priceClass' onClick='setSelfPrice($(this).text())'>"
+							+ arr[j] + "</div>";
+					$(".quickBidMiddleCls").append(tempDiv);
+				}
+			}
+		}
+	} else {
+		var start = Number($(".quickBidMiddleCls").find("div").eq(0).text())
+				- increment * 6;
+		if ((start <= biddingCurrentPrice)) {
+			start = biddingCurrentPrice;
+		}
+		setQuickBidPrice(start, biddingLadderPrice);// 更新快速出价栏
+	}
+}
+// 2 5 8 减js
+function last258Value(intValue, lengthSize) {
+	var returnValue = 0;
+	var gw = Math.floor(intValue / Math.pow(10, lengthSize - 1));
+	var cw = Math.floor(intValue / Math.pow(10, lengthSize - 2) - gw * 10);
+	if (lengthSize > 4) {
+		if (gw > 1) {
+			if (cw > 8) {
+				cw = 8;
+			} else if (cw <= 8 && cw > 5) {
+				cw = 5;
+			} else if (cw <= 5 && cw > 2) {
+				cw = 2;
+			} else if (cw > 0 && cw <= 2) {
+				cw = 0;
+			} else if (cw == 0) {
+				gw = gw - 1;
+				cw = 8;
+			}
+		} else {
+			if (cw > 8) {
+				cw = 8;
+			} else if (cw <= 8 && cw > 5) {
+				cw = 5;
+			} else if (cw <= 5 && cw > 2) {
+				cw = 2;
+			} else if (cw > 0 && cw <= 2) {
+				cw = 0;
+			} else if (cw == 0) {
+				cw = 8;
+				gw = 10 - 1;
+				lengthSize = lengthSize - 1;
+			}
+		}
+	} else if (lengthSize == 4) {
+		if (gw > 1) {
+			if (cw > 8) {
+				cw = 8;
+			} else if (cw <= 8 && cw > 5) {
+				cw = 5;
+			} else if (cw <= 5 && cw > 2) {
+				cw = 2;
+			} else if (cw > 0 && cw <= 2) {
+				cw = 0;
+			} else {
+				cw = 8;
+				gw = gw - 1;
+			}
+		} else {
+			if (cw > 8) {
+				cw = 8;
+			} else if (cw <= 8 && cw > 5) {
+				cw = 5;
+			} else if (cw <= 5 && cw > 2) {
+				cw = 2;
+			} else if (cw > 0 && cw <= 2) {
+				cw = 0;
+			} else {
+				gw = 8;
+				cw = 0;
+				lengthSize = lengthSize - 1;
+			}
+		}
+	} else if (lengthSize == 3) {
+		if (gw > 8) {
+			gw = 8;
+			cw = 0;
+		} else if (gw <= 8 && gw > 5) {
+			gw = 5;
+			cw = 0;
+		} else if (gw <= 5) {
+			gw = 2;
+			cw = 0;
+		}
+	}
+	var lastValue = (gw * 10 + cw) * Math.pow(10, lengthSize - 2);
+	return lastValue;
+}
+/**
+ * 快速出价向右按钮点击事件
+ */
+function quickBidGoRight() {
+	var start = $(".quickBidMiddleCls").find("div").eq(4).text();
+	setQuickBidPrice(start, biddingLadderPrice);// 更新快速出价栏
+}
+/**
+ * 
+ */
+function doItemSeller() {
+	var sellerId = $("#sellerId").val();
+	var spanId = this.id;
+	var url = "";
+	var position = "";
+	if (spanId == "s_sold_num") {
+		position = "历史成交拍品";
+		url = baseUrl + "/jsp/ecp/public/itemsold.jsp?position=" + position
+				+ "&sellerid=" + sellerId;
+	} else if (spanId == "s_bid_num") {
+		position = "正在拍卖拍品";
+		url = baseUrl + "/jsp/ecp/public/itembid.jsp?position=" + position
+				+ "&sellerid=" + sellerId;
+	} else if (spanId == "s_mavin_num") {
+		position = "专家点评";
+		url = baseUrl + "/jsp/ecp/public/itemreview.jsp?position=" + position
+				+ "&sellerid=" + sellerId;
+	}
+	window.open(url);
+}
+/**
+ * 好评、中评、差评-点击事件函数
+ */
+function doItemEval() {
+	var sellerId = $("#sellerId").val();
+	var sellerName = $("#s_name").text();
+	var spanId = this.id;
+	var position = "";
+	if (spanId == "s_evaluate_A") {
+		position = "好评";
+	} else if (spanId == "s_evaluate_B") {
+		position = "中评";
+	} else if (spanId == "s_evaluate_C") {
+		position = "差评";
+	}
+	var url = baseUrl + "/jsp/ecp/public/itemeval.jsp?position=" + position
+			+ "&sellerid=" + sellerId + "&sellername=" + sellerName;
+	window.open(url);
+}
+/**
+ * 初始化页面右上角卖家和相关统计信息
+ */
+function initSellerAndCountOfSeller() {
+	var obj = {
+		"lotid" : lotId,
+		"itemid" : null
+	};
+	doController("common/itemlot/getselleriteminfo.action", obj, function(
+			_response) {
+		if (_response.result) {
+			var data = _response.data;
+			if (data != null) {
+				$("#sellerId").val(data.sellerId);
+				$("#s_name").text(data.sellerName);
+				$("#s_sold_num").text(data.soldCount);
+				$("#s_bid_num").text(data.bidCount);
+				$("#s_evaluate_A").text(data.gradeACount);
+				$("#s_evaluate_B").text(data.gradeBCount);
+				$("#s_evaluate_C").text(data.gradeCCount);
+				$("#s_mavin_num").text(data.mavinCount);
+			}
+		}else{
+			ecpBase.alert(_response.data);
+		}
+	});
+}
+/**
+ * 专家猜价格
+ */
+function doGuessClick() {
+	var guessPrice = $("#guessPrice").val();
+	var mavinGuessPrice = {
+		itemId : itemId,
+		lotId : lotId,
+		price : guessPrice
+	}
+	doController(
+			"ecp/mavinguessprice/dosaveguessprice.action",
+			mavinGuessPrice,
+			function(_response) {
+				if (_response.data == "您已经猜过了") {
+					ecpBase.alert("您已经猜过了");
+				} else {
+					$("#myGuess").val(guessPrice);
+					var trs = "<div class='zzcxDataInfoDivBoxCls'><div class='zzcxPriceDataInfoDivBoxCls'>￥"
+							+ mavinGuessPrice.price
+							+ "</div><div class='zzcxNameDataInfoDivBoxCls'>"
+							+ _response.data.nickName + "</div></div>";
+					$("#cjg").after(trs);
+					$("#guessPrice").val("");
+					var price = parseFloat(($("#currentPrice").text() + "")
+							.replace(/,/ig, ""));
+					var guessPrice = parseFloat(mavinGuessPrice.price);
+					if (guessPrice > price) {
+						$("#myGuess").css("color", "blue");
+					} else {
+						$("#myGuess").css("color", "#d73660");
+					}
+					$("#myGuess").text(mavinGuessPrice.price);
+					$("#cjg").hide();
+				}
+			});
+
+}
+// 关注拍品页面初始化
+function initFollowGoods() {
+	var obj = {
+		cncrnCont : lotId,
+		cncrnType : $("#cncrnType").val()
+	}
+	doController((chatId==""?"common":"ecp")+"/buyer/myconcern/queryisfollowed.action", obj, function(
+			_response) {
+		if (_response.data != null) {
+			var followCount = _response.data.followCount;
+			if (_response.data.count == 1) {
+				$("#cancel").show();
+				$("#follow").hide();
+			}
+			if (_response.data.count == 0) {
+				$("#follow").show();
+				$("#cancel").hide();
+			}
+			if (_response.data.count == -1) {
+				$("#follow").hide();
+				$("#cancel").hide();
+			}
+			$("#followCount").text(followCount);
+		}
+	});
+}
+// 定义全局变量用于存放拍品的lotId,只存最新浏览的10个拍品
+var items = new Array();
+// cookie处理
+function handleCookie() {
+	// 判断是否存在保存itemId的cookie,有则向cookie中赋值,没有则创建cookie后向cookie中赋值
+	var  items = [];
+	if ($.cookie('item_cookie') != null) {
+	//if(false){
+		// 获取当前cookie的值转换为数组并赋值给数组item
+		items = $.fromJSON($.cookie("item_cookie"));
+		// 将新浏览的拍品lotId存入数组
+		if(lotId != undefined && lotId != null && lotId != "" && lotId != "null" && !isNaN(lotId)){
+			if(isExit(lotId)){
+				//cookie存在直接返回
+				return;
+			}
+			if(items.length < 10){
+				items.push({lotId:lotId,picPath:cookieMajorItemPic});
+			}else{
+				items.push({lotId:lotId,picPath:cookieMajorItemPic});
+				//删除并返回数组的第一个元素
+				items.shift();
+			}
+		}
+	} else {
+		// 将第一次浏览的拍品的itemId存入数组
+		if(lotId != undefined && lotId != null && lotId != "" && lotId != "null" && !isNaN(lotId)){
+			items.push({lotId:lotId,picPath:cookieMajorItemPic});
+		}
+		// 此时cookie不存在,创建cookie
+		// $.cookie('item_cookie');
+		// $.cookie(‘cookieName’,'cookieValue’，｛expires：7，path：’/'，domain:
+		// ‘chuhoo.com’，secure: false，raw:false｝);
+		/*$.cookie('item_cookie', {
+			expires : 30,
+			path : '/',
+			domain : '',
+			secure : false,
+			raw : false
+		});*/
+	}
+	// 设置cookie值
+	$.cookie('item_cookie', $.toJSON(items),{
+		expires : 30,
+		path : '/',
+		domain : '',
+		secure : false,
+		raw : false
+	});
+}
+
+/**
+ * 校验拍品在cookie是否已经存在
+ */
+function isExit(lotId){
+	var flag = false;
+	var itemArr = $.fromJSON($.cookie("item_cookie"));
+	for (var i = 0; i < itemArr.length; i++) {
+		if(lotId == itemArr[i].lotId){
+			flag = true;
+			break;
+		}
+	}
+	return flag;
+}
+
+// 查询当前登录用户浏览过的拍品
+function queryScannedItem() {
+	if ($.cookie("item_cookie") == null) {
+		return false;
+	}
+	var itemArr = $.fromJSON($.cookie("item_cookie"));
+	for (var i = 0; i < itemArr.length; i++) {
+		var url = lotUrl + itemArr[i].lotId;
+		var itemHtml = "<a href='"+url+"'><div class='tjppInfoDivBoxCls'>"
+				+ "<div class='tjppImgInfoDivBoxCls' style='position: relative;text-align: center;vertical-align: middle;'>"
+				+"<img onload='autoImgSize(this,221,199,false)' width='220px' height='220px' src='"+ itemArr[i].picPath+"'></img></div>"
+				+ "<div class='tjppBuyerInfoDivBoxCls'>"
+				+ "<div class='tjppBuyerInfoCls'>"
+				+ "<div class='tjppBuyerNameFontCls'></div>"
+				+ "</div>"
+				+ "</div>"
+				+ "</div></a>";
+		$(".tjppBoxCls").append(itemHtml);
+	}
+}
+// 初始化猜价格列表
+function queryGuessPriceList(lotId) {
+	doController(
+			"ecp/mavinguessprice/queryguesspricelist.action",
+			{
+				lotId : lotId
+			},
+			function(_response) {
+				if (_response.result) {
+					$.each(
+						_response.data,
+						function(n, value) {
+							var trs = "<div class='zzcxDataInfoDivBoxCls'><div class='zzcxPriceDataInfoDivBoxCls'>￥"
+									+ value.PRICE
+									+ "</div><div class='zzcxNameDataInfoDivBoxCls'>"
+									+ value.NICK_NAME
+									+ "</div></div>";
+							$("#cjg").after(trs);
+						});
+				}
+			})
+}
+// 初始化我猜的价格
+function myGuessPrice(lotId) {
+	doController("ecp/mavinguessprice/myguessprice.action", {
+		lotId : lotId
+	}, function(_response) {
+		if (_response.data != null) {
+			$("#cjg").hide();
+			var price = parseFloat(($("#currentPrice").text() + "").replace(
+					/,/ig, ""));
+			var guessPrice = parseFloat(_response.data.PRICE);
+			if (guessPrice > price) {
+				$("#myGuess").css("color", "blue");
+			} else {
+				$("#myGuess").css("color", "#d73660");
+			}
+			$("#myGuess").text(_response.data.PRICE);
+		}
+	})
+}
+// 判断猜价格 点评 div 是否显示
+function guessPriceHiddenorShow() {
+	doController("ecp/mavinguessprice/ismavin.action", null,
+			function(_response) {
+				if (_response.data == "Y") {
+					$("#cjg").show();
+					$("#mydian").show();
+					$("#mydianspan").show();
+				} else {
+					$("#cjg").hide();
+					$("#mydian").hide();
+					$("#mydianspan").hide();
+				}
+			})
+}
+// 关注商品
+function followGoods() {
+	var obj = {
+		cncrnCont : lotId,
+		cncrnType : $("#cncrnType").val()
+	}
+	doController("ecp/buyer/myconcern/dofollowitem.action", obj, function(
+			_response) {
+		if (_response.result) {
+			if (_response.data.msg == "true") {
+				initFollowGoods();
+			}else{
+				ecpBase.alert(_response.data);
+			}
+		}
+	});
+}
+// 取消关注
+function cancelFollow() {
+	var obj = {
+		cncrnCont : lotId,
+		cncrnType : $("#cncrnType").val()
+	}
+	doController("ecp/buyer/myconcern/docancelfollow.action", obj, function(
+			_response) {
+		if (_response.result) {
+			if (_response.data) {
+				initFollowGoods();
+			}
+		}else{
+			ecpBase.alert(_response.data);
+		}
+	});
+}
+// 1：连接服务器
+var joined = false;
+function joinServer() {
+	if(!joined){
+		joined = true;
+		com.fwzx.core.cometd.CometdUtil.join(chatId, [ {
+			channel : "/text/auct"+lotId,
+			callback : function(_message) {
+				callbackServer(_message);
+			}
+		} ]);
+	}
+	
+}
+
+/**
+ * 推送回调接口
+ */
+function callbackServer(_message) {
+	// 1:设置当前最新的出价信息
+	var _msgData = $.fromJSON(_message.data);
+	var currentBid = {
+		bidNumber:_msgData.bidNumber,
+		bidderName:_msgData.memberName,
+		bidderId:_msgData.memberId,
+		isAbsentee:_msgData.isAbsentee,
+		UNDERRSRVPRICE:_msgData.UNDERRSRVPRICE
+	}
+	setCurrentBid(currentBid,true);
+	setQuickBidPrice(_msgData.price, biddingLadderPrice);
+	biddingCurrentPrice=_msgData.price;
+	$("#currentPrice").html(formatMoney(_msgData.price, 2));// 当前价格
+	var cmmssnValue= _msgData.nextPrice/commission;
+	$("#cmmssn").html(formatMoney(cmmssnValue, 2));//当前拥金
+	var chargeprice=cmmssnValue+Number(_msgData.nextPrice);
+	$("#chargePrice").html(formatMoney(chargeprice, 2));
+	$("#selfPrice").html(formatMoney(_msgData.nextPrice, 2));// 当前出价
+	if (currentBid.UNDERRSRVPRICE == 'Y') {
+		$("#underRsrvPrice").show();
+	} else {
+		$("#underRsrvPrice").hide();
+	}
+	if(_msgData.biddingEndTime!=null){
+		biddingEndTime = _msgData.biddingEndTime;
+		sDate = null;
+		$("#endTime").html(new Date(biddingEndTime).format("yyyy-MM-dd hh:mm:ss"));
+		clearInterval(setIntervalP);
+		setStartTimeCountDown();
+		if(!postponeFlag){
+			postponeFlag = true;
+			$("#postpone").css("display","block");
+		}
+	}
+	appendBidList(_msgData.bids);
+}
+
+/**
+ * 延时公告
+ */
+function doPostpone(){
+	window.open(baseUrl + "/jsp/ecp/public/postpone.html");
+	/*top.showEcpWinForm({
+		title : "延时说明",
+		width : 850,
+		height: 545,
+		iframHeight:900,
+		url : baseUrl + "/jsp/ecp/public/postpone.jsp",
+		listeners : {
+			"close" : {
+				text : "关闭",
+				execute : function(_val, _obj) {
+					return true;
+				}
+			}
+		}
+	});*/
+}
+
+/**
+ * 拍卖方式
+ */
+function doBidMode(){
+	window.open(baseUrl + "/jsp/ecp/public/bidmoderule.html");
+}
+/**
+ * 竞买类型
+ */
+function doBidType(){
+	window.open(baseUrl + "/jsp/ecp/public/bidtyperule.html");
+}
+/**
+ * 未到保留价说明
+ */
+function doUnderRsrvPrice(){
+	window.open(baseUrl + "/jsp/ecp/public/notice.html");
+}
+
+/**
+ * 刷新最新出价记录信息
+ * @param _bidDatas
+ */
+function appendBidList(_bidDatas){
+	for(var i=0 ; i<_bidDatas.length ; i++){
+		var _bidData = _bidDatas[i];
+		var isProxy = (_bidData.isAbsentee == "Y" ?"<font color='red'>(代理)</font>":"");
+		var table_html = "<tr><td class='bidName'>"+_bidData.bidderName
+			+"</td><td class='bidPrice'>"+_bidData.bidPrice.toFixed(2)
+			+"元"+isProxy+"</td>"
+			+"<td class='bidTime'>"+new Date(_bidData.bidTime).format('yyyy-MM-dd hh:mm:ss')
+			+"</td></tr>";
+		if($("#price_table").find("tr").length==11){
+			$("#price_table").find("tr").eq(10).remove();
+		}else if($("#price_table").find("tr").length==0){
+			$("#price_table").empty();
+			$("#price_table").html("<tr><th>竞买人</th><th>竞买价</th><th>出价时间</th></tr>");
+		}
+		$("#price_table").find("tr").eq(0).after($(table_html));
+	}
+}
+
+function proxyM() {
+	var beginTime = $("#startTime").text();
+	var endTime = $("#endTime").text();
+	var d1 = new Date(beginTime.replace(/\-/g, "\/"));
+	var d2 = getSystemDate();
+	var d3 = new Date(endTime.replace(/\-/g, "\/"));
+	if (d1 > d2) {
+		ecpBase.alert("拍品还没有开始拍买不允许代理");
+		$("input[name='bidType']").eq(0).attr("checked","checked");
+        $("input[name='bidType']").eq(1).removeAttr("checked");
+        $("input[name='bidType']").eq(0).click();
+		return false;
+	}
+	if (d2 > d3) {
+		ecpBase.alert("拍品拍卖已经结束不允许代理");
+		$("input[name='bidType']").eq(0).attr("checked","checked");
+        $("input[name='bidType']").eq(1).removeAttr("checked");
+        $("input[name='bidType']").eq(0).click();
+		return false;
+	}
+}
+function proxyC() {
+	
+}
+/**
+ * 初始化百度编辑器
+ */
+function initUEEditor() {
+	// 实例化ueditor
+	com.fwzx.core.ueditorUtil.UeditorUtil.init('serviceEditor', {
+		initialFrameWidth : 615,
+		initialFrameHeight : 200
+	});
+}
+/**
+ * 专家评论
+ */
+var Comment = {
+	makeContentHtml : function(data) {
+		var _nickName = data.NICK_NAME;
+		if (_nickName && _nickName.length >= 3) {
+			var _p = _nickName.substr(0, 1);
+			var _f = _nickName.substr((_nickName.length - 1), _nickName.length);
+			var _m = "****";
+			_nickName = _p + _m + _f;
+		} else {
+			_nickName = "";
+		}
+		var _mavinCommentWrap = $("<div class='mavinCommentWrap' id=main_"
+				+ data.REVIEW_ID + "></div>");
+		var _mavinComLeft = $("<div class='mavinComLeft'></div>");
+		var _mavinComRight = $("<div class='mavinComRight'></div>");
+		var _mavinImgWrap = $("<div class='mavinImgWrap'></div>");
+		var _img = $("<img  class='mavinImgCls'/>");
+		$(_img).attr("src", baseUrl + "/" + data.AVATAR);// 主图信息
+		var _itemline1 = $("<div class='itemline'>" + _nickName + "</div>");
+		var _itemline2 = $("<div class='itemline'>"
+				+ new Date(data.REVIEW_TIME).format('yyyy-MM-dd hh:mm:ss')
+				+ "</div>");
+		var _mavinCommentDiv = $("<div class='mavinCommentDiv'>"
+				+ data.REVIEW_CONTENT + "</div>");
+		var _BtnwrapDiv = $("<div class='BtnwrapDiv'></div>");
+		var _alinkBtn1 = $("<div class='alinkBtn huifu'> 回复（<span>"
+				+ data.REPLY_NUM + "</span>）</div>");
+		var _alinkBtn2 = $("<div class='alinkBtn'> 赞（<span>"
+				+ data.REVIEW_ACCEPT_NUM + "</span>）</div>");
+		var _alinkBtn3 = $("<div class='alinkBtn'> 踩（<span>"
+				+ data.REVIEW_CAI_NUM + "</span>）</div>");
+		var _alinkBtn4 = $("<div class='alinkBtn'> 举报 </div>");
+		var _textAreaWarpDiv = $("<div class='textAreaWarpDiv'></div>");
+		var _textareadiv = $("<div class='textareadiv'></div>");
+		var _textarea = $("<textarea class='replytextarea'></textarea>");
+		var _btnline = $("<div class='btnline'></div>");
+		var _commonbtn = $("<div class='commonbtn'>提交</div>");
+		var _warntext = $("<div class='warntext'>还可以输入<span class='fontnum'>120</span>字</div>");
+		var _replylistWrap = $("<div class='replylistWrap'></div>");
+		_commonbtn.data("reviewId", data.REVIEW_ID);
+		// textarea绑定事件
+		_textarea.on("change", function() {
+			this.value = this.value.substring(0, 120);
+			var length = this.value.length;
+			var _tentlength = parseInt(120 - length);
+			$(this).parent().parent().find(".fontnum").text(_tentlength);
+		}).on("keydown", function() {
+			this.value = this.value.substring(0, 120);
+			var length = this.value.length;
+			var _tentlength = parseInt(120 - length);
+			$(this).parent().parent().find(".fontnum").text(_tentlength);
+		}).on("keyup", function() {
+			this.value = this.value.substring(0, 120);
+			var length = this.value.length;
+			var _tentlength = parseInt(120 - length);
+			$(this).parent().parent().find(".fontnum").text(_tentlength);
+		});
+		// 绑定右侧区域鼠标滑动事件
+		_mavinCommentWrap.bind("mouseover", function() {
+			// _BtnwrapDiv.show();
+		}).bind("mouseleave", function() {
+			var flag1 = _textAreaWarpDiv.is(":hidden");
+			var flag2 = _replylistWrap.is(":hidden"); // 查询列表是否显示
+			if (flag1 && flag2) {
+				// _BtnwrapDiv.hide();
+			}
+		});
+		// 绑定回复事件，点击回复显示textarea
+		_alinkBtn1.bind("click", function() {
+			Comment.hf(data.REVIEW_ID, this);
+			Comment.queryReviewList(data.REVIEW_ID, this);
+			$(this).parent().parent().find(".replylistWrap").toggle();
+		});
+		// 绑定赞函数
+		_alinkBtn2.bind("click", function() {
+			Comment.opt(data.REVIEW_ID, 1, this);
+		});
+		// 绑定踩函数
+		_alinkBtn3.bind("click", function() {
+			Comment.opt(data.REVIEW_ID, 2, this);
+		});
+		// 绑定回复提交按钮事件
+		_commonbtn.bind("click", function() {
+			Comment.reply(this);
+		});
+		_BtnwrapDiv.append(_alinkBtn1);
+		_BtnwrapDiv.append(_alinkBtn2);
+		_BtnwrapDiv.append(_alinkBtn3);
+		_BtnwrapDiv.append(_alinkBtn4);
+		_textareadiv.append(_textarea);
+		_btnline.append(_commonbtn);
+		_btnline.append(_warntext);
+		_textAreaWarpDiv.append(_textareadiv);
+		_textAreaWarpDiv.append(_btnline);
+		// 右侧部分
+		_mavinComRight.append(_mavinCommentDiv);
+		_mavinComRight.append(_BtnwrapDiv);
+		_mavinComRight.append(_textAreaWarpDiv);
+		_mavinComRight.append(_replylistWrap);
+		// 左侧部分
+		_mavinImgWrap.append(_img);
+		_mavinComLeft.append(_mavinImgWrap);
+		_mavinComLeft.append(_itemline1);
+		_mavinComLeft.append(_itemline2);
+		_mavinCommentWrap.append(_mavinComLeft);
+		_mavinCommentWrap.append(_mavinComRight);
+		return _mavinCommentWrap;
+	},
+	// 点评赞
+	opt : function(reviewId, type, _pos) {
+		var obj = {
+			"reviewId" : reviewId,
+			"type" : type
+		};
+		doController("ecp/mavin/mavinreviewreply/isOpertion.action", obj,
+				function(_response) {
+					if (_response.result) {
+						ecpBase.alert(_response.data.message);
+						if (type == 1) {
+							$(_pos).find("span").text(
+									_response.data.REVIEW_ACCEPT_NUM);
+						} else if (type == 2) {
+							$(_pos).find("span").text(
+									_response.data.REVIEW_CAI_NUM);
+						}
+					}
+				});
+	},
+	// 提交 点评回复
+	reply : function(_obj) {
+		var reviewId = $(_obj).data("reviewId");
+		var replyContent = $(_obj).parent().parent().find("textarea").val();
+		if (replyContent == '') {
+			ecpBase.alert("回复内容不能为空");
+			return;
+		}
+		var obj = {
+			"replyId" : reviewId,
+			"replyContent" : replyContent
+		}
+		doController("ecp/mavin/mavinreviewreply/addmavinreviewreply.action",
+				obj, function(_response) {
+					if (_response.result) {
+						var _o = Comment.getCommonReplyHtml(_response.data);
+						$(_obj).parent().parent().hide();
+						var _list = $(_obj).parent().parent().parent().find(
+								".replylistWrap").show();
+						_list.append(_o.replyContWrap).append(_o.replyline);
+						var _curNum = $(_obj).parent().parent().parent().find(
+								".huifu").find("span").text();
+						$(_obj).parent().parent().parent().find(".huifu").find(
+								"span").text(parseInt(_curNum + 1));
+					}
+				});
+	},
+	/**
+	 * 获取公共回复样式
+	 */
+	getCommonReplyHtml : function(item) {
+		var _o = {};
+		var num1 = item.REPLY_ACCEPT_NUM == undefined ? 0
+				: item.REPLY_ACCEPT_NUM;
+		var num2 = item.REPLY_CAI_NUM == undefined ? 0 : item.REPLY_CAI_NUM;
+		var _replylineWrap = $("<div class='replylineWrap'></div>");
+		var _replyleft = $("<div class='replyleft'></div>");
+		var _replyright = $("<div class='replyright'>"
+				+ new Date(item.ADD_TIME).format('yyyy-MM-dd') + "</div>");
+		var _repylName = $("<span class='repylName'>" + item.NICK_NAME
+				+ "</span>");
+		var _replyCont = $("<span> ： </span><span class='replyCont'>"
+				+ item.REPLY_CONTENT + "</span>");
+		var _replyline = $("<div class='replyline'></div>");
+		var _BtnwrapDiv = $("<div class='BtnwrapDivItem'></div>");
+		var _abt1 = $("<div class='alinkBtn' style='display:none;'>赞（<span>"
+				+ num1 + "</span>）</div>");
+		var _abt2 = $("<div class='alinkBtn' style='display:none;'>踩（<span>"
+				+ num2 + "</span>）</div>");
+		var _abt3 = $("<div class='alinkBtn' style='display:none;'>举报</div>");
+		// 绑定赞函数
+		_abt1.bind("click", function() {
+			Comment.replyCN(item.REPLY_ID, this);
+		});
+		// 绑定踩函数
+		_abt2.bind("click", function() {
+			Comment.replyCAI(item.REPLY_ID, this);
+		});
+		_BtnwrapDiv.append(_abt1);
+		_BtnwrapDiv.append(_abt2);
+		_BtnwrapDiv.append(_abt3);
+		_replyline.append(_BtnwrapDiv);
+		_replyleft.append(_repylName);
+		_replyleft.append(_replyCont);
+		_replylineWrap.append(_replyleft);
+		_replylineWrap.append(_replyright);
+		_o.replyContWrap = _replylineWrap;
+		_o.replyline = _replyline;
+		return _o;
+	},
+	// 用户提交新的评论信息
+	comment : function() {
+		var content = com.fwzx.core.ueditorUtil.UeditorUtil
+				.getContent('serviceEditor');
+		var obj = {
+			content : content,
+			itemId : itemId
+		}
+		doController("ecp/mavin/mavinreview/addmavinreview.action", obj,
+				function(_response) {
+					if (_response.data != null) {
+						ecpBase.alert("点评成功");
+						var str = Comment.makeContentHtml(_response.data);
+						$("#comment").append(str);
+						com.fwzx.core.ueditorUtil.UeditorUtil.setContent('');
+					}
+				});
+	},
+	// 点击回复数量加载信息
+	queryReviewList : function(reviewid, _pos) {
+		var obj = {
+			"reviewId" : reviewid
+		}
+		doController(
+				"ecp/mavin/mavinreviewreply/reviewreplyListbyreviewid.action",
+				obj, function(_response) {
+					if (_response.data != null) {
+						$(_pos).parent().parent().find(".replylistWrap")
+								.empty();
+						$.each(_response.data, function(index, item) {
+							var _o = Comment.getCommonReplyHtml(item);
+							$(_pos).parent().parent().find(".replylistWrap")
+									.append(_o.replyContWrap).append(
+											_o.replyline);
+						});
+					}
+				})
+	},
+	/**
+	 * 初始化专家点评数据
+	 */
+	initReviewList : function(itemId, tp) {
+		var obj = {
+			itemId : itemId,
+			tp : tp
+		}
+		doController("ecp/mavin/mavinreview/queryreviewlist.action", obj,
+				function(_response) {
+					if (_response.data != null) {
+						var str;
+						$.each(_response.data, function(index, item) {
+							var str = Comment.makeContentHtml(item);
+							$("#comment").append(str);
+						});
+					}
+				});
+	},
+	/**
+	 * 回复校验
+	 */
+	hf : function(reviewid, _pos) {
+		var obj = {
+			"reviewId" : reviewid
+		}
+		doController("ecp/mavin/mavinreviewreply/isReply.action", obj,
+				function(_response) {
+					if (_response.data == 0) {
+						$(_pos).parent().parent().find(".textAreaWarpDiv")
+								.toggle();
+					} else if (_response.data == 1) {
+						// ecpBase.alert("你已经回复过该条点评");
+					} else if (_response.data == 2) {
+						// ecpBase.alert("不能回复自己的点评");
+					} else {
+						ecpBase.alert("不是专家不能回复");
+					}
+				});
+	},
+	// 回复的赞
+	replyCN : function(replyId, _pos) {
+		var obj = {
+			replyId : replyId
+		}
+		doController("ecp/mavin/mavinreviewreply/isReplyCN.action", obj,
+				function(_response) {
+					if (_response.result) {
+						$(_pos).find("span")
+								.text(_response.data.replyAcceptNum);
+					}
+				});
+	},
+	// 回复的踩
+	replyCAI : function(replyId, _pos) {
+		var obj = {
+			replyId : replyId
+		}
+		doController("ecp/mavin/mavinreviewreply/isReplyCAI.action", obj,
+				function(_response) {
+					if (_response.result) {
+						$(_pos).find("span").text(_response.data.replyCaiNum);
+					}
+				});
+	}
+}
+
+//如果是一口价或速胜，不显示“竞买类型”，“快速出价”，“阶梯方式”
+function hiddenChangePriceTool(bid_mode){
+	if(bid_mode!="0003"){
+		$("[en_auctAttr='true']").hide();
+	}
+}
+
+function doClickEyeImg(){
+	var type = $(this).attr("type");
+	if("sh" == type){
+		$(this).attr("src",baseUrl+"/image/ecp/eye_red_s.png");
+		$(this).attr("type","s");
+		initSellerAndCountOfSeller();
+		$(this).css("cursor","text");
+	}else if("s" == type){
+//		$(this).attr("src",baseUrl+"/image/ecp/eye_red_sh.png");
+//		$(this).attr("type","sh");
+	}
+}
+/**
+ * 点击相册函数,函数名必须为doClickMajorImg
+ */
+function doClickMajorImg(){
+	var itemPicSrc = $(".majorImgCls").attr("src");
+	var itemPicPath = itemPicSrc.substring(0,itemPicSrc.indexOf(".jpg"));
+	if(itemPicPath.indexOf("_") > 0){
+		itemPicPath = itemPicPath.substring(0,itemPicPath.indexOf("_"));
+	}
+	itemPicPath = itemPicPath.replace(/\\\\/ig,'/'); //将路径中"\\"替换为"/"
+	itemPicPath = itemPicPath.replace(/\\/ig,'/'); //将路径中"\"替换为"/"
+	var c = $(".smallImgCls").length; //拍品数量
+	var lotTitle = $("#itemName").text();
+	//拼接页面图片
+	var html = "";
+	for(var i=0 ; i<c ; i++){
+		if(i == 0){
+			html += "<a href='"+itemPicPath+".jpg"+"'><img title='"+lotTitle+"' src='"+itemPicPath+"_s.jpg"+"'/></a>";
+		}else{
+			html += "<a href='"+itemPicPath+"_"+i+".jpg"+"'><img src='"+itemPicPath+"_"+i+"_s.jpg"+"'/></a>";
+		}
+	}
+	$("body").css({'overflow':'hidden'});
+	//添加图片
+	$(".images").empty();
+	$(".images").append(html);
+	
+	var winSrcol = $(window).scrollTop();
+    var width =  $(window).width();
+    var winHeight = $(document).height();
+    var _top = winSrcol; //距离可视区域的高度
+    
+	$("#hidebg").css({
+		'display':'block',
+        'height':winHeight+'px',
+        'top':_top
+	});
+	$("#images").css({
+		'display':'block'
+	});
+	var options = {
+		imageCrop: false, //图像分割 .默认是false
+		transition: "fade", //效果淡出.默认是slide:滑动
+		autoplay: 3000 //自动翻页时间3000ms
+	};
+	// Load the classic theme
+    Galleria.loadTheme(baseUrl+'/common/javascript/lib/galleria/themes/classic/galleria.classic.js');
+    // Initialize Galleria
+	Galleria.run('.images',options);
+	$(".close").on('click',function(){
+		$("#hidebg").css({'display':'none'});
+		$("body").css({'overflow':'auto'});
+	})
+}
+
+/**
+ * 更多竞拍规则信息
+ */
+function doBidRule(){
+	top.showEcpWinForm({
+		title : "竞买类型",
+		width : 800,
+		height: 545,
+		iframHeight:700,
+		url : baseUrl + "/jsp/ecp/public/bidtypes.jsp",
+		listeners : {
+		}
+	});
+}
+
+
+
+function autoImgSizeAuction(Img, maxWidth, maxHeight) {
+	$("#zoom1")[0].style.marginTop="0px";
+	$("#zoom1")[0].style.marginLeft="0px";
+	$("#dbox").css("height","402px");
+	var image = new Image();
+	image.src = Img.src;
+	$(".MagicZoomBigImageCont img").css("width",image.width+"px");
+	$(".MagicZoomBigImageCont img").css("height",image.height+"px");
+	autoImgSize(Img, maxWidth, maxHeight,true); 
+	// 当图片比图片框小时不做任何改变 
+	if ( Img.width > Img.height) //原图片宽高比例 大于 图片框宽高比例
+	{
+		$("#zoom1")[0].style.marginTop=((402-Img.height)/2)+"px";
+		$("#dbox").css("height",((402-(402-Img.height)/2))+"px");
+	} 
+	else if( Img.width < Img.height) {   //原图片宽高比例 小于 图片框宽高比例
+		$("#zoom1")[0].style.marginLeft=((402-Img.width)/2)+"px";
+	}
+	if(MagicZoom_zooms[0]!=undefined){
+		(MagicZoom_zooms[0].initZoom());
+	}
+}
+
+
+
+//设置确认弹出窗口
+//设置弹出div
+
+function GenerateHtmlDiv(paramval,callbackok,callbackcancel){
+
+	var _html = "";
+
+	_html += '<div id="mb_box"></div><div id="mb_con">';
+	_html += '<div id="mb_ico"></div><div id="html_div">' + paramval 	+ '</div><div id="btn_div">';
+	_html += '<input id="mb_btn_ok" type="button" value="' 	+ '确认' + '" />';
+	_html += '<input id="mb_btn_no" type="button" value="'		+ '取消' + '" />';
+	_html += '</div></div>';
+	// 必须先将_html添加到body，再设置Css样式
+	$("body").append(_html);
+
+	$("#mb_btn_ok").click(function() {
+		$("#mb_box,#mb_con").remove();
+		callbackok()
+	});
+
+	$("#mb_btn_no").click(function() {
+		$("#mb_box,#mb_con").remove();
+		callbackcancel()
+	});
+
+	GenerateCssDiv();
+}
+
+
+//设置样式
+function GenerateCssDiv() {
+
+	$("#mb_box").css({
+		width : '100%',
+		height : '100%',
+		zIndex : '99999',
+		position : 'fixed',
+		filter : 'Alpha(opacity=60)',
+		backgroundColor : 'black',
+		top : '0',
+		left : '0',
+		opacity : '0.6'
+	});
+
+	$("#mb_con").css({
+		zIndex : '999999',
+		width : '400px',
+		position : 'fixed',
+		backgroundColor : 'White',
+		padding : '10px 10px 10px 10px'
+	});
+
+	$("#mb_ico").css({
+		display : 'block',
+		position : 'absolute',
+		right : '10px',
+		top : '10px',
+		width : '18px',
+		height : '18px',
+		textAlign : 'center',
+		lineHeight : '16px',
+		cursor : 'pointer',
+		fontFamily : '微软雅黑'
+	});
+	//$("#mb_ico").css({
+	//	backgroundImage : "url("+baseUrl+"/common/javascript/lib/winform/image/close_a.png)",
+	//	backgroundRepeat : 'no-repeat'
+	//});
+
+	$("#html_div").css({
+		padding : '20px 20px 0px 20px',
+		lineHeight : '22px',
+		fontSize: '15px'
+	});
+	$("#btn_div").css({
+		textAlign : 'center',
+		padding : '10px 20px 10px 20px'
+	});
+
+
+	$("#mb_btn_ok,#mb_btn_no").css({
+			backgroundColor : '#D73660',
+			width : '100px',
+			height : '30px',
+			color : 'white',
+			border : 'none',
+			marginLeft : '20px'
+	});
+
+	$("#mb_btn_no,#mb_btn_ok").hover(function() {
+		$(this).css({
+			backgroundColor : '#FFF',
+			border : 'solid 1px #D73660',
+			color : '#000'
+		});
+	}, function() {
+		$(this).css({
+			backgroundColor : '#D73660',
+			color : '#ffffff',
+			border : 'none'
+		});
+	});
+
+
+	// 右上角关闭按钮hover样式
+	//$("#mb_ico").hover(function() {$(this).css(
+	//	{
+	//		backgroundImage : "url("+baseUrl+"/common/javascript/lib/winform/image/close.png)",
+	//		backgroundRepeat : 'no-repeat'
+	//	});},function() {$(this).css(
+	//	{
+	//		backgroundImage : "url("+baseUrl+"/common/javascript/lib/winform/image/close_a.png)",
+	//		backgroundRepeat : 'no-repeat'
+	//	});
+	//});
+
+	var _widht = document.documentElement.clientWidth; // 屏幕宽
+	var _height = document.documentElement.clientHeight; // 屏幕高
+
+	var boxWidth = $("#mb_con").width();
+	var boxHeight = $("#mb_con").height();
+
+	// 让提示框居中
+	$("#mb_con").css({
+		top : (_height - boxHeight) / 2 + "px",
+		left : (_widht - boxWidth) / 2 + "px"
+	});
+
+}
+
+
+//设置弹出窗口 只是显示信息并不进行
+function GenerateHtmlDivForShow(paramval){
+	var _html = "";
+	_html += '<div id="mb_box"></div><div id="mb_con">';
+	_html += '<div id="mb_ico"></div><div id="html_div">' + paramval 	+ '</div><div id="btn_div">';
+	_html += '</div></div>';
+	// 必须先将_html添加到body，再设置Css样式
+	$("body").append(_html);
+	GenerateCssDiv();
+}
+
+
+//设置确认弹出窗口完成
+
+
+
+/**
+ * 页面初始化函数
+ */
+$(function() {
+	if(lotId==undefined ||lotId==null || lotId=='' || isNaN(lotId)){
+		ecpBase.alert("标的号只能为数字形式");
+		return;
+	}
+
+	var param=$("#currentPrice").text();
+	//var cmmssnValue= Math.round(param/10);
+	//$("#cmmssn").html(formatMoney(cmmssnValue, 2));//当前拥金
+	queryScannedItem();
+	initFollowGoods();
+	$("#selfPrice").attr("class", "floatLeft priceContentCls i_" + lotId);
+	
+	// 1:初始化拍品信息
+	initItemInfo();
+	// 2:绑定出价方法事件
+	doBindAddPriceButtonClickListener();
+	// 3:绑定“加入竞拍助手”方法事件
+	doBindAddBidderHelpButtonClickListener();
+	// 4:初始化tab页签信息
+	Auction.initPageInfo();
+	initUEEditor();
+	// 5:初始化勘误信息
+	var obj = {
+		lotId : lotId
+		//itemId : itemId
+	}
+//	queryBidList(obj);
+	
+	// 6:初始化猜价格列表
+	//queryGuessPriceList(lotId);  -- 专家的后期要修改  itemid不用了改为lotId
+	//myGuessPrice(lotId);    -- 专家的后期要修改  itemid不用了改为lotId
+	// 7:初始化专家点评信息
+	//Comment.initReviewList(itemId, 1);  -- 专家的后期要修改  itemid不用了
+	// 8:绑定邀请专家按钮
+	Auction.doInvitedMavins();
+	// 初始化猜价格按钮是否显示
+	//guessPriceHiddenorShow(); -- 专家的后期要修改  itemid不用了
+	// 猜价格-点击事件绑定
+	$("#guessButton").on('click', doGuessClick);
+	// 9、初始化页面右上角卖家和相关统计信息
+	//initSellerAndCountOfSeller();
+	// 历史成交、正在拍卖、专家点评-点击事件绑定
+	$("#eyeImg").on('click', doClickEyeImg);
+	// 历史成交、正在拍卖、专家点评-点击事件绑定
+	$(".sellerHotryInfoDivBoxCls1").find("span").on('click', doItemSeller);
+	// 好评、中评、差评-点击事件绑定
+	$(".sellerHotryInfoDivBoxCls2").find("span").on('click', doItemEval);
+	// 发表咨询按钮显示
+	if (chatId == "") {
+		$("#zx").hide();
+	} else {
+		$("#zx").show();
+	}
+	
+
+	
+
+});
+
+
+	
+	
