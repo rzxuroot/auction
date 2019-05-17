@@ -410,7 +410,7 @@
     }
     //注册功能
     function register() {
-
+        if($("form").valid()){
         var  username= $("#username").val();
         var  phone=$("#mbrMobile").val();
         var  password=$("#password").val();
@@ -435,6 +435,7 @@
                     }
                 }
             })
+        }
         }
     }
 </script>
