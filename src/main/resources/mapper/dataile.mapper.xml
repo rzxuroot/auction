@@ -44,7 +44,7 @@
 
     </resultMap>
     <sql id="goods">
-        goods_content_id, goods_no, goods_name, explain_note, explain_info,
+        goods_id,goods_content_id, goods_no, goods_name, explain_note, explain_info,
         explain_add, goods_img, asking_price, bidding_steps, bout, author,
         year1, texture,t1.item_name,t2.item_name shape, length1, width, height, diameter,
         pre_start_time,pre_deadline,auction_start_time,auction_deadline,
@@ -63,7 +63,7 @@
     </sql>
     <!--<include refid="historical"/>,-->
     <select id="queryHistoricalPriceByGoodsId" resultMap="historicalResultMap">
-      select historical_price_id, historical_user_id, historical_goods_id, auction_price, No1_judge, deduct_judge
+      select historical_price_id, historical_user_id, historical_goods_id,auction_time,auction_price, No1_judge, deduct_judge
 ,username from tb_historical_price join
         tb_user where historical_user_id=user_id and historical_goods_id=#{goodsId} order by
         auction_price desc LIMIT 0,10;

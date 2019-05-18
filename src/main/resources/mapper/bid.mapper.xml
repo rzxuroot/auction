@@ -30,6 +30,34 @@
   private long creditLimit;
   private String accountStatus;-->
     <select id="queryAccountByUserId" resultMap="accountResultMap">
-        select total_margin_limit from tb_account where account_user_id = #{userId}
+        select * from tb_account where account_user_id = #{userId}
     </select>
+    <insert id="addHistorical">
+        insert into tb_historical_price (historical_user_id, historical_goods_id, auction_time,auction_price, No1_judge, deduct_judge)
+        values (#{historicalPrice.historicalUserId}, #{historicalPrice.historicalGoodsId},#{historicalPrice.auctionTime},
+        #{historicalPrice.auctionPrice},#{historicalPrice.no1Judge},#{historicalPrice.deductJudge});
+    </insert>
+    <update id="updataAccount">
+        update tb_account set freeze_margin_money =#{account.freezeMarginMoney},freeze_margin_limit =#{account.freezeMarginLimit},
+        available_margin_limit =#{account.availableMarginLimit} where account_user_id=#{account.accountUserId}
+
+    </update>
+    <!-- private long accountUserId;
+  private long accountBalance;
+  private long deposit;
+  private long totalMarginMoney;
+  private long freezeMarginMoney;
+  private long availableMarginMoney;
+  private long totalMarginLimit;
+  private long freezeMarginLimit;
+  private long availableMarginLimit;
+  private long creditLimit;
+  private String accountStatus;-->
+    <!--private long historicalPriceId;
+  private long historicalUserId;
+  private long historicalGoodsId;
+  private java.sql.Timestamp auctionTime;
+  private long auctionPrice;
+  private String no1Judge;
+  private String deductJudge;-->
 </mapper>

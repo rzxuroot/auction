@@ -45,7 +45,7 @@ public class HistoricalPriceVO {
     }
 
     public long getAuctionPrice() {
-        return auctionPrice/100;
+        return auctionPrice;
     }
 
     public void setAuctionPrice(long auctionPrice) {

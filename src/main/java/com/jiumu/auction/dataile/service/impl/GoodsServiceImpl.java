@@ -17,10 +17,10 @@ public class GoodsServiceImpl implements IGoodsService {
     public GoodsVO queryGoodsById(Long goodsId) {
         GoodsVO goodsVO = goodsMapper.queryGoodsById(goodsId);
         //将起拍价和竞拍价处以100得到元单位的价格
-        long price = goodsVO.getAskingPrice() / 100;
-        long binddPrice = goodsVO.getBiddingSteps() / 100;
-        goodsVO.setAskingPrice(price);
-        goodsVO.setBiddingSteps(binddPrice);
+//        long price = goodsVO.getAskingPrice() / 100;
+//        long binddPrice = goodsVO.getBiddingSteps() / 100;
+//        goodsVO.setAskingPrice(price);
+//        goodsVO.setBiddingSteps(binddPrice);
         return goodsVO;
     }
 

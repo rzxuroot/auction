@@ -42,6 +42,7 @@
 <!--<script type="text/javascript" src="detaile/detaile/simpwinform.js.下载"></script>-->
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script type="text/javascript" src="http://cdn-hangzhou.goeasy.io/goeasy.js"></script>
 <script>
     var baseUrl = "";
     var lotUrl="/jsp/ecp/public/auction.jsp?lotid=";
@@ -473,9 +474,9 @@
                 </div>
             	<div class="floatLeft offerInfoColumnCls">起拍价</div>
             	<div class="floatLeft offerInfoColumnCls">竞价阶梯</div>
-            	<div class="floatLeft offerCurrentPriceValInfoColumnCls" id="currentPrice" th:text="${historicalPriceList.get(0).auctionPrice}">1.00</div>
-            	<div class="floatLeft offerValInfoColumnCls" id="startPrice" th:text="${goods.askingPrice}">1.00</div>
-            	<div class="floatLeft offerValInfoColumnCls" id="incrPrice" th:text="${goods.biddingSteps}">0.00</div>
+            	<div class="floatLeft offerCurrentPriceValInfoColumnCls" id="currentPrice" th:text="${historicalPriceList.get(0).auctionPrice/100.00}">1.00</div>
+            	<div class="floatLeft offerValInfoColumnCls" id="startPrice" th:text="${goods.askingPrice/100.00}">1.00</div>
+            	<div class="floatLeft offerValInfoColumnCls" id="incrPrice" th:text="${goods.biddingSteps/100.00}">0.00</div>
             </div>
          	<!--2.2.5：拍卖方式信息 -->
         	<div class="auctionTypeInfoRowCls">
@@ -500,7 +501,7 @@
             	<div class="floatLeft">
                 	<div class="priceDivCls">
                     	<div class="floatLeft jianBtnCls" id="jianHao">-</div>
-                    	<div class="floatLeft priceContentCls i_973476012" id="selfPrice" th:text="${goods.askingPrice}">&nbsp;</div>
+                    	<div class="floatLeft priceContentCls i_973476012" id="selfPrice" th:text="${historicalPriceList.get(0).auctionPrice/100.00}">&nbsp;</div>
                     	<div class="floatLeft jiaBtnCls" id="jiaHao">+</div>
                     </div>
                 </div>
@@ -902,7 +903,7 @@ body{margin:8px;font-family:sans-serif;font-size:16px;}p{margin:5px 0;}</style><
                             <tbody th:each="historical : ${historicalPriceList}">
                                 <tr>
                                     <td class="bidName" th:text="${historical.userName}">sala</td>
-                                    <td class="bidPrice" th:text="${historical.auctionPrice}">1.00元</td>
+                                    <td class="bidPrice" th:text="${historical.auctionPrice/100.00}">1.00元</td>
                                     <td class="bidTime" th:text="${historical.auctionTime}">2019-05-15 10:02:54</td>
                                 </tr>
                             </tbody>
@@ -1172,6 +1173,7 @@ function doClickPreQuery() {
 </div>
 <input type="hidden" id="preStartTime" th:value="${goods.preStartTime}"/>
 <input type="hidden" id="preDeadline" th:value="${goods.preDeadline}"/>
+<input type="hidden" id="goodsId" th:value="${goods.goodsId}"/>
 <script type="text/javascript">
     $("#tabul li").mouseover(function () {
         var x = $('#tabul li').index(this);
@@ -1188,7 +1190,7 @@ function doClickPreQuery() {
     var stairPrice=$("#incrPrice").text();
     var current=$("#currentPrice").text();
     $("#jianHao").click(function () {
-        var jiancu=Number($("#selfPrice").text())-Number(stairPrice);
+        var jiancu=Number($("#selfPrice").text())-Number(stairPrice)*1.0;
         if (jiancu < current) {
             alert("不可小于当前价格")
         }else{
@@ -1197,7 +1199,7 @@ function doClickPreQuery() {
 
     });
     $("#jiaHao").click(function () {
-        $("#selfPrice").text(Number($("#selfPrice").text())+Number(stairPrice));
+        $("#selfPrice").text(Number($("#selfPrice").text())+Number(stairPrice)*1.0);
 
     });
 </script>
@@ -1232,10 +1234,12 @@ function doClickPreQuery() {
     }
 </script>
 <script type="text/javascript">
-    var current=$("#currentPrice").text();
+
     $("#addPriceBtn").click(function () {
+        var current=$("#selfPrice").text();
+        var goodsId=$("#goodsId").val();
         $.post("bid/isBidder",
-            {price:current},
+            {price:current,goodsId:goodsId},
             function (data) {
             if (data.code==0){
                 if (confirm("您还未登录，登录后即可出价，是否前往登录?")){
@@ -1438,6 +1442,22 @@ function doClickPreQuery() {
         showtime();
     }, 1000);
 
+</script>
+<!--goeast实时更新，jq循环赋值实现循环-->
+<script type="text/javascript">
+    var goEasy = new GoEasy({
+        appkey: 'BS-1c38afb26a204fc59a318265155eac96'
+    });
+    goEasy.subscribe({
+        channel:'zgj', //发消息频道和收消息频道要是同一个频道。
+        onMessage: function(message){
+            alert('收到：'+message.content);
+            window.location.href="order.html";
+        }
+    });
+
+
+    //GoEasy-OTP可以对appkey进行有效保护，详情请参考：GoEasy-Reference
 </script>
 </body>
 

@@ -1,6 +1,8 @@
 package com.jiumu.auction.dataile.service;
 
 import com.jiumu.auction.dataile.po.TbAccount;
+import com.jiumu.auction.dataile.po.TbHistoricalPrice;
+import com.jiumu.auction.dataile.vo.JsonResult;
 
 public interface IBidService {
     /**
@@ -9,4 +11,20 @@ public interface IBidService {
      * @return
      */
     TbAccount queryAccountByUserId(Long userId);
+
+    /**
+     * 保证金的扣除添加
+     * @param userId
+     * @param price
+     * @return
+     */
+    JsonResult MarginDeduction(Long userId,float price,Long goodsId);
+
+    /**
+     * 添加历史价格
+     * @param userId
+     * @param price
+     * @param goodsId
+     */
+    void addHistorical(Long userId,float price,Long goodsId);
 }

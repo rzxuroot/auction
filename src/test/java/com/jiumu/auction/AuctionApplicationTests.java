@@ -19,10 +19,15 @@ public class AuctionApplicationTests {
     @Test
     public void contextLoads() {
 //        StringRedisTemplate redisTemplate= new StringRedisTemplate();
-        redisTemplate.boundValueOps("au").set("zhangsan");
-        String au = redisTemplate.boundValueOps("au").get();
+        redisTemplate.boundValueOps("au11").set("zhangsan");
+        String au = redisTemplate.boundValueOps("au11").get();
         System.out.println(au);
     }
-
+    @Test
+    public void test1(){
+        float a=1.0f;
+        Long b=(long)a;
+        System.out.println(b);
+    }
 
 }
