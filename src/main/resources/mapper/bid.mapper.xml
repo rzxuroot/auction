@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jiumu.auction.dataile.mapper.BidMapper">
+    <resultMap id="accountResultMap" type="com.jiumu.auction.dataile.po.TbAccount">
+        <id property="accountId" column="account_id"/>
+        <result property="accountUserId" column="account_user_id"/>
+        <result property="accountBalance" column="account_balance"/>
+        <result property="deposit" column="deposit"/>
+        <result property="totalMarginMoney" column="total_margin_money"/>
+        <result property="freezeMarginMoney" column="freeze_margin_money"/>
+        <result property="availableMarginMoney" column="available_margin_money"/>
+        <result property="totalMarginLimit" column="total_margin_limit"/>
+        <result property="freezeMarginLimit" column="freeze_margin_limit"/>
+        <result property="availableMarginLimit" column="available_margin_limit"/>
+        <result property="creditLimit" column="credit_limit"/>
+        <result property="accountStatus" column="account_status"/>
+    </resultMap>
+    <!--private long accountId;
+  private long accountUserId;
+  private long accountBalance;
+  private long deposit;
+  private long totalMarginMoney;
+  private long freezeMarginMoney;
+  private long availableMarginMoney;
+  private long totalMarginLimit;
+  private long freezeMarginLimit;
+  private long availableMarginLimit;
+  private long creditLimit;
+  private String accountStatus;-->
+    <select id="queryAccountByUserId" resultMap="accountResultMap">
+        select total_margin_limit from tb_account where account_user_id = #{userId}
+    </select>
+</mapper>

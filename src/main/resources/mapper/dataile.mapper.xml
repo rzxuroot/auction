@@ -3,6 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.jiumu.auction.dataile.mapper.GoodsMapper">
+    <!--商品信息-->
     <resultMap id="goodsResultMap" type="com.jiumu.auction.dataile.vo.GoodsVO">
         <id property="goodsId" column="goods_id"/>
         <result property="goodsContentId" column="goods_content_id"/>
@@ -22,41 +23,50 @@
         <result property="authorName" column="author_name"/>
         <result property="authorInfo" column="author_info"/>
         <result property="itemName" column="item_name"/>
+        <result property="shape" column="shape"/>
     </resultMap>
-    <!--  private long goodsId;
-  private long goodsContentId;
-  private String goodsNo;
-  private String goodsName;
-  private String explainNote;
-  private String explainInfo;
-  private String explainAdd;
-  private String goodsImg;
-  private long askingPrice;
-  private long biddingSteps;
-  private long bout;
-  private long author;
-  private long year;
-  private long texture;
-  private String shape;
-  private String length;
-  private String width;
-  private String height;
-  private String diameter;
-  private java.sql.Timestamp preStartTime;
-  private java.sql.Timestamp preDeadline;
-  private java.sql.Timestamp auctionStartTime;
-  private java.sql.Timestamp auctionDeadline;
-  private String obligate1;
-  private String obligate2;
-   private String itemName;
--->
+    <!--历史价格-->
+    <!-- private long historicalPriceId;
+    private long historicalUserId;
+    private long historicalGoodsId;
+    private java.sql.Timestamp auctionTime;
+    private long auctionPrice;
+    private String no1Judge;
+    private String deductJudge;
+    private String userName;-->
+    <resultMap id="historicalResultMap" type="com.jiumu.auction.dataile.vo.HistoricalPriceVO">
+        <id property="historicalPriceId" column="historical_price_id"/>
+        <result property="historicalUserId" column="historical_user_id"/>
+        <result property="historicalGoodsId" column="historical_goods_id"/>
+        <result property="auctionTime" column="auction_time"/>
+        <result property="auctionPrice" column="auction_price"/>
+        <result property="userName" column="username"/>
+
+    </resultMap>
     <sql id="goods">
-         goods_id,goods_content_id,goods_no,goods_name,explain_note,explain_info,explain_add,
-        goods_img, asking_price, bidding_steps, bout, author, year, texture, shape, length, width, height, diameter
+        goods_content_id, goods_no, goods_name, explain_note, explain_info,
+        explain_add, goods_img, asking_price, bidding_steps, bout, author,
+        year1, texture,t1.item_name,t2.item_name shape, length1, width, height, diameter,
+        pre_start_time,pre_deadline,auction_start_time,auction_deadline,
         author_id,author_name,author_info
     </sql>
+    <!--商品信息-->
     <select id="queryGoodsById" resultMap="goodsResultMap">
-        select * from tb_goods join tb_author join db_auction.tb_item where author=author_id and item_id=texture and goods_id = #{goodsId}
-    </select>
+        select <include refid="goods"/> from tb_goods join tb_author join tb_item t1 join tb_item t2 where
+         author=author_id and t1.item_id=texture and t2.item_id=shape and goods_id = #{goodsId}
 
+</select>
+
+    <!--历史价格-->
+    <sql id="historical">
+  historical_price_id, historical_user_id, historical_goods_id, auction_price, No1_judge, deduct_judge
+    </sql>
+    <!--<include refid="historical"/>,-->
+    <select id="queryHistoricalPriceByGoodsId" resultMap="historicalResultMap">
+      select historical_price_id, historical_user_id, historical_goods_id, auction_price, No1_judge, deduct_judge
+,username from tb_historical_price join
+        tb_user where historical_user_id=user_id and historical_goods_id=#{goodsId} order by
+        auction_price desc LIMIT 0,10;
+
+    </select>
 </mapper>

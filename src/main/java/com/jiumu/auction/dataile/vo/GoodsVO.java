@@ -15,10 +15,10 @@ public class GoodsVO {
   private long biddingSteps;
   private long bout;
   private long author;
-  private long year;
+  private long year1;
   private long texture;
   private String shape;
-  private String length;
+  private String length1;
   private String width;
   private String height;
   private String diameter;
@@ -149,12 +149,12 @@ public class GoodsVO {
   }
 
 
-  public long getYear() {
-    return year;
+  public long getYear1() {
+    return year1;
   }
 
-  public void setYear(long year) {
-    this.year = year;
+  public void setYear1(long year1) {
+    this.year1 = year1;
   }
 
 
@@ -176,12 +176,12 @@ public class GoodsVO {
   }
 
 
-  public String getLength() {
-    return length;
+  public String getLength1() {
+    return length1;
   }
 
-  public void setLength(String length) {
-    this.length = length;
+  public void setLength1(String length1) {
+    this.length1 = length1;
   }
 
 
@@ -304,10 +304,10 @@ public class GoodsVO {
             ", biddingSteps=" + biddingSteps +
             ", bout=" + bout +
             ", author=" + author +
-            ", year=" + year +
+            ", year=" + year1 +
             ", texture=" + texture +
             ", shape='" + shape + '\'' +
-            ", length='" + length + '\'' +
+            ", length='" + length1 + '\'' +
             ", width='" + width + '\'' +
             ", height='" + height + '\'' +
             ", diameter='" + diameter + '\'' +
