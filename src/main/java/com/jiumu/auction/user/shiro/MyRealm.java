@@ -50,7 +50,9 @@ public class MyRealm extends AuthorizingRealm {
                 throw new IncorrectCredentialsException();
             }
         }
-        SecurityUtils.getSubject().getSession().setAttribute("user",tbUser);
+        String user=tbUser.getUserName();
+        SecurityUtils.getSubject().getSession().setAttribute("user",user);
+
         return new SimpleAuthenticationInfo(username,password,"myrealm");
     }
 }

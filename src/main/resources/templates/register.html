@@ -1,7 +1,7 @@
 ﻿
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
-      xmlns:cursor="http://www.w3.org/1999/xhtml">
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 <head>
     <base th:href="${#request.getContextPath()}+'/'">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
@@ -9,8 +9,6 @@
 <meta http-equiv="Cache-Control" content="no-siteapp" />
 <meta http-equiv="Cache-Control" content="no-transform" />
 <link rel="alternate" media="handheld" href="#" />
-
-
 <link type="text/css" rel="stylesheet" href="css/base_2.css" />
 <link type="text/css" rel="stylesheet" href="css/base_3.css" />
 <link type="text/css" rel="stylesheet" href="css/jquery-ui.min_1.css" />
@@ -148,11 +146,15 @@
                                                       您好，&nbsp;<span id="header_nickName">
                                    <a  href="/jsp/ecp/buyer/buyerindex.jsp" target=""></a>
                                 </span>
-                                <a id="header_logout" href="#" onclick="logout();" style="display:none;">&nbsp;<b>，退出</b></a> 
-                                <a id="header_login" href="login.html" target="_self" style=""><b>请登录</b></a>&nbsp;&nbsp;
+                                <shiro:user>
+                                <a id="header_logout" href="#" onclick="logout();" style="display:none;">&nbsp;<b>，退出</b></a>
+                                </shiro:user>
+                                <shiro:guest>
+                                <a id="header_login" href="html/login.html" target="_self" style=""><b>请登录</b></a>&nbsp;&nbsp;
+                                </shiro:guest>
                 </div>
                 <div style="float:left;">
-                    <a href="register.html"
+                    <a href="html/register.html"
                     target="_self" style="color: #FF003B;font-weight:600;">免费注册</a>&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
                 </div>
                 <div id="myDealDiv" style="cursor: pointer;float:left;position:relative;display:none;" ><a href="/jsp/ecp/buyer/buyerindex.jsp">买家中心</a><img

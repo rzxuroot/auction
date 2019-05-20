@@ -1,0 +1,457 @@
+@charset "utf-8";
+/* CSS Document */
+div.topToolbarDivCls {
+    height: 26px;
+    width: 65px;
+    font-family: "微软雅黑";
+    font-size: 12px;
+    margin-left: 1px;
+    float: left;
+    text-align: center;
+    line-height: 26px;
+    cursor: pointer;
+    vertical-align: middle;
+}
+
+div.topToolbarDivSelectedCls {
+    color: #FFF;
+    background-color: #ec154e;
+}
+
+div.topToolbarDivUnSelectedCls {
+    color: #666666;
+    background-color: #FFF;
+}
+
+div.tempOperArrDivCls {
+    text-align: center;
+    width: auto;
+    display: inline-block !important;
+    display: inline;
+    vertical-align: middle;
+
+}
+
+div.tableHeaderCls {
+    line-height: 38px;
+    color: #474749;
+    background-color: #f4f4f4;
+    height: 38px;
+}
+
+div.tablePageToolbarCls {
+    /*line-height: 38px;*/
+    color: #474749;
+    /*height: 38px;*/
+    text-align: right;
+    vertical-align: middle;
+}
+
+td.tableColumnHeaderCls {
+    color: #464648;
+    font-size: 14px;
+    height: 38px;
+    line-height: 38px;
+    text-align: center;
+    vertical-align: middle;
+    border-right-width: 1px;
+    border-right-style: none;
+}
+
+
+td.tableXZColumnHeaderCls {
+    color: #464648;
+    font-size: 14px;
+    height: 38px;
+    line-height: 38px;
+    line-height: 38px;
+    text-align: center;
+    padding-left: 10px;
+    padding-right: 10px;
+    vertical-align: middle;
+    margin: 0px;
+    width: 20px;
+    min-width: 20px;
+    max-width: 20px;
+    border-right-width: 1px;
+    border-right-style: none;
+    border-left-width: 1px;
+    border-left-style: none;
+}
+
+td.tableXZColumnHeaderCls{
+	color: #464648;
+	font-size: 14px;
+	height: 38px;
+	line-height: 38px;
+	line-height: 38px;
+	text-align: center;
+	padding-left: 10px;
+	padding-right: 10px;
+	vertical-align: middle;
+	margin: 0px;
+	width: 20px;
+	min-width: 20px;
+	max-width:20px;
+	border-right-width: 1px;
+	border-right-style: none;
+	border-left-width: 1px;
+	border-left-style: none;
+
+}
+
+.middleCheckbox {
+    vertical-align: middle;
+    margin-top: 0;
+    height: 38px;
+}
+
+div.editOperBtnIconCls4, div.saveOperBtnIconCls4, div.addOperBtnIconCls4 {
+    background-image: url(image/editopericon.png);
+    background-repeat: no-repeat;
+    background-position: center center;
+    cursor: pointer;
+    height: 27px;
+    line-height: 27px;
+    font-size: 12px;
+    width: 66px;
+    text-align: center;
+    vertical-align: middle;
+    color: #FFF;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+div.editOperBtnIconCls6, div.saveOperBtnIconCls6, div.addOperBtnIconCls6 {
+    background-image: url(image/editopericon6.png);
+    background-repeat: no-repeat;
+    background-position: center center;
+    cursor: pointer;
+    font-size: 12px;
+    height: 27px;
+    line-height: 27px;
+    width: 100px;
+    text-align: center;
+    vertical-align: middle;
+    color: #FFF;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+div.editOperBtnMOIconCls4, div.saveOperBtnMOIconCls4, div.addOperBtnMOIconCls4 {
+    background-image: url(image/editopermoicon.png);
+    background-repeat: no-repeat;
+    background-position: center center;
+    cursor: pointer;
+    height: 27px;
+    font-size: 12px;
+    line-height: 27px;
+    width: 66px;
+    text-align: center;
+    vertical-align: middle;
+    color: #FFF;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+div.editOperBtnMOIconCls6, div.saveOperBtnMOIconCls6, div.addOperBtnMOIconCls6 {
+    background-image: url(image/editopermoicon6.png);
+    background-repeat: no-repeat;
+    background-position: center center;
+    cursor: pointer;
+    font-size: 12px;
+    height: 27px;
+    line-height: 27px;
+    width: 100px;
+    text-align: center;
+    vertical-align: middle;
+    color: #FFF;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+table.tableToolElCls {
+    height: 38px;
+    width: 100%;
+    background-color: #f1f1f1;
+    margin-bottom: 10px;
+}
+
+.marginLeft5 {
+    margin-left: 5px;
+}
+
+table.tableToolElCls tr td.buttonTdCls {
+    text-align: left;
+    width: 80%;
+    padding-left: 2px;
+}
+
+table.tableToolElCls tr td.totalRecordsTdCls {
+    text-align: center;
+    width: 10%;
+    color: #645751;
+    font-family: "微软雅黑";
+}
+
+table.tableToolElCls tr td.pageInfoTdCls {
+    text-align: center;
+    font-family: "微软雅黑";
+    color: #645751;
+    width: 5%;
+}
+
+table.tableToolElCls tr td.preBtnTdCls {
+    text-align: center;
+    min-width: 70px;
+}
+
+div.sudokuDivCls {
+    border: 2px solid #fff;
+}
+
+div.sudokuDivMOCls {
+    border: 2px solid #ec154e;
+}
+
+td.sudokuTdCls {
+    border: 1px solid #e4e4e4;
+    cursor: pointer;
+    border-spacing: 200px;
+}
+
+td.sudokuTdNbspCls {
+    border: 1px solid #e4e4e4;
+    cursor: pointer;
+    border-spacing: 200px;
+}
+
+td.sudokuTdMOCls {
+    border: 1px solid #ec154e;
+    cursor: pointer;
+
+}
+
+div.tableContentBoxCls {
+    border-top-width: 1px;
+
+    border-right-width: 1px;
+    border-left-width: 1px;
+    border-top-style: solid;
+    border-right-style: solid;
+    border-left-style: solid;
+    border-top-color: #dddddd;
+    border-right-color: #dddddd;
+    border-left-color: #dddddd;
+}
+
+div.tableContentBoxCls table.tableGroupItemCls {
+    width: 100%;
+    height: 37px;
+    color: #404040;
+    background-color: #f9f9f9;
+    font-size: 12px;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-bottom-color: #dddddd;
+}
+
+div.tableContentBoxCls table.tableRowItemCls {
+    width: 100%;
+    height: 37px;
+    color: #404040;
+    font-size: 12px;
+
+}
+
+div.pageBtnDivCls {
+    height: 16px;
+    width: 17px;
+    line-height: 16px;
+    border: 1px solid #e5e5e5;
+    text-align: center;
+    vertical-align: middle;
+}
+
+div.pageBtnDisDivCls {
+    background-color: #efefef;
+    font-family: "宋体";
+    font-size: 12px;
+    color: #999999;
+}
+
+div.pageBtnNoDisDivCls {
+    background-color: #FFFFFF;
+    font-family: "宋体";
+    font-size: 12px;
+    color: #999999;
+    cursor: pointer;
+}
+
+div.pagePreBtnDivCls {
+    height: 16px;
+    width: 17px;
+    border: 1px solid #e5e5e5;
+    text-align: center;
+    vertical-align: middle;
+}
+
+div.tableContentBoxCls table.tableRowItemCls tr td.tableColItemCls {
+
+    font-size: 12px;
+}
+
+div.tableContentBoxCls table.tableRowItemCls tr td.tableColItemRBCls {
+
+    border-right-width: 1px;
+    border-right-style: solid;
+    border-right-color: #e4e4e4;
+    font-size: 12px;
+}
+
+div.tableContentBoxCls table.tableRowItemCls tr td.tableColItemRBCheckboxCls {
+    width: 30px;
+    min-width: 20px;
+    max-width: 20px;
+    border-right-width: 1px;
+    border-right-style: solid;
+    border-right-color: #e4e4e4;
+
+	width:30px;
+	min-width:20px;
+	max-width:20px;
+	border-right-width: 1px;
+	border-right-style: solid;
+	border-right-color: #e4e4e4;	
+}
+
+/**调整表格padding by zcc 2017-2-7**/
+div.tableContentBoxCls table.tableRowItemCls tr td {
+    /* 	padding: 10px; */
+    padding: 2px;
+    line-height: 19px;
+    color: #666666;
+}
+
+img.tableImgBoxCls {
+
+    width: 91px;
+    border: 1px solid #ddd;
+}
+
+.fbolder {
+    font-weight: bolder;
+}
+
+span.tablePageBtnDisabledCls {
+    line-height: 24px;
+    background-color: #dddddd;
+    height: 24px;
+    width: 53px;
+    color: #606060;
+    display: block;
+    border: 1px solid #b0b0b0;
+    text-align: center;
+    vertical-align: middle;
+}
+
+span.tablePageBtnCls {
+    line-height: 24px;
+    font-size: 14px;
+    cursor: pointer;
+    background-color: #999999;
+    height: 24px;
+    width: 53px;
+    color: #fff;
+    display: block;
+    border: 1px solid #666666;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.tablePageInfoCls {
+    width: 90%;
+}
+
+.tablePageBtnTdCls {
+    width: 5%;
+}
+
+table.tableRowItemCls tr td {
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-bottom-color: #dddddd;
+}
+
+.orderBtn {
+    background-image: url(../../../../image/orderbtn01.png);
+    line-height: 31px;
+    height: 31px;
+    display: block;
+    width: 112px;
+    color: #FFF;
+    cursor: pointer;
+}
+
+.alignleft {
+    text-align: left;
+}
+
+.aligncenter {
+    text-align: center;
+}
+
+.alignright {
+    text-align: right;
+}
+
+.valigntop {
+    vertical-align: top;
+}
+
+.valignmiddle {
+    vertical-align: middle;
+}
+
+.valignnbotton {
+    vertical-align: bottom;
+}
+
+.scsdTablePageBtnCls {
+    line-height: 30px;
+    height: 30px;
+    width: 30px;
+    font-size: 14px;
+    text-align: center;
+    vertical-align: middle;
+    border: 0px solid #d9d9d7;
+    cursor: pointer;
+}
+
+.scsdTablePageMoreBtnCls{
+    line-height: 24px;
+    height: 24px;
+    width: 30px;
+    font-size: 14px;
+    text-align: center;
+    vertical-align: middle;
+    border: 0px solid #d9d9d7;
+}
+
+.backPageCls {
+    font-size: 14px;
+    cursor: pointer;
+    background-color: #999999;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.backPageDisabledCls {
+    font-size: 14px;
+    cursor: pointer;
+    text-align: center;
+    vertical-align: middle;
+}
+
+table.tablePageBtnTdCls tr td{ padding: 0px; margin: 0px;}
+#toPage{ height: 22px; padding: 0px 5px; margin: 0px; border-spacing: 0px;}

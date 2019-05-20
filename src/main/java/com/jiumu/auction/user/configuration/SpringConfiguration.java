@@ -1,5 +1,6 @@
 package com.jiumu.auction.user.configuration;
 
+import at.pollux.thymeleaf.shiro.dialect.ShiroDialect;
 import com.jiumu.auction.user.shiro.MyRealm;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
@@ -35,5 +36,9 @@ public class SpringConfiguration {
         return factoryBean;
     }
 
+    @Bean
+    public ShiroDialect shiroDialect(){
+        return new ShiroDialect();
 
+    }
 }

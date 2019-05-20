@@ -1,0 +1,334 @@
+﻿@charset "utf-8";
+/* CSS Document */
+
+/*ECM弹出框样式*/
+body.bodyCls{
+	background-color: #FFFFFF;
+	font-size:12px;
+	font-family: "微软雅黑";
+}
+
+body.bodyCls table.tableCls{
+	width: 96%;
+	margin-top:15px;
+	margin-left:auto;
+	margin-right:auto;
+	border:solid 1px #E0DED9;
+	border-collapse:collapse;
+}
+
+/* 奇数行样式 */
+body.bodyCls table.tableCls tr.oddTrCls{
+    background-color: #FFFFFF;
+    border-bottom:solid 1px #E0DED9;
+}
+
+/* 偶数行样式 */
+body.bodyCls table.tableCls tr.evenTrCls{
+    background-color: #F9F9F8;
+    border-bottom:solid 1px #E0DED9;
+}
+
+td.rightBorderCls{
+	background-color: #FFFFFF;
+	border-right-width: 1px;
+	border-right-style: solid;
+	border-right-color: #E0DED9;
+}
+
+td.rBCls{
+	border-right-width: 1px;
+	border-right-style: solid;
+	border-right-color: #E0DED9;
+}
+body.bodyCls table.tableCls td.midTdCls{
+    width:1px;
+    background-color: #D9D6D1;
+}
+
+body.bodyCls table.tableCls td.labelCls{
+	line-height: 40px;
+	height: 40px;
+	text-align: right;
+	text-indent: 20;
+	vertical-align: middle;
+	border-right-width: 1px;
+	border-right-style: solid;
+	border-right-color: #d5d5d5;
+}
+
+td.labelW6Cls{
+	width: 100px;	
+}
+td.labelW7Cls{
+	width: 100px;	
+}
+
+select.inputSelectCls{
+	margin-left: 2px;
+	line-height: 30px;
+	height: 30px;
+}
+
+body.bodyCls table.tableCls td.inputTdCls{
+	line-height: 40px;
+	height: 40px;
+	text-align: left;
+	vertical-align: middle;
+}
+
+
+td.inputTdMLCls{
+	padding-left: 2px;
+}
+
+body.bodyCls table.tableCls td.inputTdCls input.inputCls{
+	font-size:12px;
+	line-height: 30px;
+	height: 30px;
+	border: 1px solid #d5d5d5;
+	float:left;
+	margin-left: 2px;
+}
+
+body.bodyCls table.tableCls td.inputTdCls textarea.inputCls{
+	font-size: 12px;
+	border: 1px solid #d5d5d5;
+	margin-left: 2px;
+	margin-top: 2px;
+	margin-bottom: 2px;
+}
+
+body.bodyCls table.tableCls td.inputTdCls input.inputCls:focus{
+    line-height: 30px;
+    height: 30px;
+    border: 1px solid #00A0E8;
+    float:left;
+}
+img.userIconCls{
+	margin-top: 5px;
+	margin-left:2px;
+	cursor:pointer;	
+}
+body.bodyCls table.tableCls td.inputTdCls input.inputClsDis{
+	font-size:12px;
+	line-height: 30px;
+	height: 30px;
+	border: 1px solid #d5d5d5;
+	background-color: #F6F6F5;
+	float:left;
+}
+
+body.bodyCls table.tableCls td.inputTdCls *{
+    font-size:12px;
+}
+
+/*ECM页面输入框部分样式*/
+div.containDivCls{
+	border:solid 1px #E1DFDA;
+	background-color: #FFFFFF;
+	margin:3px 3px 3px 3px;
+	font-size:12px;
+}
+
+div.containDivCls div.titleCls{
+	margin-top:5px;
+	margin-left: 5px;
+	margin-bottom:5px;
+	font-size:13px;
+	text-align: left;
+    text-indent: 25px;
+    background-image: url(../images/list-items.gif);
+    background-repeat: no-repeat;
+    background-position: 5px 0px;
+}
+
+div.containDivCls div.titleCls{
+    margin-left:5px;
+	cursor:pointer;
+}
+img.imgAfterTitleCls{
+    margin-left:9px;
+	cursor:pointer;
+}
+
+.pointer{
+	cursor:pointer;
+}
+
+div.containDivCls div.blueLineCls{
+	with:100%;
+	height:3px;
+	background-color:#0097E7;
+    margin-bottom:5px;
+}
+
+div.containDivCls table.tableCls{
+    width: 100%;
+    border-top:solid 1px #E0DED9;
+    border-collapse: separate;
+    border-spacing: 10px;
+}
+
+div.containDivCls input.inputCls {
+	font-size:12px;
+    height: 24px;
+    width: 120px;
+    line-height: 24px;
+    border: solid 1px #D0CCC7;
+}
+
+div.containDivCls select.select {
+	font-size:12px;
+	height: 26px;
+    width: 122px;
+    font-size:12px;
+    border: solid 1px #D0CCC7;
+}
+
+div.containDivCls input.inputCls:focus {
+    height: 24px;
+    width: 120px;
+    line-height: 24px;
+    border: solid 1px #00A0E8;
+}
+
+div.containDivCls select.select:focus {
+    height: 26px;
+    width: 122px;
+    font-size:12px;
+    border: solid 1px #00A0E8;
+}
+
+div.pswdCheckDivCls{
+	float:right;
+	margin-top: 4px;
+	margin-right: 20px;
+	width:96px;
+}
+
+div.pswdCheckDivCls span{
+	display:block;
+    width:30px;
+    height:18px;
+    line-height:18px;
+    float:left;
+    margin-right:2px;
+    font-size:12px;
+    text-align:center;
+}
+
+
+
+/*div.pswdCheckDivClsLeft{
+    float:left;
+    margin-top: 4px;
+    margin-left: 20px;
+    width:96px;
+}
+
+div.pswdCheckDivClsLeft span{
+    display:block;
+    width:30px;
+    height:18px;
+    line-height:18px;
+    float:left;
+    margin-right:2px;
+    font-size:12px;
+    text-align:center;
+}*/
+
+span.pswdWeakCls{
+	background-color:red;
+	color:white;
+}
+
+span.pswdMiddleCls{
+    background-color:yellow;
+    color:black;
+}
+
+span.pswdStrongCls{
+    background-color:green;
+    color:white;
+}
+
+span.pswdCheckDefaultCls{
+    background-color:grey;
+    color:white;
+}
+
+.itemDescTagCls{
+	border-radius:10px;
+	border: 1px solid #d4d4d4;
+	cursor:pointer;
+	font-size:12px;
+	font-weight:lighter;
+	height:25px;
+	text-align:center;
+	line-height:25px;
+	display:block;
+	clear:both; 
+	margin-top:4px;
+	cursor:pointer;
+	margin-left:10px;
+}
+.itemDescTagMOCls{
+	border-radius:10px;
+	border: 1px solid #d4d4d4;
+	cursor: pointer;
+	background-color: #ededed;
+	font-size:12px;
+	font-weight:lighter;
+	height:25px;
+	text-align:center;
+	line-height:25px;
+	display:block;
+	clear:both; 
+	margin-top:4px;
+	cursor:pointer;
+	margin-left:10px;
+}
+/**去掉type=number 默认样式**/
+input[type=number] {  
+    -moz-appearance:textfield;  
+}  
+input[type=number]::-webkit-inner-spin-button,  
+input[type=number]::-webkit-outer-spin-button {  
+    -webkit-appearance: none;  
+    margin: 0;  
+}
+
+td.labelCls{
+	border: 1px solid #d4d4d4;
+	line-height: 30px;
+	height: 30px;
+	min-width: 100px;
+	background-color: #f9f9f8;
+	text-indent: 10px;	
+}
+td.contentCls{
+	border: 1px solid #d4d4d4;
+	line-height: 30px;
+	height: 30px;
+	min-width: 100px;
+	text-indent: 3px;
+}
+table.FormTableCls{
+	border-collapse:collapse;
+	margin:3px;
+}
+
+
+
+.ui-autocomplete {
+	max-height: 200px;
+	overflow-y: auto;
+	overflow-x: hidden;
+}
+* html .ui-autocomplete {
+	height: 100px;
+}
+a:link#titleHrefCls,a:hover#titleHrefCls,a:active#titleHrefCls, a:visited#titleHrefCls{
+	color:#d83560;	
+}
