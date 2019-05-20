@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jiumu.auction.user.dao.UserMapper">
+    <resultMap id="baseResult" type="com.jiumu.auction.user.bean.TbUser">
+        <id property="userId" column="user_id" javaType="java.lang.Long"/>
+        <result property="userName" column="username" javaType="java.lang.String"/>
+        <result property="userPassword" column="password" javaType="java.lang.String"/>
+        <result property="email" column="email" javaType="java.lang.String"/>
+        <result property="phone" column="phone" javaType="java.lang.String"/>
+    </resultMap>
+
+
+    <select id="checkUsername" resultMap="baseResult">
+        select user_id,username,password from tb_user where username =#{username}
+    </select>
+    <select id="checkEmail" resultMap="baseResult">
+        select user_id,username,password from  tb_user where email=#{email}
+    </select>
+    <select id="checkPhone" resultMap="baseResult">
+        select user_id,username,password from tb_user where phone =#{phone}
+    </select>
+
+    <!--查询手机号是否被使用-->
+    <select id="selectUserByTel" resultMap="baseResult">
+        select user_id,username,password,email,phone from tb_user where phone=#{phone}
+    </select>
+    <!--查询用户的名称是否被使用-->
+    <select id="selectUserByName" resultMap="baseResult">
+        select user_id,username,password,email,phone from tb_user where username=#{name};
+    </select>
+
+    <insert id="insertUser">
+        insert  into tb_user(username,password,phone) value (#{userInfo.username},#{userInfo.password},#{userInfo.phone});
+    </insert>
+</mapper>

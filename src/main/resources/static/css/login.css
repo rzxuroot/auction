@@ -1,0 +1,170 @@
+﻿@charset "utf-8";
+/* CSS Document */
+
+* {
+    font-size: 14px;
+    font-color: #8E8B88;
+}
+
+.bodyDiv {
+    width: 100%;
+    margin-top: 20px;
+}
+
+.container {
+    width: 100%;
+    margin: auto;
+}
+
+.logo {
+    width: 1200px;
+    margin: auto;
+    margin-bottom: 20px;
+}
+
+.float_left {
+    float: left;
+}
+
+.logo_hr {
+    float: left;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+.input_1200 {
+    width: 100%;
+    height: 380px;
+    background: #EBE9E7;
+}
+.inputAreaBg {
+    width: 1200px;
+    height: 380px;
+    margin: auto;
+}
+
+.loginBgImg {
+    margin-top: 10px;
+}
+
+.inputArea {
+    float: right;
+    width: 320px;
+    height: 300px;
+    margin-top: 30px;
+    background: #FFFFFF;
+    text-align: center;
+}
+
+.textDiv {
+    width: 100%;
+    height: 40px;
+	float:left;
+}
+
+.loginText {
+    float: left;
+    margin-top: 10px;
+    margin-left: 30px;
+    font-weight: 550;
+    font-size: 18px;
+    color: #676661;
+}
+
+.registerText {
+    float: right;
+    margin-top: 14px;
+    margin-right: 30px;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.msg {
+    margin-left: 30px;
+    height: 25px;
+	float:left;
+}
+
+.msg_wrap {
+    width: 260px;
+    height: 25px;
+    margin: 0 auto;
+    background: #FFD6D2;
+    border: 1px solid #FFA59D;
+}
+.msg_img_div {
+    width: 15px;
+    height: 18px;
+    margin-top: 4px;
+    float: left;
+}
+
+.msg_content {
+    width: 240px;
+    height: 25px;
+    line-height: 25px;
+    text-align: left;
+    font-size: 12px;
+    color: #666;
+    float: right;
+}
+
+.msgImg {
+    width: 15px;
+    height: 18px;
+    margin-left: 5px;
+    background: url(../images/light.png) no-repeat;
+}
+.errorImg {
+    width: 15px;
+    height: 18px;
+    margin-left: 5px;
+    background: url(../images/errorimg.png) no-repeat;
+}
+.nickNameDiv {
+	float:left;
+    height: 36px;
+    margin-left: 30px;
+    margin-right: 30px;
+    margin-top: 10px;
+}
+
+.passwordDiv {
+	float:left;
+    height: 36px;
+    margin-left: 30px;
+    margin-right: 30px;
+    margin-top: 20px;
+}
+
+.textInput {
+    width: 248px;
+    height: 100%;
+    line-height: 40px;
+    border: solid 1px #D0CCC7;
+    padding-left: 10px;
+}
+
+.autoLoginDiv {
+    float: left;
+    margin-left: 30px;
+    margin-top: 20px;
+}
+
+.loginBtn {
+    float: left;
+    margin-top: 20px;
+    margin-left: 30px;
+    margin-right: 30px;
+    background: #FF0040;
+    color: white;
+    font-size: 18px;
+	width:260px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    cursor: pointer
+}
+
+.loginBtn:hover {
+    background-color: #e34871;
+}

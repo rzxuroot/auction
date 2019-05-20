@@ -1,0 +1,1128 @@
+﻿@charset "utf-8";
+body,html{
+    font-family: "微软雅黑";
+    font-size: 12px;
+    margin: 0px;
+    height: 100%;
+}
+*{
+    font-family: "微软雅黑";
+    font-size: 12px;
+}
+.pwhidden::-ms-reveal { 
+    display: none;
+}
+/*禁止滚动条
+body{
+    overflow-x:hidden;
+    overflow-y:hidden;
+  } */
+  
+/*启用滚动条*/
+body{
+    overflow-x:auto;
+    overflow-y:auto;
+   
+  }
+
+.footLine{
+    width: 1200px;
+    height: 20px;
+    margin: 0 auto;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-bottom-color: #e7e7e7;
+}
+
+
+.headAndFoot *{
+    margin:0 auto;
+    padding:0px;
+    font-size:12px;
+    font-family:"微软雅黑";
+}
+.floatLeft{
+    float:left;
+}
+.padding0{
+    padding:0px;
+}  
+.margin0{
+    margin:0px;
+}  
+.headAndFoot a{
+    text-decoration: none;
+    color: #5E5A56;
+}
+
+.headAndFoot li {
+    list-style:none;
+}
+
+
+.headerMenu_ul{
+    width:100px;
+    background:#F9F4F4;
+    line-height:30px;
+}
+
+.headerMenu_ul li:hover{
+    background:#CDCDCD;
+}
+
+.shopMenu_ul{
+    width:70px;
+    background:#F9F4F4;
+    line-height:24px;
+}
+
+.shopMenu_ul li:hover{
+    background:#CDCDCD;
+}
+
+.headAndFoot .footer_ul li a {
+    color: #96928E;
+}
+
+.headAndFoot .quicklink a {
+    color: #FFFFFF;
+}
+
+.headAndFoot .footer_ul{
+    margin-left:20px;
+}
+
+.headAndFoot .footer_ul li{
+    margin-left:20px;
+    line-height:24px;
+}
+
+.headAndFoot .linkTable{
+    margin-top:30px;
+    margin-bottom:30px;
+}
+.headAndFoot .linkTable tr td{
+    cursor: pointer;
+}
+.headAndFoot .redCircle{
+    float:left;
+    /*width:56px;
+    height:56px;
+    line-height:56px;
+    text-align:center;
+    border:solid 2px #EF2350;
+    border-radius:28px;
+    -webkit-border-radius:28px;
+    -moz-border-radius:28px;
+    font-size:28px;
+    color:#EF2350;*/
+}
+
+.headAndFoot .description{
+    float:left;
+    margin-left:15px;
+    max-width:195px;    
+}
+div.mainDivCls{
+    line-height: 112px;
+    height: 112px;
+    background-color: #FFF;
+    width: 100%;
+    text-align: center;
+    vertical-align: middle;
+}
+div.logoDivCls{
+    line-height: 112px;
+    height: 112px;
+    background-color: #FFF;
+    width: 1200px;
+    text-align: left;
+    margin: 0 auto;
+    vertical-align: middle;
+}
+
+div.ecpMainCls{
+    width: 1200px;
+    text-align: left;
+    margin: 0 auto;
+    vertical-align: middle;
+}
+
+
+div.logoImgDivCls{
+    height: 100%;
+    width: 200px;
+    background-image: url(../images/logo.png);
+    background-repeat: no-repeat;
+    background-position: left center;
+    float:left;
+}
+div.logoDivCls div.pageTitleDivCls{
+    width: 159px;
+    height: 100%;
+    float: left;
+    font-family: "微软雅黑";
+    font-size: 24px;
+    font-weight: bolder;
+    color: #2c2930;
+    text-align: center;
+    vertical-align: middle;
+    float:left;
+}
+div.logoDivCls div.searchDivCls{
+    width: 455px;
+    height: 112px;
+    line-height: 112px;
+    float: left;
+    margin-left: 427px;
+    padding: 0px;
+    margin-top: 0px;
+    margin-right: 0px;
+    margin-bottom: 0px;
+}
+div.searchMainCls{
+    height: 34px;
+    width: 420px;
+    border: 2px solid #d73660;
+    margin-top: 38px;
+    float:right;
+}
+div.searchFilterName{
+    width: 100px;
+    border-right-width: 1px;
+    border-right-style: solid;
+    border-right-color: #e1e1e1;
+    height: 34px;
+    line-height: 34px;
+    font-family: "微软雅黑";
+    font-size: 14px;
+    font-weight: normal;
+    color: #888888;
+    text-align: left;
+    padding-left: 8px;
+    float:left;
+    background-image: url(../images/searchsplitdown.png);
+    background-repeat: no-repeat;
+    background-position: 90px 13px;
+}
+div.searchInputDivCls{
+    float: left;
+    width: 253px;
+}
+div.searchBtnDivCls{
+    float: left;
+    width: 58px;
+    line-height: 34px;
+    height: 34px;
+    background-color: #d73660;
+    background-image: url(../images/searchquerybtn.png);
+    background-repeat: no-repeat;
+    background-position: 20px 5px;
+    cursor:pointer;
+}
+
+input.searchInputCls{
+    border-top-style: none;
+    border-right-style: none;
+    border-bottom-style: none;
+    border-left-style: none;
+    line-height: 32px;
+    height: 32px;
+    width: 253px;
+}
+
+div.sellCenterMenuDiv{
+    clear:both;
+    line-height: 45px;
+    height: 45px;
+    width: 100%;
+    background-color: #cc1d46;
+}
+div.sellCenterUserInfoDIvCls{
+    clear:both;
+    line-height: 180px;
+    height: 180px;
+    width: 100%;
+    background-image: url(../images/sellcenteruserinfobg.png);
+}
+div.sellSeledMenuCls{
+    float: left;
+    cursor:pointer;
+    background-color: #ee9db0;
+    line-height: 45px;
+    height: 45px;
+    width: 102px;
+    color: #ce1d47;
+    font-family: "微软雅黑";
+    font-size: 14px;
+    text-align: center;
+}
+
+div.sellMenuCls{
+    float: left;
+    cursor:pointer;
+    background-color: #cc1d46;
+    line-height: 45px;
+    height: 45px;
+    width: 102px;
+    color: #fff;
+    font-family: "微软雅黑";
+    font-size: 14px;
+    text-align: center;
+}
+div.userImgDivCls{
+    line-height: 180px;
+    height: 180px;
+    width: 150px;
+    background-image: url(../images/userimg.png);
+    background-repeat: no-repeat;
+    background-position: center center;
+    float:left;
+    margin-top:-10px;
+}
+
+.zhezhaoDiv{
+    line-height: 180px;
+    height: 180px;
+    width: 150px;
+    background-image: url(../images/circle_d102.png);
+    background-repeat: no-repeat;
+    background-position: center center;
+    float:left;
+    position:relative;
+    z-index:1000px;
+    margin-top:-9px;
+}
+
+.avatarDiv{
+    height: 180px;
+    width: 150px;
+    background-image: url(../images/circle_d100.png);
+    background-repeat: no-repeat;
+    background-position: center center;
+    float:left;
+    margin-left:-126px;
+    margin-top:31px;
+}
+
+.avatarImg{
+    height:102px;
+    width:102px;
+}
+
+div.userInfoDivCls{
+    line-height: 180px;
+    height: 180px;
+    width: 207px;
+    float:left;
+}
+div.upSellerDivCls{
+    width: 234px;
+    float: left;
+    color: #fff;
+    font-family: "微软雅黑";
+    font-size: 14px;
+    margin-top: 9px;
+    background-image: url(../images/sellerbz.png);
+    background-repeat: no-repeat;
+    background-position: 40px 40px;
+    text-indent: 55px;
+    height: 161px;
+    line-height: 105px;
+}
+div.sellWaiterDivCls{
+    width: 365px;
+    float: right;
+    height: 170px;
+    line-height: 170px;
+    padding-top: 10px;
+}
+div.userSafeDivCls{
+    width: 193px;
+    float: left;
+    position: relative;
+    color: #fff;
+    font-family: "微软雅黑";
+    font-size: 14px;
+    margin-top: 9px;
+    border-right-width: 1px;
+    border-right-style: solid;
+    border-right-color: #8c8a8d;
+    background-image: url(../images/safe1.png);
+    background-repeat: no-repeat;
+    background-position: 60px 30px;
+    text-indent: 40px;
+    padding-top:56px;
+    line-height: 105px;
+    height: 105px;
+}
+.applyForSellerCls{
+    background-color: #CC1D48;
+    position: relative;
+    top: -30px;
+    height: 25px;
+    line-height: 25px;
+    text-align: center;
+    width: 120px;
+    left: 20px;
+    color: #ffffff;
+    text-indent: 0px;
+    cursor: pointer;
+}
+.pointer{
+    cursor:pointer;
+
+}
+div.nickNameDivCls{
+    line-height: 63px;
+    height: 63px;
+    width: 207px;
+    background-image: url(../images/xuxian.png);
+    font-family: "微软雅黑";
+    font-size: 14px;
+    color: #FFF;
+    background-repeat: repeat-x;
+    background-position: 50px 62px;
+    text-indent: 11px;
+}
+div.topLjxpjDivCls{
+    margin-top:10px;
+}
+div.ljxpjDivCls{
+    line-height: 30px;
+    height: 30px;
+    width: 207px;
+    font-family: "微软雅黑";
+    font-size: 12px;
+    color: #FFF;
+    text-indent: 11px;
+}
+div.bzjjeDivCls{
+    line-height: 30px;
+    height: 30px;
+    width: 207px;
+    font-family: "微软雅黑";
+    font-size: 12px;
+    color: #FFF;
+    text-indent: 11px;
+}
+div.jnbzjDivCls{
+    line-height: 30px;
+    height: 30px;
+    width: 207px;
+    font-family: "微软雅黑";
+    font-size: 12px;
+    color: #FFF;
+    text-indent: 11px;
+    text-decoration: underline;
+}
+div.sellWaiterBoxR1Cls{
+    background-image: url(../images/sellwaiterboxr1.png);
+    background-repeat: no-repeat;
+    height: 10px;
+    width: 12px;
+    float:left;
+}
+div.sellWaiterBoxR2Cls{
+    background-repeat: no-repeat;
+    background-image: url(../images/sellwaiterboxr2.png);
+    background-repeat: repeat;
+    height: 9px;
+    width: 340px;
+    float: left;
+    border-top-width: 1px;
+    border-top-style: solid;
+    border-top-color: #7d787e;
+}
+div.sellWaiterBoxR3Cls{
+    background-image: url(../images/sellwaiterboxr3.png);
+    background-repeat: no-repeat;
+    height: 10px;
+    width: 12px;
+    float: left;
+}
+div.sellWaiterBoxR4Cls{
+    background-repeat: no-repeat;
+    background-image: url(../images/sellwaiterboxr2.png);
+    background-repeat: repeat;
+    height: 138px;
+    width: 11px;
+    float: left;
+    clear:both;
+    border-left-width: 1px;
+    border-left-style: solid;
+    border-left-color: #7d787e;
+}
+div.sellWaiterBoxR5Cls{
+    background-repeat: no-repeat;
+    background-image: url(../images/sellwaiterboxr2.png);
+    background-repeat: repeat;
+    height: 128px;
+    padding-top:10px;
+    line-height: 30px;
+    width: 340px;
+    float: left;
+    font-family: "微软雅黑";
+    font-size: 12px;
+    color: #FFF;
+    text-indent: 20px;
+    zoom:1;
+}
+div.sellWaiterBoxR5Cls:after{
+	content: "";
+	clear: both;
+	display: block;
+}
+
+div.sellWaiterBoxR5Cls .divLeft{
+   width: 180px;
+   float: left;
+   text-indent: 0;
+   font-size: 10px;
+}
+
+div.sellWaiterBoxR5Cls .divRight{
+   width: 110px;
+   height:130px;
+   float: left;
+}
+
+div.myAccountCls{
+	width:130px;
+	height:130px;
+	text-align: center;
+}
+
+div.sellWaiterBoxR6Cls{
+    background-repeat: no-repeat;
+    background-image: url(../images/sellwaiterboxr2.png);
+    background-repeat: repeat;
+    height: 138px;
+    width: 11px;
+    float: left;
+    border-right-width: 1px;
+    border-right-style: solid;
+    border-right-color: #7d787e;
+}
+
+
+
+div.sellWaiterBoxR7Cls{
+    background-repeat: no-repeat;
+    background-image: url(../images/sellwaiterboxr7.png);
+    background-repeat: repeat;
+    height: 10px;
+    width: 12px;
+    float: left;
+    clear:both;
+}
+div.sellWaiterBoxR8Cls{
+    background-repeat: no-repeat;
+    background-image: url(../images/sellwaiterboxr2.png);
+    background-repeat: repeat;
+    height: 9px;
+    width: 340px;
+    float: left;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-bottom-color: #7d787e;
+}
+div.sellWaiterBoxR9Cls{
+    background-repeat: no-repeat;
+    background-image: url(../images/sellwaiterboxr9.png);
+    background-repeat: repeat;
+    height: 9px;
+    width: 12px;
+    float: left;
+}
+span.waiterBoxTextLeftCls{
+    width: 160px;
+    display:block;
+    float: left;
+}
+
+div.textLeftCls{
+    width: 180px;
+    zoom:1;
+}
+div.textLeftCls:after{
+	content: "";
+	display: block;
+	clear: both;
+}
+
+div.textTitleLeft{
+	height:20px;
+	width:85px;
+    line-height: 20px;
+    text-align:left;
+    float: left;
+}
+
+div.textValRight{
+    height:20px;
+    width:75px;
+    margin-left:5px;
+    line-height: 20px;
+    text-align:left;
+    float: left;
+}
+
+div.imgEyeCls{
+	width: 18px;
+	float: left;
+	cursor: pointer;
+}
+div.eyeImgCls{
+	width: 18px;
+	height: 12px;
+}
+
+span.waiterBoxTextRightCls{
+/* 	width: 160px; */
+    float: left;
+    display:block;
+}
+div.MainBodyDiv{
+    width: 100%;
+    height:100%;
+    clear:both;
+}
+
+div .maniContentTitleWrap{
+    background-color:#F3F3F3 ;
+    height: 40px;
+    padding-left:20px;
+    zoom:1;
+}
+
+div .maniContentTitleWrap:after{
+    content:"";
+    display:block;
+    clear:both;
+}
+
+.maniContentTitleWrap .titleWrapOne{
+    font-size:16px;
+    float:left;
+    margin-top:5px;
+}
+
+.maniContentTitleWrap .titleImg{
+    margin-top: 14px;
+    margin-left:5px;
+    float:left;
+}
+
+.maniContentTitleWrap .titleWrapTwo{
+    font-size: 14px;
+    margin-left:5px;
+    margin-top: 7px;
+    float:left;
+    color:#888888;
+}
+
+div.Main1200Div{
+    padding-top:20px;
+    height:100%;
+    clear:both;
+    width: 1200px;
+    text-align: left;
+    margin: 0 auto;
+    vertical-align: middle;
+    zoom:1;
+}
+div.Main1200Div:AFTER{
+    content: "";
+    display: block;
+    clear: both;
+}
+div.Main1200NoTpDiv{
+    height:100%;
+    clear:both;
+    width: 1200px;
+    text-align: left;
+    margin: 0 auto;
+    vertical-align: middle;
+}
+
+
+div.sellCenterLeftMenuBodyCls{
+    clear:both;
+    height: auto;
+    width: 196px;
+    float: left;
+    border: 1px solid #e7e7e7;
+}
+
+ul.sellCenterLeftMenu1Cls{
+    list-style:none;
+    margin-top:13px;
+    padding-left:18px;
+}
+ul.noul{
+    list-style:none;
+}
+
+li.leftLi{
+    float:left;
+}
+.jyglIconCls{
+    background-image: url(../images/jyglicon.png);
+    background-repeat: no-repeat;
+    background-position: 0px 3px;
+}
+.ppglzxIconCls{
+    background-image: url(../images/ppglzxicon.png);
+    background-repeat: no-repeat;
+    background-position: 0px 1px;
+}
+.htglIconCls{
+    background-image: url(../images/htglicon.png);
+    background-repeat: no-repeat;
+    background-position: 0px 0px;
+}
+.baseIconCls{
+    background-image: url(../images/baseicon.jpg);
+    background-repeat: no-repeat;
+    background-position: 0px 0px;
+}
+.wlzxIconCls{
+    background-image: url(../images/wlzxicon.png);
+    background-repeat: no-repeat;
+    background-position: 0px 4px;
+}
+.zhglIconCls{
+    background-image: url(../images/zhglicon.png);
+    background-repeat: no-repeat;
+    background-position: 0px 0px;
+}
+.cwglIconCls{
+    background-image: url(../images/cwglicon.png);
+    background-repeat: no-repeat;
+    background-position: 0px 3px;
+}
+.yxglIconCls{
+    background-image: url(../images/yxglicon.png);
+    background-repeat: no-repeat;
+    background-position: 0px 0px;
+}
+.kfglIconCls{
+    background-image: url(../images/kfglicon.png);
+    background-repeat: no-repeat;
+    background-position: 0px 0px;
+}
+li.sellCenterLeftMenu1Cls{
+    text-indent: 20px;
+    width: 160px;
+    font-family: "微软雅黑";
+    font-size: 14px;
+    color: #939393;
+    padding-left:7px;
+    margin-bottom:10px;
+}
+li.sellCenterLeftMenu2Cls{
+    text-indent: 20px;
+    width: 115px;
+    height:23px;
+    line-height:23px;
+    font-family: "微软雅黑";
+    font-size: 12px;
+    color: #939393;
+    margin-left:22px;
+    margin-top:2px;
+    cursor:pointer;
+}
+li.sellCenterLeftMenu2SelectedCls{
+    color: #FFF;
+    background-color: #d73660;
+}
+li.sellCenterLeftMenuUnderLineCls{
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-bottom-color: #e7e7e7;
+    width: 160px;
+    margin-top:10px;
+}
+div.split20pxCls{
+    width: 20px;
+    height:100%;
+    float:left;
+}
+.alignL{
+    text-align: left;
+}
+
+.alignC{
+    text-align:center;
+}
+
+.alignR{
+    text-align:right;
+}
+
+.font14{
+    font-size:14px;
+}
+.valignT{
+    vertical-align: top;
+}
+
+.valignM{
+    vertical-align: middle;
+}
+
+.valignB{
+    vertical-align: button;
+}
+
+div.rowSplitCls{
+    width: 100%;
+    height:20px;
+    clear:both;
+}
+div.rowSplitCls10{
+    width: 100%;
+    height:10px;
+    clear:both;
+}
+
+div.colSplitCls{
+    width: 20px;
+    height:100%;
+    float:left;
+}
+
+div.mainCenterBodyCls{
+    float:left;
+}
+div.height20DivCls{
+    height:20px;
+}
+
+div.buyDivCls{
+    line-height: 130px;
+    height: 130px;
+    background-color: #CC1D46;
+    text-align: center;
+    vertical-align: middle;
+    clear:both;
+}
+
+div.buyLogoDivCls{
+    float:left;
+    width:300px;
+    line-height: 130px;
+    height: 130px;
+    text-align: left;
+    vertical-align: middle;
+}
+
+div.buyLogoImgDivCls{
+    float:left;
+    height: 100%;
+    width: 110px;
+    background-image: url(../images/buyerlogo.png);
+    background-repeat: no-repeat;
+    background-position: left center;
+    float:left;
+}
+
+div.buyLogoDivCls div.pageTitleDivCls{
+    height: 100%;
+    line-height:155px;
+    float: left;
+    font-family: "微软雅黑";
+    font-size: 20px;
+    font-weight: bolder;
+    color: #FFFFFF;
+    float:left;
+    margin-left:30px;
+}
+
+div.buyCenterMenuDiv{
+    float:left;
+    width: 400px;
+    line-height: 130px;
+    height: 130px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+div.buyCenterMenuMid{
+    margin-top:55px;
+}
+
+div.buySeledMenuCls{
+    float: left;
+    cursor:pointer;
+    line-height: 45px;
+    height: 45px;
+    width: 102px;
+    color: #FFFFFF;
+    font-family: "微软雅黑";
+    font-size: 14px;
+    text-align: center;
+    text-decoration:underline;
+}
+
+div.buySeledMenuMsgCls{
+    float: left;
+    cursor:pointer;
+    line-height: 45px;
+    height: 45px;
+    width: 152px;
+    color: #FFFFFF;
+    font-family: "微软雅黑";
+    font-size: 14px;
+    text-align: center;
+    text-decoration:underline;
+}
+
+div.buyMenuCls{
+    float: left;
+    cursor:pointer;
+    background-color: #cc1d46;
+    line-height: 45px;
+    height: 45px;
+    width: 102px;
+    color: #fff;
+    font-family: "微软雅黑";
+    font-size: 14px;
+    text-align: center;
+    position:relative;
+}
+
+.buyMenuDetailCls{
+    list-style:none;
+    width:100px;
+    height:180px;
+    background:#F9F4F4;
+    line-height:24px;
+    text-align:left;
+    position:absolute;
+    z-index:1001;
+    border-top:solid 1px black;
+    border-bottom:solid 1px black;
+}
+
+.buyMenuDetailCls a{
+    text-decoration:none;
+    color:#000000;
+}
+
+div.buySearchDivCls{
+    width: 455px;
+    height: 112px;
+    line-height: 112px;
+    float: right;
+    padding: 0px;
+    margin-top: 0px;
+    margin-right: 0px;
+    margin-bottom: 0px;
+}
+
+div.buySearchInputDivCls{
+    float: left;
+    width: 260px;
+}
+
+input.buySearchInputCls{
+    border-top-style: none;
+    border-right-style: none;
+    border-bottom-style: none;
+    border-left-style: none;
+    line-height: 32px;
+    height: 32px;
+    width: 260px;
+}
+
+div.buySearchBtnDivCls{
+    float: left;
+    width: 58px;
+    line-height: 34px;
+    height: 34px;
+    background-color: #F7F7F6;
+    cursor:pointer;
+}
+
+div.buySearchMainCls{
+    height: 34px;
+    width: 320px;
+    margin-top: 62px;
+    float:right;
+}
+
+div.buyUserInfoDivCls{
+    line-height: 180px;
+    height: 180px;
+    width: 280px;
+    float:left;
+}
+
+.buyFocusCenterIconCls{
+    background-image: url(../images/buyfocuscentericon.png);
+    background-repeat: no-repeat;
+    background-position: 0px 1px;
+}
+
+.buyUserInfoMngIconCls{
+    background-image: url(../images/buyerinfomngicon.png);
+    background-repeat: no-repeat;
+    background-position: 0px 4px;
+}
+
+
+div.tabHeaderDivCls{
+    height: 44px;
+    width: 974px;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-bottom-color: #ec135a;
+}
+
+li.tabHeaderItemCls{
+    height: 43px;
+    line-height: 43px;
+    width:159px;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 14px;
+}
+
+
+
+li.tabHeaderItemUnSelectedCls{
+    background-color: #ffffff;
+    border-top-width: 1px;
+    border-left-width: 1px;
+    border-top-style: solid;
+    border-left-style: solid;
+    border-top-color: #dddddd;
+    border-left-color: #dddddd;
+}
+
+
+li.tabHeaderItemSelectedCls{
+    background-color: #ec135a;
+    border: 1px solid #ec135a;
+    color: #FFF;
+}
+
+
+
+
+li.tabHeaderItemUnSelectedLastCls{
+    border-right-width: 1px;
+    border-right-style: solid;
+    border-right-color: #dddddd;
+}
+
+
+li.tabHeaderItemSelectedLastCls{
+    background-color: #ec135a;
+    border-right-width: 1px;
+    border-right-style: solid;
+    border-right-color: #ec135a;
+}
+
+input.searchOrderInputCls{
+    line-height: 30px;
+    height: 30px;
+    width: 318px;
+    border: 1px solid #dddddd;
+    float:left;
+}
+div.searchOrderQueryBtnCls{
+    float: left;
+    line-height: 32px;
+    height: 32px;
+    width: 76px;
+    border-top-width: 1px;
+    border-right-width: 1px;
+    border-bottom-width: 1px;
+    border-top-style: solid;
+    border-right-style: solid;
+    border-bottom-style: solid;
+    border-top-color: #dddddd;
+    border-right-color: #dddddd;
+    border-bottom-color: #dddddd;
+    background-color: #f2f2f2;
+    font-size: 14px;
+    color: #474749;
+    text-align: center;
+    vertical-align: middle;
+}
+div.searchOrderMoreQueryBtnCls{
+    float: left;
+    line-height: 32px;
+    color: #474749;
+    height: 32px;
+    width: 100px;
+    margin-left: 40px;
+    text-decoration: underline;
+}
+
+/*验证码图片*/
+.codeImg{
+    width:80px;
+    height:26px;
+    margin-bottom:-8px;
+    cursor:pointer;
+}
+
+/*验证码换一张文字*/
+.changePic{
+    color:#008DFE;
+    cursor:pointer;
+}
+
+
+div .tabUnderlineHeaderDivCls{
+    width: 974px;
+    line-height:44px;
+    height: 50px;
+    font-size:16px;
+    background-color:#FCFCFC;
+}
+div .tabUnderlineHeaderDivCls li{
+    margin-left: 20px;
+    letter-spacing: 1px;
+}
+.tabUnderlineHeaderItemSelectedCls div{
+    height:40px;
+    color:#D83560;
+    border-bottom:solid 3px #D83560;
+}
+.tabUnderlineHeaderItemUnSelectedCls{
+    height:40px;
+    color:#000;
+}
+
+
+/**去掉type=number 默认样式**/
+input[type=number] {  
+    -moz-appearance:textfield;  
+}  
+input[type=number]::-webkit-inner-spin-button,  
+input[type=number]::-webkit-outer-spin-button {  
+    -webkit-appearance: none;  
+    margin: 0;  
+}
+
+
+span.ecpValidateErrorCls{
+    padding-left: 29px;
+    background-image: url(../images/errorimg.png);
+    background-repeat: no-repeat;
+    background-position: 10px;
+    color: #F00;
+}
+
+span.ecpValidateCorrectCls{
+    padding-left: 29px;
+    background-image: url(../images/correctimg.png);
+    background-repeat: no-repeat;
+    background-position: 10px;
+    color: #F00;
+}

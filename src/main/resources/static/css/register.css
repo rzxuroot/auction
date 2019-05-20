@@ -1,0 +1,199 @@
+﻿@charset "utf-8";
+/* CSS Document */
+
+* {
+    font-size: 14px;
+    font-color: #666;
+}
+
+.bodyDiv {
+    width: 100%;
+    margin-top: 20px;
+}
+
+.container {
+    width: 1200px;
+    margin: 0 auto;
+}
+
+.float_left {
+    float: left;
+}
+
+.logo_hr {
+    float: left;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.textUnderLogo {
+    float: left;
+    margin-top: 20px;
+    margin-left: 20px;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.inputArea {
+    clear: both;
+    margin-top: 20px;
+    border: solid 1px #e7e7e7;
+}
+
+.redStar {
+    font-weight: 600;
+    float: left;
+}
+
+.inputArea input {
+    height: auto;
+    line-height: 22px;
+    border: solid 1px #e7e7e7;
+}
+
+.mobileText {
+    margin-top: 16px;
+    margin-left: 400px;
+    text-align: left;
+    height: 28px;
+    line-height: 28px;
+}
+
+.mobileText select {
+    width: 100px;
+    height: 24px;
+    margin-left: 54px;
+    margin-right: -5px;
+    margin-bottom: -9px;
+    border: solid 1px #e7e7e7;
+}
+
+.mobileTextInput {
+    width: 120px;
+}
+
+.textMargin {
+    margin-top: 16px;
+    margin-left: 400px;
+    text-align: left;
+    zoom: 1;
+}
+
+.textMargin:after {
+    content: "";
+    display: block;
+    clear: both;
+}
+
+.nickName {
+    width: 200px;
+    margin-left: 25px;
+}
+
+.passwd {
+    width: 200px;
+    margin-left: 11px;
+    float: left;
+}
+
+.rePassword {
+    width: 200px;
+    margin-left: 11px;
+}
+
+.validateCode {
+    width: 90px;
+    margin-left: 25px;
+}
+
+.codeImg {
+    width: 100px;
+    margin-left: 6px;
+}
+
+.msgCode {
+    width: 90px;
+    margin-left: 11px;
+}
+
+.getMsgCodeBtn {
+    float: left;
+    width: 100px;
+    height: 26px;
+    line-height: 26px;
+    text-align: center;
+    background: #F4F3F2;
+    margin-left: 10px;
+}
+
+.getMsgCodeBtn_clickable {
+    float: left;
+    width: 100px;
+    height: 26px;
+    line-height: 26px;
+    text-align: center;
+    background: #FF0040;
+    cursor: pointer;
+    color: #FFFFFF;
+    margin-left: 10px;
+}
+
+.submitBtn {
+    margin-top: 10px;
+    margin-left: 430px;
+    background: #FF0040;
+    color: white;
+    width: 180px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+}
+
+.rule {
+    text-align: left;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    margin-left: 400px;
+    width: 300px;
+}
+
+.rule a{
+    text-decoration: none;
+    color: #0068C9;
+}
+
+.areaCodeDiv {
+    float: left;
+    margin-left: 25px;
+    width: 80px;
+    height: 24px;
+    line-height: 24px;
+    border: solid 1px #e7e7e7;
+    border-right: none;
+    text-align: center;
+    position: relative;
+}
+
+.areaCodeUl {
+    list-style: none;
+    width: 50px;
+    position: absolute;
+    z-index: 1001;
+    list-style: none;
+    margin-top: -24px;
+}
+
+.areaCodeUl li {
+    background: #F9F4F4;
+    border-left: solid 1px #e7e7e7;
+    border-right: solid 1px #e7e7e7;
+    margin-left: -22px;
+}
+
+.areaCodeUl li:hover {
+    background: #CDCDCD;
+}
+
+.titleDiv {
+    float: left;
+}

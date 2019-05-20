@@ -2,7 +2,8 @@
 <!-- saved from url=(0065)http://www.artrade.com/jsp/ecp/public/auction.jsp?lotid=973476012 -->
 <html  lang="zh-CN"
        xmlns="http://www.w3.org/1999/xhtml"
-       xmlns:th="http://www.thymeleaf.org" >
+       xmlns:th="http://www.thymeleaf.org"
+       xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <base th:href="${#request.getContextPath()}+'/'">
@@ -198,7 +199,9 @@
                                    <a href="http://www.artrade.com/jsp/ecp/buyer/buyerindex.jsp" target="">sala</a>
                                 </span>
                                 <a id="header_logout" href="http://www.artrade.com/jsp/ecp/public/auction.jsp?lotid=973476012#" onclick="logout();" style="">&nbsp;<b>，退出</b></a>
+
                                 <a id="header_login" href="http://www.artrade.com/jsp/ecp/login.jsp" target="_self" style="display:none;"><b>请登录</b></a>&nbsp;&nbsp;
+
                 </div>
                 <div style="float:left;display:none;">
                     <a href="http://www.artrade.com/jsp/ecp/register.jsp" target="_self" style="color: #FF003B;font-weight:600;">免费注册</a>&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
