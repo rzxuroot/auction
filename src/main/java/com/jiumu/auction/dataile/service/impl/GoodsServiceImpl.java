@@ -5,22 +5,44 @@ import com.jiumu.auction.dataile.service.IGoodsService;
 import com.jiumu.auction.dataile.vo.GoodsVO;
 import com.jiumu.auction.dataile.vo.HistoricalPriceVO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 @Service
 public class GoodsServiceImpl implements IGoodsService {
     @Autowired
     private GoodsMapper goodsMapper;
+    @Autowired
+    private StringRedisTemplate redisTemplate;
     @Override
     public GoodsVO queryGoodsById(Long goodsId) {
         GoodsVO goodsVO = goodsMapper.queryGoodsById(goodsId);
-        //将起拍价和竞拍价处以100得到元单位的价格
-//        long price = goodsVO.getAskingPrice() / 100;
-//        long binddPrice = goodsVO.getBiddingSteps() / 100;
-//        goodsVO.setAskingPrice(price);
-//        goodsVO.setBiddingSteps(binddPrice);
+        String endTime = redisTemplate.boundValueOps("dataileTime" + goodsId).get();
+        if (endTime!=null){
+            Timestamp deadline = goodsVO.getAuctionDeadline();
+
+            Timestamp endTimestamp =Timestamp.valueOf(endTime);
+
+            if (deadline.getTime()<endTimestamp.getTime()){
+                goodsVO.setAuctionDeadline(endTimestamp);
+            }
+
+        }
+        else {
+            synchronized (this){
+                String endTime1 = redisTemplate.boundValueOps("dataileTime" + goodsId).get();
+                if (endTime1!=null){
+                    Timestamp deadline = goodsVO.getAuctionDeadline();
+                    Timestamp endTimestamp1 =Timestamp.valueOf(endTime1);
+                    if (deadline.getTime()<endTimestamp1.getTime()){
+                        goodsVO.setAuctionDeadline(endTimestamp1);
+                    }
+                }
+            }
+        }
         return goodsVO;
     }
 

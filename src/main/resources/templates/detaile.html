@@ -901,8 +901,8 @@ body{margin:8px;font-family:sans-serif;font-size:16px;}p{margin:5px 0;}</style><
                                 </tr>
                             </thead>
 
-                            <tbody id="hisBid"  th:each="historical : ${historicalPriceList}">
-                                <tr >
+                            <tbody id="hisBid" >
+                                <tr  th:each="historical : ${historicalPriceList}" >
                                     <td class="bidName" th:text="${historical.userName}">sala</td>
                                     <td class="bidPrice" th:text="${historical.auctionPrice/100.00}">1.00元</td>
                                     <td class="bidTime" th:text="${historical.auctionTime}">2019-05-15 10:02:54</td>
@@ -1182,7 +1182,7 @@ function doClickPreQuery() {
         $(this).removeClass("itemDetailTabCls").addClass("itemDetailTabSelCls");
         $(".itemDetailTabContentBoxCls").css('display','none');
         $("#auctdiv_"+x).css('display','block');
-        console.log("位置："+x);
+        //console.log("位置："+x);
     });
 
 </script>
@@ -1237,6 +1237,13 @@ function doClickPreQuery() {
 <script type="text/javascript">
 
     $("#addPriceBtn").click(function () {
+         var dayTimeText = $("#toDay").text();
+         var hourTimeText =$("#toHour").text();
+         var minTimeText =$("#toMinute").text();
+         var secTimeText =$("#toSecond").text();
+
+
+
         var current=$("#selfPrice").text();
         var goodsId=$("#goodsId").val();
         $.post("bid/isBidder",
@@ -1250,6 +1257,11 @@ function doClickPreQuery() {
             if (data.code == 1) {
                 if (confirm("您账户保证金不足，是否前往充值？")){
                     window.location.href="recharge.html";
+                }
+            }
+            if (data.code==5){
+                if (dayTimeText <= 0 && hourTimeText <= 0 && minTimeText <= 0 && secTimeText!=0) {
+
                 }
             }
         });
@@ -1407,9 +1419,7 @@ function doClickPreQuery() {
     // var toSecondSpan = document.getElementById("toSecond");
     // var btn = document.getElementById("btn");
     var balanceTimes = endDate - startDate1; //得到是毫秒
-    $("#btn").click(function(){
-        balanceTimes+=2*60*1000;
-    });
+
     console.log("天数1："+endDate);
     function haih() {
         $(".myOfferInfoRowCls").css('display', 'none');
@@ -1426,14 +1436,29 @@ function doClickPreQuery() {
         var min = parseInt(balanceTimes / 1000 / 60 % 60); //72分 1小时12分
         //秒
         var sec = parseInt(balanceTimes / 1000 % 60)
+        if (day <= 0 && hour <= 0 && min <= 0 && sec <= 0) {
+            $("#toDay").text(0);
+            $("#toHour").text(0);
+            $("#toMinute").text(0);
+            $("#toSecond").text(0);
+            haih();
+            $("#timeState").text("已结束");
+        }else{
+            $("#toDay").text(day);
+            $("#toHour").text(hour);
+            $("#toMinute").text(min);
+            $("#toSecond").text(sec);
+        }
+        if (day == 0 && hour == 0 && min == 0 && sec == 0){
+            var goodsId=$("#goodsId").val();
+            $.post("myAuction/updateState",{goodsId:goodsId},function (data) {
 
-        $("#toDay").text(day);
-        $("#toHour").text(hour);
-        $("#toMinute").text(min);
-        $("#toSecond").text(sec);
-        // toHourSpan.text(hour+"");
-        // toMinuteSpan.text( min+"");
-        // toSecondSpan.innerHTML = sec+"";
+            });
+        }
+
+
+
+
 
     }
 
@@ -1446,26 +1471,6 @@ function doClickPreQuery() {
 </script>
 <!--goeast实时更新，jq循环赋值实现循环-->
 <script type="text/javascript">
-    Date.prototype.format = function (fmt) {
-        var o = {
-            "M+": this.getMonth() + 1,                 //月份
-            "d+": this.getDate(),                    //日
-            "h+": this.getHours(),                   //小时
-            "m+": this.getMinutes(),                 //分
-            "s+": this.getSeconds(),                 //秒
-            "q+": Math.floor((this.getMonth() + 3) / 3), //季度
-            "S": this.getMilliseconds()             //毫秒
-        };
-        if (/(y+)/.test(fmt)) {
-            fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
-        }
-        for (var k in o) {
-            if (new RegExp("(" + k + ")").test(fmt)) {
-                fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
-            }
-        }
-        return fmt;
-    }
     function timestampToTime(time) {    //时间戳为10位需*1000，时间戳为13位的话不需乘1000在转成yymmdd
         var date = new Date(time);
         var y = date.getFullYear();
@@ -1495,10 +1500,10 @@ function doClickPreQuery() {
                 alert(hisList[i].userName )
             }
             var hisList=eval(message.content);
-            console.log("历史对象:"+message.content+"---------"+hisList)
+           // console.log("历史对象:"+message.content+"---------"+hisList)
             $("#bidderName").text(hisList[0].userName);
             $("#bidNumber").text(hisList.length);
-            $("#currentPrice").text(hisList[0].auctionPrice)
+            $("#currentPrice").text(hisList[0].auctionPrice/100)
             var htmlStr="";
             for (var i=0;i<hisList.length;i++){
                 // $("#hisBid:eq(" + i + ")").find('#bidName').text(hisList[i].userName);
@@ -1509,6 +1514,15 @@ function doClickPreQuery() {
             }
 
             $("#hisBid").html(htmlStr);
+        }
+    });
+    goEasy.subscribe({
+        channel:'zgjTime', //发消息频道和收消息频道要是同一个频道。
+        onMessage: function(message){
+
+            $("#endTime").text(message.content)
+            var startDate2=new Date(message.content);
+            balanceTimes =2 * 60 * 1000;
         }
     });
 

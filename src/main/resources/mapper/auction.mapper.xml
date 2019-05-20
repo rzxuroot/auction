@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jiumu.auction.myAuction.mapper.AuctionMapper">
+    <select id="queryAuctionByUserIdAndGoodsId" resultType="com.jiumu.auction.myAuction.po.TbAuction">
+        select * from tb_auction where auction_user_id=#{userId} and auction_goods_id=#{goodsId};
+    </select>
+    <select id="queryAuctionListByGoodsId" resultType="com.jiumu.auction.myAuction.po.TbAuction">
+        select * from tb_auction where auction_goods_id=#{goodsId};
+    </select>
+   <insert id="addMyAuction">
+       insert into tb_auction (auction_user_id, auction_goods_id, auction_ising, auction_isout, auction_islead,auction_price) values
+       (#{auction.auctionUserId},#{auction.auctionGoodsId},#{auction.auctionIsing},#{auction.auctionIsout},
+       #{auction.auctionIslead},#{auction.auctionPrice});
+   </insert>
+    <update id="updateMyAuction">
+        update tb_auction set auction_user_id=#{auction.auctionUserId}, auction_goods_id=#{auction.auctionGoodsId},
+        auction_ising=#{auction.auctionIsing}, auction_isout=#{auction.auctionIsout}, auction_islead=#{auction.auctionIslead},
+        auction_price=#{auction.auctionPrice} where auction_id=#{auction.auctionId};
+    </update>
+</mapper>

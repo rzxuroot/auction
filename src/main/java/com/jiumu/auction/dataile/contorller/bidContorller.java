@@ -7,6 +7,7 @@ import com.jiumu.auction.dataile.service.IBidService;
 import com.jiumu.auction.dataile.service.IGoodsService;
 import com.jiumu.auction.dataile.vo.HistoricalPriceVO;
 import com.jiumu.auction.dataile.vo.JsonResult;
+import com.jiumu.auction.myAuction.service.IAuctionService;
 import io.goeasy.GoEasy;
 import org.apache.log4j.Logger;
 import org.apache.shiro.SecurityUtils;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -26,7 +28,8 @@ public class bidContorller {
     private IBidService bidServiceImpl;
     @Autowired
     private IGoodsService goodsServiceImpl;
-
+    @Autowired
+    private IAuctionService auctionServiceImpl;
     private Logger logger= Logger.getLogger(bidContorller.class);
     @RequestMapping("/isBidder")
     @ResponseBody
@@ -46,6 +49,7 @@ public class bidContorller {
         JsonResult jsonResult=new JsonResult();
         //从session中获取登录对象
         TbUser user = (TbUser) SecurityUtils.getSubject().getSession().getAttribute("user");
+        long userId = user.getUserId();
         //判断是否登录
         if(user==null){
             //如果没有登录返回code为零
@@ -54,7 +58,7 @@ public class bidContorller {
         }else {
             //如果登录则对比保证金额度
                 //获取用户id
-            long userId = user.getUserId();
+
             //根据用户id查询用户账户对象
             TbAccount account = bidServiceImpl.queryAccountByUserId(userId);
             //获取可用保证金额度
@@ -67,15 +71,22 @@ public class bidContorller {
                 jsonResult.setMsg("账户保证金不足");
             }else{
 
-                jsonResult = bidServiceImpl.MarginDeduction(user.getUserId(), curPrice, id);
+                jsonResult = bidServiceImpl.MarginDeduction(userId, curPrice, id);
                 logger.info("json:"+jsonResult);
 
                 if (jsonResult.getCode()==5){
-                    bidServiceImpl.addHistorical(user.getUserId(), curPrice, id);
+                    Date date=new Date();
+                    //测试阶段goodsId先用1表示
+                    bidServiceImpl.pushTime(date,1l,resp);
+                    bidServiceImpl.addHistorical(userId, curPrice, id);
+                    //测试阶段商品id先用1表示
+                    auctionServiceImpl.addMyAuction(curPrice,userId,1l);
                 }
                 List<HistoricalPriceVO> historicalPriceVOS = goodsServiceImpl.queryHistoricalPriceByGoodsId(id);
                 Gson gson=new Gson();
                 String hisJson = gson.toJson(historicalPriceVOS);
+
+
                 GoEasy goEasy=new GoEasy("http://rest-hangzhou.goeasy.io", "BC-82d3f7de164e46ce9347b04494a76336");
                 goEasy.publish("zgj",hisJson);
                 try {
