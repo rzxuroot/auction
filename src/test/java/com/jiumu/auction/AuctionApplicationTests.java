@@ -1,7 +1,6 @@
 package com.jiumu.auction;
 
 
-import com.jiumu.auction.user.utils.MD5Utils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mybatis.spring.annotation.MapperScan;
@@ -20,14 +19,15 @@ public class AuctionApplicationTests {
     @Test
     public void contextLoads() {
 //        StringRedisTemplate redisTemplate= new StringRedisTemplate();
-        redisTemplate.boundValueOps("au").set("zhangsan");
-        String au = redisTemplate.boundValueOps("au").get();
+        redisTemplate.boundValueOps("au11").set("zhangsan");
+        String au = redisTemplate.boundValueOps("au11").get();
         System.out.println(au);
     }
     @Test
-    public  void test1(){
-        String md5 = MD5Utils.md5("123456", "sala");
-        System.out.println(md5);
+    public void test1(){
+        float a=1.0f;
+        Long b=(long)a;
+        System.out.println(b);
     }
 
 }

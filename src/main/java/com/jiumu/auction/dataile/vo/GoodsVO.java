@@ -13,12 +13,12 @@ public class GoodsVO {
   private String goodsImg;
   private long askingPrice;
   private long biddingSteps;
-  private long bout;
+  private String bout;
   private long author;
-  private long year;
-  private long texture;
+  private String year1;
+  private String texture;
   private String shape;
-  private String length;
+  private String length1;
   private String width;
   private String height;
   private String diameter;
@@ -131,11 +131,11 @@ public class GoodsVO {
   }
 
 
-  public long getBout() {
+  public String  getBout() {
     return bout;
   }
 
-  public void setBout(long bout) {
+  public void setBout(String bout) {
     this.bout = bout;
   }
 
@@ -149,20 +149,20 @@ public class GoodsVO {
   }
 
 
-  public long getYear() {
-    return year;
+  public String getYear1() {
+    return year1;
   }
 
-  public void setYear(long year) {
-    this.year = year;
+  public void setYear1(String year1) {
+    this.year1 = year1;
   }
 
 
-  public long getTexture() {
+  public String getTexture() {
     return texture;
   }
 
-  public void setTexture(long texture) {
+  public void setTexture(String texture) {
     this.texture = texture;
   }
 
@@ -176,12 +176,12 @@ public class GoodsVO {
   }
 
 
-  public String getLength() {
-    return length;
+  public String getLength1() {
+    return length1;
   }
 
-  public void setLength(String length) {
-    this.length = length;
+  public void setLength1(String length1) {
+    this.length1 = length1;
   }
 
 
@@ -304,10 +304,10 @@ public class GoodsVO {
             ", biddingSteps=" + biddingSteps +
             ", bout=" + bout +
             ", author=" + author +
-            ", year=" + year +
+            ", year=" + year1 +
             ", texture=" + texture +
             ", shape='" + shape + '\'' +
-            ", length='" + length + '\'' +
+            ", length='" + length1 + '\'' +
             ", width='" + width + '\'' +
             ", height='" + height + '\'' +
             ", diameter='" + diameter + '\'' +

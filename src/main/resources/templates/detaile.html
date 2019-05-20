@@ -41,6 +41,9 @@
 <!--<script src="detaile/detaile/ecpValidation.js.下载"></script>-->
 <link type="text/css" rel="stylesheet" href="detaile/detaile/simpwinform.css">
 <!--<script type="text/javascript" src="detaile/detaile/simpwinform.js.下载"></script>-->
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script type="text/javascript" src="http://cdn-hangzhou.goeasy.io/goeasy.js"></script>
 <script>
     var baseUrl = "";
     var lotUrl="/jsp/ecp/public/auction.jsp?lotid=";
@@ -434,7 +437,7 @@
             </div>
          	<!--2.2.2：拍品开拍时间等信息 -->
         	<div class="itemTimeRowCls">
-            	<div class="notBeginPaiDivCls">已结束</div>
+            	<div class="notBeginPaiDivCls" id="timeState">已结束</div>
             	<div class="juKaiPaiDivCls">
                     <span id="timeTitleSpan">距结束</span>：
                     <span id="toDay" class="djsSpanFontCls">0</span> 天
@@ -457,21 +460,26 @@
 
          	<!--2.2.3：出价次数等信息 -->
         	<div class="offerCntRowCls">
-            	<div class="floatLeft offerCntDivCls">出价次数：<span id="bidNumber">1</span>次</div>
+            	<div class="floatLeft offerCntDivCls">出价次数：<span id="bidNumber" th:text="${historicalPriceList.size()}">1</span>次</div>
             	<div class="floatLeft firstPersonDivCls">
                 	<span id="blink"></span>
                 </div>
-            	<div class="floatLeft firstPersonDivCls"><div style="float:left">领先者：</div><div id="bidderName" style="float:left;overflow: hidden;text-overflow:ellipsis;white-space: nowrap; width:100px;" title="sala">sala</div></div>
+            	<div class="floatLeft firstPersonDivCls">
+                    <div style="float:left">领先者：</div>
+                    <div id="bidderName" style="float:left;overflow: hidden;text-overflow:ellipsis;white-space: nowrap; width:100px;" title="sala" th:text="${historicalPriceList.get(0).userName}">sala</div>
+                </div>
             	<div id="bidderId" class="floatLeft firstPersonDivCls" style="text-align: right;display:none;"></div>
             </div>
          	<!--2.2.4：出价信息 -->
         	<div class="offerInfoRowCls">
-            	<div class="floatLeft offerInfoColumnCls">当前价<span id="underRsrvPrice" style="display:none;color:red" onclick="doUnderRsrvPrice()">(未达保留价)</span></div>
+            	<div class="floatLeft offerInfoColumnCls">当前价
+                    <span id="underRsrvPrice" style="display:none;color:red" onclick="doUnderRsrvPrice()">(未达保留价)</span>
+                </div>
             	<div class="floatLeft offerInfoColumnCls">起拍价</div>
             	<div class="floatLeft offerInfoColumnCls">竞价阶梯</div>
-            	<div class="floatLeft offerCurrentPriceValInfoColumnCls" id="currentPrice">1.00</div>
-            	<div class="floatLeft offerValInfoColumnCls" id="startPrice" th:text="${goods.askingPrice}">1.00</div>
-            	<div class="floatLeft offerValInfoColumnCls" id="incrPrice" th:text="${goods.biddingSteps}">0.00</div>
+            	<div class="floatLeft offerCurrentPriceValInfoColumnCls" id="currentPrice" th:text="${historicalPriceList.get(0).auctionPrice/100.00}">1.00</div>
+            	<div class="floatLeft offerValInfoColumnCls" id="startPrice" th:text="${goods.askingPrice/100.00}">1.00</div>
+            	<div class="floatLeft offerValInfoColumnCls" id="incrPrice" th:text="${goods.biddingSteps/100.00}">0.00</div>
             </div>
          	<!--2.2.5：拍卖方式信息 -->
         	<div class="auctionTypeInfoRowCls">
@@ -496,7 +504,7 @@
             	<div class="floatLeft">
                 	<div class="priceDivCls">
                     	<div class="floatLeft jianBtnCls" id="jianHao">-</div>
-                    	<div class="floatLeft priceContentCls i_973476012" id="selfPrice" th:text="${goods.askingPrice}">&nbsp;</div>
+                    	<div class="floatLeft priceContentCls i_973476012" id="selfPrice" th:text="${historicalPriceList.get(0).auctionPrice/100.00}">&nbsp;</div>
                     	<div class="floatLeft jiaBtnCls" id="jiaHao">+</div>
                     </div>
                 </div>
@@ -507,7 +515,7 @@
             <div en_auctattr="true" class="quickBidRowCls" style="display: inline;">
                 <div class="floatLeft priceLabelDivCls">快速出价：</div>
                 <div class="quickBidCls">
-                    <div class="quickBidLeftBtnCls" id="upPrice" th:onclick="quickBidGoLeft()"></div>
+                    <div class="quickBidLeftBtnCls" id="upPrice" onclick="quickBidGoLeft()"></div>
                     <div class="quickBidMiddleCls">
                         <div class="priceClass" onclick="setSelfPrice($(this).text())" th:text="${goods.askingPrice}">1</div>
                         <div class="priceClass" onclick="setSelfPrice($(this).text())">1</div>
@@ -515,7 +523,7 @@
                         <div class="priceClass" onclick="setSelfPrice($(this).text())">1</div>
                         <div class="priceClass" onclick="setSelfPrice($(this).text())">1</div>
                     </div>
-                    <div class="quickBidRightBtnCls" id="lastPrice" th:onclick="quickBidGoRight()"></div>
+                    <div class="quickBidRightBtnCls" id="lastPrice" onclick="quickBidGoRight()"></div>
                 </div>
             </div>
             <!--2.2.9：出价按钮信息 -->
@@ -655,7 +663,7 @@
                         <span th:text="'作者:'+${goods.authorName}"></span><br>
                         <span th:text="'质地：'+${goods.itemName}">质地：木板</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         <span th:text="'形式：'+${goods.shape}">形式：重彩</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
-                        <span th:text="'长度：'+${goods.length}">长度：1厘米</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <span th:text="'长度：'+${goods.length1}">长度：1厘米</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         <span th:text="'宽度：'+${goods.width}">宽度：1厘米</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
                     </div>
                 	<!-- th:text="'作者:'+${goods.authorName}+'质地：'+${goods.texture}+'形式：'+${goods.shape}+'长度：'+${goods.length}+'宽度：'+${goods.width}"-->
@@ -671,7 +679,7 @@
                     </div>
 					<div class="itemDetailContentInfoDivBoxCls" id="showartradesd"><img src="detaile/detaile/artrsd.jpg"></div>
                 </div>
-                <div class="itemDetailTabContentBoxCls" id="auctdiv_1" style="display: inline;">
+                <div class="itemDetailTabContentBoxCls" id="auctdiv_1" style="display: none">
                 	<div class="itemDetailTitleInfoDivBoxCls">作者简介</div>
                     <div class="itemDetailContentInfoDivBoxCls" id="authorDescContentInfo" style="min-height:100px" th:text="${goods.authorInfo}">
                     </div>
@@ -887,18 +895,23 @@ body{margin:8px;font-family:sans-serif;font-size:16px;}p{margin:5px 0;}</style><
 
                 	<div class="price_div">
                 		<span>已出的竞价(只显示最近10次竞价)</span>
-	                	<table class="price_table" id="price_table"><tbody>
-                        <tr>
-                            <th>竞买人</th>
-                            <th>竞买价</th>
-                            <th>出价时间</th>
-                        </tr>
-                        <tr>
-                            <td class="bidName">sala</td>
-                            <td class="bidPrice">1.00元</td>
-                            <td class="bidTime">2019-05-15 10:02:54</td>
-                        </tr>
-                        </tbody>
+	                	<table class="price_table" id="price_table">
+                            <thead>
+                                <tr>
+                                    <th>竞买人</th>
+                                    <th>竞买价</th>
+                                    <th>出价时间</th>
+                                </tr>
+                            </thead>
+
+                            <tbody id="hisBid"  th:each="historical : ${historicalPriceList}">
+                                <tr >
+                                    <td class="bidName" th:text="${historical.userName}">sala</td>
+                                    <td class="bidPrice" th:text="${historical.auctionPrice/100.00}">1.00元</td>
+                                    <td class="bidTime" th:text="${historical.auctionTime}">2019-05-15 10:02:54</td>
+                                </tr>
+                            </tbody>
+
                         </table>
 	                	<span style="font-size: 14px;">(代理)表示该次竞价为代理竞价,<span class="moreBidRule" onclick="doBidRule();">更多信息</span></span>
                 	</div>
@@ -1162,6 +1175,9 @@ function doClickPreQuery() {
     </div>
 </div>
 </div>
+<input type="hidden" id="preStartTime" th:value="${goods.preStartTime}"/>
+<input type="hidden" id="preDeadline" th:value="${goods.preDeadline}"/>
+<input type="hidden" id="goodsId" th:value="${goods.goodsId}"/>
 <script type="text/javascript">
     $("#tabul li").mouseover(function () {
         var x = $('#tabul li').index(this);
@@ -1176,29 +1192,72 @@ function doClickPreQuery() {
 <!--竞买价加减-->
 <script type="text/javascript">
     var stairPrice=$("#incrPrice").text();
+    var current=$("#currentPrice").text();
     $("#jianHao").click(function () {
-
-        $("#selfPrice").text(Number($("#selfPrice").text())-Number(stairPrice));
+        var jiancu=Number($("#selfPrice").text())-Number(stairPrice)*1.0;
+        if (jiancu < current) {
+            alert("不可小于当前价格")
+        }else{
+            $("#selfPrice").text(jiancu);
+        }
 
     });
     $("#jiaHao").click(function () {
-        $("#selfPrice").text(Number($("#selfPrice").text())+Number(stairPrice));
+        $("#selfPrice").text(Number($("#selfPrice").text())+Number(stairPrice)*1.0);
 
     });
 </script>
 <script type="text/javascript">
     
     var stairPrice=$("#incrPrice").text();
-    var frist=$(".priceClass :eq(0)").text();
+    var frist=$("#currentPrice").text();
+    if (frist==null){
+        frist= $(".priceClass:eq(0)").text();
+    }
+    var current=$("#currentPrice").text();
     function quickBidGoLeft() {
-        frist=Number(frist)+Number(4*stairPrice);
+        var aaa=Number(frist)-Number(4*stairPrice);
+        if (aaa<current){
+
+            alert("不可小于当前价格")
+        }else{
+            frist=Number(frist)-Number(4*stairPrice);
+            for(var i=0;i<=5;i++) {
+                $(".priceClass:eq(" + i + ")").text(frist+(Number(i)*stairPrice));
+            }
+        }
     }
     function quickBidGoRight() {
-        frist=Number(frist)-Number(4*stairPrice);
+        frist=Number(frist)+Number(4*stairPrice);
+        for(var i=0;i<=5;i++) {
+            $(".priceClass:eq(" + i + ")").text(frist+(Number(i)*stairPrice));
+        }
     }
     for(var i=0;i<=5;i++) {
-        $(".priceClass:eq(" + i + ")").text(frist+(Number(i)*stairPrice));
+        $(".priceClass:eq(" + i + ")").text(Number(frist)+(Number(i)*stairPrice));
     }
+</script>
+<script type="text/javascript">
+
+    $("#addPriceBtn").click(function () {
+        var current=$("#selfPrice").text();
+        var goodsId=$("#goodsId").val();
+        $.post("bid/isBidder",
+            {price:current,goodsId:goodsId},
+            function (data) {
+            if (data.code==0){
+                if (confirm("您还未登录，登录后即可出价，是否前往登录?")){
+                    window.location.href="login.html";
+                }
+            }
+            if (data.code == 1) {
+                if (confirm("您账户保证金不足，是否前往充值？")){
+                    window.location.href="recharge.html";
+                }
+            }
+        });
+    });
+
 </script>
 <!--<script type="text/javascript">-->
     <!--function setStartTimeCountDown() {-->
@@ -1253,47 +1312,212 @@ function doClickPreQuery() {
     <!--setStartTimeCountDown();-->
 <!-- </script>-->
 <!--倒计时-->
-<!--<script type="text/javascript">-->
-    <!--console.log("天数2：");-->
-    <!--// var end=${"#endTime"}.text();-->
-    <!--var startDate = new Date();-->
-    <!--var endDate = new Date("2019-05-20");-->
-    <!--// var toDaySpan = document.getElementById("toDay");-->
-    <!--// var toHourSpan = document.getElementById("toHour");-->
-    <!--// var toMinuteSpan = document.getElementById("toMinute");-->
-    <!--// var toSecondSpan = document.getElementById("toSecond");-->
-    <!--// var btn = document.getElementById("btn");-->
-    <!--var balanceTimes = endDate - startDate; //得到是毫秒-->
-    <!--// btn.onclick=function(){-->
-    <!--//     balanceTimes+=2*60*1000;-->
-    <!--// }-->
-    <!--console.log("天数1："+endDate);-->
+<script type="text/javascript">
+    Date.prototype.format = function (fmt) {
+        var o = {
+            "M+": this.getMonth() + 1,                 //月份
+            "d+": this.getDate(),                    //日
+            "h+": this.getHours(),                   //小时
+            "m+": this.getMinutes(),                 //分
+            "s+": this.getSeconds(),                 //秒
+            "q+": Math.floor((this.getMonth() + 3) / 3), //季度
+            "S": this.getMilliseconds()             //毫秒
+        };
+        if (/(y+)/.test(fmt)) {
+            fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+        }
+        for (var k in o) {
+            if (new RegExp("(" + k + ")").test(fmt)) {
+                fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+            }
+        }
+        return fmt;
+    }
 
-    <!--function showtime() {-->
-        <!--console.log("天数3：");-->
-        <!--//天-->
-        <!--var day = parseInt(balanceTimes / 1000 / 60 / 60 / 24);-->
-        <!--//小时-->
-        <!--var hour = parseInt(balanceTimes / 1000 / 60 / 60 % 24); //25小时 一天1小时-->
-        <!--//分-->
-        <!--var min = parseInt(balanceTimes / 1000 / 60 % 60); //72分 1小时12分-->
-        <!--//秒-->
-        <!--var sec = parseInt(balanceTimes / 1000 % 60)-->
 
-        <!--${"#toDay"}.text(day);-->
-        <!--console.log("天数："+day);-->
-        <!--toHourSpan.text(hour+"");-->
-        <!--toMinuteSpan.text( min+"");-->
-        <!--toSecondSpan.innerHTML = sec+"";-->
+    var end=$("#endTime").text();
+    var startTime=$("#startTime").text();
+    var startDate = new Date().format("yyyy-MM-dd hh:mm:ss");
+    var startDate1 = new Date()
+    var preEndTime=$("#preDeadline").val();
+    var preStartTime=$("#preStartTime").val();
+    console.log("格式：现在："+startDate +"-----"+"读取："+preEndTime+",和："+startTime );
+    //开始（当前时间）和竞拍结束结束时间
+    var starta = startTime.split(".");
+    var startDateTemp = starta[0].split(" ");
+    var startb = end.split(".");
+    var endDateTemp = startb[0].split(" ");
+    console.log(starta[0]+"---->>>>"+startb[0])
+    var arrStartDate = startDateTemp[0].split("-");
+    var arrEndDate = endDateTemp[0].split("-");
+    var arrStartTime = startDateTemp[1].split(":");
+    var arrEndTime = endDateTemp[1].split(":");
+    var allStartDate = new Date(arrStartDate[0], arrStartDate[1], arrStartDate[2], arrStartTime[0], arrStartTime[1], arrStartTime[2]);
+    var allEndDate = new Date(arrEndDate[0], arrEndDate[1], arrEndDate[2], arrEndTime[0], arrEndTime[1], arrEndTime[2]);
+    //预展时间
+    var startc = preStartTime.split(".");
+    var prestartDateTemp = startc[0].split(" ");
+    var startd = preEndTime.split(".");
+    var preendDateTemp = startd[0].split(" ");
+    var prearrStartDate = prestartDateTemp[0].split("-");
+    var prearrEndDate = preendDateTemp[0].split("-");
+    var prearrStartTime = prestartDateTemp[1].split(":");
+    var prearrEndTime = preendDateTemp[1].split(":");
+    var preallStartDate = new Date(prearrStartDate[0], prearrStartDate[1], prearrStartDate[2], prearrStartTime[0], prearrStartTime[1], prearrStartTime[2]);
+    var preallEndDate = new Date(prearrEndDate[0], prearrEndDate[1], prearrEndDate[2], prearrEndTime[0], prearrEndTime[1], prearrEndTime[2]);
+    //当前时间
 
-    <!--}-->
-    <!--var timer = null;-->
-    <!--timer = setInterval(function () {-->
-        <!--balanceTimes -= 1000;-->
-        <!--showtime();-->
-    <!--}, 1000);-->
-    <!--showtime();-->
-<!--</script>-->
+
+    var curendDateTemp = startDate.split(" ");
+
+    var curarrStartDate = curendDateTemp[0].split("-");
+
+    var curarrStartTime = curendDateTemp[1].split(":");
+
+    var curallStartDate = new Date(curarrStartDate[0], curarrStartDate[1], curarrStartDate[2], curarrStartTime[0], curarrStartTime[1], curarrStartTime[2]);
+
+
+    //比较
+    if (preallStartDate.getTime() < curallStartDate.getTime()&&curallStartDate.getTime() < preallEndDate.getTime()) {
+        console.log("开始1："+preallStartDate.getTime()+"---"+startDate.getTime()+"--"+"结束时间："+preallEndDate.getTime());
+        end=preEndTime;
+        $("#timeState").text("预展中");
+        showtime();
+    }
+    console.log("开始2："+allStartDate.getTime()+"--"+curallStartDate.getTime()+"---"+"结束时间："+allEndDate.getTime());
+    if (allStartDate.getTime() < curallStartDate.getTime()&&curallStartDate.getTime() < allEndDate.getTime()) {
+        console.log("开始2："+allStartDate.getTime()+"--"+curallStartDate.getTime()+"---"+"结束时间："+allEndDate.getTime());
+        $("#timeState").text("竞拍中");
+        showtime();
+    }
+    console.log("开始3："+allEndDate.getTime() +"-----"+"结束时间："+curallStartDate.getTime() );
+    if (allEndDate.getTime()  < curallStartDate.getTime() ) {
+        console.log("开始3："+allEndDate.getTime() +"-----"+"结束时间："+curallStartDate.getTime() );
+        $("#timeState").text("已结束");
+        $("#toDay").text(Number(0));
+        $("#toHour").text(Number(0));
+        $("#toMinute").text(Number(0));
+        $("#toSecond").text(Number(0));
+
+        haih();
+        //showtime();
+    }
+
+    var endDate = new Date(end);
+    // var toDaySpan = document.getElementById("toDay");
+    // var toHourSpan = document.getElementById("toHour");
+    // var toMinuteSpan = document.getElementById("toMinute");
+    // var toSecondSpan = document.getElementById("toSecond");
+    // var btn = document.getElementById("btn");
+    var balanceTimes = endDate - startDate1; //得到是毫秒
+    $("#btn").click(function(){
+        balanceTimes+=2*60*1000;
+    });
+    console.log("天数1："+endDate);
+    function haih() {
+        $(".myOfferInfoRowCls").css('display', 'none');
+        $(".quickBidRowCls").css('display', 'none');
+        $(".addPriceBtnInfoRowCls").css('display', 'none');
+    }
+    function showtime() {
+
+        //天
+        var day = parseInt(balanceTimes / 1000 / 60 / 60 / 24);
+        //小时
+        var hour = parseInt(balanceTimes / 1000 / 60 / 60 % 24); //25小时 一天1小时
+        //分
+        var min = parseInt(balanceTimes / 1000 / 60 % 60); //72分 1小时12分
+        //秒
+        var sec = parseInt(balanceTimes / 1000 % 60)
+
+        $("#toDay").text(day);
+        $("#toHour").text(hour);
+        $("#toMinute").text(min);
+        $("#toSecond").text(sec);
+        // toHourSpan.text(hour+"");
+        // toMinuteSpan.text( min+"");
+        // toSecondSpan.innerHTML = sec+"";
+
+    }
+
+    var timer = null;
+    timer = setInterval(function () {
+        balanceTimes -= 1000;
+        showtime();
+    }, 1000);
+
+</script>
+<!--goeast实时更新，jq循环赋值实现循环-->
+<script type="text/javascript">
+    Date.prototype.format = function (fmt) {
+        var o = {
+            "M+": this.getMonth() + 1,                 //月份
+            "d+": this.getDate(),                    //日
+            "h+": this.getHours(),                   //小时
+            "m+": this.getMinutes(),                 //分
+            "s+": this.getSeconds(),                 //秒
+            "q+": Math.floor((this.getMonth() + 3) / 3), //季度
+            "S": this.getMilliseconds()             //毫秒
+        };
+        if (/(y+)/.test(fmt)) {
+            fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+        }
+        for (var k in o) {
+            if (new RegExp("(" + k + ")").test(fmt)) {
+                fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+            }
+        }
+        return fmt;
+    }
+    function timestampToTime(time) {    //时间戳为10位需*1000，时间戳为13位的话不需乘1000在转成yymmdd
+        var date = new Date(time);
+        var y = date.getFullYear();
+        var m = date.getMonth() + 1;
+        m = m < 10 ? ('0' + m) : m;
+        var d = date.getDate();
+        d = d < 10 ? ('0' + d) : d;
+        var h = date.getHours();
+        h = h < 10 ? ('0' + h) : h;
+        var minute = date.getMinutes();
+        var second = date.getSeconds();
+        minute = minute < 10 ? ('0' + minute) : minute;
+        second = second < 10 ? ('0' + second) : second;
+        return y + '-' + m + '-' + d+' '+h+':'+minute+':'+second;
+    };
+
+    var goEasy = new GoEasy({
+        appkey: 'BS-1c38afb26a204fc59a318265155eac96'
+    });
+    goEasy.subscribe({
+        channel:'zgj', //发消息频道和收消息频道要是同一个频道。
+        onMessage: function(message){
+            var array=new Array();
+            var json = $.parseJSON(message.content)
+            var hisList = json.modelList;
+            for(i in hisList ){
+                alert(hisList[i].userName )
+            }
+            var hisList=eval(message.content);
+            console.log("历史对象:"+message.content+"---------"+hisList)
+            $("#bidderName").text(hisList[0].userName);
+            $("#bidNumber").text(hisList.length);
+            $("#currentPrice").text(hisList[0].auctionPrice)
+            var htmlStr="";
+            for (var i=0;i<hisList.length;i++){
+                // $("#hisBid:eq(" + i + ")").find('#bidName').text(hisList[i].userName);
+                // $("#hisBid:eq(" + i + ")").find('#bidPrice').text(hisList[i].actionPrice);
+                // $("#hisBid:eq(" + i + ")").find('#bidTime').text(hisList[i].actionTime);
+                var format = timestampToTime((hisList[i].auctionTime));
+                htmlStr+="<tr ><td class=\"bidName\">"+hisList[i].userName+"</td><td class=\"bidPrice\">"+hisList[i].auctionPrice/100.00+"</td><td class=\"bidTime\">"+format+"</td></tr>";
+            }
+
+            $("#hisBid").html(htmlStr);
+        }
+    });
+
+
+    //GoEasy-OTP可以对appkey进行有效保护，详情请参考：GoEasy-Reference
+</script>
 </body>
 
 
