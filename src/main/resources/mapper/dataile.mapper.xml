@@ -46,14 +46,14 @@
     <sql id="goods">
         goods_id,goods_content_id, goods_no, goods_name, explain_note, explain_info,
         explain_add, goods_img, asking_price, bidding_steps, bout, author,
-        year1, texture,t1.item_name,t2.item_name shape, length1, width, height, diameter,
+        year1, texture,shape, length1, width, height, diameter,
         pre_start_time,pre_deadline,auction_start_time,auction_deadline,
         author_id,author_name,author_info
     </sql>
     <!--商品信息-->
     <select id="queryGoodsById" resultMap="goodsResultMap">
-        select <include refid="goods"/> from tb_goods join tb_author join tb_item t1 join tb_item t2 where
-         author=author_id and t1.item_id=texture and t2.item_id=shape and goods_id = #{goodsId}
+        select <include refid="goods"/> from tb_goods join tb_author  where
+         author=author_id  and goods_id = #{goodsId}
 
 </select>
 

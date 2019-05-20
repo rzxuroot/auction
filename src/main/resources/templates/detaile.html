@@ -900,8 +900,9 @@ body{margin:8px;font-family:sans-serif;font-size:16px;}p{margin:5px 0;}</style><
                                     <th>出价时间</th>
                                 </tr>
                             </thead>
-                            <tbody th:each="historical : ${historicalPriceList}">
-                                <tr>
+
+                            <tbody id="hisBid"  th:each="historical : ${historicalPriceList}">
+                                <tr >
                                     <td class="bidName" th:text="${historical.userName}">sala</td>
                                     <td class="bidPrice" th:text="${historical.auctionPrice/100.00}">1.00元</td>
                                     <td class="bidTime" th:text="${historical.auctionTime}">2019-05-15 10:02:54</td>
@@ -1445,14 +1446,69 @@ function doClickPreQuery() {
 </script>
 <!--goeast实时更新，jq循环赋值实现循环-->
 <script type="text/javascript">
+    Date.prototype.format = function (fmt) {
+        var o = {
+            "M+": this.getMonth() + 1,                 //月份
+            "d+": this.getDate(),                    //日
+            "h+": this.getHours(),                   //小时
+            "m+": this.getMinutes(),                 //分
+            "s+": this.getSeconds(),                 //秒
+            "q+": Math.floor((this.getMonth() + 3) / 3), //季度
+            "S": this.getMilliseconds()             //毫秒
+        };
+        if (/(y+)/.test(fmt)) {
+            fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+        }
+        for (var k in o) {
+            if (new RegExp("(" + k + ")").test(fmt)) {
+                fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+            }
+        }
+        return fmt;
+    }
+    function timestampToTime(time) {    //时间戳为10位需*1000，时间戳为13位的话不需乘1000在转成yymmdd
+        var date = new Date(time);
+        var y = date.getFullYear();
+        var m = date.getMonth() + 1;
+        m = m < 10 ? ('0' + m) : m;
+        var d = date.getDate();
+        d = d < 10 ? ('0' + d) : d;
+        var h = date.getHours();
+        h = h < 10 ? ('0' + h) : h;
+        var minute = date.getMinutes();
+        var second = date.getSeconds();
+        minute = minute < 10 ? ('0' + minute) : minute;
+        second = second < 10 ? ('0' + second) : second;
+        return y + '-' + m + '-' + d+' '+h+':'+minute+':'+second;
+    };
+
     var goEasy = new GoEasy({
         appkey: 'BS-1c38afb26a204fc59a318265155eac96'
     });
     goEasy.subscribe({
         channel:'zgj', //发消息频道和收消息频道要是同一个频道。
         onMessage: function(message){
-            alert('收到：'+message.content);
-            window.location.href="order.html";
+            var array=new Array();
+            var json = $.parseJSON(message.content)
+            var hisList = json.modelList;
+            for(i in hisList ){
+                alert(hisList[i].userName )
+            }
+            var hisList=eval(message.content);
+            console.log("历史对象:"+message.content+"---------"+hisList)
+            $("#bidderName").text(hisList[0].userName);
+            $("#bidNumber").text(hisList.length);
+            $("#currentPrice").text(hisList[0].auctionPrice)
+            var htmlStr="";
+            for (var i=0;i<hisList.length;i++){
+                // $("#hisBid:eq(" + i + ")").find('#bidName').text(hisList[i].userName);
+                // $("#hisBid:eq(" + i + ")").find('#bidPrice').text(hisList[i].actionPrice);
+                // $("#hisBid:eq(" + i + ")").find('#bidTime').text(hisList[i].actionTime);
+                var format = timestampToTime((hisList[i].auctionTime));
+                htmlStr+="<tr ><td class=\"bidName\">"+hisList[i].userName+"</td><td class=\"bidPrice\">"+hisList[i].auctionPrice/100.00+"</td><td class=\"bidTime\">"+format+"</td></tr>";
+            }
+
+            $("#hisBid").html(htmlStr);
         }
     });
 

@@ -84,6 +84,7 @@ public class bidContorller {
                             "  <return_code><![CDATA[SUCCESS]]></return_code>\n" +
                             "  <return_msg><![CDATA[OK]]></return_msg>\n" +
                             "</xml>");
+                    resp.reset();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

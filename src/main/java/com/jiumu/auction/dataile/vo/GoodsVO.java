@@ -13,10 +13,10 @@ public class GoodsVO {
   private String goodsImg;
   private long askingPrice;
   private long biddingSteps;
-  private long bout;
+  private String bout;
   private long author;
-  private long year1;
-  private long texture;
+  private String year1;
+  private String texture;
   private String shape;
   private String length1;
   private String width;
@@ -131,11 +131,11 @@ public class GoodsVO {
   }
 
 
-  public long getBout() {
+  public String  getBout() {
     return bout;
   }
 
-  public void setBout(long bout) {
+  public void setBout(String bout) {
     this.bout = bout;
   }
 
@@ -149,20 +149,20 @@ public class GoodsVO {
   }
 
 
-  public long getYear1() {
+  public String getYear1() {
     return year1;
   }
 
-  public void setYear1(long year1) {
+  public void setYear1(String year1) {
     this.year1 = year1;
   }
 
 
-  public long getTexture() {
+  public String getTexture() {
     return texture;
   }
 
-  public void setTexture(long texture) {
+  public void setTexture(String texture) {
     this.texture = texture;
   }
 

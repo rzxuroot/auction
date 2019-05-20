@@ -5,7 +5,6 @@ public class TbGoods {
 
   private long goodsId;
   private long goodsContentId;
-  private String auctionNo;
   private String goodsNo;
   private String goodsName;
   private String explainNote;
@@ -16,10 +15,10 @@ public class TbGoods {
   private long biddingSteps;
   private long bout;
   private long author;
-  private long year1;
+  private long year;
   private long texture;
-  private long shape;
-  private String length1;
+  private String shape;
+  private String length;
   private String width;
   private String height;
   private String diameter;
@@ -27,7 +26,7 @@ public class TbGoods {
   private java.sql.Timestamp preDeadline;
   private java.sql.Timestamp auctionStartTime;
   private java.sql.Timestamp auctionDeadline;
-  private String goodsStatus;
+  private String obligate1;
   private String obligate2;
 
 
@@ -46,15 +45,6 @@ public class TbGoods {
 
   public void setGoodsContentId(long goodsContentId) {
     this.goodsContentId = goodsContentId;
-  }
-
-
-  public String getAuctionNo() {
-    return auctionNo;
-  }
-
-  public void setAuctionNo(String auctionNo) {
-    this.auctionNo = auctionNo;
   }
 
 
@@ -148,12 +138,12 @@ public class TbGoods {
   }
 
 
-  public long getYear1() {
-    return year1;
+  public long getYear() {
+    return year;
   }
 
-  public void setYear1(long year1) {
-    this.year1 = year1;
+  public void setYear(long year) {
+    this.year = year;
   }
 
 
@@ -166,21 +156,21 @@ public class TbGoods {
   }
 
 
-  public long getShape() {
+  public String getShape() {
     return shape;
   }
 
-  public void setShape(long shape) {
+  public void setShape(String shape) {
     this.shape = shape;
   }
 
 
-  public String getLength1() {
-    return length1;
+  public String getLength() {
+    return length;
   }
 
-  public void setLength1(String length1) {
-    this.length1 = length1;
+  public void setLength(String length) {
+    this.length = length;
   }
 
 
@@ -247,12 +237,12 @@ public class TbGoods {
   }
 
 
-  public String getGoodsStatus() {
-    return goodsStatus;
+  public String getObligate1() {
+    return obligate1;
   }
 
-  public void setGoodsStatus(String goodsStatus) {
-    this.goodsStatus = goodsStatus;
+  public void setObligate1(String obligate1) {
+    this.obligate1 = obligate1;
   }
 
 
@@ -264,4 +254,34 @@ public class TbGoods {
     this.obligate2 = obligate2;
   }
 
+  @Override
+  public String toString() {
+    return "TbGoods{" +
+            "goodsId=" + goodsId +
+            ", goodsContentId=" + goodsContentId +
+            ", goodsNo='" + goodsNo + '\'' +
+            ", goodsName='" + goodsName + '\'' +
+            ", explainNote='" + explainNote + '\'' +
+            ", explainInfo='" + explainInfo + '\'' +
+            ", explainAdd='" + explainAdd + '\'' +
+            ", goodsImg='" + goodsImg + '\'' +
+            ", askingPrice=" + askingPrice +
+            ", biddingSteps=" + biddingSteps +
+            ", bout=" + bout +
+            ", author=" + author +
+            ", year=" + year +
+            ", texture=" + texture +
+            ", shape='" + shape + '\'' +
+            ", length='" + length + '\'' +
+            ", width='" + width + '\'' +
+            ", height='" + height + '\'' +
+            ", diameter='" + diameter + '\'' +
+            ", preStartTime=" + preStartTime +
+            ", preDeadline=" + preDeadline +
+            ", auctionStartTime=" + auctionStartTime +
+            ", auctionDeadline=" + auctionDeadline +
+            ", obligate1='" + obligate1 + '\'' +
+            ", obligate2='" + obligate2 + '\'' +
+            '}';
+  }
 }
