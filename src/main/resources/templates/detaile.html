@@ -448,7 +448,7 @@
 
 
                 <div class="guanZhuWeiGuanDivCls">
-                	<div id="followCount" class="floatLeft sharePersonCntDivCls">1</div><div class="floatLeft">关注</div>
+                	<div id="followCount" class="floatLeft sharePersonCntDivCls" th:text="${attentionNumber}">1</div><div class="floatLeft">关注</div>
                 	<div class="floatLeft careItemPersonCntDivCls" style="display:none;"></div>
                 	<div class="floatLeft" style="display:none;">人围观</div>
                 	<div id="postpone" class="postpone" style="display:none;" onclick="doPostpone();">延时</div>
@@ -592,56 +592,17 @@
         	<!--3.1推荐拍品列表信息-->
 			<div style="overflow-y: scroll; height: 600px;" class="tjppBoxCls">
 				<div class="tjppTitleInfoDivBoxCls">浏览拍品</div>
-            <a href="http://www.artrade.com/jsp/ecp/public/auction.jsp?lotid=973484569">
+            <a th:each="browse:${browseVOS}"  th:href="'/dataile/goodsDataile?goodsId='+${browse.getBrowseGoodsId()}" >
                 <div class="tjppInfoDivBoxCls">
                     <div class="tjppImgInfoDivBoxCls" style="position: relative;text-align: center;vertical-align: middle;">
-                        <img onload="autoImgSize(this,221,199,false)" width="199" height="199" src="detaile/detaile/a10609401_s.jpg" style="position: absolute; left: 50%; top: 50%; margin-left: -99.5px; margin-top: -99.5px;"></div>
-                    <div class="tjppBuyerInfoDivBoxCls"><div class="tjppBuyerInfoCls"><div class="tjppBuyerNameFontCls"></div></div></div></div></a>
-                <a href="http://www.artrade.com/jsp/ecp/public/auction.jsp?lotid=973485614">
-                    <div class="tjppInfoDivBoxCls"><div class="tjppImgInfoDivBoxCls" style="position: relative;text-align: center;vertical-align: middle;">
-                        <img onload="autoImgSize(this,221,199,false)" width="199" height="199" src="detaile/detaile/a10619575_s.jpg" style="position: absolute; left: 50%; top: 50%; margin-left: -99.5px; margin-top: -99.5px;"></div>
-                        <div class="tjppBuyerInfoDivBoxCls"><div class="tjppBuyerInfoCls"><div class="tjppBuyerNameFontCls"></div></div></div></div></a>
-                <a href="http://www.artrade.com/jsp/ecp/public/auction.jsp?lotid=973474032"><div class="tjppInfoDivBoxCls">
-                    <div class="tjppImgInfoDivBoxCls" style="position: relative;text-align: center;vertical-align: middle;">
-                        <img onload="autoImgSize(this,221,199,false)" width="199" height="199" src="detaile/detaile/a10602709_s.jpg" style="position: absolute; left: 50%; top: 50%; margin-left: -99.5px; margin-top: -99.5px;"></div>
-                    <div class="tjppBuyerInfoDivBoxCls"><div class="tjppBuyerInfoCls"><div class="tjppBuyerNameFontCls"></div></div></div></div></a>
-                <a href="http://www.artrade.com/jsp/ecp/public/auction.jsp?lotid=973484667"><div class="tjppInfoDivBoxCls">
-                    <div class="tjppImgInfoDivBoxCls" style="position: relative;text-align: center;vertical-align: middle;">
-                        <img onload="autoImgSize(this,221,199,false)" width="199" height="199" src="detaile/detaile/a10600690_s.jpg" style="position: absolute; left: 50%; top: 50%; margin-left: -99.5px; margin-top: -99.5px;"></div>
-                    <div class="tjppBuyerInfoDivBoxCls"><div class="tjppBuyerInfoCls"><div class="tjppBuyerNameFontCls"></div></div></div></div></a>
-                <a href="http://www.artrade.com/jsp/ecp/public/auction.jsp?lotid=973482715"><div class="tjppInfoDivBoxCls">
-                    <div class="tjppImgInfoDivBoxCls" style="position: relative;text-align: center;vertical-align: middle;">
-                        <img onload="autoImgSize(this,221,199,false)" width="199" height="199" src="detaile/detaile/a10601623_s.jpg" style="position: absolute; left: 50%; top: 50%; margin-left: -99.5px; margin-top: -99.5px;"></div>
-                    <div class="tjppBuyerInfoDivBoxCls"><div class="tjppBuyerInfoCls">
-                        <div class="tjppBuyerNameFontCls"></div></div></div></div></a>
-                <a href="http://www.artrade.com/jsp/ecp/public/auction.jsp?lotid=973482712">
-                    <div class="tjppInfoDivBoxCls">
-                        <div class="tjppImgInfoDivBoxCls" style="position: relative;text-align: center;vertical-align: middle;">
-                            <img onload="autoImgSize(this,221,199,false)" width="199" height="199" src="detaile/detaile/a10601620_s.jpg" style="position: absolute; left: 50%; top: 50%; margin-left: -99.5px; margin-top: -99.5px;"></div>
-                        <div class="tjppBuyerInfoDivBoxCls"><div class="tjppBuyerInfoCls"><div class="tjppBuyerNameFontCls"></div></div></div></div></a>
-                <a href="http://www.artrade.com/jsp/ecp/public/auction.jsp?lotid=973476012"><div class="tjppInfoDivBoxCls">
-                    <div class="tjppImgInfoDivBoxCls" style="position: relative;text-align: center;vertical-align: middle;">
-                        <img onload="autoImgSize(this,221,199,false)" width="220px" height="220px" src="detaile/detaile/z00000003_s.jpg"></div>
-                    <div class="tjppBuyerInfoDivBoxCls"><div class="tjppBuyerInfoCls"><div class="tjppBuyerNameFontCls"></div></div></div></div></a>
-                <a href="http://www.artrade.com/jsp/ecp/public/auction.jsp?lotid=973469047"><div class="tjppInfoDivBoxCls">
-                    <div class="tjppImgInfoDivBoxCls" style="position: relative;text-align: center;vertical-align: middle;">
-                        <img onload="autoImgSize(this,221,199,false)" width="199" height="199" src="detaile/detaile/a10597914_s.jpg" style="position: absolute; left: 50%; top: 50%; margin-left: -99.5px; margin-top: -99.5px;"></div>
-                    <div class="tjppBuyerInfoDivBoxCls"><div class="tjppBuyerInfoCls"><div class="tjppBuyerNameFontCls"></div></div></div></div></a>
-                <a href="http://www.artrade.com/jsp/ecp/public/auction.jsp?lotid=973484666"><div class="tjppInfoDivBoxCls">
-                    <div class="tjppImgInfoDivBoxCls" style="position: relative;text-align: center;vertical-align: middle;">
-                <img onload="autoImgSize(this,221,199,false)" width="199" height="199" src="detaile/detaile/a10600689_s.jpg" style="position: absolute; left: 50%; top: 50%; margin-left: -99.5px; margin-top: -99.5px;"></div><div class="tjppBuyerInfoDivBoxCls"><div class="tjppBuyerInfoCls">
-                    <div class="tjppBuyerNameFontCls"></div></div></div></div></a>
-                <a href="http://www.artrade.com/jsp/ecp/public/auction.jsp?lotid=973482713">
-                    <div class="tjppInfoDivBoxCls">
-                        <div class="tjppImgInfoDivBoxCls" style="position: relative;text-align: center;vertical-align: middle;">
-                            <img onload="autoImgSize(this,221,199,false)" width="199" height="199" src="detaile/detaile/a10601621_s.jpg" style="position: absolute; left: 50%; top: 50%; margin-left: -99.5px; margin-top: -99.5px;"></div>
-                        <div class="tjppBuyerInfoDivBoxCls">
-                            <div class="tjppBuyerInfoCls">
-                                <div class="tjppBuyerNameFontCls"></div>
-                            </div>
-                        </div>
+                        <img onload="autoImgSize(this,221,199,false)" width="199" height="199" th:src="${browse.goodsImg}" style="position: absolute; left: 50%; top: 50%; margin-left: -99.5px; margin-top: -99.5px;"></div>
+                    <div class="tjppBuyerInfoDivBoxCls"><div class="tjppBuyerInfoCls"><div class="tjppBuyerNameFontCls">
+
                     </div>
-                </a>
+                    </div>
+                    </div>
+                </div>
+            </a>
             </div>
             <!--3.1拍品详情列表信息-->
             <div class="itemDetailInfoDivBoxCls" style="">
@@ -1178,6 +1139,7 @@ function doClickPreQuery() {
 <input type="hidden" id="preStartTime" th:value="${goods.preStartTime}"/>
 <input type="hidden" id="preDeadline" th:value="${goods.preDeadline}"/>
 <input type="hidden" id="goodsId" th:value="${goods.goodsId}"/>
+<input type="hidden" id="isAttention" th:value="${isAttention}"/>
 <script type="text/javascript">
     $("#tabul li").mouseover(function () {
         var x = $('#tabul li').index(this);
@@ -1532,6 +1494,40 @@ function doClickPreQuery() {
 
 
     //GoEasy-OTP可以对appkey进行有效保护，详情请参考：GoEasy-Reference
+</script>
+<script type="text/javascript">
+    var isAttention= $("#isAttention").val()
+    var goodsId = $("#goodsId").val();
+
+    if (isAttention==0){
+        $("#follow").css('display','block');
+        $("#cancel").css('display','none');
+    } else{
+        $("#follow").css('display','none');
+        $("#cancel").css('display','block');
+    }
+    function followGoods() {
+
+        $.post("attention/addAttention",{goodsId:goodsId},function (data) {
+            if (data.code==0){
+
+                if (confirm("您还未登录，登录后即可关注，是否前往登录?")){
+                    window.location.href="login.html";
+                }
+            }else{
+                $("#follow").css('display','none');
+                $("#cancel").css('display','block');
+            }
+        });
+    }
+
+    function cancelFollow() {
+        $("#follow").css('display','block');
+        $("#cancel").css('display','none');
+        $.post("attention/deleteAttention",{goodsId:goodsId},function (data) {
+
+        });
+    }
 </script>
 </body>
 

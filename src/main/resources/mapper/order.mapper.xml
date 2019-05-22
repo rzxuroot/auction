@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jiumu.auction.order.mapper.OrderMapper">
+    <insert id="addOrder">
+        insert into tb_order (order_user_id,order_goods_id,order_time,transaction_price,
+        order_no,order_judge,payment_status)
+        values (#{order.orderUserId},#{order.orderGoodsId},#{order.orderTime},#{order.transactionPrice},
+        #{order.orderNo},#{order.orderJudge},#{order.paymentStatus});
+    </insert>
+</mapper>

@@ -2,6 +2,7 @@ package com.jiumu.auction.commons.time;
 
 import com.jiumu.auction.dataile.service.IGoodsService;
 import com.jiumu.auction.myAuction.service.IAuctionService;
+import com.jiumu.auction.order.service.impl.OrderServiceImpl;
 import org.springframework.data.redis.core.StringRedisTemplate;
 
 import java.sql.Timestamp;
@@ -9,6 +10,7 @@ import java.util.Date;
 import java.util.TimerTask;
 
 public class ChangeTime extends TimerTask {
+
     private StringRedisTemplate redisTemplate;
     private Timestamp timestamp;
     private Long goodsId;
@@ -35,6 +37,16 @@ public class ChangeTime extends TimerTask {
                 IAuctionService auctionServiceImpl= (IAuctionService) Ser.getBean("auctionServiceImpl");
                 //修改竞拍状态
                 auctionServiceImpl.updateMyAuction(goodsId);
+
+                String lenderIdAndPrice = redisTemplate.boundValueOps("dataile-" + goodsId).get();
+                if (lenderIdAndPrice!=null) {
+                    String[] split = lenderIdAndPrice.split("\\-");
+                    long redisId = Long.parseLong(split[0]);
+                    float redisPrice = Float.parseFloat(split[1]);
+                    long transactionPrice = (long) (redisPrice * 10);
+                    OrderServiceImpl orderServiceImpl = (OrderServiceImpl) Ser.getBean("orderServiceImpl");
+                    orderServiceImpl.addOrder(redisId,goodsId,transactionPrice);
+                }
                 boolean cancel = cancel();
             }
         }else{
@@ -45,8 +57,18 @@ public class ChangeTime extends TimerTask {
                 IAuctionService auctionServiceImpl= (IAuctionService) Ser.getBean("auctionServiceImpl");
                 //修改竞拍状态
                 auctionServiceImpl.updateMyAuction(goodsId);
+                String lenderIdAndPrice = redisTemplate.boundValueOps("dataile-" + goodsId).get();
+                if (lenderIdAndPrice!=null) {
+                    String[] split = lenderIdAndPrice.split("\\-");
+                    long redisId = Long.parseLong(split[0]);
+                    float redisPrice = Float.parseFloat(split[1]);
+                    long transactionPrice = (long) (redisPrice * 10);
+                    OrderServiceImpl orderServiceImpl = (OrderServiceImpl) Ser.getBean("orderServiceImpl");
+                    orderServiceImpl.addOrder(redisId,goodsId,transactionPrice);
+                }
                 boolean cancel = cancel();
             }
         }
+
     }
 }

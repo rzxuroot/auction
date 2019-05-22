@@ -1,14 +1,20 @@
 package com.jiumu.auction.dataile.service.impl;
 
 import com.jiumu.auction.dataile.mapper.GoodsMapper;
+import com.jiumu.auction.dataile.po.TbBrowse;
+import com.jiumu.auction.dataile.po.TbUser;
 import com.jiumu.auction.dataile.service.IGoodsService;
+import com.jiumu.auction.dataile.vo.BrowseVO;
 import com.jiumu.auction.dataile.vo.GoodsVO;
 import com.jiumu.auction.dataile.vo.HistoricalPriceVO;
+import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -75,5 +81,49 @@ public class GoodsServiceImpl implements IGoodsService {
     @Override
     public void updateGoodsAuctionDeadline(Timestamp auctionDeadline, Long goodsId) {
         goodsMapper.updateGoodsAuctionDeadline(auctionDeadline,goodsId);
+    }
+
+    @Override
+    public void addBrowse(Long goodsId) {
+        //获取用户
+        TbUser user = (TbUser) SecurityUtils.getSubject().getSession().getAttribute("user");
+        //判断用户是否为空
+        if (user!=null){
+
+            //获得用户id
+            long userId = user.getUserId();
+            String goodsIdAndUserIdBrowes = redisTemplate.boundValueOps(goodsId + "-browse-" + userId).get();
+            if (!"1".equals(goodsIdAndUserIdBrowes)) {
+                //创建我的浏览对象
+                TbBrowse tbBrowse = new TbBrowse();
+                //添加商品id
+                tbBrowse.setBrowseGoodsId(goodsId);
+                //添加用户id
+                tbBrowse.setBrowseUserId(userId);
+                //获得当前时间
+                Date date = new Date();
+                //创建格式刷
+                SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                //转化为string
+                String format1 = format.format(date);
+                //转化为timestamp类型
+                Timestamp timestamp = Timestamp.valueOf(format1);
+                tbBrowse.setBrowseRecordTime(timestamp);
+                redisTemplate.boundValueOps(goodsId + "-browse-" + userId).set("1");
+                goodsMapper.addBrowse(tbBrowse);
+            }
+        }
+
+    }
+
+    @Override
+    public List<BrowseVO> queryBrowseList() {
+        TbUser user = (TbUser) SecurityUtils.getSubject().getSession().getAttribute("user");
+
+        if (user!=null) {
+            long userId = user.getUserId();
+            return goodsMapper.queryBrowseList(userId);
+        }
+         return null;
     }
 }

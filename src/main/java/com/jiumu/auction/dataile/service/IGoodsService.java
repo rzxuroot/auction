@@ -1,6 +1,8 @@
 package com.jiumu.auction.dataile.service;
 
+import com.jiumu.auction.dataile.po.TbBrowse;
 import com.jiumu.auction.dataile.po.TbGoods;
+import com.jiumu.auction.dataile.vo.BrowseVO;
 import com.jiumu.auction.dataile.vo.GoodsVO;
 import com.jiumu.auction.dataile.vo.HistoricalPriceVO;
 
@@ -34,5 +36,17 @@ public interface IGoodsService {
      * @param goodsId
      */
     void updateGoodsAuctionDeadline(Timestamp auctionDeadline, Long goodsId);
+    /**
+     * 添加我的浏览表
+
+     */
+    void addBrowse(Long goodsId);
+
+    /**
+     * 根据用户id查询我的浏览记录集合
+     *
+     * @return
+     */
+    List<BrowseVO> queryBrowseList();
 
 }

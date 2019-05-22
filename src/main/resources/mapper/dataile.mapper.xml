@@ -74,4 +74,12 @@
     <update id="updateGoodsAuctionDeadline">
         update tb_goods set auction_deadline=#{auctionDeadline} where goods_id=#{goodsId}
     </update>
+    <insert id="addBrowse">
+        insert into tb_browse (browse_user_id, browse_goods_id,browse_record_time)
+        values (#{browse.browseUserId},#{browse.browseGoodsId},#{browse.browseRecordTime} );
+    </insert>
+    <select id="queryBrowseList" resultType="com.jiumu.auction.dataile.vo.BrowseVO">
+        select browse_record_id,browse_user_id, browse_goods_id,browse_record_time,goods_img from tb_browse
+        join tb_goods where browse_user_id=goods_id and browse_user_id=#{userId} limit 0,10;
+    </select>
 </mapper>
