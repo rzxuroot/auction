@@ -41,7 +41,7 @@
         <result property="auctionTime" column="auction_time"/>
         <result property="auctionPrice" column="auction_price"/>
         <result property="userName" column="username"/>
-
+        <result property="hisNumber" column="his_number"/>
     </resultMap>
     <sql id="goods">
         goods_id,goods_content_id, goods_no, goods_name, explain_note, explain_info,
@@ -63,10 +63,15 @@
     </sql>
     <!--<include refid="historical"/>,-->
     <select id="queryHistoricalPriceByGoodsId" resultMap="historicalResultMap">
-      select historical_price_id, historical_user_id, historical_goods_id,auction_time,auction_price, No1_judge, deduct_judge
+      select  historical_price_id, historical_user_id, historical_goods_id,auction_time,auction_price, No1_judge, deduct_judge
 ,username from tb_historical_price join
         tb_user where historical_user_id=user_id and historical_goods_id=#{goodsId} order by
         auction_price desc LIMIT 0,10;
-
     </select>
+    <select id="queryCountHistorical" resultType="java.lang.Integer">
+        select COUNT(*) his_number from tb_historical_price;
+    </select>
+    <update id="updateGoodsAuctionDeadline">
+        update tb_goods set auction_deadline=#{auctionDeadline} where goods_id=#{goodsId}
+    </update>
 </mapper>

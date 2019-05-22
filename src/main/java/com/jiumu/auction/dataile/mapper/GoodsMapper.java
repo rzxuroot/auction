@@ -6,6 +6,7 @@ import com.jiumu.auction.dataile.vo.HistoricalPriceVO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 
@@ -24,4 +25,12 @@ public interface GoodsMapper {
      * @return
      */
    List<HistoricalPriceVO> queryHistoricalPriceByGoodsId(@Param("goodsId") Long goodsId);
+
+    /**
+     * 查询历史总数
+     * @return
+     */
+   int queryCountHistorical();
+
+   void updateGoodsAuctionDeadline(@Param("auctionDeadline") Timestamp auctionDeadline,@Param("goodsId") Long goodsId);
 }

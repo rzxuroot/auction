@@ -16,6 +16,6 @@ public class AuctionController {
         if (goodsId!=null){
             id=Long.parseLong(goodsId);
         }
-        auctionServiceImpl.updateMyAuction(id);
+//        auctionServiceImpl.updateMyAuction(id);
     }
 }

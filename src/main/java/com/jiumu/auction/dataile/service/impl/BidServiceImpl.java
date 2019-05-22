@@ -1,5 +1,6 @@
 package com.jiumu.auction.dataile.service.impl;
 
+import com.jiumu.auction.commons.time.ChangeAuctionStatus;
 import com.jiumu.auction.dataile.mapper.BidMapper;
 import com.jiumu.auction.dataile.po.TbAccount;
 import com.jiumu.auction.dataile.po.TbHistoricalPrice;
@@ -35,6 +36,8 @@ public class BidServiceImpl implements IBidService {
     private StringRedisTemplate redisTemplate;
     @Autowired
     private AuctionMapper auctionMapper;
+    @Autowired
+    private ChangeAuctionStatus changeAuctionStatus;
     Logger logger= Logger.getLogger(BidServiceImpl.class);
 
     /**
@@ -68,7 +71,7 @@ public class BidServiceImpl implements IBidService {
                 @Override
                 public Object execute(RedisOperations redisOperations) throws DataAccessException {
 
-                    //锁num key
+                    //锁 key
                     //上锁
                     redisOperations.watch("dataile-" + goodsId);
                     // 因为事务没有提交是不会执行任何指令的。所以查询需要写在事务外
@@ -131,6 +134,7 @@ public class BidServiceImpl implements IBidService {
                             bidMapper.updataAccount(redisAccount);
                         }
 
+
                         jsonResult.setCode(5);
                         jsonResult.setMsg("succeed");
                     }else {
@@ -184,18 +188,25 @@ public class BidServiceImpl implements IBidService {
     public void pushTime(Date date, Long goodsId, HttpServletResponse resp) {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         //从缓存中获取结束时间
-        String goodsTime = redisTemplate.boundValueOps("dataileTime" + goodsId).get();
+        String goodsTime = redisTemplate.boundValueOps("dataileTime-" + goodsId).get();
         //如果缓存中不为空，则用取出的时间对比
+        GoodsVO goodsVO = goodsServiceImpl.queryGoodsById(goodsId);
+        Timestamp auctionDeadline = goodsVO.getAuctionDeadline();
+
         if (goodsTime != null) {
+            //设置定时任务，在缓存中的时间那一刻执行（修改竞拍状态，将缓存中的时间更新到数据库）
+            //changeAuctionStatus.changeStatus(redisTemplate,goodsId);
             //格式转换
             Timestamp endTimestamp = Timestamp.valueOf(goodsTime);
             //获得结束和当前两个时间的毫秒数
             long endTime = endTimestamp.getTime();
+
             long startTime = date.getTime();
             //相减获得间隔时间
             long intervalTime = endTime - startTime;
             //判断结束时间是否比当前时间大一分钟以内
             if (intervalTime <= 60 * 1000) {
+
                 //如果是则结束时间加两分钟
                 long lenEndTime = startTime + 2 * 60 * 1000;
                 //格式转换为string
@@ -203,7 +214,8 @@ public class BidServiceImpl implements IBidService {
 
                 String lenEndTimestampStr = format.format(lenEndTimestamp);
                 //将新的结束时间存入缓存
-                redisTemplate.boundValueOps("dataileTime" + goodsId).set(lenEndTimestampStr);
+                redisTemplate.boundValueOps("dataileTime-" + goodsId).set(lenEndTimestampStr);
+
                 //goeasy推送时间到前端
                 GoEasy goEasy = new GoEasy("http://rest-hangzhou.goeasy.io", "BC-82d3f7de164e46ce9347b04494a76336");
                 goEasy.publish("zgjTime", lenEndTimestampStr);
@@ -220,7 +232,7 @@ public class BidServiceImpl implements IBidService {
             }
         } else {
             synchronized (this) {
-                String goodsTime1 = redisTemplate.boundValueOps("dataileTime" + goodsId).get();
+                String goodsTime1 = redisTemplate.boundValueOps("dataileTime-" + goodsId).get();
                 //双重检测锁
                 if (goodsTime1 != null) {
                     //格式转换
@@ -239,7 +251,7 @@ public class BidServiceImpl implements IBidService {
 
                         String lenEndTimestampStr = format.format(lenEndTimestamp);
                         //将新的结束时间存入缓存
-                        redisTemplate.boundValueOps("dataileTime" + goodsId).set(lenEndTimestampStr);
+                        redisTemplate.boundValueOps("dataileTime-" + goodsId).set(lenEndTimestampStr);
                         //goeasy推送时间到前端
                         GoEasy goEasy = new GoEasy("http://rest-hangzhou.goeasy.io", "BC-82d3f7de164e46ce9347b04494a76336");
                         goEasy.publish("zgjTime", lenEndTimestampStr);
@@ -255,10 +267,11 @@ public class BidServiceImpl implements IBidService {
                         }
                     }
                 } else {
-                    GoodsVO goodsVO = goodsServiceImpl.queryGoodsById(goodsId);
-                    Timestamp auctionDeadline = goodsVO.getAuctionDeadline();
+
                     String auctionDeadlineStr = format.format(auctionDeadline);
                     Timestamp endTimestamp = Timestamp.valueOf(auctionDeadlineStr);
+                    //设置定时任务，在数据库中的时间那一刻执行（修改竞拍状态，将缓存中的时间更新到数据库）
+
                     //获得结束和当前两个时间的毫秒数
                     long endTime = endTimestamp.getTime();
                     long startTime = date.getTime();
@@ -273,7 +286,7 @@ public class BidServiceImpl implements IBidService {
 
                         String lenEndTimestampStr = format.format(lenEndTimestamp);
                         //将新的结束时间存入缓存
-                        redisTemplate.boundValueOps("dataileTime" + goodsId).set(lenEndTimestampStr);
+                        redisTemplate.boundValueOps("dataileTime-" + goodsId).set(lenEndTimestampStr);
                         //goeasy推送时间到前端
                         GoEasy goEasy = new GoEasy("http://rest-hangzhou.goeasy.io", "BC-82d3f7de164e46ce9347b04494a76336");
                         goEasy.publish("zgjTime", lenEndTimestampStr);
@@ -291,5 +304,6 @@ public class BidServiceImpl implements IBidService {
                 }
             }
         }
+        changeAuctionStatus.changeStatus(redisTemplate,goodsId,auctionDeadline);
     }
 }

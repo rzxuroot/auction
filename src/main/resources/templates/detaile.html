@@ -460,7 +460,7 @@
 
          	<!--2.2.3：出价次数等信息 -->
         	<div class="offerCntRowCls">
-            	<div class="floatLeft offerCntDivCls">出价次数：<span id="bidNumber" th:text="${historicalPriceList.size()}">1</span>次</div>
+            	<div class="floatLeft offerCntDivCls">出价次数：<span id="bidNumber" th:text="${historicalPriceList[0].hisNumber}">1</span>次</div>
             	<div class="floatLeft firstPersonDivCls">
                 	<span id="blink"></span>
                 </div>
@@ -661,7 +661,7 @@
                 	<div class="itemDetailTitleInfoDivBoxCls">拍品信息</div>
                     <div class="itemDetailContentInfoDivBoxCls" id="itemDescDetailContentInfo">
                         <span th:text="'作者:'+${goods.authorName}"></span><br>
-                        <span th:text="'质地：'+${goods.itemName}">质地：木板</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <span th:text="'质地：'+${goods.texture}">质地：木板</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         <span th:text="'形式：'+${goods.shape}">形式：重彩</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
                         <span th:text="'长度：'+${goods.length1}">长度：1厘米</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                         <span th:text="'宽度：'+${goods.width}">宽度：1厘米</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
@@ -670,7 +670,7 @@
                     <div class="itemDetailTitleInfoDivBoxCls">拍品说明</div>
                     <div class="itemDetailContentInfoDivBoxCls" id="itemExplainDetailContentInfo"  >
                         <span th:text="${goods.explainInfo}"></span><br>
-                        <span th:text="'形式：'+${goods.explainAdd}"></span>
+                        <span th:text="${goods.explainAdd}"></span>
 
                         <br> <span th:text="'作者:'+${goods.authorName}"></span><br>
                         <a href="http://auction.artrade.com/auction_db/artist_info-75137.html" >
@@ -1262,10 +1262,11 @@ function doClickPreQuery() {
                     window.location.href="recharge.html";
                 }
             }
+            if (data.code==4){
+                alert("有人抢先出价与您相同或者比您高")
+            }
             if (data.code==5){
-                if (dayTimeText <= 0 && hourTimeText <= 0 && minTimeText <= 0 && secTimeText!=0) {
 
-                }
             }
         });
     });
@@ -1452,12 +1453,12 @@ function doClickPreQuery() {
             $("#toMinute").text(min);
             $("#toSecond").text(sec);
         }
-        if (day == 0 && hour == 0 && min == 0 && sec == 0){
-            var goodsId=$("#goodsId").val();
-            $.post("myAuction/updateState",{goodsId:goodsId},function (data) {
-
-            });
-        }
+        // if (day == 0 && hour == 0 && min == 0 && sec == 0){
+        //     var goodsId=$("#goodsId").val();
+        //     $.post("myAuction/updateState",{goodsId:goodsId},function (data) {
+        //
+        //     });
+        // }
 
 
 
@@ -1505,8 +1506,8 @@ function doClickPreQuery() {
             var hisList=eval(message.content);
            // console.log("历史对象:"+message.content+"---------"+hisList)
             $("#bidderName").text(hisList[0].userName);
-            $("#bidNumber").text(hisList.length);
-            $("#currentPrice").text(hisList[0].auctionPrice/100)
+            $("#bidNumber").text(hisList[0].hisNumber);
+            $("#currentPrice").text(hisList[0].auctionPrice/100.00)
             var htmlStr="";
             for (var i=0;i<hisList.length;i++){
                 // $("#hisBid:eq(" + i + ")").find('#bidName').text(hisList[i].userName);

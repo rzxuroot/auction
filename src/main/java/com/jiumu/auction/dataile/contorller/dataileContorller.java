@@ -32,6 +32,8 @@ public class dataileContorller {
         GoodsVO goods = goodsServiceImpl.queryGoodsById(1l);
         //获取历史价格集合
         List<HistoricalPriceVO> historicalPriceList = goodsServiceImpl.queryHistoricalPriceByGoodsId(1l);
+        int countHistorical = goodsServiceImpl.queryCountHistorical();
+        historicalPriceList.get(0).setHisNumber(countHistorical);
         //存入model传到前端
         model.addAttribute("historicalPriceList",historicalPriceList);
         logger.info("查询出来的历史价格集合对象"+historicalPriceList);

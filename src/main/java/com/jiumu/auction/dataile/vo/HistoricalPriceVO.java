@@ -11,6 +11,15 @@ public class HistoricalPriceVO {
     private String no1Judge;
     private String deductJudge;
     private String userName;
+    private int hisNumber;
+
+    public int getHisNumber() {
+        return hisNumber;
+    }
+
+    public void setHisNumber(int hisNumber) {
+        this.hisNumber = hisNumber;
+    }
 
     public long getHistoricalPriceId() {
         return historicalPriceId;

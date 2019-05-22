@@ -83,6 +83,8 @@ public class bidContorller {
                     auctionServiceImpl.addMyAuction(curPrice,userId,1l);
                 }
                 List<HistoricalPriceVO> historicalPriceVOS = goodsServiceImpl.queryHistoricalPriceByGoodsId(id);
+                int countHistorical = goodsServiceImpl.queryCountHistorical();
+                historicalPriceVOS.get(0).setHisNumber(countHistorical);
                 Gson gson=new Gson();
                 String hisJson = gson.toJson(historicalPriceVOS);
 

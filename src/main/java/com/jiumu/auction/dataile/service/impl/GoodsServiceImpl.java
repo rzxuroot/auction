@@ -61,4 +61,19 @@ public class GoodsServiceImpl implements IGoodsService {
 
         return priceVOList;
     }
+
+    @Override
+    public int queryCountHistorical() {
+        return goodsMapper.queryCountHistorical();
+    }
+
+    /**
+     * 修改商品结束时间
+     * @param auctionDeadline
+     * @param goodsId
+     */
+    @Override
+    public void updateGoodsAuctionDeadline(Timestamp auctionDeadline, Long goodsId) {
+        goodsMapper.updateGoodsAuctionDeadline(auctionDeadline,goodsId);
+    }
 }

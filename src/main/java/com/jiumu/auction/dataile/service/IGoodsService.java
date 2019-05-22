@@ -4,6 +4,7 @@ import com.jiumu.auction.dataile.po.TbGoods;
 import com.jiumu.auction.dataile.vo.GoodsVO;
 import com.jiumu.auction.dataile.vo.HistoricalPriceVO;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 public interface IGoodsService {
@@ -20,4 +21,18 @@ public interface IGoodsService {
      * @return
      */
     List<HistoricalPriceVO> queryHistoricalPriceByGoodsId(Long goodsId);
+
+    /**
+     * 查询历史总数
+     * @return
+     */
+    int queryCountHistorical();
+
+    /**
+     * 修改结束时间
+     * @param auctionDeadline
+     * @param goodsId
+     */
+    void updateGoodsAuctionDeadline(Timestamp auctionDeadline, Long goodsId);
+
 }
