@@ -42,9 +42,7 @@ public class bidContorller {
         if (goodsId!=null){
             id=Long.parseLong(goodsId);
         }
-        TbUser tbUsers=new TbUser();
-        tbUsers.setUserId(1);
-        SecurityUtils.getSubject().getSession().setAttribute("user",tbUsers);
+
         //创建jsong对象
         JsonResult jsonResult=new JsonResult();
         //从session中获取登录对象
@@ -77,10 +75,10 @@ public class bidContorller {
                 if (jsonResult.getCode()==5){
                     Date date=new Date();
                     //测试阶段goodsId先用1表示
-                    bidServiceImpl.pushTime(date,1l,resp);
+                    bidServiceImpl.pushTime(date,id,resp);
                     bidServiceImpl.addHistorical(userId, curPrice, id);
                     //测试阶段商品id先用1表示
-                    auctionServiceImpl.addMyAuction(curPrice,userId,1l);
+                    auctionServiceImpl.addMyAuction(curPrice,userId,id);
                 }
                 List<HistoricalPriceVO> historicalPriceVOS = goodsServiceImpl.queryHistoricalPriceByGoodsId(id);
                 int countHistorical = goodsServiceImpl.queryCountHistorical();

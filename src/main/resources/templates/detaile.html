@@ -395,7 +395,7 @@
         <div class="webAuctionMainLeft">
         	<div id="dbox" class="t2 webAuctionItemBigImgCls">
                 <a href="detaile/detaile/z00000003.jpg" id="zoom1" class="MagicZoom" style="position: relative; display: block; outline: 0px; text-decoration: none;">
-                    <img onload="autoImgSizeAuction(this,402,402,true)" class="majorImgCls" id="sim986542" src="detaile/detaile/z00000003.jpg">
+                    <img onload="autoImgSizeAuction(this,402,402,true)" class="majorImgCls" id="sim986542" th:src="'http://139.199.73.166/images/'+${goods.goodsImg}" style="width: 378px;height:468px;margin-top: 0px;margin-left: 0px;">
                     <div id="bc986542" class="MagicZoomBigImageCont" style="width: 400px; height: 400px; overflow: hidden; z-index: 0; visibility: hidden; position: absolute;">
                         <img id="bim986542" src="detaile/detaile/z00000003.jpg">
                     </div>
@@ -539,7 +539,7 @@
 			<div class="sellerInfoDivBoxCls" style="display: none;">
 				<input type="hidden" id="sellerId" name="sellerId">
 				<div class="sellerNameInfoDivBoxCls">委托方：<span id="s_name">***</span>
-					<img th:src="${goods.goodsImg}" class="eyeImgCls" id="eyeImg" type="sh">
+					<img th:src="'http://139.199.73.166/images/'+${goods.goodsImg}" class="eyeImgCls" id="eyeImg" style="width: 518px;height:638px;" type="sh">
 				</div>
                 <div class="sellerHotryInfoDivBoxCls1">历史成交：<span id="s_sold_num">***</span>件</div>
                 <div class="sellerHotryInfoDivBoxCls1">正在拍卖：<span id="s_bid_num">***</span>件</div>
@@ -595,7 +595,7 @@
             <a th:each="browse:${browseVOS}"  th:href="'/dataile/goodsDataile?goodsId='+${browse.getBrowseGoodsId()}" >
                 <div class="tjppInfoDivBoxCls">
                     <div class="tjppImgInfoDivBoxCls" style="position: relative;text-align: center;vertical-align: middle;">
-                        <img onload="autoImgSize(this,221,199,false)" width="199" height="199" th:src="${browse.goodsImg}" style="position: absolute; left: 50%; top: 50%; margin-left: -99.5px; margin-top: -99.5px;"></div>
+                        <img onload="autoImgSize(this,221,199,false)" width="199" height="199" th:src="'http://139.199.73.166/images/'+${browse.goodsImg}" style="position: absolute; left: 50%; top: 50%; margin-left: -99.5px; margin-top: -99.5px;"></div>
                     <div class="tjppBuyerInfoDivBoxCls"><div class="tjppBuyerInfoCls"><div class="tjppBuyerNameFontCls">
 
                     </div>
