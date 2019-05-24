@@ -9,17 +9,19 @@ import org.aspectj.lang.annotation.Aspect;
 @Aspect
 public class LoggerProxy {
     Logger logger=Logger.getLogger(LoggerProxy.class);
-    @Around("execution(public * com.jiumu.auction.*.*(..))")
+    @Around("execution(public * com.jiumu.auction..*.*(..))")
     public Object logger(ProceedingJoinPoint joinPoint){
 
         try {
 
             String kind = joinPoint.getKind();
             Object[] args = joinPoint.getArgs();
-            logger.debug("传入参数"+kind +":"+args[0]);
-            Object proceed = joinPoint.proceed();
-            logger.debug("返回值："+proceed);
-            return proceed;
+            if(args.length > 0){
+                logger.debug("传入参数"+kind +":"+args[0]);
+                Object proceed = joinPoint.proceed();
+                logger.debug("返回值："+proceed);
+                return proceed;
+            }
         } catch (Throwable throwable) {
             throwable.printStackTrace();
             //错误日志

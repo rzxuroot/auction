@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jiumu.auction.index.mapper.IndexGoodsMapper">
+
+    <sql id="selectSqlMin">
+        g.goods_id goods_id,
+        g.goods_no goods_no,
+        g.goods_name goods_name,
+        g.goods_img goods_img,
+        g.asking_price asking_price,
+        g.author author_name ,
+        g.logout_time logout_time,
+        g.goods_status goods_status
+    </sql>
+
+    <sql id="join">
+        from tb_goods g join tb_content c
+        join tb_list l
+        join tb_author a
+        on l.list_id = c.content_list_id and
+        c.content_id = g.goods_content_id and
+        a.author_id = g.author
+        <where>
+            <if test="listName != null">
+                and l.list_name = #{listName}
+            </if>
+            <if test="contentName != null">
+                and c.content_name = #{contentName}
+            </if>
+            <if test="firstCatgId != null">
+                and l.list_id = #{firstCatgId}
+            </if>
+            <if test="secondCatgId != null">
+                and c.content_id = #{secondCatgId}
+            </if>
+            <if test="authorName != null">
+                and a.author_name = #{authorName}
+            </if>
+            <if test="timeFlag != null and timeFlag != 'all'">
+                and g.goods_status = #{timeFlag}
+            </if>
+            <if test="itemAge != null">
+                and g.year1 = #{itemAge}
+            </if>
+            <if test="material != null">
+                and g.texture = #{material}
+            </if>
+            <if test="style != null">
+                and g.shape = #{style}
+            </if>
+            <if test="srName != null">
+                and g.bout = #{srName}
+            </if>
+            <if test="beforePrice != null and endPrice != null and beforePrice > 0 and endPrice > 0">
+                and g.asking_price between #{beforePrice} and #{endPrice}
+            </if>
+        </where>
+        order by g.goods_id limit #{index},#{pageSize}
+    </sql>
+    <!--首页1通过分类表1的id查询商品-->
+    <select id="queryGoodsByListId" resultType="com.jiumu.auction.index.VO.GoodsVO">
+        select
+        <include refid="selectSqlMin"/>
+        from tb_goods g join tb_item i1
+        join tb_item i2
+        join tb_item i3
+        join tb_item i4
+        join tb_author a
+        join tb_list l
+        join tb_content c
+        on g.bout = i1.item_id and
+        g.author = a.author_id and
+        g.year1 = i2.item_id and
+        g.texture = i3.item_id and
+        g.shape = i4.item_id and
+        l.list_id = c.content_list_id and
+        c.content_id = g.goods_content_id and
+        l.list_id = #{listId};
+    </select>
+
+    <!--通过首页1的分类表2id查询商品-->
+    <select id="queryGoodsByContentId" resultType="com.jiumu.auction.index.VO.GoodsVO">
+        select
+        <include refid="selectSqlMin"/>
+        from tb_goods g join tb_item i1
+        join tb_item i2
+        join tb_item i3
+        join tb_item i4
+        join tb_author a
+        join tb_content c
+        on g.bout = i1.item_id and
+        g.author = a.author_id and
+        g.year1 = i2.item_id and
+        g.texture = i3.item_id and
+        g.shape = i4.item_id and
+        c.content_id = g.goods_content_id and
+        c.content_id = #{contentId};
+    </select>
+
+    <!--通过分类表4多条件查询商品-->
+    <!--废除-->
+    <select id="queryGoodsByConditions" resultType="com.jiumu.auction.index.VO.GoodsVO">
+        select
+        <include refid="selectSqlMin"/>
+        from tb_goods g join tb_item i1
+        join tb_item i2
+        join tb_item i3
+        join tb_item i4
+        join tb_author a
+        on g.bout = i1.item_id and
+        g.author = a.author_id and
+        g.year1 = i2.item_id and
+        g.texture = i3.item_id and
+        g.shape = i4.item_id
+        <where>
+            <if test="itemBoutId != null and itemBoutId > 0">
+                and i1.item_id = #{itemBoutId}
+            </if>
+            <if test="authorId != null and authorId > 0">
+                and a.author_id = #{authorId}
+            </if>
+            <if test="itemYeal1Id != null and itemYeal1Id > 0">
+                and i2.item_id = #{itemYeal1Id}
+            </if>
+            <if test="itemTextureId != null and itemTextureId > 0">
+                and i3.item_id = #{itemTextureId}
+            </if>
+            <if test="itemShapeId != null and itemShapeId > 0">
+                and i4.item_id = #{itemShapeId}
+            </if>
+            <if test="goodsStatus != null and goodsStatus >= 0 ">
+                and g.goods_status = #{goodsStatus}
+            </if>
+            <if test="beforePrice != null and endPrice != null and beforePrice >= 0 and endPrice >= 0">
+                and g.asking_price between #{beforePrice} and #{endPrice}
+            </if>
+        </where>
+        order by g.goods_id limit #{index},#{pageSize}
+    </select>
+
+    <select id="queryGoodsByFilter" resultType="com.jiumu.auction.index.VO.GoodsVO">
+        select
+        <include refid="selectSqlMin"/>
+        from tb_goods g join tb_content c
+        join tb_list l
+        join tb_author a
+        on l.list_id = c.content_list_id and
+        c.content_id = g.goods_content_id and
+        a.author_id = g.author
+        <where>
+            <if test="listName != null">
+                and l.list_name = #{listName}
+            </if>
+            <if test="contentName != null">
+                and c.content_name = #{contentName}
+            </if>
+            <if test="firstCatgId != null">
+                and l.list_id = #{firstCatgId}
+            </if>
+            <if test="secondCatgId != null">
+                and c.content_id = #{secondCatgId}
+            </if>
+            <if test="authorName != null">
+                and a.author_name = #{authorName}
+            </if>
+            <if test="timeFlag != null and timeFlag != 'all'">
+                and g.goods_status = #{timeFlag}
+            </if>
+            <if test="itemAge != null">
+                and g.year1 = #{itemAge}
+            </if>
+            <if test="material != null">
+                and g.texture = #{material}
+            </if>
+            <if test="style != null">
+                and g.shape = #{style}
+            </if>
+            <if test="srName != null">
+                and g.bout = #{srName}
+            </if>
+            <if test="beforePrice != null and endPrice != null and beforePrice > 0 and endPrice > 0">
+                and g.asking_price between #{beforePrice} and #{endPrice}
+            </if>
+            <if test="itemName != null and itemName != ''">
+                and g.goods_name like #{itemName} or g.goods_no like #{itemName} or g.year1 like #{itemName}
+            </if>
+        </where>
+        order by g.goods_id limit #{index},#{pageSize}
+    </select>
+
+    <!--查询筛选条件总共有多少条数据-->
+    <select id="queryPageInfo" resultType="com.jiumu.auction.index.VO.PageVO">
+        select count(g.goods_id) totalSize
+        from tb_goods g join tb_content c
+        join tb_list l
+        join tb_author a
+        on l.list_id = c.content_list_id and
+        c.content_id = g.goods_content_id and
+        a.author_id = g.author
+        <where>
+            <if test="listName != null">
+                and l.list_name = #{listName}
+            </if>
+            <if test="contentName != null">
+                and c.content_name = #{contentName}
+            </if>
+            <if test="firstCatgId != null">
+                and l.list_id = #{firstCatgId}
+            </if>
+            <if test="secondCatgId != null">
+                and c.content_id = #{secondCatgId}
+            </if>
+            <if test="authorName != null">
+                and a.author_name = #{authorName}
+            </if>
+            <if test="timeFlag != null and timeFlag != 'all'">
+                and g.goods_status = #{timeFlag}
+            </if>
+            <if test="itemAge != null">
+                and g.year1 = #{itemAge}
+            </if>
+            <if test="material != null">
+                and g.texture = #{material}
+            </if>
+            <if test="style != null">
+                and g.shape = #{style}
+            </if>
+            <if test="srName != null">
+                and g.bout = #{srName}
+            </if>
+            <if test="beforePrice != null and endPrice != null and beforePrice > 0 and endPrice > 0">
+                and g.asking_price between #{beforePrice} and #{endPrice}
+            </if>
+            <if test="itemName != null and itemName != ''">
+                and g.goods_name like #{itemName} or g.goods_no like #{itemName} or g.year1 like #{itemName}
+            </if>
+        </where>
+    </select>
+</mapper>

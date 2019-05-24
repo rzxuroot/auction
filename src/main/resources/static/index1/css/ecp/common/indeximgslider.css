@@ -1,0 +1,128 @@
+@CHARSET "UTF-8";
+
+
+.big_img{
+    width:1190px;
+    height:450px;
+    z-index:-999;
+}
+
+.picShow {
+    height: 485px;
+    position: relative;
+}
+
+ul, ol {
+    padding: 0;
+}
+
+.banner {
+    clear:both;
+    position: relative;
+    overflow: auto;
+    text-align: center;
+}
+
+.banner li {
+    list-style: none;
+}
+
+.banner ul li {
+    height:485px;
+    float: left;
+}
+#imgSlider .dots {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0px;
+}
+#imgSlider .dots li {
+    display: inline-block;
+    width: 40px;
+    height: 5px;
+    margin: 0 4px;
+    text-indent: -999em;
+    border-radius: 6px;
+    cursor: pointer;
+    opacity: .4;
+    -webkit-transition: background .5s, opacity .5s;
+    -moz-transition: background .5s, opacity .5s;
+    transition: background .5s, opacity .5s;
+    background:#9D9AA3;
+}
+#imgSlider .dots li.active {
+    background: #D73660;
+    opacity: 1;
+}
+#imgSlider .arrow {
+    position: absolute;
+    top:189px;
+    width:72px; 
+    height:72px; 
+    background:url(../../../image/ecp/home/ico_sliding.png) 0  0 no-repeat; 
+    filter:alpha(opacity=50);
+    opacity:0.5;
+}
+
+#imgSlider .prev,#imgSlider .next{ position:absolute; left:3%; top:50%; margin-top:-25px; display:block; width:72px; height:72px; background:url(../../../image/ecp/home/ico_sliding.png) 0  0 no-repeat; filter:alpha(opacity=50);opacity:0.5;   }
+#imgSlider .next{ left:auto; right:3%; background-position: 0 -72px; }
+#imgSlider .prev:hover,#imgSlider.next:hover{ filter:alpha(opacity=100);opacity:1;  }
+        
+#imgSlider .prev{
+    background-position: 0 0;
+}
+#imgSlider .prev:hover {
+    background-position: 0 -144px;
+}
+#imgSlider .next {
+    background-position: 0 -72px;
+}
+#imgSlider .next:hover {
+    background-position: 0 -216px;
+}
+  
+  
+  
+  /* 本例子css 
+        .slideBox{ width:1190px;height:450px; overflow:hidden; position:relative; border:1px solid #ddd;  }
+        .slideBox .hd{ height:15px; overflow:hidden; position:absolute; bottom:5px; z-index:1;width:100%;  }
+        .slideBox .hd ul{ overflow:hidden; zoom:1; width: 100%; text-align:center; }
+        .slideBox .hd ul li{ width:9px; height:9px; overflow:hidden; margin:0 3px; text-indent:-999px; cursor:pointer; background:url("../../image/ecp/home/icoCircle.gif") 0 -9px no-repeat; }
+        .slideBox .hd ul  li {
+            background: rgba(0, 0, 0, 0) url("../../image/ecp/home/dot1.png") no-repeat scroll 0 -16px;
+            cursor: pointer;
+            display: inline-block;
+            height: 16px;
+            margin: 0 5px;
+            overflow: hidden;
+            width: 16px;
+        }
+        .slideBox .hd ul  li.on {
+            background-position: 0 0;
+        }
+        
+        
+        .slideBox .bd{ position:relative; height:100%; z-index:0;   }
+        .slideBox .bd li{ zoom:1; vertical-align:middle; }
+        .slideBox .bd img{ width:1190px; height:450px; display:block;  }
+*/
+        /* 下面是前/后按钮代码，如果不需要删除即可 
+        .slideBox .prev,.slideBox .next{ position:absolute; left:3%; top:50%; margin-top:-25px; display:block; width:72px; height:72px; background:url(../../image/ecp/home/ico_sliding.png) 0  0 no-repeat; filter:alpha(opacity=50);opacity:0.5;   }
+        .slideBox .next{ left:auto; right:3%; background-position:background-position: 0 -72px; }
+        .slideBox .prev:hover,.slideBox .next:hover{ filter:alpha(opacity=100);opacity:1;  }
+        .slideBox .prevStop{ display:none;  }
+        .slideBox .nextStop{ display:none;  }
+        
+        .slideBox .prev{
+            background-position: 0 0;
+        }
+        .slideBox .prev:hover {
+            background-position: 0 -144px;
+        }
+        .slideBox .next {
+            background-position: 0 -72px;
+        }
+        .slideBox .next:hover {
+            background-position: 0 -216px;
+        }*/

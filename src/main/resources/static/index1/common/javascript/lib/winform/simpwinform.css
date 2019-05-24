@@ -1,0 +1,332 @@
+@charset "utf-8";
+/*
+这段代码会影响   实名认证 页面中 账户设置下拉菜单的样式     2016-08-03 蒋磊 
+*{
+	margin:0;
+	padding:0;
+} 
+*/
+.windowDiv{
+	 position:absolute;
+	 cursor:move;
+}
+.winFormWrapDiv{
+	background:#00A0E8;
+}
+
+.winForm_header{
+	height:24px;
+	background:#fff;
+}
+.winFormHeader_titleIcon{
+	width:16px;
+	height:16px;
+	margin-left:10px;
+	margin-top:12px;
+	float:left;
+}
+.titleIconImg{
+	width:16px;
+	height:16px;
+}
+.winForm_header_r1{
+	margin-left:10px;
+	margin-top:10px;
+	float:left;
+	font-size:12px;
+	font-weight:500;
+	color:#525252;
+	font-family:"宋体";
+}
+.winForm_hearder_closeDiv{
+   float:right;
+   height:24px;
+   width: 24px;
+   cursor:pointer;
+}
+
+.headecolseImg{
+	width:14px;
+	height:14px;
+	cursor:pointer;
+	margin-top:5px;
+	margin-left:5px;
+}
+
+/**********************************/
+.confirm_text_div{
+	border:1px solid #CCEAF4;
+	background:#D9EDF7;
+	height:80px;
+	line-height:35px;
+	text-align:left;
+	font-size:14px;
+	color:#61A8DC;
+	font-family:"微软雅黑";
+	font-weight:600;
+	padding:10px;
+}
+
+.confirm_msg_div{
+	height:60px;
+	border-bottom:1px solid #CBCBCB;
+}
+.confirm_msg_icon{
+	width:60px;
+	height:60px;
+	text-align:center;
+	float:left;
+}
+.confirm_icon_img{
+	width:26px;
+	height:26px;
+	margin-top:12px;
+}
+
+.confirm_msgtext_div{
+	margin-top:10px;
+	margin-left:10px;
+	height:60px;
+	line-height:25px;
+	text-align:left;
+	float:left;
+	width:70%;
+	font-size:14px;
+	color:#7C7979;
+	font-family:"微软雅黑";
+	display:block;
+	word-break: break-all;
+	word-wrap: break-word;
+}
+
+.confirm_buttonDiv{
+	height:50px;
+}
+
+.confirm_sureBtn{
+	width:80px;
+	height:30px;
+	line-height:30px;
+	text-align:center;
+	/*position:relative;
+	margin-top:5px;*/
+	background-color:#6EB3E1;
+	color:#fff;
+	cursor:pointer;
+	float:right;
+	margin-top:10px;
+	margin-right:10px;
+}
+
+.confirm_sureBtn_hover{
+	width:80px;
+	height:30px;
+	line-height:30px;
+	text-align:center;
+	/*position:relative;
+	margin-top:5px;*/
+	background-color:#3691CC;
+	color:#fff;
+	cursor:pointer;
+	float:right;
+	margin-top:10px;
+	margin-right:10px;
+}
+
+.confirm_cancelBtn{
+	width:80px;
+	height:30px;
+	line-height:30px;
+	text-align:center;
+	/*position:relative;
+	margin-top:5px;*/
+	background-color:#9BABB5;
+	color:#fff;
+	cursor:pointer;
+	float:right;
+	margin-right:15px;
+	margin-top:10px;
+}
+.confirm_cancelBtn_hover{
+	width:80px;
+	height:30px;
+	line-height:30px;
+	text-align:center;
+	/*position:relative;
+	margin-top:5px;*/
+	background-color:#6F7C86;
+	color:#fff;
+	cursor:pointer;
+	float:right;
+	margin-right:15px;
+	margin-top:10px;
+}
+
+
+.winForm_hr{
+	height:2px;
+	clear:both;
+	background:#00A0E8;
+}
+.winForm_content{
+	overflow:auto;
+	overflow-x:hidden;
+	background:#ffffff;
+}
+
+.winForm_foot{
+	height:60px;
+	background:#fff;
+}
+/******************************************/
+
+.window_msgClass{
+	/*font-size:14px;
+	font-family:"微软雅黑";
+	font-weight:600;
+	word-break: break-all;
+	word-wrap: break-word;*/
+	position:relative;
+	zoom:1;
+}
+.window_msgClass:after{
+	content:""; 
+	display:block;
+	clear:both;
+}
+	
+
+.windMsgIcon{
+	width:36px;
+	height:36px;
+	float:left;
+	position:relative;
+	left:57px;
+	top:32px;
+}
+
+.windMsgCont{
+	height:60px;
+	line-height:60px;
+	text-align:center;
+	color:#3a3a3a;
+	margin:10px;
+	font-size:14px;
+	font-weight:500;
+}
+/*****************确定按钮********************/
+.winForm_foot_sureBtnDiv_r1{
+	height:34px; 
+	line-height:34px;
+	text-align:center;
+	color:#fff;
+	float:right;
+	margin-right:15px;
+	background:#D73660;
+	width:117px;
+}
+.winForm_foot_sureBtnDiv_r2{
+	 color:#fff;
+	 height:34px;
+	 text-align:center;
+}
+.winForm_foot_sureBtnDiv_r3{
+    height:34px; 
+	line-height:34px;
+	float:right;
+	margin-right:15px;
+	background:#A90E36;
+	width:117px;
+	cursor:pointer;
+}
+/*****************清除按钮********************/
+.winForm_foot_clearBtnDiv_r1{
+	height:34px; 
+	line-height:34px;
+	text-align:center;
+	float:right;
+	margin-right:10px;
+	background:#D73660;
+	width:112px;
+	cursor:pointer;
+}
+
+.winForm_foot_clearBtnDiv_r2{
+	color:#fff;
+	height:34px;
+	text-align:center;
+}
+.winForm_foot_clearBtnDiv_r3{
+	height:34px; 
+	line-height:34px;
+	text-align:center;
+	float:right;
+	margin-right:10px;
+	background:#A90E36;
+	width:112px;
+	cursor:pointer;
+}
+
+/*****************windDiv 九宫格**********************/
+.windowDiv_r1{
+	height:1px;
+}
+.windowDiv_r1_1{
+	height:1px;
+	width:1px;
+	float:left;
+}
+.windowDiv_r1_2{
+	height:1px;
+	float:left;
+}
+.windowDiv_r1_3{
+	height:1px;
+	width:17px;
+	float:left;
+}
+
+.windowDiv_r2{
+	clear:both;
+}
+.windowDiv_r2_1{
+	width:1px;
+	float:left;
+}
+.windowDiv_r2_2{
+	width:15px;
+	float:left;
+}
+.windowDiv_r2_3{
+	width:17px;
+	float:left;
+}
+
+.windowDiv_r2_3_1{
+	height:36px;
+	width:17px;
+}
+
+.windowDiv_r2_3_2{
+	width:17px;
+}
+
+.windowDiv_r3{
+	height:30px;
+	clear:both;
+}
+
+.windowDiv_r3_1{
+	height:21px;
+	width:17px;
+	float:left;
+}
+.windowDiv_r3_2{
+	height:21px;
+	float:left;
+}
+.windowDiv_r3_3{
+	height:21px;
+	width:28px;
+	float:left;
+}
