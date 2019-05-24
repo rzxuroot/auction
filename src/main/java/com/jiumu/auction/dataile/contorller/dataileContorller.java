@@ -43,8 +43,10 @@ public class dataileContorller {
         List<HistoricalPriceVO> historicalPriceList=null;
         historicalPriceList = goodsServiceImpl.queryHistoricalPriceByGoodsId(gid);
         int countHistorical = goodsServiceImpl.queryCountHistorical(gid);
-
-        model.addAttribute("countHistorical",countHistorical);
+        if (historicalPriceList!=null&&historicalPriceList.size()>0){
+            historicalPriceList.get(0).setHisNumber(countHistorical);
+        }
+        //model.addAttribute("countHistorical",countHistorical);
         //存入model传到前端
         model.addAttribute("historicalPriceList",historicalPriceList);
         logger.info("查询出来的历史价格集合对象"+historicalPriceList);

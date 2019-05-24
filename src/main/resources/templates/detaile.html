@@ -194,15 +194,29 @@
         </div>
         <div style="float: right;">
             <div>
-                <div style="float:left">
-                                                      您好，&nbsp;<span id="header_nickName">
-                                   <a href="http://www.artrade.com/jsp/ecp/buyer/buyerindex.jsp" target="">sala</a>
+                <shiro:guest>
+                    <div style="float:left">
+                        您好，&nbsp;<span id="header_nickName">
+                                   <a  href="jsp/ecp/buyer/buyerindex.jsp" target=""></a>
                                 </span>
-                                <a id="header_logout" href="http://www.artrade.com/jsp/ecp/public/auction.jsp?lotid=973476012#" onclick="logout();" style="">&nbsp;<b>，退出</b></a>
+                        <a id="header_logout" href="#" onclick="logout();" style="display:none;">&nbsp;<b>，退出</b></a>
+                        <a id="header_login" href="jsp/ecp/login.jsp" target="_self" style=""><b>请登录</b></a>&nbsp;&nbsp;
+                    </div>
+                    <div style="float:left;">
+                        <a href="jsp/ecp/register.jsp"
+                           target="_self" style="color: #FF003B;font-weight:600;">免费注册</a>&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+                    </div>
+                </shiro:guest>
+                <shiro:user>
+                <!--<div style="float:left">您好，&nbsp;<span id="header_nickName">-->
+                                   <!--<a href="http://www.artrade.com/jsp/ecp/buyer/buyerindex.jsp" target="" th:text="${user.userName}"></a>-->
+                                <!--</span>-->
+                                <!--<a id="header_logout" href="http://www.artrade.com/jsp/ecp/public/auction.jsp?lotid=973476012#" onclick="logout();" style="">&nbsp;<b>，退出</b></a>-->
 
-                                <a id="header_login" href="http://www.artrade.com/jsp/ecp/login.jsp" target="_self" style="display:none;"><b>请登录</b></a>&nbsp;&nbsp;
+                                <!--<a id="header_login" href="http://www.artrade.com/jsp/ecp/login.jsp" target="_self" style="display:none;"><b>请登录</b></a>&nbsp;&nbsp;-->
 
-                </div>
+                <!--</div>-->
+                </shiro:user>
                 <div style="float:left;display:none;">
                     <a href="http://www.artrade.com/jsp/ecp/register.jsp" target="_self" style="color: #FF003B;font-weight:600;">免费注册</a>&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
                 </div>
@@ -362,7 +376,7 @@
 	                              <span class="shcfy_child_title_en">IDENTIFICATION</span>-->
 	                          </div>
 	                          <div class="shcfy_rig_shoplist"><!--
-	                            <span class="shop_span_text">嘉德</span>
+	                            <span class="shop_span_text">利晨</span>
 	                             <span>|</span>
 	                             <span class="shop_span_text">佳士得</span>
 	                             <span>|</span>
@@ -370,7 +384,7 @@
 	                             <span>|</span>
 	                             <span class="shop_span_text">瑞和文物</span>
 	                             <span>|</span>
-	                              <span class="shop_span_text">嘉德</span>
+	                              <span class="shop_span_text">利晨</span>
 	                             <span>|</span>
 	                             <span class="shop_span_text">佳士得</span>
 	                             <span>|</span>
@@ -387,17 +401,17 @@
 <div class="MainBodyDiv" style="">
 	<div class="Main1200NoTpDiv" style="">
         <!--1:网站导航栏-->
-        <div class="webNavToolBarCls"><span id="currLocalTitleSpan"><span class="ahover" onclick="doClickIndex();">首页</span> > <span class="ahover" id="2_1" onclick="doClickCatg(this);">中国绘画</span> > <span class="ahover" id="663_2" onclick="doClickCatg(this);">花鸟</span><span class="lot_span"> LOT 973476012</span><span class="sr_span" id="2147484466" onclick="doClickSr(this);"><img class="sr_png" src="detaile/detaile/sr_2.png"></span></span>
+        <div class="webNavToolBarCls"><span id="currLocalTitleSpan"><a href="homepage.html"><span class="ahover">首页</span></a> > <span class="lot_span"> LOT 973476012</span><span class="sr_span" id="2147484466" onclick="doClickSr(this);"><img class="sr_png" src="detaile/detaile/sr_2.png"></span></span>
         <!-- <span id="share" style="float:right;margin: 10px 30px;display:none;"><a class="bshareDiv" href="http://www.bshare.cn/share"></a>
         </span> -->
         </div>
         <!--2.1:网站竞拍主体信息栏(左)-->
         <div class="webAuctionMainLeft">
         	<div id="dbox" class="t2 webAuctionItemBigImgCls">
-                <a href="detaile/detaile/z00000003.jpg" id="zoom1" class="MagicZoom" style="position: relative; display: block; outline: 0px; text-decoration: none;">
+                <a th:href="'http://139.199.73.166/images/'+${goods.goodsImg}" id="zoom1" class="MagicZoom" style="position: relative; display: block; outline: 0px; text-decoration: none;">
                     <img onload="autoImgSizeAuction(this,402,402,true)" class="majorImgCls" id="sim986542" th:src="'http://139.199.73.166/images/'+${goods.goodsImg}" style="width: 378px;height:468px;margin-top: 0px;margin-left: 0px;">
                     <div id="bc986542" class="MagicZoomBigImageCont" style="width: 400px; height: 400px; overflow: hidden; z-index: 0; visibility: hidden; position: absolute;">
-                        <img id="bim986542" src="detaile/detaile/z00000003.jpg">
+                        <img id="bim986542" th:src="'http://139.199.73.166/images/'+${goods.goodsImg}">
                     </div>
                 </a>
             </div>
@@ -420,7 +434,7 @@
         <div class="webAuctionMainCenter">
          	<!--2.2.1：拍品标题-->
         	<div class="titleRowCls">
-            	<div class="titleTextDivCls" id="itemName" th:text="${goods.goodsId}+' '+${goods.authorName}+' '+${goods.goodsName}">z00000003 佚名 内部测试3 勿点</div>
+            	<div class="titleTextDivCls" id="itemName" th:text="${goods.goodsId}+' '+${goods.goodsName}"></div>
             	<div class="shareTextDivCls" style="padding-top: 3px;"><span><a class="bshareDiv" href="http://www.bshare.cn/share" style="display: block; text-decoration: none; padding: 0px; margin: 0px; font-size: 12px; height: 15px; width: 30px;">
                     <div class="bsPromo bsPromo1"></div>
                     <div class="buzzButton bsStyle999" style="height:15px;color:#333;;background:transparent url(../../../image/ecp/fenxiang.png) no-repeat;text-align:center;width:30px;"></div>
@@ -430,7 +444,7 @@
                     </a>
                     </span>
                 </div>
-                <div style="float:left;margin-left:2px;">分享</div>
+                <!--<div style="float:left;margin-left:2px;">分享</div>-->
             	<div id="follow" class="careItemTextDivCls" style="display: none;" onclick="followGoods()">关注拍品</div>
             	<div id="cancel" class="noCareItemTextDivCls" style="" onclick="cancelFollow()">取消关注</div>
             	<input type="hidden" id="cncrnType" value="0001">
@@ -460,13 +474,13 @@
 
          	<!--2.2.3：出价次数等信息 -->
         	<div class="offerCntRowCls">
-            	<div class="floatLeft offerCntDivCls">出价次数：<span id="bidNumber" th:text="${countHistorical}">1</span>次</div>
+            	<div class="floatLeft offerCntDivCls">出价次数：<span id="bidNumber" th:text="${historicalPriceList==null||historicalPriceList.size()<=0}?'0 ':${historicalPriceList.get(0).hisNumber}">1</span>次</div>
             	<div class="floatLeft firstPersonDivCls">
                 	<span id="blink"></span>
                 </div>
             	<div class="floatLeft firstPersonDivCls">
                     <div style="float:left">领先者：</div>
-                    <div id="bidderName" style="float:left;overflow: hidden;text-overflow:ellipsis;white-space: nowrap; width:100px;" title="sala" th:text="${historicalPriceList==null||historicalPriceList.size()<=0}?'0':${historicalPriceList.get(0).userName}">sala</div>
+                    <div id="bidderName" style="float:left;overflow: hidden;text-overflow:ellipsis;white-space: nowrap; width:100px;" th:title="${historicalPriceList==null||historicalPriceList.size()<=0}?' ':${historicalPriceList.get(0).userName}" th:text="${historicalPriceList==null||historicalPriceList.size()<=0}?' ':${historicalPriceList.get(0).userName}">sala</div>
                 </div>
             	<div id="bidderId" class="floatLeft firstPersonDivCls" style="text-align: right;display:none;"></div>
             </div>
@@ -879,7 +893,7 @@ body{margin:8px;font-family:sans-serif;font-size:16px;}p{margin:5px 0;}</style><
 
                 </div>
                 <div class="itemDetailTabContentBoxCls" id="auctdiv_4" style="line-height: 35px; padding: 20px 10px 20px 20px; display: none;">
-                	<p style="color:#f60;font-size: 14px;">敬告：您的出价行为表明已经认同了嘉德在线的拍卖规则。不论成功与否，你都承担与之相应的法律行为。</p>
+                	<p style="color:#f60;font-size: 14px;">敬告：您的出价行为表明已经认同了利晨在线的拍卖规则。不论成功与否，你都承担与之相应的法律行为。</p>
                 	<p style="color:#f60;font-size: 14px;">买受人须在成功竞买到拍品后的10个自然日付款，如果买受人未足额支付成交价款，逾期系统将自动扣除相当于拍品落槌价20%的保证金。</p>
 
 					<p style="font-size: 14px;">注意：根据《拍卖法》的规定：买受人应当按照约定支付拍卖标的的价款，未按照约定支付价款的，应当承担违约责。通过竞买取得的拍品为特殊属性之商品，
@@ -961,7 +975,7 @@ function doClickPreQuery() {
                         <div>
                             <b style="font-size:14px;">拍前预展48小时</b>
                         </div>
-                        <div style="font-size: 12px;">嘉德在线拍品，将在开拍前48小时内预展，敬请留意。</div>
+                        <div style="font-size: 12px;">利晨在线拍品，将在开拍前48小时内预展，敬请留意。</div>
                     </div></td>
 
                 <td><hr class="logo_hr" size="56px" style="border:none;border-right:solid 1px #e7e7e7;border-left:0px;">
@@ -1012,7 +1026,7 @@ function doClickPreQuery() {
                         <img src="detaile/detaile/weixinma.jpg" width="80px" height="80px">
                     </div>
                     <div style="float: left; margin-top: 10px; font-size: 12px; color: #96928E;">
-                        <div id="footerAddress" style="margin-top: 10px; margin-left: 10px;">地址：北京崇文门外大街44号大康大厦11层嘉德在线</div>
+                        <div id="footerAddress" style="margin-top: 10px; margin-left: 10px;">地址：北京崇文门外大街44号大康大厦11层利晨在线</div>
                         <div id="footerPostCode" style="margin-top: 16px; margin-left: 10px;">邮编：100062</div>
                         <div id="footerMbr_email" style="margin-top: 16px; margin-left: 10px;">电子邮箱market@artrade.com</div>
                     </div>
@@ -1096,13 +1110,13 @@ function doClickPreQuery() {
                                     <a href="http://www.artrade.com/jsp/ecp/helpdoc/about_us.jsp?menuId=7" target="_blank">互联网行为规范</a>
                                 </div>
                                 <div class="quicklink">
-                                    <a href="http://www.cguardian.com/" target="_blank">中国嘉德国际拍卖有限公司</a>&nbsp;&nbsp;|&nbsp;
+                                    <a href="http://www.cguardian.com/" target="_blank">中国利晨国际拍卖有限公司</a>&nbsp;&nbsp;|&nbsp;
                                     <!--a href="http://www.artcool.com/" target="_blank">ARTCOOL</a>&nbsp;&nbsp;|&nbsp;-->
                                     <a href="http://www.dolcey.com/" target="_blank">道喜红酒网</a>&nbsp;&nbsp;|&nbsp;
                                     <a href="http://www.e-unionpay.com/" target="_blank">中国银联</a>
                                 </div>
                                 <div style="color: #96928E;margin-top:10px;">
-                                    <span>Copyright@1999-2019 ARTRADE.COM All Rights Reserved</span><span>北京嘉德在线拍卖有限公司</span><br>
+                                    <span>Copyright@1999-2019 ARTRADE.COM All Rights Reserved</span><span>北京利晨在线拍卖有限公司</span><br>
                                     <span><a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010102002497" target="_blank"><img alt="" style="vertical-align: middle;" src="detaile/detaile/artradewjlogo.png">京公网安备 11010102002497号 </a>&nbsp;ICP经营许可证编号:京ICP证010113号</span><span style="margin-left: 10px;">北京市通信公司提供网络带宽</span><span style="margin-left: 10px;">网络文化经营许可证：<a href="http://www.artrade.com/image/ecp/wangwen.jpg" target="_blank">京网文（2016）6577-891号</a></span>
                                 </div>
                             </div>
@@ -1316,13 +1330,13 @@ function doClickPreQuery() {
     var startDate1 = new Date()
     var preEndTime=$("#preDeadline").val();
     var preStartTime=$("#preStartTime").val();
-    console.log("格式：现在："+startDate +"-----"+"读取："+preEndTime+",和："+startTime );
+    //console.log("格式：现在："+startDate +"-----"+"读取："+preEndTime+",和："+startTime );
     //开始（当前时间）和竞拍结束结束时间
     var starta = startTime.split(".");
     var startDateTemp = starta[0].split(" ");
     var startb = end.split(".");
     var endDateTemp = startb[0].split(" ");
-    console.log(starta[0]+"---->>>>"+startb[0])
+    //console.log(starta[0]+"---->>>>"+startb[0])
     var arrStartDate = startDateTemp[0].split("-");
     var arrEndDate = endDateTemp[0].split("-");
     var arrStartTime = startDateTemp[1].split(":");
@@ -1354,20 +1368,20 @@ function doClickPreQuery() {
 
     //比较
     if (preallStartDate.getTime() < curallStartDate.getTime()&&curallStartDate.getTime() < preallEndDate.getTime()) {
-        console.log("开始1："+preallStartDate.getTime()+"---"+startDate.getTime()+"--"+"结束时间："+preallEndDate.getTime());
+        //console.log("开始1："+preallStartDate.getTime()+"---"+startDate.getTime()+"--"+"结束时间："+preallEndDate.getTime());
         end=preEndTime;
         $("#timeState").text("预展中");
         showtime();
     }
-    console.log("开始2："+allStartDate.getTime()+"--"+curallStartDate.getTime()+"---"+"结束时间："+allEndDate.getTime());
+    //console.log("开始2："+allStartDate.getTime()+"--"+curallStartDate.getTime()+"---"+"结束时间："+allEndDate.getTime());
     if (allStartDate.getTime() < curallStartDate.getTime()&&curallStartDate.getTime() < allEndDate.getTime()) {
-        console.log("开始2："+allStartDate.getTime()+"--"+curallStartDate.getTime()+"---"+"结束时间："+allEndDate.getTime());
+        //console.log("开始2："+allStartDate.getTime()+"--"+curallStartDate.getTime()+"---"+"结束时间："+allEndDate.getTime());
         $("#timeState").text("竞拍中");
         showtime();
     }
-    console.log("开始3："+allEndDate.getTime() +"-----"+"结束时间："+curallStartDate.getTime() );
+    //console.log("开始3："+allEndDate.getTime() +"-----"+"结束时间："+curallStartDate.getTime() );
     if (allEndDate.getTime()  < curallStartDate.getTime() ) {
-        console.log("开始3："+allEndDate.getTime() +"-----"+"结束时间："+curallStartDate.getTime() );
+        //console.log("开始3："+allEndDate.getTime() +"-----"+"结束时间："+curallStartDate.getTime() );
         $("#timeState").text("已结束");
         $("#toDay").text(Number(0));
         $("#toHour").text(Number(0));
@@ -1386,7 +1400,7 @@ function doClickPreQuery() {
     // var btn = document.getElementById("btn");
     var balanceTimes = endDate - startDate1; //得到是毫秒
 
-    console.log("天数1："+endDate);
+    //console.log("天数1："+endDate);
     function haih() {
         $(".myOfferInfoRowCls").css('display', 'none');
         $(".quickBidRowCls").css('display', 'none');
