@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jiumu.auction.userCenter.dao.MyClinchMapper">
+    <resultMap id="baseResultMap" type="com.jiumu.auction.userCenter.vo.MyClinch">
+        <result property="goodsName" column="goods_name"/>
+        <result property="auctionPrice" column="auction_price"/>
+        <result property="transactionPrice" column="transaction_price"/>
+        <result property="orderJudge" column="order_judge"/>
+        <result property="orderNo" column="order_no"/>
+        <result property="certificatePrice" column="certificate_price"/>
+        <result property="premiums" column="premiums"/>
+        <result property="totalPrice" column="total_price"/>
+    </resultMap>
+    <select id="queryMyClinchByUserId" resultMap="baseResultMap" parameterType="java.lang.String">
+SELECT goods_name,auction_price,transaction_price,order_judge,order_no,premiums,total_price
+FROM tb_goods a JOIN tb_order b ON a.goods_id=b.order_goods_id
+JOIN tb_auction c on c.auction_goods_id = b.order_goods_id
+where b.order_user_id = #{userId}
+          <if test="statusId!=''">
+            <if test="statusId==0">
+                and order_judge='否'
+            </if>
+            <if test="statusId==1">
+                and order_judge='是'
+            </if>
+          </if>
+    </select>
+
+
+    <update id="updateClinch">
+        update tb_order set order_judge = '是' where order_no = #{orderNo};
+    </update>
+
+
+</mapper>

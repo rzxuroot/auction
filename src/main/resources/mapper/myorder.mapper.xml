@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jiumu.auction.userCenter.dao.MyOrderMapper">
+    <resultMap id="baseResultMap" type="com.jiumu.auction.userCenter.po.TbOrder">
+        <id property="orderId" column="order_id"/>
+        <result property="orderUserId" column="order_user_id"/>
+        <result property="orderGoodsId" column="order_goods_id"/>
+        <result property="orderCertificateId" column="order_certificate_id"/>
+        <result property="orderJudge" column="order_judge"/>
+        <result property="paymentStatus" column="payment_status"/>
+        <result property="orderTime" column="order_time"/>
+        <result property="orderNo" column="order_no"/>
+        <result property="freight" column="freight"/>
+        <result property="seller" column="seller"/>
+        <result property="pickType" column="pick_type"/>
+        <result property="invoiceChoose" column="invoice_choose"/>
+        <result property="stockStatus" column="stock_status"/>
+        <result property="otherCharges" column="other_charges"/>
+        <result property="refundStatus" column="refund_status"/>
+        <result property="premiums" column="premiums"/>
+        <result property="buyerMsg" column="buyer_msg"/>
+        <result property="transactionPrice" column="transaction_price"/>
+        <result property="totalPrice" column="total_price"/>
+        <result property="anyCertificate" column="any_certificate"/>
+    </resultMap>
+
+    <sql id="order">
+        order_id,order_user_id,order_goods_id,order_certificate_id,order_judge,payment_status,order_time
+        ,order_no,freight,seller,pick_type,invoice_choose,stock_status,other_charges,refund_status,premiums
+        ,buyer_msg,transaction_price,total_price,any_certificate
+    </sql>
+
+    <select id="queryOrderByUserId" resultMap="baseResultMap">
+        select <include refid="order"/> from tb_order where order_user_id =#{userId} and order_judge = '是'
+        <if test="statusId!=''">
+            and payment_status=#{statusId};
+        </if>
+    </select>
+</mapper>

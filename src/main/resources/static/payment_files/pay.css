@@ -1,0 +1,475 @@
+@charset "utf-8";
+
+
+/*******************************/
+.headImgDiv {
+    width: 1200px;
+    margin: 0 auto;
+}
+.topbanner {
+    height: 100px;
+    text-align: center;
+}
+
+.logo {
+    height: 100px;
+    width: 200px;
+    text-align: left;
+    float: left;
+}
+
+.imgSpan {
+    height: 100%;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.logoImg {
+    width: 92px;
+    height: 66px;
+    vertical-align: middle;
+}
+
+
+.doSearch {
+    width: 426px;
+    height: 36px;
+    float: right;
+    margin-top: 30px;
+}
+
+.selectPanel {
+    background: url(../../../../image/ecp/selectpanel_1.jpg) no-repeat;
+    width: 112px;
+    height: 34px;
+    border-right:1px solid #f7f7f7;
+    list-style:none;
+}
+.selectPanel_ul{
+    height:34px;
+    width: 70px;
+    margin-top:0px;
+    margin-left:0px;
+}
+
+.selectPanel_ul_li_left{
+    list-style:none;
+    width:70px;
+    height:34px;
+    line-height:34px;
+    text-align:center;
+    float:left;
+    margin-top:0px;
+    margin-left:-30px;
+}
+.selectPanel_ul_li_rig{
+    list-style:none;
+    width:20px;
+    height:34px;
+    float:left;
+}
+
+.selectPanel_list{
+    border:1px solid #f7f7f7;
+    list-style:none;
+    width:110px;
+    display:none;
+    background:#fff;
+    position:relative;
+    z-index:999;
+}
+.selectPanel_list_li{
+    height:30px;
+    line-height:30px;
+    text-align:left;
+    width:90px;
+    border-bottom:1px solid #f7f7f7;
+    padding-left:0px;
+}
+
+.pdIcon{
+    width:14px;
+    height:9px;
+    margin-top:10px;
+}
+.keywordInput {
+	outline:none;
+    width: 310px;
+    vertical-align: middle;
+    font-size: 14px;
+    color: #00234f;
+    border: 0;
+    height: 28px;;
+    margin: 2px;
+    line-height: 28px;
+}
+.searchItemCls{
+	background-color: #BB4462;	
+    width: 50px;
+	color:#FFF;
+    float:left;
+	margin-top:7px;
+	cursor:pointer;
+}
+.keywordPanel {
+/*     background: url(../../../../image/ecp/selectpanel_2.jpg) no-repeat; */
+    width: 365px;
+    height: 30px;
+    float:right; 
+    border: 2px solid #BB4462;
+}
+
+.iconSearchPanel {
+    background: url(../../../../image/ecp/selectpanel_3.png) no-repeat;
+    width: 50px;
+    height: 36px;
+    float:right; 
+}
+
+
+.bodyDiv{
+    width: 1200px;
+    float:left;
+    margin-top:30px;
+    font-size: 12px;
+    color: #666;
+}
+
+.orderNo{
+	font-size:16px;
+	float:left;
+}
+
+.orderAmount{
+	font-size:14px;
+	float:right;
+	margin-right:20px;
+}
+
+.orderAmount em{
+	color:#FF003D;
+	font-style:normal;
+	font-weight:600;
+}
+
+.orderDetailLink{
+	float:right;
+	font-size:14px;
+}
+
+.payInfo{
+	clear:both;
+    width: 1200px;
+    height:auto;
+    margin-top:30px;
+    border:solid 1px #E9E8E5;
+}
+
+.payType{
+	float:left;
+    margin-left:60px;
+    margin-top:15px;
+    margin-bottom:10px;
+	height:26px;
+	line-height:26px;
+    text-align:center;
+	border:solid 1px #E9E8E5;
+	cursor:pointer;
+	font-size:12px;
+}
+/* 蒋磊2016-6-21 注掉的--暂时不用这个效果 */
+/* 
+.payType:hover{
+	width:88px;
+	height:24px;
+	line-height:24px;
+    border:solid 2px #FF8194;
+} 
+*/
+
+.closeOpen{
+	clear:both;
+	margin-left:20px;
+	margin-bottom:10px;
+}
+
+.pink{
+	float:left;
+	width: 1140px;
+	margin-left:20px;
+	border:solid 1px #ff8aa1;
+	background:#fff8f9;
+	padding:8px;
+}
+
+.fund{
+	float:left;
+	margin-left:20px;
+	margin-right:20px;    
+}
+
+.couponTip{
+	margin-left:36px;
+	margin-top:10px;
+    margin-bottom:10px;
+}
+
+.couponCode{
+	float:left;
+	margin-left:36px;
+    margin-top:10px;
+    margin-bottom:20px;
+}
+
+.couponInput{
+	margin-left:4px;
+	margin-right:4px;
+	width:80px;
+	height:20px;
+	border: solid 1px #D1CEC8;
+}
+
+.useCoupon{
+	float:left;
+	margin-left:10px;
+	width:60px;
+	height:22px;
+	line-height:22px;
+	text-align:center;
+	background:#FF0040;
+	color:#FFFFFF;
+    margin-top:46px;
+    margin-bottom:20px;
+    cursor:pointer;
+}
+
+.couponAmount{
+	clear:both;
+	margin-left:36px;
+    margin-bottom:10px;
+}
+
+.Amount{
+	margin-left:36px;
+	margin-top:-2px;
+    margin-bottom:5px;
+}
+
+.pswd{
+	float:left;
+    margin-left:40px;
+    margin-bottom:10px;
+}
+
+.pswdInput{
+    width:140px;
+    height:24px;
+    border: solid 1px #D1CEC8;
+}
+
+.msgInputDiv{
+	clear:left;
+	float:left;
+	margin-left:40px;
+	margin-bottom:20px;
+}
+
+.msgInput{
+    width:140px;
+    height:24px;
+    border: solid 1px #D1CEC8;
+    margin-left:2px;
+}
+
+.getMsgCodeBtn{
+    float:left;
+    margin-left:20px;
+    width:120px;
+    height:26px;
+    line-height:26px;
+    text-align:center;
+    background:#F4F3F2;
+    border:solid 1px #CDC9C4;
+}
+
+.getMsgCodeBtn_clickable{
+	float:left;
+    margin-left:20px;
+    width:120px;
+    height:26px;
+    line-height:26px;
+    text-align:center;
+    background:#F4F3F2;
+    border:solid 1px #CDC9C4;
+    color:#2646b9;
+    cursor: pointer;
+}
+.second{
+    float:right;
+    margin-right:35px;
+    margin-top:-28px;
+    color:#008DFE;
+    height:28px;
+    line-height:28px;
+    text-align:center;
+}
+.confirmBtn{
+	clear:both;
+	float:left;
+    margin-left:40px;
+    width:92px;
+    height:30px;
+    line-height:30px;
+    text-align:center;
+    background:#FF0040;
+    color:#FFFFFF;
+    cursor:pointer;
+    font-size:14px;
+}
+.acctFund{
+	height:24px;
+	line-height:24px;
+	text-align:left;
+}
+.yhDiv{
+	float:left;
+	width: 1140px;
+	margin-left:20px;
+	margin-top:14px;
+	border:1px solid #e9e8e5;
+	padding:8px;
+	border-width: 1px 0 1px 0;
+}
+.hzDiv{
+	float:left;
+	padding:8px;
+	width: 1140px;
+	height:11px;
+	margin-left:20px;
+	border:0px solid #e9e8e5;
+}
+.coupon-items{
+	width: 1140px;
+	display: block;
+}
+.coupon-items ul{
+    list-style: outside none none;
+
+}
+.coupon-items li{
+	display: inline;
+
+}
+
+
+.coupon-item{
+	float: left;
+	margin: 0px 10px 10px 0px;
+/* 	border: 1px solid #CEF0F1; */
+}
+.i-detail-disabled .i-jd{
+	cursor: not-allowed;
+	border-left: 1px solid #D1D1D1;
+	border-right: 1px solid #D1D1D1;
+	background-color: #D1D1D1;
+}
+.i-detail .i-jd{
+	border-left: 1px solid #74D2D4;
+	border-right: 1px solid #74D2D4;
+	background-color: #74D2D4;
+}
+.coupon-item{
+	cursor: pointer;
+}
+.i-msg{
+	height:50px;
+	cursor: pointer;
+}
+.i-detail{
+	height:75px;
+	cursor: pointer;
+	border: 1px solid #74D2D4;
+}
+.i-detail-disabled{
+	height:75px;
+	cursor: not-allowed;
+	border: 1px solid #D1D1D1;
+	
+}
+
+.item-select{
+	border: 1px solid #E43A3D;
+	background-image: url("../../../../image/ecp/buyer/coupon-selected.png");
+	background-repeat: no-repeat;
+	background-position: right bottom;
+	
+}
+.hide{
+	display: none;
+}
+.i-price{
+	color: #FFF;
+	display: inline;
+	position: relative;
+	top: 2px;
+	margin-left: 15px;
+	width:40px;
+	height:30px;
+	line-height:30px;
+	float: left;
+}
+.i-price em{
+	font-style: normal;
+	font: 24px Arial,Verdana,"Microsoft YaHei",SimSun;
+}
+.i-limit{
+	padding-left:10px;
+	display: inline;
+	position: relative;
+	top: 12px;
+	color: #CEF0F1;
+	margin-left:20px;
+}
+
+.i-time{
+	margin-top:15px;
+	color: #CEF0F1;
+	margin-left: 15px;
+	margin-right: 10px;
+/* 	position: relative; */
+/* 	top:15px; */
+	
+}
+.i-detail .i-info{
+	text-align:center;
+	height:25px;
+	line-height: 25px;
+	color: #74D2D4;
+}
+
+.i-detail-disabled .i-info{
+	text-align:center;
+	height:25px;
+	line-height: 25px;
+	color: #D1D1D1;
+}
+.i-detail-disabled .i-limit{
+	color: #F5F5F5;
+}
+.i-detail-disabled .i-time{
+	color: #F5F5F5;
+}
+
+.coupon-info{
+	clear:both;
+	height:30px;
+	line-height:30px;
+	margin-top: 10px;
+	padding-left:35px;
+	background-color:#F6F6F6;
+}
+.coupon-info em{
+	font-style: normal;
+	font-weight:bold;
+	color: #ff0000;
+}

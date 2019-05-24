@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jiumu.auction.userCenter.dao.MyAuctionMapper">
+    <resultMap id="baseResultMap" type="com.jiumu.auction.userCenter.vo.MyAuction">
+        <result property="auctionIsing" column="auction_ising"/>
+        <result property="auctionIsout" column="auction_isout"/>
+        <result property="auctionIslead" column="auction_islead"/>
+        <result property="auctionPrice" column="auction_price"/>
+        <result property="goodsName" column="goods_name"/>
+        <result property="goodsImg" column="goods_img"/>
+    </resultMap>
+    
+    <select id="queryMyAuctionList" resultMap="baseResultMap">
+       SELECT auction_ising,auction_isout, auction_islead,auction_price,goods_name,goods_img,goods_no
+FROM tb_auction a join tb_goods b on a.auction_goods_id = b.goods_id
+where a.auction_user_id=#{userId};
+    </select>
+    
+</mapper>

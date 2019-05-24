@@ -1,22 +1,23 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <!-- saved from url=(0057)http://www.artrade.com/jsp/ecp/buyer/trademng/myorder.jsp -->
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<script id="allmobilize" charset="utf-8" src="myorder_files/allmobilize.min.js.下载"></script><style type="text/css"></style>
+<!--<script id="allmobilize" charset="utf-8" src="myorder_files/allmobilize.min.js.下载"></script>--><style type="text/css"></style>
 <meta http-equiv="Cache-Control" content="no-siteapp">
 <meta http-equiv="Cache-Control" content="no-transform">
 
     <base th:href="${#request.getContextPath()}+'/'">
 <link rel="alternate" media="handheld" href="http://www.artrade.com/jsp/ecp/buyer/trademng/myorder.jsp#">
 
-
+    <script type="text/javascript" src="js/jquery-3.1.1.js"></script>
 <link type="text/css" rel="stylesheet" href="myorder_files/base.css">
 <link type="text/css" rel="stylesheet" href="myorder_files/base(1).css">
 <link type="text/css" rel="stylesheet" href="myorder_files/jquery-ui.min.css">
 <link type="text/css" rel="stylesheet" href="myorder_files/jquery-ui-timepicker-addon.css">
-<script type="text/javascript" src="myorder_files/jquery-1.11.3.min.js.下载"></script>
+<!--<script type="text/javascript" src="myorder_files/jquery-1.11.3.min.js.下载"></script>
 <script type="text/javascript" src="myorder_files/jquery-1.11.3.extends.js.下载"></script>
 <script type="text/javascript" src="myorder_files/dateextend.js.下载"></script>
 <script type="text/javascript" src="myorder_files/ajaxfileupload.js.下载"></script>
@@ -24,11 +25,11 @@
 <script type="text/javascript" src="myorder_files/jquery.ui.datepicker-zh-cn.js.下载"></script>
 <script type="text/javascript" src="myorder_files/jquery-ui-timepicker-addon.js.下载"></script>
 <script type="text/javascript" src="myorder_files/common.js.下载"></script>
-<script type="text/javascript" src="myorder_files/businesscommon.js.下载"></script>
-<script src="myorder_files/ecpbase.js.下载"></script>
-<script src="myorder_files/ecpValidation.js.下载"></script>
+<script type="text/javascript" src="myorder_files/businesscommon.js.下载"></script>-->
+<!--<script src="myorder_files/ecpbase.js.下载"></script>
+<script src="myorder_files/ecpValidation.js.下载"></script>-->
 <link type="text/css" rel="stylesheet" href="myorder_files/simpwinform.css">
-<script type="text/javascript" src="myorder_files/simpwinform.js.下载"></script>
+<!--<script type="text/javascript" src="myorder_files/simpwinform.js.下载"></script>-->
 <script>
     var baseUrl = "";
     var lotUrl="/jsp/ecp/public/auction.jsp?lotid=";
@@ -40,24 +41,24 @@
 
 
 
-<link type="text/css" rel="stylesheet" href="myorder_files/scsdtable.css"><script type="text/javascript" src="myorder_files/scsdtable.js.下载"></script>
+<!--<link type="text/css" rel="stylesheet" href="myorder_files/scsdtable.css"><script type="text/javascript" src="myorder_files/scsdtable.js.下载"></script>
 
-<link type="text/css" rel="stylesheet" href="myorder_files/simpwinform.css"><script type="text/javascript" src="myorder_files/simpwinform.js.下载"></script><script type="text/javascript" src="myorder_files/ecpbase.js.下载"></script>
+<link type="text/css" rel="stylesheet" href="myorder_files/simpwinform.css"><script type="text/javascript" src="myorder_files/simpwinform.js.下载"></script><script type="text/javascript" src="myorder_files/ecpbase.js.下载"></script>-->
 
 <link type="text/css" rel="stylesheet" href="myorder_files/myorder.css">
-<script type="text/javascript" src="myorder_files/myorder.js.下载"></script>
+<!--<script type="text/javascript" src="myorder_files/myorder.js.下载"></script>-->
 <title>我的订单</title>
 <script>
     var buyerId = '1497734450';
     var status = '';
 </script>
-<script charset="utf-8" src="myorder_files/sm.min.js.下载" async=""></script></head>
+<!--<script charset="utf-8" src="myorder_files/sm.min.js.下载" async=""></script></head>-->
 <body>
 
 
 
-<script type="text/javascript" src="myorder_files/header.js.下载"></script>
-<script type="text/javascript" src="myorder_files/jquery.SuperSlide.2.1.1.js.下载"></script>
+<!--<script type="text/javascript" src="myorder_files/header.js.下载"></script>
+<script type="text/javascript" src="myorder_files/jquery.SuperSlide.2.1.1.js.下载"></script>-->
 
 <script>
 	var showNotice = "";
@@ -116,8 +117,13 @@
 	 #header_nickName a:hover{
 	  text-decoration: underline;
 	  color:#E6002D;
+
 	}
-	
+	.tabHeaderItemSelectedCls{
+        background-color: #ec135a!important;
+        border: 1px solid #ec135a!important;
+        color: #FFF!important;
+    }
 
 </style>
 <div class="headAndFoot" style="background:#F9F4F4;clear:both;">
@@ -130,21 +136,21 @@
             <div>
                 <div style="float:left">
                                                       您好，&nbsp;<span id="header_nickName">
-                                   <a href="http://www.artrade.com/jsp/ecp/buyer/buyerindex.jsp" target="">sala</a>
+                                   <a href="" target=""></a>
                                 </span>
-                                <a id="header_logout" href="http://www.artrade.com/jsp/ecp/buyer/trademng/myorder.jsp#" onclick="logout();" style="">&nbsp;<b>，退出</b></a> 
-                                <a id="header_login" href="http://www.artrade.com/jsp/ecp/login.jsp" target="_self" style="display:none;"><b>请登录</b></a>&nbsp;&nbsp;
+                                <a id="header_logout" href="#" onclick="logout();" style="">&nbsp;<b>，退出</b></a>
+                                <a id="header_login" href="" target="_self" style="display:none;"><b>请登录</b></a>&nbsp;&nbsp;
                 </div>
                 <div style="float:left;display:none;">
                     <a href="http://www.artrade.com/jsp/ecp/register.jsp" target="_self" style="color: #FF003B;font-weight:600;">免费注册</a>&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
                 </div>
                 <div id="myDealDiv" style="cursor: pointer;float:left;position:relative;"><a href="http://www.artrade.com/jsp/ecp/buyer/buyerindex.jsp">买家中心</a><img src="myorder_files/pulldown.png">&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
                     <ul id="myDeal" class="headerMenu_ul" style="position:absolute;z-index:1001;left:-20px;">
-                        <li style="display:none"><a href="http://www.artrade.com/jsp/ecp/buyer/buyerindex.jsp">买家首页</a></li>
-                        <li style="display:none"><a href="http://www.artrade.com/jsp/ecp/buyer/trademng/myauct.jsp">我的竞拍</a></li>
-                        <li style="display:none"><a href="http://www.artrade.com/jsp/ecp/buyer/trademng/myclinch.jsp">我的成交</a></li>
-                        <li style="display:none"><a href="http://www.artrade.com/jsp/ecp/buyer/trademng/mycart.jsp">结算</a></li>
-                        <li style="display:none"><a href="http://www.artrade.com/jsp/ecp/buyer/myasset/margin.jsp">我的保证金</a></li>
+                        <li style="display:none"><a href="">买家首页</a></li>
+                        <li style="display:none"><a href="">我的竞拍</a></li>
+                        <li style="display:none"><a href="">我的成交</a></li>
+                        <li style="display:none"><a href="">结算</a></li>
+                        <li style="display:none"><a href="">我的保证金</a></li>
                     </ul>
                 </div>
                 <div style="float:left;">
@@ -236,10 +242,10 @@
 			}
 		});
 	}
-	$(function(){
+	/*$(function(){
 		//1:获取未阅读的站内信
 		getMsgCnt();
-	});
+	});*/
 </script>	
 <div class="buyDivCls">
 	<div style="width: 1200px;margin:0 auto;">
@@ -287,9 +293,9 @@
 
 
 
-<script type="text/javascript" src="myorder_files/echarts.js.下载"></script>
+<!--<script type="text/javascript" src="myorder_files/echarts.js.下载"></script>
 
-<script type="text/javascript" src="myorder_files/buyerinfo.js.下载"></script>
+<script type="text/javascript" src="myorder_files/buyerinfo.js.下载"></script>-->
 <script>
 var mbrType = "0001";
 var idVerify = "" ;
@@ -410,17 +416,17 @@ var idVerify = "" ;
     <div class="Main1200Div">
         
 
-
-<script type="text/javascript" src="myorder_files/buycntleftmenu.js.下载"></script>
+<!--
+<script type="text/javascript" src="myorder_files/buycntleftmenu.js.下载"></script>-->
 
 
 <div class="sellCenterLeftMenuBodyCls" style="height:auto">
 	<ul class="sellCenterLeftMenu1Cls">
     	<li class="jyglIconCls sellCenterLeftMenu1Cls">交易管理</li>
-    	<li class="sellCenterLeftMenu2Cls " ><a href="myclinch.html">我的竞拍</a></li>
+    	<li class="sellCenterLeftMenu2Cls " ><a href="userCenter/auction">我的竞拍</a></li>
     	<li class="sellCenterLeftMenu2Cls " onclick="buyCenterLeftMenu.doClickMenuHander(1.2)">代理竞价</li>
-    	<li class="sellCenterLeftMenu2Cls "><a href="myclinch.html">我的成交</a></li>
-    	<li class="sellCenterLeftMenu2Cls sellCenterLeftMenu2SelectedCls"><a href="myorder.html">我的订单</a></li>
+    	<li class="sellCenterLeftMenu2Cls "><a href="userCenter/clinch">我的成交</a></li>
+    	<li class="sellCenterLeftMenu2Cls sellCenterLeftMenu2SelectedCls"><a href="userCenter/myorder">我的订单</a></li>
     	<li class="sellCenterLeftMenu2Cls " onclick="buyCenterLeftMenu.doClickMenuHander(1.8)">我的退货</li>
 		<li class="sellCenterLeftMenu2Cls " onclick="buyCenterLeftMenu.doClickMenuHander(1.9)">我的证书</li>
     	
@@ -428,7 +434,7 @@ var idVerify = "" ;
     </ul>
 	<ul class="sellCenterLeftMenu1Cls">
     	<li class="buyFocusCenterIconCls sellCenterLeftMenu1Cls">关注中心</li>
-    	<li class="sellCenterLeftMenu2Cls "><a href="focusauct.html">关注的拍品</a></li>
+    	<li class="sellCenterLeftMenu2Cls "><a href="html/focusauct.html">关注的拍品</a></li>
     	
     	<li class="sellCenterLeftMenuUnderLineCls"></li>
     </ul>
@@ -468,12 +474,12 @@ var idVerify = "" ;
         <div class="mainCenterBodyCls">
                 <!--核心代码区域-->
             <div class="tabHeaderDivCls">
-                <ul class="noul padding0 margin0 ulBoxCls">
-                    <li id="btn_0000" class="floatLeft pointer tabHeaderItemCls tabHeaderItemSelectedCls" onclick="queryMenu('0000')">所有订单</li>
-                    <li id="btn_0002" class="floatLeft pointer tabHeaderItemCls tabHeaderItemUnSelectedCls" onclick="queryMenu('0002')">待付款</li>
-                    <li id="btn_0003" class="floatLeft pointer tabHeaderItemCls tabHeaderItemUnSelectedCls" onclick="queryMenu('0003')">待发货</li>
-                    <li id="btn_0004" class="floatLeft pointer tabHeaderItemCls tabHeaderItemUnSelectedCls" onclick="queryMenu('0004')">待收货</li>
-                    <li id="btn_0005" class="floatLeft pointer tabHeaderItemCls tabHeaderItemUnSelectedCls tabHeaderItemUnSelectedLastCls" onclick="queryMenu('0005')">待评价</li>
+                <ul class="noul padding0 margin0 ulBoxCls" id="ssss">
+                    <li id="btn_0" class="floatLeft pointer tabHeaderItemCls tabHeaderItemSelectedCls" onclick="queryMenu(0)">所有订单</li>
+                    <li id="btn_1" class="floatLeft pointer tabHeaderItemCls tabHeaderItemUnSelectedCls" onclick="queryMenu(1)">待付款</li>
+                    <li id="btn_2" class="floatLeft pointer tabHeaderItemCls tabHeaderItemUnSelectedCls" onclick="queryMenu(2)">待发货</li>
+                    <li id="btn_3" class="floatLeft pointer tabHeaderItemCls tabHeaderItemUnSelectedCls" onclick="queryMenu(3)">待收货</li>
+                    <li id="btn_4" class="floatLeft pointer tabHeaderItemCls tabHeaderItemUnSelectedCls tabHeaderItemUnSelectedLastCls" onclick="queryMenu(4)">待评价</li>
                    <!--  <li id="btn_0007" class="floatLeft pointer tabHeaderItemCls tabHeaderItemUnSelectedCls tabHeaderItemUnSelectedLastCls" onclick="queryMenu('0007')">退货</li> -->
                 </ul>
             </div>
@@ -530,7 +536,109 @@ var idVerify = "" ;
 	    	</form>
 			</div> -->
             <div>
-                <div style="width:974px;" comname="ScsdTable" setting="{id:&quot;myOrderQuery&quot;,autoLoad:false,queryId:&quot;myOrderQuery&quot;,controllerPath:&quot;ecp/transaction/order/queryorder.action&quot;,operArr:&quot;operArr&quot;,render:&quot;myOrderQueryRender&quot;,page:{currentPage:1,pageCount:0,recordCount:0,pageSize:10},isGroup:&quot;true&quot;,columns:[{&quot;border&quot;:&quot;true&quot;,&quot;groupOrDetail&quot;:&quot;group&quot;,&quot;hidden&quot;:&quot;false&quot;,&quot;columnHeader&quot;:null,&quot;toDetail&quot;:null,&quot;width&quot;:&quot;10%&quot;,&quot;format&quot;:null,&quot;valign&quot;:&quot;center&quot;,&quot;align&quot;:&quot;center&quot;,&quot;dictType&quot;:null,&quot;columnName&quot;:&quot;GEN_TIME&quot;},{&quot;border&quot;:&quot;true&quot;,&quot;groupOrDetail&quot;:&quot;group&quot;,&quot;hidden&quot;:&quot;false&quot;,&quot;columnHeader&quot;:null,&quot;toDetail&quot;:null,&quot;width&quot;:&quot;20%&quot;,&quot;format&quot;:null,&quot;valign&quot;:&quot;center&quot;,&quot;align&quot;:&quot;center&quot;,&quot;dictType&quot;:null,&quot;columnName&quot;:&quot;ORDER_ID&quot;},{&quot;border&quot;:&quot;true&quot;,&quot;groupOrDetail&quot;:&quot;group&quot;,&quot;hidden&quot;:&quot;false&quot;,&quot;columnHeader&quot;:null,&quot;toDetail&quot;:null,&quot;width&quot;:&quot;15%&quot;,&quot;format&quot;:null,&quot;valign&quot;:&quot;center&quot;,&quot;align&quot;:&quot;center&quot;,&quot;dictType&quot;:null,&quot;columnName&quot;:&quot;FREIGHT&quot;},{&quot;border&quot;:&quot;true&quot;,&quot;groupOrDetail&quot;:&quot;group&quot;,&quot;hidden&quot;:&quot;false&quot;,&quot;columnHeader&quot;:null,&quot;toDetail&quot;:null,&quot;width&quot;:&quot;70%&quot;,&quot;format&quot;:null,&quot;valign&quot;:&quot;center&quot;,&quot;align&quot;:&quot;right&quot;,&quot;dictType&quot;:null,&quot;columnName&quot;:&quot;SELLER_NAME&quot;},{&quot;border&quot;:&quot;false&quot;,&quot;groupOrDetail&quot;:&quot;group&quot;,&quot;hidden&quot;:&quot;true&quot;,&quot;columnHeader&quot;:null,&quot;toDetail&quot;:null,&quot;width&quot;:&quot;0%&quot;,&quot;format&quot;:null,&quot;valign&quot;:null,&quot;align&quot;:null,&quot;dictType&quot;:null,&quot;columnName&quot;:&quot;BUYER_ID&quot;},{&quot;border&quot;:&quot;false&quot;,&quot;groupOrDetail&quot;:&quot;group&quot;,&quot;hidden&quot;:&quot;true&quot;,&quot;columnHeader&quot;:null,&quot;toDetail&quot;:null,&quot;width&quot;:&quot;0%&quot;,&quot;format&quot;:null,&quot;valign&quot;:null,&quot;align&quot;:null,&quot;dictType&quot;:null,&quot;columnName&quot;:&quot;EXPR_NO&quot;},{&quot;border&quot;:&quot;false&quot;,&quot;groupOrDetail&quot;:&quot;group&quot;,&quot;hidden&quot;:&quot;true&quot;,&quot;columnHeader&quot;:null,&quot;toDetail&quot;:null,&quot;width&quot;:&quot;0%&quot;,&quot;format&quot;:null,&quot;valign&quot;:null,&quot;align&quot;:null,&quot;dictType&quot;:null,&quot;columnName&quot;:&quot;EXPR_NAME&quot;},{&quot;border&quot;:null,&quot;groupOrDetail&quot;:&quot;detail&quot;,&quot;hidden&quot;:&quot;true&quot;,&quot;columnHeader&quot;:&quot;&quot;,&quot;toDetail&quot;:null,&quot;width&quot;:&quot;0%&quot;,&quot;format&quot;:null,&quot;valign&quot;:null,&quot;align&quot;:null,&quot;dictType&quot;:null,&quot;columnName&quot;:&quot;items.LOT_PIC_PATH&quot;},{&quot;border&quot;:null,&quot;groupOrDetail&quot;:&quot;detail&quot;,&quot;hidden&quot;:&quot;true&quot;,&quot;columnHeader&quot;:&quot;&quot;,&quot;toDetail&quot;:null,&quot;width&quot;:null,&quot;format&quot;:null,&quot;valign&quot;:&quot;middle&quot;,&quot;align&quot;:&quot;center&quot;,&quot;dictType&quot;:null,&quot;columnName&quot;:&quot;items.LOT_CMMSSN&quot;},{&quot;border&quot;:&quot;false&quot;,&quot;groupOrDetail&quot;:&quot;detail&quot;,&quot;hidden&quot;:&quot;true&quot;,&quot;columnHeader&quot;:&quot;&quot;,&quot;toDetail&quot;:null,&quot;width&quot;:&quot;0%&quot;,&quot;format&quot;:null,&quot;valign&quot;:null,&quot;align&quot;:null,&quot;dictType&quot;:null,&quot;columnName&quot;:&quot;items.OUT_TIME_DAY&quot;},{&quot;border&quot;:null,&quot;groupOrDetail&quot;:&quot;detail&quot;,&quot;hidden&quot;:&quot;true&quot;,&quot;columnHeader&quot;:&quot;&quot;,&quot;toDetail&quot;:null,&quot;width&quot;:null,&quot;format&quot;:null,&quot;valign&quot;:null,&quot;align&quot;:null,&quot;dictType&quot;:null,&quot;columnName&quot;:&quot;items.NEED_CERT&quot;},{&quot;border&quot;:null,&quot;groupOrDetail&quot;:&quot;detail&quot;,&quot;hidden&quot;:&quot;true&quot;,&quot;columnHeader&quot;:&quot;&quot;,&quot;toDetail&quot;:null,&quot;width&quot;:null,&quot;format&quot;:null,&quot;valign&quot;:null,&quot;align&quot;:null,&quot;dictType&quot;:null,&quot;columnName&quot;:&quot;items.INSR_FEE&quot;},{&quot;border&quot;:null,&quot;groupOrDetail&quot;:&quot;detail&quot;,&quot;hidden&quot;:&quot;true&quot;,&quot;columnHeader&quot;:&quot;&quot;,&quot;toDetail&quot;:null,&quot;width&quot;:null,&quot;format&quot;:null,&quot;valign&quot;:null,&quot;align&quot;:null,&quot;dictType&quot;:null,&quot;columnName&quot;:&quot;items.NEED_INSR&quot;},{&quot;border&quot;:null,&quot;groupOrDetail&quot;:&quot;detail&quot;,&quot;hidden&quot;:&quot;true&quot;,&quot;columnHeader&quot;:&quot;&quot;,&quot;toDetail&quot;:null,&quot;width&quot;:null,&quot;format&quot;:null,&quot;valign&quot;:null,&quot;align&quot;:null,&quot;dictType&quot;:null,&quot;columnName&quot;:&quot;items.FIRSTCATGID&quot;},{&quot;border&quot;:null,&quot;groupOrDetail&quot;:&quot;detail&quot;,&quot;hidden&quot;:&quot;true&quot;,&quot;columnHeader&quot;:&quot;&quot;,&quot;toDetail&quot;:null,&quot;width&quot;:null,&quot;format&quot;:null,&quot;valign&quot;:null,&quot;align&quot;:null,&quot;dictType&quot;:null,&quot;columnName&quot;:&quot;items.ITEM_AGE&quot;},{&quot;border&quot;:null,&quot;groupOrDetail&quot;:&quot;detail&quot;,&quot;hidden&quot;:&quot;true&quot;,&quot;columnHeader&quot;:&quot;&quot;,&quot;toDetail&quot;:null,&quot;width&quot;:null,&quot;format&quot;:null,&quot;valign&quot;:null,&quot;align&quot;:null,&quot;dictType&quot;:null,&quot;columnName&quot;:&quot;items.AUTHOR_NAME&quot;},{&quot;border&quot;:null,&quot;groupOrDetail&quot;:&quot;detail&quot;,&quot;hidden&quot;:&quot;true&quot;,&quot;columnHeader&quot;:&quot;&quot;,&quot;toDetail&quot;:null,&quot;width&quot;:null,&quot;format&quot;:null,&quot;valign&quot;:null,&quot;align&quot;:null,&quot;dictType&quot;:null,&quot;columnName&quot;:&quot;items.GlIDE_MARK&quot;},{&quot;border&quot;:null,&quot;groupOrDetail&quot;:&quot;detail&quot;,&quot;hidden&quot;:&quot;false&quot;,&quot;columnHeader&quot;:&quot;拍品&quot;,&quot;toDetail&quot;:null,&quot;width&quot;:&quot;35%&quot;,&quot;format&quot;:null,&quot;valign&quot;:null,&quot;align&quot;:&quot;left&quot;,&quot;dictType&quot;:null,&quot;columnName&quot;:&quot;items.ITEM_NAME&quot;},{&quot;border&quot;:&quot;true&quot;,&quot;groupOrDetail&quot;:&quot;detail&quot;,&quot;hidden&quot;:&quot;false&quot;,&quot;columnHeader&quot;:&quot;成交价&quot;,&quot;toDetail&quot;:null,&quot;width&quot;:&quot;8%&quot;,&quot;format&quot;:null,&quot;valign&quot;:&quot;middle&quot;,&quot;align&quot;:&quot;center&quot;,&quot;dictType&quot;:null,&quot;columnName&quot;:&quot;items.HAMMER_PRICE&quot;},{&quot;border&quot;:&quot;true&quot;,&quot;groupOrDetail&quot;:&quot;detail&quot;,&quot;hidden&quot;:&quot;false&quot;,&quot;columnHeader&quot;:&quot;库存状态&quot;,&quot;toDetail&quot;:null,&quot;width&quot;:&quot;9%&quot;,&quot;format&quot;:null,&quot;valign&quot;:&quot;middle&quot;,&quot;align&quot;:&quot;center&quot;,&quot;dictType&quot;:null,&quot;columnName&quot;:&quot;items.STOCK_QTY&quot;},{&quot;border&quot;:&quot;true&quot;,&quot;groupOrDetail&quot;:&quot;detail&quot;,&quot;hidden&quot;:&quot;false&quot;,&quot;columnHeader&quot;:&quot;其他费用&quot;,&quot;toDetail&quot;:null,&quot;width&quot;:&quot;9%&quot;,&quot;format&quot;:null,&quot;valign&quot;:&quot;middle&quot;,&quot;align&quot;:&quot;center&quot;,&quot;dictType&quot;:null,&quot;columnName&quot;:&quot;items.CERT_FEE&quot;},{&quot;border&quot;:&quot;true&quot;,&quot;groupOrDetail&quot;:&quot;detail&quot;,&quot;hidden&quot;:&quot;false&quot;,&quot;columnHeader&quot;:&quot;退货&quot;,&quot;toDetail&quot;:null,&quot;width&quot;:&quot;9%&quot;,&quot;format&quot;:null,&quot;valign&quot;:&quot;middle&quot;,&quot;align&quot;:&quot;center&quot;,&quot;dictType&quot;:null,&quot;columnName&quot;:&quot;items.LOT_STATUS&quot;},{&quot;border&quot;:&quot;true&quot;,&quot;groupOrDetail&quot;:&quot;group&quot;,&quot;hidden&quot;:&quot;false&quot;,&quot;columnHeader&quot;:&quot;合计&quot;,&quot;toDetail&quot;:&quot;true&quot;,&quot;width&quot;:&quot;9%&quot;,&quot;format&quot;:null,&quot;valign&quot;:&quot;middle&quot;,&quot;align&quot;:&quot;center&quot;,&quot;dictType&quot;:null,&quot;columnName&quot;:&quot;NP_AMOUNT&quot;},{&quot;border&quot;:&quot;true&quot;,&quot;groupOrDetail&quot;:&quot;group&quot;,&quot;hidden&quot;:&quot;false&quot;,&quot;columnHeader&quot;:&quot;全部订单&quot;,&quot;toDetail&quot;:&quot;true&quot;,&quot;width&quot;:&quot;9%&quot;,&quot;format&quot;:null,&quot;valign&quot;:&quot;middle&quot;,&quot;align&quot;:&quot;center&quot;,&quot;dictType&quot;:null,&quot;columnName&quot;:&quot;ORDER_STATUS&quot;}]}" id="myOrderQuery">    <div class="tableHeaderCls" style="">        <table class="padding0 margin0" width="100%" cellpadding="0" cellspacing="0" border="0">        	<tbody><tr>            <td class="tableColumnHeaderCls" style="width:35%;">拍品</td><td class="tableColumnHeaderCls" style="width:8%;">成交价</td><td class="tableColumnHeaderCls" style="width:9%;">库存状态</td><td class="tableColumnHeaderCls" style="width:9%;">其他费用</td><td class="tableColumnHeaderCls" style="width:9%;">退货</td><td class="tableColumnHeaderCls" style="width:9%;">合计</td><td class="tableColumnHeaderCls" style="width:9%;">全部订单</td><td class="tableColumnHeaderCls" style="">操作</td>            </tr>        </tbody></table>    </div>    <div class="rowSplitCls10"></div>        <div class="tableContentBoxCls" style=""><table class="tableGroupItemCls" cellpadding="0" cellspacing="0" border="0"><tbody><tr><td style="width:10%" class="aligncenter"><div style="color:#2a2c2f">2019-05-14</div></td><td style="width:20%" class="aligncenter"><div style="color:#EC135A;font-weight:500;">订单号:1128269553676058624</div></td><td style="width:15%" class="aligncenter"><div style="color:#2a2c2f;">运费:50</div></td><td style="width:70%" class="alignright"><div style="margin-right:30px;font-size:14px;">卖家:北京嘉德在线拍卖有限公司</div></td></tr></tbody></table><table class="tableRowItemCls" cellpadding="0" cellspacing="0" border="0"><tbody><tr><td style="width:35%" class="alignleft valigncenter tableColItemRBCls"><div class="itemDiv"><a target="_blank" href="http://www.artrade.com/jsp/ecp/public/auction.jsp?lotid=973476012"><div class="itemPic"><img src="myorder_files/z00000003_s.jpg" alt="显示失败"></div></a><div class="itemName" style="font-size:12px;"><a target="_blank" href="http://www.artrade.com/jsp/ecp/public/auction.jsp?lotid=973476012">z00000003 佚名 内部测试3 勿点</a></div></div></td><td style="width:8%" class="aligncenter valignmiddle tableColItemRBCls">1.1</td><td style="width:9%" class="aligncenter valignmiddle tableColItemRBCls">虚拟库</td><td style="width:9%" class="aligncenter valignmiddle tableColItemRBCls"><div style="text-align:left;margin-left:25px;"><div></div><div style="font-size:12px;">无证书</div><div style="font-size:12px;">保费：0.01</div></div></td><td style="width:9%" class="aligncenter valignmiddle tableColItemRBCls"><div style="color:red;width:100px;"></div></td><td rowspan="1" style="width:9%" class="aligncenter valignmiddle tableColItemRBCls">51.11</td><td rowspan="1" style="width:9%" class="aligncenter valignmiddle tableColItemRBCls"><div><div style="font-size:12px;">待付款</div><a href="http://www.artrade.com/ecp/transaction/gotoorderdetail.action?orderid=1128269553676058624&amp;retStatus=N" style="font-size:12px;color:red">订单详情</a></div></td><td rowspan="1" class="aligncenter valignmiddle tableColItemCls"><div class="tempOperArrDivCls" tempoperarrindex="0"><div icontype="edit" style="width:100px" class="editOperBtnIconCls4">取消订单</div></div><div style="height:5px;">&nbsp;</div><div class="tempOperArrDivCls" tempoperarrindex="2"><div icontype="edit" style="width:100px" class="editOperBtnIconCls4">确认付款</div></div></td></tr></tbody></table></div>        <div class="rowSplitCls10"></div>        <div class="tablePageToolbarCls">        <table style="width:100%;">            <tbody><tr>                <td class="font14" align="left">每页显示                    <select class="font14">                        <option value="10" selected="selected">10</option>                        <option value="20">20</option>                        <option value="50">50</option>                        <option value="100">100</option>                        <option value="200">200</option>                    </select>条记录，                    共<span class="recordCountSpan font14">1</span>条                </td>                <td class="tablePageBtnToolBarCls" align="right">                    <div class="font14" style="float: right;"><table class="tablePageBtnTdCls"><tbody><tr><td style="display:none;" gotopage="1" btntype="first"><span class="tablePageBtnDisabledCls">首页</span></td><td gotopage="0" btntype="pre"><span class="tablePageBtnDisabledCls">上一页</span></td><td gotopage="1" id="toPage" btntype="page" class="backPageCls">1</td><td gotopage="2" btntype="next"><span class="tablePageBtnDisabledCls">下一页</span></td><td style="display:none;" gotopage="1" btntype="last"><span class="tablePageBtnDisabledCls">尾页</span></td></tr></tbody></table></div>                </td>                <!--<td class="font14 tablePageInfoCls">总共<span class="recordCountSpan font14"></span>条，每页<span class="pageSizeSpan font14"></span>条， <span class="currentPageSpan font14"></span>/<span class="pageCountSpan font14"></span></td>-->                <!--<td class="tablePageBtnTdCls"><span class="tablePageBtnDisabledCls">上一页</span></td>-->                <!--<td class="tablePageBtnTdCls"><span class="tablePageBtnCls">下一页</span></td>-->            </tr>        </tbody></table>    </div></div>
+                <div style="width:974px;" comname="ScsdTable" setting="{id:&quot;myOrderQuery&quot;,autoLoad:false,queryId:&quot;myOrderQuery&quot;,controllerPath:&quot;ecp/transaction/order/queryorder.action&quot;,operArr:&quot;operArr&quot;,render:&quot;myOrderQueryRender&quot;,page:{currentPage:1,pageCount:0,recordCount:0,pageSize:10},isGroup:&quot;true&quot;,columns:[{&quot;border&quot;:&quot;true&quot;,&quot;groupOrDetail&quot;:&quot;group&quot;,&quot;hidden&quot;:&quot;false&quot;,&quot;columnHeader&quot;:null,&quot;toDetail&quot;:null,&quot;width&quot;:&quot;10%&quot;,&quot;format&quot;:null,&quot;valign&quot;:&quot;center&quot;,&quot;align&quot;:&quot;center&quot;,&quot;dictType&quot;:null,&quot;columnName&quot;:&quot;GEN_TIME&quot;},{&quot;border&quot;:&quot;true&quot;,&quot;groupOrDetail&quot;:&quot;group&quot;,&quot;hidden&quot;:&quot;false&quot;,&quot;columnHeader&quot;:null,&quot;toDetail&quot;:null,&quot;width&quot;:&quot;20%&quot;,&quot;format&quot;:null,&quot;valign&quot;:&quot;center&quot;,&quot;align&quot;:&quot;center&quot;,&quot;dictType&quot;:null,&quot;columnName&quot;:&quot;ORDER_ID&quot;},{&quot;border&quot;:&quot;true&quot;,&quot;groupOrDetail&quot;:&quot;group&quot;,&quot;hidden&quot;:&quot;false&quot;,&quot;columnHeader&quot;:null,&quot;toDetail&quot;:null,&quot;width&quot;:&quot;15%&quot;,&quot;format&quot;:null,&quot;valign&quot;:&quot;center&quot;,&quot;align&quot;:&quot;center&quot;,&quot;dictType&quot;:null,&quot;columnName&quot;:&quot;FREIGHT&quot;},{&quot;border&quot;:&quot;true&quot;,&quot;groupOrDetail&quot;:&quot;group&quot;,&quot;hidden&quot;:&quot;false&quot;,&quot;columnHeader&quot;:null,&quot;toDetail&quot;:null,&quot;width&quot;:&quot;70%&quot;,&quot;format&quot;:null,&quot;valign&quot;:&quot;center&quot;,&quot;align&quot;:&quot;right&quot;,&quot;dictType&quot;:null,&quot;columnName&quot;:&quot;SELLER_NAME&quot;},{&quot;border&quot;:&quot;false&quot;,&quot;groupOrDetail&quot;:&quot;group&quot;,&quot;hidden&quot;:&quot;true&quot;,&quot;columnHeader&quot;:null,&quot;toDetail&quot;:null,&quot;width&quot;:&quot;0%&quot;,&quot;format&quot;:null,&quot;valign&quot;:null,&quot;align&quot;:null,&quot;dictType&quot;:null,&quot;columnName&quot;:&quot;BUYER_ID&quot;},{&quot;border&quot;:&quot;false&quot;,&quot;groupOrDetail&quot;:&quot;group&quot;,&quot;hidden&quot;:&quot;true&quot;,&quot;columnHeader&quot;:null,&quot;toDetail&quot;:null,&quot;width&quot;:&quot;0%&quot;,&quot;format&quot;:null,&quot;valign&quot;:null,&quot;align&quot;:null,&quot;dictType&quot;:null,&quot;columnName&quot;:&quot;EXPR_NO&quot;},{&quot;border&quot;:&quot;false&quot;,&quot;groupOrDetail&quot;:&quot;group&quot;,&quot;hidden&quot;:&quot;true&quot;,&quot;columnHeader&quot;:null,&quot;toDetail&quot;:null,&quot;width&quot;:&quot;0%&quot;,&quot;format&quot;:null,&quot;valign&quot;:null,&quot;align&quot;:null,&quot;dictType&quot;:null,&quot;columnName&quot;:&quot;EXPR_NAME&quot;},{&quot;border&quot;:null,&quot;groupOrDetail&quot;:&quot;detail&quot;,&quot;hidden&quot;:&quot;true&quot;,&quot;columnHeader&quot;:&quot;&quot;,&quot;toDetail&quot;:null,&quot;width&quot;:&quot;0%&quot;,&quot;format&quot;:null,&quot;valign&quot;:null,&quot;align&quot;:null,&quot;dictType&quot;:null,&quot;columnName&quot;:&quot;items.LOT_PIC_PATH&quot;},{&quot;border&quot;:null,&quot;groupOrDetail&quot;:&quot;detail&quot;,&quot;hidden&quot;:&quot;true&quot;,&quot;columnHeader&quot;:&quot;&quot;,&quot;toDetail&quot;:null,&quot;width&quot;:null,&quot;format&quot;:null,&quot;valign&quot;:&quot;middle&quot;,&quot;align&quot;:&quot;center&quot;,&quot;dictType&quot;:null,&quot;columnName&quot;:&quot;items.LOT_CMMSSN&quot;},{&quot;border&quot;:&quot;false&quot;,&quot;groupOrDetail&quot;:&quot;detail&quot;,&quot;hidden&quot;:&quot;true&quot;,&quot;columnHeader&quot;:&quot;&quot;,&quot;toDetail&quot;:null,&quot;width&quot;:&quot;0%&quot;,&quot;format&quot;:null,&quot;valign&quot;:null,&quot;align&quot;:null,&quot;dictType&quot;:null,&quot;columnName&quot;:&quot;items.OUT_TIME_DAY&quot;},{&quot;border&quot;:null,&quot;groupOrDetail&quot;:&quot;detail&quot;,&quot;hidden&quot;:&quot;true&quot;,&quot;columnHeader&quot;:&quot;&quot;,&quot;toDetail&quot;:null,&quot;width&quot;:null,&quot;format&quot;:null,&quot;valign&quot;:null,&quot;align&quot;:null,&quot;dictType&quot;:null,&quot;columnName&quot;:&quot;items.NEED_CERT&quot;},{&quot;border&quot;:null,&quot;groupOrDetail&quot;:&quot;detail&quot;,&quot;hidden&quot;:&quot;true&quot;,&quot;columnHeader&quot;:&quot;&quot;,&quot;toDetail&quot;:null,&quot;width&quot;:null,&quot;format&quot;:null,&quot;valign&quot;:null,&quot;align&quot;:null,&quot;dictType&quot;:null,&quot;columnName&quot;:&quot;items.INSR_FEE&quot;},{&quot;border&quot;:null,&quot;groupOrDetail&quot;:&quot;detail&quot;,&quot;hidden&quot;:&quot;true&quot;,&quot;columnHeader&quot;:&quot;&quot;,&quot;toDetail&quot;:null,&quot;width&quot;:null,&quot;format&quot;:null,&quot;valign&quot;:null,&quot;align&quot;:null,&quot;dictType&quot;:null,&quot;columnName&quot;:&quot;items.NEED_INSR&quot;},{&quot;border&quot;:null,&quot;groupOrDetail&quot;:&quot;detail&quot;,&quot;hidden&quot;:&quot;true&quot;,&quot;columnHeader&quot;:&quot;&quot;,&quot;toDetail&quot;:null,&quot;width&quot;:null,&quot;format&quot;:null,&quot;valign&quot;:null,&quot;align&quot;:null,&quot;dictType&quot;:null,&quot;columnName&quot;:&quot;items.FIRSTCATGID&quot;},{&quot;border&quot;:null,&quot;groupOrDetail&quot;:&quot;detail&quot;,&quot;hidden&quot;:&quot;true&quot;,&quot;columnHeader&quot;:&quot;&quot;,&quot;toDetail&quot;:null,&quot;width&quot;:null,&quot;format&quot;:null,&quot;valign&quot;:null,&quot;align&quot;:null,&quot;dictType&quot;:null,&quot;columnName&quot;:&quot;items.ITEM_AGE&quot;},{&quot;border&quot;:null,&quot;groupOrDetail&quot;:&quot;detail&quot;,&quot;hidden&quot;:&quot;true&quot;,&quot;columnHeader&quot;:&quot;&quot;,&quot;toDetail&quot;:null,&quot;width&quot;:null,&quot;format&quot;:null,&quot;valign&quot;:null,&quot;align&quot;:null,&quot;dictType&quot;:null,&quot;columnName&quot;:&quot;items.AUTHOR_NAME&quot;},{&quot;border&quot;:null,&quot;groupOrDetail&quot;:&quot;detail&quot;,&quot;hidden&quot;:&quot;true&quot;,&quot;columnHeader&quot;:&quot;&quot;,&quot;toDetail&quot;:null,&quot;width&quot;:null,&quot;format&quot;:null,&quot;valign&quot;:null,&quot;align&quot;:null,&quot;dictType&quot;:null,&quot;columnName&quot;:&quot;items.GlIDE_MARK&quot;},{&quot;border&quot;:null,&quot;groupOrDetail&quot;:&quot;detail&quot;,&quot;hidden&quot;:&quot;false&quot;,&quot;columnHeader&quot;:&quot;拍品&quot;,&quot;toDetail&quot;:null,&quot;width&quot;:&quot;35%&quot;,&quot;format&quot;:null,&quot;valign&quot;:null,&quot;align&quot;:&quot;left&quot;,&quot;dictType&quot;:null,&quot;columnName&quot;:&quot;items.ITEM_NAME&quot;},{&quot;border&quot;:&quot;true&quot;,&quot;groupOrDetail&quot;:&quot;detail&quot;,&quot;hidden&quot;:&quot;false&quot;,&quot;columnHeader&quot;:&quot;成交价&quot;,&quot;toDetail&quot;:null,&quot;width&quot;:&quot;8%&quot;,&quot;format&quot;:null,&quot;valign&quot;:&quot;middle&quot;,&quot;align&quot;:&quot;center&quot;,&quot;dictType&quot;:null,&quot;columnName&quot;:&quot;items.HAMMER_PRICE&quot;},{&quot;border&quot;:&quot;true&quot;,&quot;groupOrDetail&quot;:&quot;detail&quot;,&quot;hidden&quot;:&quot;false&quot;,&quot;columnHeader&quot;:&quot;库存状态&quot;,&quot;toDetail&quot;:null,&quot;width&quot;:&quot;9%&quot;,&quot;format&quot;:null,&quot;valign&quot;:&quot;middle&quot;,&quot;align&quot;:&quot;center&quot;,&quot;dictType&quot;:null,&quot;columnName&quot;:&quot;items.STOCK_QTY&quot;},{&quot;border&quot;:&quot;true&quot;,&quot;groupOrDetail&quot;:&quot;detail&quot;,&quot;hidden&quot;:&quot;false&quot;,&quot;columnHeader&quot;:&quot;其他费用&quot;,&quot;toDetail&quot;:null,&quot;width&quot;:&quot;9%&quot;,&quot;format&quot;:null,&quot;valign&quot;:&quot;middle&quot;,&quot;align&quot;:&quot;center&quot;,&quot;dictType&quot;:null,&quot;columnName&quot;:&quot;items.CERT_FEE&quot;},{&quot;border&quot;:&quot;true&quot;,&quot;groupOrDetail&quot;:&quot;detail&quot;,&quot;hidden&quot;:&quot;false&quot;,&quot;columnHeader&quot;:&quot;退货&quot;,&quot;toDetail&quot;:null,&quot;width&quot;:&quot;9%&quot;,&quot;format&quot;:null,&quot;valign&quot;:&quot;middle&quot;,&quot;align&quot;:&quot;center&quot;,&quot;dictType&quot;:null,&quot;columnName&quot;:&quot;items.LOT_STATUS&quot;},{&quot;border&quot;:&quot;true&quot;,&quot;groupOrDetail&quot;:&quot;group&quot;,&quot;hidden&quot;:&quot;false&quot;,&quot;columnHeader&quot;:&quot;合计&quot;,&quot;toDetail&quot;:&quot;true&quot;,&quot;width&quot;:&quot;9%&quot;,&quot;format&quot;:null,&quot;valign&quot;:&quot;middle&quot;,&quot;align&quot;:&quot;center&quot;,&quot;dictType&quot;:null,&quot;columnName&quot;:&quot;NP_AMOUNT&quot;},{&quot;border&quot;:&quot;true&quot;,&quot;groupOrDetail&quot;:&quot;group&quot;,&quot;hidden&quot;:&quot;false&quot;,&quot;columnHeader&quot;:&quot;全部订单&quot;,&quot;toDetail&quot;:&quot;true&quot;,&quot;width&quot;:&quot;9%&quot;,&quot;format&quot;:null,&quot;valign&quot;:&quot;middle&quot;,&quot;align&quot;:&quot;center&quot;,&quot;dictType&quot;:null,&quot;columnName&quot;:&quot;ORDER_STATUS&quot;}]}" id="myOrderQuery">    <div class="tableHeaderCls" style="">        <table class="padding0 margin0" width="100%" cellpadding="0" cellspacing="0" border="0">        	<tbody><tr>            <td class="tableColumnHeaderCls" style="width:35%;">拍品</td><td class="tableColumnHeaderCls" style="width:8%;">成交价</td><td class="tableColumnHeaderCls" style="width:9%;">库存状态</td><td class="tableColumnHeaderCls" style="width:9%;">其他费用</td><td class="tableColumnHeaderCls" style="width:9%;">退货</td><td class="tableColumnHeaderCls" style="width:9%;">合计</td><td class="tableColumnHeaderCls" style="width:9%;">全部订单</td><td class="tableColumnHeaderCls" style="">操作</td>            </tr>        </tbody></table>    </div>    <div class="rowSplitCls10"></div>
+                    <div id="orderList" >
+                        <div class="tableContentBoxCls" th:fragment="tableContentBoxCls" id="tableContentBoxCls" style="" th:each="orders:${orderList}" >
+                        <table class="tableGroupItemCls" cellpadding="0" cellspacing="0" border="0">
+                            <tbody>
+                            <tr>
+                                <td style="width:10%" class="aligncenter">
+                                    <div style="color:#2a2c2f">2019-05-14</div>
+                                </td>
+                                <td style="width:20%" class="aligncenter">
+                                    订单号:<div style="color:#EC135A;font-weight:500;"  th:text="${orders.orderNo}">1128269553676058624</div>
+                                </td>
+                                <td style="width:15%" class="aligncenter">
+                                    运费:<div style="color:#2a2c2f;" th:text="${orders.freight}">50</div>
+                                </td>
+                                <td style="width:70%" class="alignright">
+                                    卖家:<div style="margin-right:30px;font-size:14px;" th:text="${orders.seller}">北京嘉德在线拍卖有限公司</div>
+                                </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                        <table class="tableRowItemCls" cellpadding="0" cellspacing="0" border="0">
+                            <tbody>
+                            <tr><td style="width:35%" class="alignleft valigncenter tableColItemRBCls">
+                                <div class="itemDiv">
+                            <a target="_blank" href="http://www.artrade.com/jsp/ecp/public/auction.jsp?lotid=973476012">
+                                <div class="itemPic"><img src="myorder_files/z00000003_s.jpg" alt="显示失败"></div>
+                            </a>
+                                    <div class="itemName" style="font-size:12px;">
+                                        <a target="_blank" href="#" >z00000003 佚名 内部测试3 勿点</a></div>
+                                </div></td>
+                                <td style="width:8%" class="aligncenter valignmiddle tableColItemRBCls" th:text="${orders.transactionPrice}">1.1</td>
+                                <td style="width:9%" class="aligncenter valignmiddle tableColItemRBCls" th:text="${orders.stockStatus}">虚拟库</td>
+                                <td style="width:9%" class="aligncenter valignmiddle tableColItemRBCls">
+                                    <div style="text-align:left;margin-left:25px;"><div></div>
+                                        <div style="font-size:12px;" th:text="${orders.anyCertificate}"></div>
+                                        保费：<div style="font-size:12px;" th:text="${orders.premiums}">0.01</div>
+                            </div></td>
+                            <td style="width:9%" class="aligncenter valignmiddle tableColItemRBCls">
+                                <div style="color:red;width:100px;"></div>
+                            </td>
+                            <td rowspan="1" style="width:9%" class="aligncenter valignmiddle tableColItemRBCls" th:text="${orders.totalPrice}">51.11
+                            </td>
+                            <td rowspan="1" style="width:9%" class="aligncenter valignmiddle tableColItemRBCls" >
+                                <div><div style="font-size:12px;" th:text="${orders.paymentStatus}">待付款</div>
+                                    <a href="" style="font-size:12px;color:red">订单详情</a>
+                                </div>
+                            </td>
+                            <td rowspan="1" class="aligncenter valignmiddle tableColItemCls" name="operation" style="display:none">
+                                <div class="tempOperArrDivCls" tempoperarrindex="0">
+                                    <div icontype="edit" style="width:100px" class="editOperBtnIconCls4">取消订单</div>
+                                </div>
+                                <div style="height:5px;">&nbsp;</div>
+                                <div class="tempOperArrDivCls" tempoperarrindex="2">
+                                    <a id="" icontype="edit" style="width:100px" class="editOperBtnIconCls4" th:href="@{userCenter/payment(orderId=${orders.orderId})}">确认付款</a>
+                                </div>
+                            </td >
+                            </tr>
+                            </tbody>
+                        </table>
+                        </div>
+                    </div>
+                    <div class="rowSplitCls10"></div>
+                    <div class="tablePageToolbarCls"><table style="width:100%;">
+                        <tbody>
+                        <tr>
+                            <td class="font14" align="left">每页显示<select class="font14">
+                                <option value="10" selected="selected">10</option>
+                                <option value="20">20</option>
+                                <option value="50">50</option>
+                                <option value="100">100</option>
+                                <option value="200">200</option></select>条记录，
+                        共<span class="recordCountSpan font14">1</span>条
+                            </td>
+                        <td class="tablePageBtnToolBarCls" align="right">
+                            <div class="font14" style="float: right;">
+                                <table class="tablePageBtnTdCls">
+                                <tbody>
+                                <tr>
+                                    <td style="display:none;" gotopage="1" btntype="first">
+                                        <span class="tablePageBtnDisabledCls">首页</span>
+                                    </td>
+                                <td gotopage="0" btntype="pre">
+                                    <span class="tablePageBtnDisabledCls">上一页</span>
+                                </td>
+                                <td gotopage="1" id="toPage" btntype="page" class="backPageCls">1
+                                </td>
+                                <td gotopage="2" btntype="next">
+                                    <span class="tablePageBtnDisabledCls">下一页</span>
+                                </td>
+                                <td style="display:none;" gotopage="1" btntype="last">
+                                    <span class="tablePageBtnDisabledCls">尾页</span>
+                                </td>
+                                </tr>
+                                </tbody>
+                                </table>
+                            </div>
+                        </td>                <!--<td class="font14 tablePageInfoCls">总共<span class="recordCountSpan font14"></span>条，每页<span class="pageSizeSpan font14"></span>条， <span class="currentPageSpan font14"></span>/<span class="pageCountSpan font14"></span></td>-->                <!--<td class="tablePageBtnTdCls"><span class="tablePageBtnDisabledCls">上一页</span></td>-->                <!--<td class="tablePageBtnTdCls"><span class="tablePageBtnCls">下一页</span></td>-->
+                                </tr>
+                        </tbody>
+                    </table>
+                    </div>
+                </div>
 
             </div>
             
@@ -718,6 +826,24 @@ function doClickPreQuery() {
     </div>
 </div>
 
+<!--待付款,待发货，待收货，待评价-->
+<script type="text/javascript">
+    function queryMenu(id) {
+        var selectedObj = $(".tabHeaderItemSelectedCls");
+        selectedObj.removeClass("tabHeaderItemSelectedCls")
+        selectedObj.addClass("tabHeaderItemUnSelectedCls");
+        // 给当前点击添加选中
+        $("#btn_"+id).removeClass("tabHeaderItemUnSelectedCls");
+        $("#btn_"+id).addClass("tabHeaderItemSelectedCls");
 
+        $("#orderList").load("userCenter/query?id="+id,
+        function s() {
+            if(id==1){
+                $("[name='operation']").show();
+            }
+        });
+
+    }
+</script>
 </body>
 </html>

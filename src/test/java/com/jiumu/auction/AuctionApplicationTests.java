@@ -1,6 +1,9 @@
 package com.jiumu.auction;
 
 
+import com.jiumu.auction.userCenter.dao.MyAuctionMapper;
+import com.jiumu.auction.userCenter.dao.MyOrderMapper;
+import com.jiumu.auction.userCenter.vo.MyAuction;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mybatis.spring.annotation.MapperScan;
@@ -13,6 +16,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -20,7 +24,8 @@ import java.util.Date;
 public class AuctionApplicationTests {
     @Autowired
     private StringRedisTemplate redisTemplate;
-
+    @Autowired
+    private MyAuctionMapper myAuctionMapper;
     @Test
     public void contextLoads() {
 //        StringRedisTemplate redisTemplate= new StringRedisTemplate();
@@ -57,6 +62,12 @@ public class AuctionApplicationTests {
         System.out.println("longlong"+ time+"-----"+time1+"==="+i+"and两分钟等于"+t);
         Timestamp timestamp1 = new Timestamp(i);
         System.out.println("jeishu时间-当前时间=最终时间"+a+"---"+timestamp+"==="+ timestamp1);
+    }
+
+    @Test
+    public void test3(){
+        List<MyAuction> myAuctionList = myAuctionMapper.queryMyAuctionList(1L);
+
     }
 
 }

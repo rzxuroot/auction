@@ -32,6 +32,12 @@ public class OrderServiceImpl implements IOrderService {
         //当前时间的毫秒数是订单号
         long time = timestamp.getTime();
         order.setOrderNo(time+"");
+        order.setFreight(10);
+        order.setSeller("上海嘉德在线拍卖");
+        order.setStockStatus("虚拟库");
+        order.setPremiums(1);
+        order.setAnyCertificate("no");
+        order.setTotalPrice(1000);
         //添加成交价格
         order.setTransactionPrice(price);
         orderMapper.addOrder(order);

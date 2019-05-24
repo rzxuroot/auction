@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jiumu.auction.userCenter.dao.MyOrderAndPriceMapper">
+    <resultMap id="baseResultMap" type="com.jiumu.auction.userCenter.vo.MyOrderAndPrice">
+        <result column="account_balance"  property="accountBalance"/>
+        <result column="order_no"   property="orderNo"/>
+        <result column="total_price" property="totalPrice"/>
+    </resultMap>
+    <select id="queryMyOrderAndPrice" resultMap="baseResultMap">
+        SELECT account_balance,order_no,total_price from tb_account a JOIN tb_user b ON
+a.account_user_id = b.user_id JOIN tb_order c on
+c.order_user_id = b.user_id where user_id= #{userId} and order_id =#{orderId};
+    </select>
+</mapper>

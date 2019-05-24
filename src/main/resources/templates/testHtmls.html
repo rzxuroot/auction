@@ -11,25 +11,25 @@
 <script type="text/javascript" src="../static/js/jquery-3.1.1.js"></script>
 <div id="a">
     <table>
-    <tbody id="b">
-        <tr >
+        <tbody id="b">
+        <tr>
             <td id="d">a</td>
             <td id="e">b</td>
 
         </tr>
-    </tbody>
+        </tbody>
     </table>
 </div>
 <script type="text/javascript">
 
-    var text1 =$("#e").text();
+    var text1 = $("#e").text();
     console.log(text1)
-    var httpl= "<td id=\"d\">a</td> <td id=\"e\">b</td> "
-    var a="";
-    for (var i=0;i<5;i++){
+    var httpl = "<td id=\"d\">a</td> <td id=\"e\">b</td> "
+    var a = "";
+    for (var i = 0; i < 5; i++) {
         // $("#d").text(i);
         // $("#c:eq(" + i + ")").find('e').text(i);
-       a+="<tr ><td id=\"d\">"+i+"</td>  </tr>"
+        a += "<tr ><td id=\"d\">" + i + "</td>  </tr>"
 
     }
     $("#b").html(a);

@@ -1,136 +1,138 @@
-﻿
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
       xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 <head>
     <base th:href="${#request.getContextPath()}+'/'">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <!--<script id="allmobilize" charset="utf-8" src="js/allmobilize.min_1.js"></script>-->
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-<meta http-equiv="Cache-Control" content="no-transform" />
-<link rel="alternate" media="handheld" href="#" />
-<link type="text/css" rel="stylesheet" href="css/base_2.css" />
-<link type="text/css" rel="stylesheet" href="css/base_3.css" />
-<link type="text/css" rel="stylesheet" href="css/jquery-ui.min_1.css" />
-<link type="text/css" rel="stylesheet" href="css/jquery-ui-timepicker-addon_1.css" />
-<!-- <script type="text/javascript" src="js/jquery-1.11.3.min_1.js"></script>
-<script type="text/javascript" src="js/jquery-1.11.3.extends_1.js"></script>
-<script type="text/javascript" src="js/dateextend_1.js"></script>
-<script type="text/javascript" src="js/ajaxfileupload_1.js"></script>
-<script type="text/javascript" src="js/jquery-ui.min_1.js"></script>
-<script type="text/javascript" src="js/jquery.ui.datepicker-zh-cn_1.js"></script>
-<script type="text/javascript" src="js/jquery-ui-timepicker-addon_1.js"></script>
-<script type="text/javascript" src="js/common_1.js"></script>
-<script type="text/javascript" src="js/businesscommon_1.js"></script>
-<script src="js/ecpbase_1.js"></script>
-<script src="js/ecpvalidation_1.js"></script>-->
-<link type="text/css" rel="stylesheet" href="css/simpwinform_1.css" />
-<!-- <script type="text/javascript" src="js/simpwinform_1.js"></script>-->
-<script>
-    var baseUrl = "";
-    var lotUrl="/jsp/ecp/public/auction.jsp?lotid=";
-    var chatName = ""; 
-    var chatId = "";
-</script>
+    <meta http-equiv="Cache-Control" content="no-siteapp"/>
+    <meta http-equiv="Cache-Control" content="no-transform"/>
+    <link rel="alternate" media="handheld" href="#"/>
+    <link type="text/css" rel="stylesheet" href="css/base_2.css"/>
+    <link type="text/css" rel="stylesheet" href="css/base_3.css"/>
+    <link type="text/css" rel="stylesheet" href="css/jquery-ui.min_1.css"/>
+    <link type="text/css" rel="stylesheet" href="css/jquery-ui-timepicker-addon_1.css"/>
+    <!-- <script type="text/javascript" src="js/jquery-1.11.3.min_1.js"></script>
+    <script type="text/javascript" src="js/jquery-1.11.3.extends_1.js"></script>
+    <script type="text/javascript" src="js/dateextend_1.js"></script>
+    <script type="text/javascript" src="js/ajaxfileupload_1.js"></script>
+    <script type="text/javascript" src="js/jquery-ui.min_1.js"></script>
+    <script type="text/javascript" src="js/jquery.ui.datepicker-zh-cn_1.js"></script>
+    <script type="text/javascript" src="js/jquery-ui-timepicker-addon_1.js"></script>
+    <script type="text/javascript" src="js/common_1.js"></script>
+    <script type="text/javascript" src="js/businesscommon_1.js"></script>
+    <script src="js/ecpbase_1.js"></script>
+    <script src="js/ecpvalidation_1.js"></script>-->
+    <link type="text/css" rel="stylesheet" href="css/simpwinform_1.css"/>
+    <!-- <script type="text/javascript" src="js/simpwinform_1.js"></script>-->
+    <script>
+        var baseUrl = "";
+        var lotUrl = "/jsp/ecp/public/auction.jsp?lotid=";
+        var chatName = "";
+        var chatId = "";
+    </script>
 
 
-
-
-
-<!--    <script
-            src="js/select.js"></script>
-    <script
-            src="js/ecpvalidation_1.js"></script>-->
+    <!--    <script
+                src="js/select.js"></script>
+        <script
+                src="js/ecpvalidation_1.js"></script>-->
     <link type="text/css" rel="stylesheet"
           href="css/register.css"/>
-<!-- <script type="text/javascript"
-            src="js/register.js"></script>-->
+    <!-- <script type="text/javascript"
+                src="js/register.js"></script>-->
     <title>用户注册</title>
-<style type="text/css">
-    .error{
-        font-size:14px;
-        color:red;
-    }
-    #reg {
-        cursor: pointer;
-    }
+    <style type="text/css">
+        .error {
+            font-size: 14px;
+            color: red;
+        }
 
-</style>
+        #reg {
+            cursor: pointer;
+        }
+
+    </style>
 </head>
 
 <body>
-
 
 
 <!--<script type="text/javascript" src="js/header_1.js"></script>
 <script type="text/javascript" src="js/jquery.superslide.2.1.1_1.js"></script>-->
 
 <script>
-	var showNotice = "";
+    var showNotice = "";
 </script>
 <style>
-   .noticeDivBox{
-      width:300px;
-      float: left;
-      position:relative;
-      zoom:1;
-      overflow:hidden;
-   }
-   .noticeDivBox:HOVER {
-      content: "";
-      display: block;
-      clear: both;
-   }
-   
-   .noticeDiv{
-      width:220px;
-      float: left;
-      left:65px;
-      
-   }
-   .noticeDiv ul{
-      height:40px;
-      overflow:hidden;
-      zoom:1;
-   }
-   
-   .noticeDiv ul li{ 
-    height:40px; 
-    line-height:40px;  
-    text-align:center; 
-    _display:inline; 
-    width:auto !important;  
-    max-width:200px;
-    overflow:hidden; /*内容超出宽度时隐藏超出部分的内容 */
-    text-overflow:ellipsis;/* 当对象内文本溢出时显示省略标记(...) ；需与overflow:hidden;一起使用。*/
-    white-space:nowrap; /*不换行 */
-    }  /* 用 width:auto !important 覆盖SuperSlide自动生成的宽度，解决文字不衔接问题 */
-    
-    .noticeDiv ul li a{
+    .noticeDivBox {
+        width: 300px;
+        float: left;
+        position: relative;
+        zoom: 1;
+        overflow: hidden;
     }
-    
-    .noticeDiv ul li a:visited { 
-	  COLOR: #000000; 
-	} 
-	.noticeDiv ul li a:hover { 
-	  COLOR: #c81623; 
-	} 
-	.noticeDiv ul li a:active { 
-	  COLOR: #c81623; 
-	} 
-	
-	 #header_nickName a:hover{
-	  text-decoration: underline;
-	  color:#E6002D;
-	}
-	
-}
+
+    .noticeDivBox:HOVER {
+        content: "";
+        display: block;
+        clear: both;
+    }
+
+    .noticeDiv {
+        width: 220px;
+        float: left;
+        left: 65px;
+
+    }
+
+    .noticeDiv ul {
+        height: 40px;
+        overflow: hidden;
+        zoom: 1;
+    }
+
+    .noticeDiv ul li {
+        height: 40px;
+        line-height: 40px;
+        text-align: center;
+        _display: inline;
+        width: auto !important;
+        max-width: 200px;
+        overflow: hidden; /*内容超出宽度时隐藏超出部分的内容 */
+        text-overflow: ellipsis; /* 当对象内文本溢出时显示省略标记(...) ；需与overflow:hidden;一起使用。*/
+        white-space: nowrap; /*不换行 */
+    }
+
+    /* 用 width:auto !important 覆盖SuperSlide自动生成的宽度，解决文字不衔接问题 */
+
+    .noticeDiv ul li a {
+    }
+
+    .noticeDiv ul li a:visited {
+        COLOR: #000000;
+    }
+
+    .noticeDiv ul li a:hover {
+        COLOR: #c81623;
+    }
+
+    .noticeDiv ul li a:active {
+        COLOR: #c81623;
+    }
+
+    #header_nickName a:hover {
+        text-decoration: underline;
+        color: #E6002D;
+    }
+
+    }
 </style>
 <div class="headAndFoot" style="background:#F9F4F4;clear:both;">
     <div style="width:1190px;height:40px;line-height:40px;text-align:center;margin:auto;">
         <div id="noticeDivBox" class="noticeDivBox">
             <div style="float: left;">
-                <img src="picture/notice_1.png" />&nbsp;&nbsp;公告：
+                <img src="picture/notice_1.png"/>&nbsp;&nbsp;公告：
             </div>
             <div id="noticeDiv" class="noticeDiv">
                 <ul id="noticeList" class="header_ul">
@@ -138,27 +140,28 @@
             </div>
         </div>
         <div id="indexLinkDiv" style="width:100px;float: left;position:relative;">
-           
+
         </div>
         <div style="float: right;">
             <div>
                 <div style="float:left">
-                                                      您好，&nbsp;<span id="header_nickName">
-                                   <a  href="/jsp/ecp/buyer/buyerindex.jsp" target=""></a>
+                    您好，&nbsp;<span id="header_nickName">
+                                   <a href="/jsp/ecp/buyer/buyerindex.jsp" target=""></a>
                                 </span>
-                                <shiro:user>
-                                <a id="header_logout" href="#" onclick="logout();" style="display:none;">&nbsp;<b>，退出</b></a>
-                                </shiro:user>
-                                <shiro:guest>
-                                <a id="header_login" href="html/login.html" target="_self" style=""><b>请登录</b></a>&nbsp;&nbsp;
-                                </shiro:guest>
+                    <shiro:user>
+                        <a id="header_logout" href="#" onclick="logout();" style="display:none;">&nbsp;<b>，退出</b></a>
+                    </shiro:user>
+                    <shiro:guest>
+                        <a id="header_login" href="html/login.html" target="_self" style=""><b>请登录</b></a>&nbsp;&nbsp;
+                    </shiro:guest>
                 </div>
                 <div style="float:left;">
                     <a href="html/register.html"
-                    target="_self" style="color: #FF003B;font-weight:600;">免费注册</a>&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+                       target="_self" style="color: #FF003B;font-weight:600;">免费注册</a>&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
                 </div>
-                <div id="myDealDiv" style="cursor: pointer;float:left;position:relative;display:none;" ><a href="/jsp/ecp/buyer/buyerindex.jsp">买家中心</a><img
-                    src="picture/pulldown_1.png" />&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+                <div id="myDealDiv" style="cursor: pointer;float:left;position:relative;display:none;"><a
+                        href="/jsp/ecp/buyer/buyerindex.jsp">买家中心</a><img
+                        src="picture/pulldown_1.png"/>&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
                     <ul id="myDeal" class="headerMenu_ul" style="position:absolute;z-index:1001;left:-20px;">
                         <li style="display:none"><a href="/jsp/ecp/buyer/buyerindex.jsp">买家首页</a></li>
                         <li style="display:none"><a href="/jsp/ecp/buyer/trademng/myauct.jsp">我的竞拍</a></li>
@@ -167,44 +170,47 @@
                         <li style="display:none"><a href="/jsp/ecp/buyer/myasset/margin.jsp">我的保证金</a></li>
                     </ul>
                 </div>
-                <div style="float:left;display:none;" >
+                <div style="float:left;display:none;">
                     <a href="/jsp/ecp/buyer/focuscnt/focusauct.jsp" target="_self">我的关注</a>&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
                 </div>
-                 <div id="sellerCenterDiv" style="cursor: pointer;float:left;position:relative;display:none;" >
-                                                    <a href="/jsp/ecp/seller/tranm/ordermanagelist.jsp">卖家中心</a><img
-                    src="picture/pulldown_1.png" />&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+                <div id="sellerCenterDiv" style="cursor: pointer;float:left;position:relative;display:none;">
+                    <a href="/jsp/ecp/seller/tranm/ordermanagelist.jsp">卖家中心</a><img
+                        src="picture/pulldown_1.png"/>&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
                     <ul id="sellerCenter" class="headerMenu_ul" style="position:absolute;z-index:1001;left:-20px;">
                         <li style="display:none"><a href="/jsp/ecp/seller/tranm/ordermanagelist.jsp">卖家首页</a></li>
-<!--                         <li style="display:none"><a href="#">免费开店</a></li> -->
-<!--                         <li style="display:none"><a href="#">已卖出的拍品</a></li> -->
+                        <!--                         <li style="display:none"><a href="#">免费开店</a></li> -->
+                        <!--                         <li style="display:none"><a href="#">已卖出的拍品</a></li> -->
                         <li style="display:none"><a href="/jsp/ecp/item/manage/itemmng.jsp?tabIndex=0">预展中的拍品</a></li>
                         <li style="display:none"><a href="/jsp/ecp/item/manage/itemmng.jsp">拍卖中的拍品</a></li>
-<!--                         <li style="display:none"><a href="#">卖家服务市场</a></li> -->
-<!--                         <li style="display:none"><a href="#">卖家培训中心</a></li> -->
+                        <!--                         <li style="display:none"><a href="#">卖家服务市场</a></li> -->
+                        <!--                         <li style="display:none"><a href="#">卖家培训中心</a></li> -->
                     </ul>
-                </div> 
-                <div id="activeCenter" style="float:left;">
-                  <a href="/jsp/ecp/buyer/myasset/active.jsp" target="_self">活动中心</a>&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
                 </div>
-               
-                
-                <div id="mavinDiv" style="cursor: pointer;float:left;position:relative;display:none;" >
-                                                    专家中心<img src="picture/pulldown_1.png" />&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+                <div id="activeCenter" style="float:left;">
+                    <a href="/jsp/ecp/buyer/myasset/active.jsp" target="_self">活动中心</a>&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+                </div>
+
+
+                <div id="mavinDiv" style="cursor: pointer;float:left;position:relative;display:none;">
+                    专家中心<img src="picture/pulldown_1.png"/>&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
                     <ul id="mavinUlDiv" class="headerMenu_ul" style="position:absolute;z-index:1001;left:-20px;">
                         <li style="display:none"><a href="/jsp/ecp/mavin/center/mavinindex.jsp">专家首页</a></li>
                         <li style="display:none"><a href="/jsp/ecp/buyer/trademng/myauct.jsp">我的服务</a></li>
                         <li style="display:none"><a href="/jsp/ecp/buyer/trademng/myclinch.jsp">我的成交</a></li>
                         <li style="display:none"><a href="/jsp/ecp/buyer/myasset/margin.jsp">我的保证金</a></li>
-                        
+
                     </ul>
-                </div> 
+                </div>
                 <div id="helpCenterDiv" style="cursor: pointer;float:left;position:relative;">
-                                                       帮助中心<img
-                    src="picture/pulldown_1.png" />
+                    帮助中心<img
+                        src="picture/pulldown_1.png"/>
                     <ul id="helpCenter" class="headerMenu_ul" style="position:absolute;z-index:1001;left:-20px;">
-                        <li style="display:none"><a target="_blank" href="/jsp/ecp/helpdoc/helpcenter.jsp?menuId=2">买家帮助</a></li>
-                        <li style="display:none"><a target="_blank" href="/jsp/ecp/helpdoc/helpcenter.jsp?parId=0">卖家帮助</a></li>
-                        <li style="display:none"><a target="_blank" href="/jsp/ecp/helpdoc/helpcenter.jsp?parId=1">常见问题</a></li>
+                        <li style="display:none"><a target="_blank"
+                                                    href="/jsp/ecp/helpdoc/helpcenter.jsp?menuId=2">买家帮助</a></li>
+                        <li style="display:none"><a target="_blank"
+                                                    href="/jsp/ecp/helpdoc/helpcenter.jsp?parId=0">卖家帮助</a></li>
+                        <li style="display:none"><a target="_blank"
+                                                    href="/jsp/ecp/helpdoc/helpcenter.jsp?parId=1">常见问题</a></li>
                     </ul>
                 </div>
             </div>
@@ -218,8 +224,8 @@
         <!-- LOGO-->
         <div style="margin-top: 20px;">
             <div style="float: left;">
-            	<a href="/index.jsp">
-                	<img src="picture/logo_1.png"/>
+                <a href="/index.jsp">
+                    <img src="picture/logo_1.png"/>
                 </a>
             </div>
             <div class="textUnderLogo">注册新用户</div>
@@ -228,70 +234,74 @@
         <!-- 注册输入区域 -->
         <div style="clear: both"></div>
         <div class="inputArea">
-            <form action="user/register",method="post" id="form1">
-            <div class="textMargin">
-                <span class="redStar">用户名</span>
-					<span id="nickNameSpan">
-					  <input name="username" class="nickName" id="username" type="text" value="" placeholder="您的登录名或昵称" data-validate="{required:true}"/>
+            <form action="user/register" ,method="post" id="form1">
+                <div class="textMargin">
+                    <span class="redStar">用户名</span>
+                    <span id="nickNameSpan">
+					  <input name="username" class="nickName" id="username" type="text" value="" placeholder="您的登录名或昵称"
+                             data-validate="{required:true}"/>
 					</span>
-            </div>
-            <div class="textMargin">
-                <span class="redStar" style="float: left">手机号</span>
-                <input  type="hidden" id="areaCode" value="0086"/>
+                </div>
+                <div class="textMargin">
+                    <span class="redStar" style="float: left">手机号</span>
+                    <input type="hidden" id="areaCode" value="0086"/>
 
-                <div class="areaCodeDiv">
-                    <span id="areaCodeSpan" onclick="slctAreaCode()">+86</span><img
-                        style="display: block; float: right; margin-top: 8px;"
-                        src="picture/pulldown_1.png" onclick="slctAreaCode()"/>
-                    <ul class="areaCodeUl" style="position:absolute;z-index:1001;left:-20px;">
-                        <li style="display:none">+86</li>
-                        <li style="display:none">+852</li>
-                        <li style="display:none">+853</li>
-                        <li style="display:none">+886</li>
-                    </ul>
+                    <div class="areaCodeDiv">
+                        <span id="areaCodeSpan" onclick="slctAreaCode()">+86</span><img
+                            style="display: block; float: right; margin-top: 8px;"
+                            src="picture/pulldown_1.png" onclick="slctAreaCode()"/>
+                        <ul class="areaCodeUl" style="position:absolute;z-index:1001;left:-20px;">
+                            <li style="display:none">+86</li>
+                            <li style="display:none">+852</li>
+                            <li style="display:none">+853</li>
+                            <li style="display:none">+886</li>
+                        </ul>
+                    </div>
+                    <div id="mbrMobileSpan" style="float: left;">
+                        <input name="phone" class="mobileTextInput" id="mbrMobile" type="text" placeholder="常用手机号码"
+                               data-validate="{required:true}"/>
+                    </div>
                 </div>
-                <div id="mbrMobileSpan" style="float: left;">
-                    <input name="phone" class="mobileTextInput" id="mbrMobile" type="text" placeholder="常用手机号码"
-                           data-validate="{required:true}"/>
-                </div>
-            </div>
-            <div class="textMargin">
-                <span class="redStar">设置密码</span>
-                <span id="passwordSpan">
-                <input id="password" name="password"class="passwd" type="password" value="" placeholder="至少6个字符" data-validate="{required:true}"/>
+                <div class="textMargin">
+                    <span class="redStar">设置密码</span>
+                    <span id="passwordSpan">
+                <input id="password" name="password" class="passwd" type="password" value="" placeholder="至少6个字符"
+                       data-validate="{required:true}"/>
                 </span>
-                <!-- 密码强度校验 -->
-                <span class="pswdCheckDivCls" style="margin-left:10px;display: none;">
+                    <!-- 密码强度校验 -->
+                    <span class="pswdCheckDivCls" style="margin-left:10px;display: none;">
                     <span class="pswdCheckDefaultCls">弱</span>
                     <span class="pswdCheckDefaultCls">中</span>
                     <span class="pswdCheckDefaultCls">强</span>
                 </span>
-            </div>
-            <div class="textMargin">
-                <span class="redStar">确认密码</span>
-					<span id="rePasswordSpan">
-					   <input id="password1" name="password1" class="rePassword" type="password" value="" placeholder="请再次输入密码" data-validate="{required:true}"/>
+                </div>
+                <div class="textMargin">
+                    <span class="redStar">确认密码</span>
+                    <span id="rePasswordSpan">
+					   <input id="password1" name="password1" class="rePassword" type="password" value=""
+                              placeholder="请再次输入密码" data-validate="{required:true}"/>
 				    </span>
-            </div>
-            <div class="textMargin">
-                <span class="redStar">验证码</span>
-					  <span id="valideateCodeSpan">
+                </div>
+                <div class="textMargin">
+                    <span class="redStar">验证码</span>
+                    <span id="valideateCodeSpan">
 					      <input class="validateCode" type="text" name="code" value="" id="code"/>
 					  </span>
-                <img id="codeImg" class="codeImg" src="getVerify"
-                     onclick="getVerify(this);"/>
-            </div>
-            <div class="textMargin">
-                <div class="titleDiv"><span class="redStar">短信验证</span>
-                    <input id="noteCode" class="msgCode" type="text" value="" name="noteCode"/>
+                    <img id="codeImg" class="codeImg" src="getVerify"
+                         onclick="getVerify(this);"/>
                 </div>
-                <div id="getMsgCodeBtn" class="getMsgCodeBtn" onclick="GetSMS()">获取短信验证</div>
-            </div>
-            <div class="rule" >
-                <input id="agreeMent" name="agreeMent" type="checkbox" checked="" />
-                <span>我已阅读并同意<a href="/jsp/ecp/helpdoc/helpcenter.jsp?menuId=0" target="_blank">《嘉德在线拍卖规则》</a></span>
-            </div>
-            <div id="reg" class="submitBtn" onclick="javascript:register()">立即注册</div>
+                <div class="textMargin">
+                    <div class="titleDiv"><span class="redStar">短信验证</span>
+                        <input id="noteCode" class="msgCode" type="text" value="" name="noteCode"/>
+                    </div>
+                    <div id="getMsgCodeBtn" class="getMsgCodeBtn" onclick="GetSMS()">获取短信验证</div>
+                </div>
+                <div class="rule">
+                    <input id="agreeMent" name="agreeMent" type="checkbox" checked=""/>
+                    <span>我已阅读并同意<a href="/jsp/ecp/helpdoc/helpcenter.jsp?menuId=0"
+                                    target="_blank">《嘉德在线拍卖规则》</a></span>
+                </div>
+                <div id="reg" class="submitBtn" onclick="javascript:register()">立即注册</div>
             </form>
 
         </div>
@@ -299,37 +309,45 @@
 </div>
 
 
-<div  style="float:left;width:100%;clear:both;">
+<div style="float:left;width:100%;clear:both;">
     <div class="headAndFoot">
-    <!-- 关于我们 -->
-    <div style="width: 1190px; margin: auto;margin-top:10px;margin-bottom:20px;line-height:25px;">
-         <div style="width: 1190px; height: 1px; background: #FFFFFF; margin-bottom: 5px;"></div>
+        <!-- 关于我们 -->
+        <div style="width: 1190px; margin: auto;margin-top:10px;margin-bottom:20px;line-height:25px;">
+            <div style="width: 1190px; height: 1px; background: #FFFFFF; margin-bottom: 5px;"></div>
+            <div>
                 <div>
                     <div>
-                        <div>
-                            <div style="margin-top:10px;">
-                                <div class="quicklink">
-                                    <a style="color: #65635F;" href="/jsp/ecp/helpdoc/about_us.jsp?menuId=0" id="aboutus" target="_blank">关于我们</a>&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;
-                                    <a style="color: #65635F;" href="/jsp/ecp/helpdoc/about_us.jsp?menuId=6" target="_blank">友情链接</a>&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;
-                                    <a style="color: #65635F;" href="/jsp/ecp/helpdoc/about_us.jsp?menuId=5" target="_blank">招聘信息</a>&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;
-                                    <a style="color: #65635F;" href="/jsp/ecp/helpdoc/about_us.jsp?menuId=2" target="_blank">联系我们</a>&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;
-                                    <a style="color: #65635F;" href="/jsp/ecp/helpdoc/about_us.jsp?menuId=3" target="_blank">网站地图</a>&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;
-                                    <a style="color: #65635F;" href="/jsp/ecp/helpdoc/about_us.jsp?menuId=7" target="_blank">互联网行为规范</a>
-                                </div>
-                                <div class="quicklink">
-                                    <a style="color: #65635F;" href="http://www.cguardian.com/" target="_blank">中国嘉德国际拍卖有限公司</a>&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;
-                                    <!-- a style="color: #65635F;" href="http://www.artcool.com/" target="_blank">ARTCOOL</a>&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;-->
-                                    <a style="color: #65635F;" href="http://www.dolcey.com/" target="_blank">道喜红酒网</a>&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;
-                                    <a style="color: #65635F;" href="http://www.e-unionpay.com/" target="_blank">中国银联</a>
-                                </div>
-                                <div style="color: #65635F;">
-                                    <span><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="480b2738313a212f203c0879717171657a787971">[email&#160;protected]</a> ARTRADE.COM All Rights Reserved</span><span>北京嘉德在线拍卖有限公司</span><br />
-                                    <span>ICP经营许可证编号:京ICP证010113号</span><span>北京市通信公司提供网络带宽</span><span>京公网安备110101003008号</span>
-                                </div>
+                        <div style="margin-top:10px;">
+                            <div class="quicklink">
+                                <a style="color: #65635F;" href="/jsp/ecp/helpdoc/about_us.jsp?menuId=0" id="aboutus"
+                                   target="_blank">关于我们</a>&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;
+                                <a style="color: #65635F;" href="/jsp/ecp/helpdoc/about_us.jsp?menuId=6"
+                                   target="_blank">友情链接</a>&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;
+                                <a style="color: #65635F;" href="/jsp/ecp/helpdoc/about_us.jsp?menuId=5"
+                                   target="_blank">招聘信息</a>&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;
+                                <a style="color: #65635F;" href="/jsp/ecp/helpdoc/about_us.jsp?menuId=2"
+                                   target="_blank">联系我们</a>&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;
+                                <a style="color: #65635F;" href="/jsp/ecp/helpdoc/about_us.jsp?menuId=3"
+                                   target="_blank">网站地图</a>&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;
+                                <a style="color: #65635F;" href="/jsp/ecp/helpdoc/about_us.jsp?menuId=7"
+                                   target="_blank">互联网行为规范</a>
+                            </div>
+                            <div class="quicklink">
+                                <a style="color: #65635F;" href="http://www.cguardian.com/"
+                                   target="_blank">中国嘉德国际拍卖有限公司</a>&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;
+                                <!-- a style="color: #65635F;" href="http://www.artcool.com/" target="_blank">ARTCOOL</a>&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;-->
+                                <a style="color: #65635F;" href="http://www.dolcey.com/" target="_blank">道喜红酒网</a>&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;
+                                <a style="color: #65635F;" href="http://www.e-unionpay.com/" target="_blank">中国银联</a>
+                            </div>
+                            <div style="color: #65635F;">
+                                <span><a href="/cdn-cgi/l/email-protection" class="__cf_email__"
+                                         data-cfemail="480b2738313a212f203c0879717171657a787971">[email&#160;protected]</a> ARTRADE.COM All Rights Reserved</span><span>北京嘉德在线拍卖有限公司</span><br/>
+                                <span>ICP经营许可证编号:京ICP证010113号</span><span>北京市通信公司提供网络带宽</span><span>京公网安备110101003008号</span>
                             </div>
                         </div>
                     </div>
                 </div>
+            </div>
         </div>
     </div>
 </div>
@@ -340,104 +358,112 @@
 <script type="text/javascript" src="js/dist/jquery.validate.js"></script>
 <script type="text/javascript">
     $(function () {
-        $.validator.addMethod("tel",function (value,element,params) {
+        $.validator.addMethod("tel", function (value, element, params) {
             return /^1[35789]\d{9}$/.test(value);
         });
-        $.validator.addMethod("pwd",function (value,element,params) {
-            return  /^.{6,}$/.test(value);
+        $.validator.addMethod("pwd", function (value, element, params) {
+            return /^.{6,}$/.test(value);
         });
         $("form").validate({
-           rules:{
-               username:{
-                   required:true,
-                   remote:"user/selectName"
-               },
-               phone:{
-                   required:true,
-                   tel:true,
-                   remote:"user/selectTel"
-               },
-               password:{
-                   required:true,
-                   pwd:true,
-               },
-               password1:{
-                   required:true,
-                   equalTo:"#password"
-               }
-           },
-            messages:{
-               username:{
-                   required:"手机号不能为空",
-                   remote:"用户名已被占用"
-               },
-                phone:{
-                    required:"手机号不能为空",
-                    tel:"手机号格式错误",
-                    remote:"手机号已经被注册"
+            rules: {
+                username: {
+                    required: true,
+                    remote: "user/selectName"
                 },
-                password:{
-                   required:"密码不能为空",
-                    pwd:"密码必须6位以上"
+                phone: {
+                    required: true,
+                    tel: true,
+                    remote: "user/selectTel"
                 },
-                password1:{
-                   required:"重复密码不能为空",
-                   equalTo:"两次密码输入不一致"
+                password: {
+                    required: true,
+                    pwd: true,
+                },
+                password1: {
+                    required: true,
+                    equalTo: "#password"
+                }
+            },
+            messages: {
+                username: {
+                    required: "手机号不能为空",
+                    remote: "用户名已被占用"
+                },
+                phone: {
+                    required: "手机号不能为空",
+                    tel: "手机号格式错误",
+                    remote: "手机号已经被注册"
+                },
+                password: {
+                    required: "密码不能为空",
+                    pwd: "密码必须6位以上"
+                },
+                password1: {
+                    required: "重复密码不能为空",
+                    equalTo: "两次密码输入不一致"
                 }
             }
         })
     })
+
     //获取手机短信验证码
     function GetSMS() {
-            var tel=$("#mbrMobile").val();
-            if(tel==""){
-                alert("请填写手机号")
-            }else {
-                $.post("reg/r/"+tel,
-                    {
-                        'tel':tel,
-                    },function (data) {
-                        if(data.code==1){
-                            alert(data.msg)
-                        }else{
-                            alert(data.msg)
-                        }
-                    })
-            }
+        var tel = $("#mbrMobile").val();
+        if (tel == "") {
+            alert("请填写手机号")
+        } else {
+            $.post("reg/r/" + tel,
+                {
+                    'tel': tel,
+                }, function (data) {
+                    if (data.code == 1) {
+                        alert(data.msg)
+                    } else {
+                        alert(data.msg)
+                    }
+                })
         }
+    }
 
     //获取验证码
-    function getVerify(obj){
-        obj.src ="getVerify?"+Math.random();
+    function getVerify(obj) {
+        obj.src = "getVerify?" + Math.random();
     }
+
     //注册功能
     function register() {
-        if($("form").valid()){
-        var  username= $("#username").val();
-        var  phone=$("#mbrMobile").val();
-        var  password=$("#password").val();
-        var code=$("#code").val();
-        var noteCode=$("#noteCode").val();
-        if(username==""|phone==""|password==""|code==""|noteCode==""){
-            alert("请填写信息")
-        }else {
-            var data={"username":username,"phone":phone,"password":password,"code":code,"noteCode":noteCode}
-            $.ajax({
-                url: "user/register",
-                async: false,
-                type: "POST",
-                contentType: 'application/json',
-                dataType: 'json',
-                data: JSON.stringify(data),
-                success: function (s) {
-                    if (s.code == 1) {
-                        alert(s.msg);
-                    } else {
-                        alert(s.msg);
-                    }
+        if ($("form").valid()) {
+            var username = $("#username").val();
+            var phone = $("#mbrMobile").val();
+            var password = $("#password").val();
+            var code = $("#code").val();
+            var noteCode = $("#noteCode").val();
+            if (username == "" | phone == "" | password == "" | code == "" | noteCode == "") {
+                alert("请填写信息")
+            } else {
+                var data = {
+                    "username": username,
+                    "phone": phone,
+                    "password": password,
+                    "code": code,
+                    "noteCode": noteCode
                 }
-            })
-        }
+                $.ajax({
+                    url: "user/register",
+                    async: false,
+                    type: "POST",
+                    contentType: 'application/json',
+                    dataType: 'json',
+                    data: JSON.stringify(data),
+                    success: function (s) {
+                        if (s.code == 1) {
+                            alert(s.msg);
+                        } else {
+                            alert(s.msg);
+                        }
+                    }
+                })
+            }
         }
     }
 </script>

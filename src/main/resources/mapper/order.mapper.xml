@@ -5,8 +5,9 @@
 <mapper namespace="com.jiumu.auction.order.mapper.OrderMapper">
     <insert id="addOrder">
         insert into tb_order (order_user_id,order_goods_id,order_time,transaction_price,
-        order_no,order_judge,payment_status)
+        order_no,order_judge,payment_status,freight,seller,stock_status,premiums,total_price,any_certificate)
         values (#{order.orderUserId},#{order.orderGoodsId},#{order.orderTime},#{order.transactionPrice},
-        #{order.orderNo},#{order.orderJudge},#{order.paymentStatus});
+        #{order.orderNo},#{order.orderJudge},#{order.paymentStatus},#{order.freight},#{order.seller},#{order.stockStatus},
+        #{order.premiums},#{order.totalPrice},#{anyCertificate});
     </insert>
 </mapper>

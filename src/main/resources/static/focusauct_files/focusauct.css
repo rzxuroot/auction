@@ -1,0 +1,220 @@
+@charset "utf-8";
+/* CSS Document */
+* {
+	font-size: 14px;
+}
+
+.bodyDiv {
+	width: 973px;
+	margin-bottom: 30px;
+}
+
+
+.timeDiv {
+	height: 50px;
+	background-color: #FCFCFC;
+	margin-top: 20px;
+}
+
+.timeDiv .textDiv {
+	border: solid 1px #AAAAAA;
+	padding-left: 3px;
+	padding-right: 3px;
+	width:100px;
+	height: 27px;
+}
+
+.timeDiv .textDiv img {
+	width: 16px;
+	height: 16px;
+	margin-top: 6px;
+	float: right;
+	margin-right: 5px;
+}
+
+.timeDiv table {
+	margin-left: 10px;
+	padding-top: 8px;
+}
+
+.timeDiv .beginT, .endT {
+	width: 120px;
+	height: 28px;
+	border: 0px;
+	background-color: #FCFCFC;
+	text-align: left
+}
+
+.timeDiv .selectBut {
+	width: 70px;
+	height: 30px;
+	color: #000;
+	border: solid 1px #D73660;
+	background-color: #ffffff;
+	margin-left: 20px;
+	cursor: pointer;
+}
+.timeDiv .selectBut:hover {
+	width: 70px;
+	height: 30px;
+	border: 0px;
+	background-color: #d73660;
+    color: #fff;
+	margin-left: 20px;
+}
+
+.timeDiv .find1Div {
+	width: 80px;
+	height: 25px;
+	text-align: center;
+	margin-left: 0px;
+	padding-top: 5px;
+	cursor: pointer;
+}
+.timeDiv .find2Div {
+	width: 80px;
+	height: 25px;
+	text-align: center;
+	margin-left: 30px;
+	padding-top: 5px;
+	cursor: pointer;
+}
+.timeDiv .find3Div {
+	width: 80px;
+	height: 25px;
+	text-align: center;
+	margin-left: 30px;
+	padding-top: 5px;
+	cursor: pointer;
+}
+.findCss{
+	color: #FFF;
+	background-color: #D73660;
+}
+.all_line {
+	width: 40px;
+	height: 2px;
+	background-color: #D83560;
+}
+
+.biddingInfo {
+	margin-top: 20px;
+	padding: 13px;
+	border: solid 1px #D8D8D8;
+	height: 232px;
+	padding: 13px;
+}
+.biddingInfo  .commodityDiv {
+	width: 350px;
+	height: 220px;
+	background-color: #ff8080;
+	border:thin solid #400040;
+}
+
+.commodityDiv  .commodityShow {
+	color: #fff;
+	margin-left: 2px;
+	border: 1px solid #c0c0c0;
+}
+
+.commodityShow .commodityName {
+	font-size: 24px;
+}
+
+.commodityShow .commodityDesc {
+	margin-left: 18px;
+	margin-top: 5px;
+}
+
+.right_td {
+	vertical-align: top;
+	padding-left: 70px;
+	
+}
+
+.right_td .infoDiv {
+	margin-top: 10px;
+}
+
+.right_td .right_span_name {
+	font-size: 18px;
+}
+
+.right_td .right_span_time {
+	color: #ADA9A8;
+}
+
+.right_td .right_span_money {
+	color: #D73660;
+}
+
+.right_td .right_td_div {
+	float: left;
+}
+
+.right_td .right_td_operDiv {
+	width: 195px;
+	height: 30px;
+	border: solid 1px #B7B7B7;
+}
+
+.right_td_operDiv .operItem {
+	width: 30px;
+	height: 30px;
+	font-size: 20px;
+	background-color: #E9E9E9;
+	float: left;
+}
+
+.right_td_operDiv .operItem span {
+	font-size: 30px;
+	margin-top: -6px;
+	margin-left: 3px;
+	float: left;
+	color: #8B8B8B;
+}
+
+.right_td_operDiv .inputTextDiv {
+	width: 135px;
+}
+
+.right_td_operDiv .inputTextDiv input {
+	width: 135px;
+	height: 28px;
+	border: 0px;
+}
+
+.right_td_div .inputBut {
+	margin-left:20px;
+	background-color: #ffffff;
+	color: #000;
+	border: solid 1px #D73660;
+	width: 81px;
+	height: 30px;
+	cursor:pointer;
+}
+
+.right_td_div .inputBut:HOVER {
+	margin-left:20px;
+	background-color: #D73660;
+	color: #ffffff;
+	border: none;
+	width: 81px;
+	height: 30px;
+	/* background: url(../../../../image/ecp/buyer/btn_bga.png) no-repeat; */
+}
+//修改时间空间内部样式
+.datepickInput .hasDatepicker{
+	
+}
+.tableToolElCls{
+	display:none;
+}
+.imgWrap{
+    width: 350px;
+	height: 220px;
+	position: absolute;
+	}
+.nowClass{
+	width:75px;
+}

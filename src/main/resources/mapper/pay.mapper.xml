@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.jiumu.auction.userCenter.dao.PayMapper">
+    <resultMap id="baseResultMap" type="com.jiumu.auction.userCenter.vo.MyAccount">
+        <result column="username" property="userName"/>
+        <result column="account_password" property="accountPassword"/>
+    </resultMap>
+    <update id="updatePaymentStatus">
+        update tb_order set payment_status='2' where order_id=#{orderId}
+    </update>
+
+    <update id="updateAccountBalance">
+        update tb_account set account_balance=#{balance} where account_user_id=#{userId}
+    </update>
+
+    <select id="queryAccountPassword" resultMap="baseResultMap">
+        select account_password,username from tb_account a join  tb_user b on a.account_user_id = b.user_id where account_user_id=#{userId}
+    </select>
+
+    <select id="queryAccountBalance" resultType="java.lang.Long">
+        select account_balance from tb_account where account_user_id=#{userId};
+    </select>
+</mapper>

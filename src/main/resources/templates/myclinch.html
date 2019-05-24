@@ -2,187 +2,226 @@
 <!-- saved from url=(0058)http://www.artrade.com/jsp/ecp/buyer/trademng/myclinch.jsp -->
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
-<head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<script id="allmobilize" charset="utf-8" src="myclinch_files/allmobilize.min.js.下载"></script><style type="text/css"></style>
-<meta http-equiv="Cache-Control" content="no-siteapp">
-<meta http-equiv="Cache-Control" content="no-transform">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <script id="allmobilize" charset="utf-8" src="myclinch_files/allmobilize.min.js.下载"></script>
+    <style type="text/css"></style>
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta http-equiv="Cache-Control" content="no-transform">
     <base th:href="${#request.getContextPath()}+'/'">
-<link rel="alternate" media="handheld" href="http://www.artrade.com/jsp/ecp/buyer/trademng/myclinch.jsp#">
+    <link rel="alternate" media="handheld" href="http://www.artrade.com/jsp/ecp/buyer/trademng/myclinch.jsp#">
+
+    <script type="text/javascript" src="/js/jquery-3.1.1.js"></script>
+    <link type="text/css" rel="stylesheet" href="myclinch_files/base.css">
+    <link type="text/css" rel="stylesheet" href="myclinch_files/base(1).css">
+    <link type="text/css" rel="stylesheet" href="myclinch_files/jquery-ui.min.css">
+    <link type="text/css" rel="stylesheet" href="myclinch_files/jquery-ui-timepicker-addon.css">
+    <script type="text/javascript" src="myclinch_files/jquery-1.11.3.min.js.下载"></script>
+    <script type="text/javascript" src="myclinch_files/jquery-1.11.3.extends.js.下载"></script>
+    <script type="text/javascript" src="myclinch_files/dateextend.js.下载"></script>
+    <script type="text/javascript" src="myclinch_files/ajaxfileupload.js.下载"></script>
+    <script type="text/javascript" src="myclinch_files/jquery-ui.min.js.下载"></script>
+    <script type="text/javascript" src="myclinch_files/jquery.ui.datepicker-zh-cn.js.下载"></script>
+    <script type="text/javascript" src="myclinch_files/jquery-ui-timepicker-addon.js.下载"></script>
+    <script type="text/javascript" src="myclinch_files/common.js.下载"></script>
+    <script type="text/javascript" src="myclinch_files/businesscommon.js.下载"></script>
+    <script src="myclinch_files/ecpbase.js.下载"></script>
+    <script src="myclinch_files/ecpValidation.js.下载"></script>
+    <link type="text/css" rel="stylesheet" href="myclinch_files/simpwinform.css">
+    <script type="text/javascript" src="myclinch_files/simpwinform.js.下载"></script>
+    <script>
+        var baseUrl = "";
+        var lotUrl = "/jsp/ecp/public/auction.jsp?lotid=";
+        var chatName = "root666";
+        var chatId = "1497734448";
+    </script>
 
 
-<link type="text/css" rel="stylesheet" href="myclinch_files/base.css">
-<link type="text/css" rel="stylesheet" href="myclinch_files/base(1).css">
-<link type="text/css" rel="stylesheet" href="myclinch_files/jquery-ui.min.css">
-<link type="text/css" rel="stylesheet" href="myclinch_files/jquery-ui-timepicker-addon.css">
-<script type="text/javascript" src="myclinch_files/jquery-1.11.3.min.js.下载"></script>
-<script type="text/javascript" src="myclinch_files/jquery-1.11.3.extends.js.下载"></script>
-<script type="text/javascript" src="myclinch_files/dateextend.js.下载"></script>
-<script type="text/javascript" src="myclinch_files/ajaxfileupload.js.下载"></script>
-<script type="text/javascript" src="myclinch_files/jquery-ui.min.js.下载"></script>
-<script type="text/javascript" src="myclinch_files/jquery.ui.datepicker-zh-cn.js.下载"></script>
-<script type="text/javascript" src="myclinch_files/jquery-ui-timepicker-addon.js.下载"></script>
-<script type="text/javascript" src="myclinch_files/common.js.下载"></script>
-<script type="text/javascript" src="myclinch_files/businesscommon.js.下载"></script>
-<script src="myclinch_files/ecpbase.js.下载"></script>
-<script src="myclinch_files/ecpValidation.js.下载"></script>
-<link type="text/css" rel="stylesheet" href="myclinch_files/simpwinform.css">
-<script type="text/javascript" src="myclinch_files/simpwinform.js.下载"></script>
-<script>
-    var baseUrl = "";
-    var lotUrl="/jsp/ecp/public/auction.jsp?lotid=";
-    var chatName = "root666"; 
-    var chatId = "1497734448";
-</script>
+    <link type="text/css" rel="stylesheet" href="myclinch_files/unslider.css">
+    <link type="text/css" rel="stylesheet" href="myclinch_files/unslider-dots.css">
+    <script type="text/javascript" src="myclinch_files/unslider.min.js.下载"></script>
 
+    <link type="text/css" rel="stylesheet" href="myclinch_files/dateselbox.css">
+    <script type="text/javascript" src="myclinch_files/dateselbox.js.下载"></script>
 
+    <link type="text/css" rel="stylesheet" href="myclinch_files/jquery-ui.min.css">
+    <link type="text/css" rel="stylesheet" href="myclinch_files/jquery-ui.theme.min.css">
+    <link type="text/css" rel="stylesheet" href="myclinch_files/jquery-ui.structure.min.css">
+    <script type="text/javascript" src="myclinch_files/jquery-ui.min.js.下载"></script>
+    <script type="text/javascript" src="myclinch_files/jquery-ui-timepicker-addon.js.下载"></script>
+    <script type="text/javascript" src="myclinch_files/jquery.ui.datepicker-zh-cn.js.下载"></script>
+    <link type="text/css" rel="stylesheet" href="myclinch_files/jquery-ui-timepicker-addon.css">
 
+    <link type="text/css" rel="stylesheet" href="myclinch_files/scsdtable.css">
+    <script type="text/javascript" src="myclinch_files/scsdtable.js.下载"></script>
 
-
-<link type="text/css" rel="stylesheet" href="myclinch_files/unslider.css"><link type="text/css" rel="stylesheet" href="myclinch_files/unslider-dots.css"><script type="text/javascript" src="myclinch_files/unslider.min.js.下载"></script>
-
-<link type="text/css" rel="stylesheet" href="myclinch_files/dateselbox.css"><script type="text/javascript" src="myclinch_files/dateselbox.js.下载"></script>
-
-<link type="text/css" rel="stylesheet" href="myclinch_files/jquery-ui.min.css"><link type="text/css" rel="stylesheet" href="myclinch_files/jquery-ui.theme.min.css"><link type="text/css" rel="stylesheet" href="myclinch_files/jquery-ui.structure.min.css"><script type="text/javascript" src="myclinch_files/jquery-ui.min.js.下载"></script><script type="text/javascript" src="myclinch_files/jquery-ui-timepicker-addon.js.下载"></script><script type="text/javascript" src="myclinch_files/jquery.ui.datepicker-zh-cn.js.下载"></script><link type="text/css" rel="stylesheet" href="myclinch_files/jquery-ui-timepicker-addon.css">
-
-<link type="text/css" rel="stylesheet" href="myclinch_files/scsdtable.css"><script type="text/javascript" src="myclinch_files/scsdtable.js.下载"></script>
-
-<link type="text/css" rel="stylesheet" href="myclinch_files/myclinch.css">
-<script type="text/javascript" src="myclinch_files/myclinch.js.下载"></script>
-<title>我的成交</title>
-<script>
-</script>
-<script charset="utf-8" src="myclinch_files/sm.min.js.下载" async=""></script></head>
+    <link type="text/css" rel="stylesheet" href="myclinch_files/myclinch.css">
+    <script type="text/javascript" src="myclinch_files/myclinch.js.下载"></script>
+    <title>我的成交</title>
+    <script>
+    </script>
+    <script charset="utf-8" src="myclinch_files/sm.min.js.下载" async=""></script>
+</head>
 <body>
-
 
 
 <script type="text/javascript" src="myclinch_files/header.js.下载"></script>
 <script type="text/javascript" src="myclinch_files/jquery.SuperSlide.2.1.1.js.下载"></script>
 
 <script>
-	var showNotice = "";
+    var showNotice = "";
 </script>
 <style>
-   .noticeDivBox{
-      width:300px;
-      float: left;
-      position:relative;
-      zoom:1;
-      overflow:hidden;
-   }
-   .noticeDivBox:HOVER {
-      content: "";
-      display: block;
-      clear: both;
-   }
-   
-   .noticeDiv{
-      width:220px;
-      float: left;
-      left:65px;
-      
-   }
-   .noticeDiv ul{
-      height:40px;
-      overflow:hidden;
-      zoom:1;
-   }
-   
-   .noticeDiv ul li{ 
-    height:40px; 
-    line-height:40px;  
-    text-align:center; 
-    _display:inline; 
-    width:auto !important;  
-    max-width:200px;
-    overflow:hidden; /*内容超出宽度时隐藏超出部分的内容 */
-    text-overflow:ellipsis;/* 当对象内文本溢出时显示省略标记(...) ；需与overflow:hidden;一起使用。*/
-    white-space:nowrap; /*不换行 */
-    }  /* 用 width:auto !important 覆盖SuperSlide自动生成的宽度，解决文字不衔接问题 */
-    
-    .noticeDiv ul li a{
+    .noticeDivBox {
+        width: 300px;
+        float: left;
+        position: relative;
+        zoom: 1;
+        overflow: hidden;
     }
-    
-    .noticeDiv ul li a:visited { 
-	  COLOR: #000000; 
-	} 
-	.noticeDiv ul li a:hover { 
-	  COLOR: #c81623; 
-	} 
-	.noticeDiv ul li a:active { 
-	  COLOR: #c81623; 
-	} 
-	
-	 #header_nickName a:hover{
-	  text-decoration: underline;
-	  color:#E6002D;
-	}
-	
+
+    .noticeDivBox:HOVER {
+        content: "";
+        display: block;
+        clear: both;
+    }
+
+    .noticeDiv {
+        width: 220px;
+        float: left;
+        left: 65px;
+
+    }
+
+    .noticeDiv ul {
+        height: 40px;
+        overflow: hidden;
+        zoom: 1;
+    }
+
+    .noticeDiv ul li {
+        height: 40px;
+        line-height: 40px;
+        text-align: center;
+        _display: inline;
+        width: auto !important;
+        max-width: 200px;
+        overflow: hidden; /*内容超出宽度时隐藏超出部分的内容 */
+        text-overflow: ellipsis; /* 当对象内文本溢出时显示省略标记(...) ；需与overflow:hidden;一起使用。*/
+        white-space: nowrap; /*不换行 */
+    }
+
+    /* 用 width:auto !important 覆盖SuperSlide自动生成的宽度，解决文字不衔接问题 */
+
+    .noticeDiv ul li a {
+    }
+
+    .noticeDiv ul li a:visited {
+        COLOR: #000000;
+    }
+
+    .noticeDiv ul li a:hover {
+        COLOR: #c81623;
+    }
+
+    .noticeDiv ul li a:active {
+        COLOR: #c81623;
+    }
+
+    #header_nickName a:hover {
+        text-decoration: underline;
+        color: #E6002D;
+    }
+
 
 </style>
 <div class="headAndFoot" style="background:#F9F4F4;clear:both;">
     <div style="width:1190px;height:40px;line-height:40px;text-align:center;margin:auto;">
         <div id="noticeDivBox" class="noticeDivBox"></div>
         <div id="indexLinkDiv" style="width:100px;float: left;position:relative;">
-           
+
         </div>
         <div style="float: right;">
             <div>
                 <div style="float:left">
-                                                      您好，&nbsp;<span id="header_nickName">
+                    您好，&nbsp;<span id="header_nickName">
                                    <a href="http://www.artrade.com/jsp/ecp/buyer/buyerindex.jsp" target="">root666</a>
                                 </span>
-                                <a id="header_logout" href="http://www.artrade.com/jsp/ecp/buyer/trademng/myclinch.jsp#" onclick="logout();" style="">&nbsp;<b>，退出</b></a> 
-                                <a id="header_login" href="http://www.artrade.com/jsp/ecp/login.jsp" target="_self" style="display:none;"><b>请登录</b></a>&nbsp;&nbsp;
+                    <a id="header_logout" href="http://www.artrade.com/jsp/ecp/buyer/trademng/myclinch.jsp#"
+                       onclick="logout();" style="">&nbsp;<b>，退出</b></a>
+                    <a id="header_login" href="http://www.artrade.com/jsp/ecp/login.jsp" target="_self"
+                       style="display:none;"><b>请登录</b></a>&nbsp;&nbsp;
                 </div>
                 <div style="float:left;display:none;">
-                    <a href="http://www.artrade.com/jsp/ecp/register.jsp" target="_self" style="color: #FF003B;font-weight:600;">免费注册</a>&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+                    <a href="http://www.artrade.com/jsp/ecp/register.jsp" target="_self"
+                       style="color: #FF003B;font-weight:600;">免费注册</a>&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
                 </div>
-                <div id="myDealDiv" style="cursor: pointer;float:left;position:relative;"><a href="http://www.artrade.com/jsp/ecp/buyer/buyerindex.jsp">买家中心</a><img src="myclinch_files/pulldown.png">&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+                <div id="myDealDiv" style="cursor: pointer;float:left;position:relative;"><a
+                        href="http://www.artrade.com/jsp/ecp/buyer/buyerindex.jsp">买家中心</a><img
+                        src="myclinch_files/pulldown.png">&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
                     <ul id="<myDeal></myDeal>" class="headerMenu_ul" style="position:absolute;z-index:1001;left:-20px;">
-                        <li style="display:none"><a href="http://www.artrade.com/jsp/ecp/buyer/buyerindex.jsp">买家首页</a></li>
-                        <li style="display:none"><a href="http://www.artrade.com/jsp/ecp/buyer/trademng/myauct.jsp">我的竞拍</a></li>
-                        <li style="display:none"><a href="http://www.artrade.com/jsp/ecp/buyer/trademng/myclinch.jsp">我的成交</a></li>
-                        <li style="display:none"><a href="http://www.artrade.com/jsp/ecp/buyer/trademng/mycart.jsp">结算</a></li>
-                        <li style="display:none"><a href="http://www.artrade.com/jsp/ecp/buyer/myasset/margin.jsp">我的保证金</a></li>
+                        <li style="display:none"><a href="http://www.artrade.com/jsp/ecp/buyer/buyerindex.jsp">买家首页</a>
+                        </li>
+                        <li style="display:none"><a
+                                href="http://www.artrade.com/jsp/ecp/buyer/trademng/myauct.jsp">我的竞拍</a></li>
+                        <li style="display:none"><a href="http://www.artrade.com/jsp/ecp/buyer/trademng/myclinch.jsp">我的成交</a>
+                        </li>
+                        <li style="display:none"><a
+                                href="http://www.artrade.com/jsp/ecp/buyer/trademng/mycart.jsp">结算</a></li>
+                        <li style="display:none"><a
+                                href="http://www.artrade.com/jsp/ecp/buyer/myasset/margin.jsp">我的保证金</a></li>
                     </ul>
                 </div>
                 <div style="float:left;">
                     <a href="http://www.artrade.com/jsp/ecp/buyer/focuscnt/focusauct.jsp" target="_self">我的关注</a>&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
                 </div>
-                 <div id="sellerCenterDiv" style="cursor: pointer;float:left;position:relative;display:none;">
-                                                    <a href="http://www.artrade.com/jsp/ecp/seller/tranm/ordermanagelist.jsp">卖家中心</a><img src="myclinch_files/pulldown.png">&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+                <div id="sellerCenterDiv" style="cursor: pointer;float:left;position:relative;display:none;">
+                    <a href="http://www.artrade.com/jsp/ecp/seller/tranm/ordermanagelist.jsp">卖家中心</a><img
+                        src="myclinch_files/pulldown.png">&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
                     <ul id="sellerCenter" class="headerMenu_ul" style="position:absolute;z-index:1001;left:-20px;">
-                        <li style="display:none"><a href="http://www.artrade.com/jsp/ecp/seller/tranm/ordermanagelist.jsp">卖家首页</a></li>
-<!--                         <li style="display:none"><a href="#">免费开店</a></li> -->
-<!--                         <li style="display:none"><a href="#">已卖出的拍品</a></li> -->
-                        <li style="display:none"><a href="http://www.artrade.com/jsp/ecp/item/manage/itemmng.jsp?tabIndex=0">预展中的拍品</a></li>
-                        <li style="display:none"><a href="http://www.artrade.com/jsp/ecp/item/manage/itemmng.jsp">拍卖中的拍品</a></li>
-<!--                         <li style="display:none"><a href="#">卖家服务市场</a></li> -->
-<!--                         <li style="display:none"><a href="#">卖家培训中心</a></li> -->
+                        <li style="display:none"><a
+                                href="http://www.artrade.com/jsp/ecp/seller/tranm/ordermanagelist.jsp">卖家首页</a></li>
+                        <!--                         <li style="display:none"><a href="#">免费开店</a></li> -->
+                        <!--                         <li style="display:none"><a href="#">已卖出的拍品</a></li> -->
+                        <li style="display:none"><a
+                                href="http://www.artrade.com/jsp/ecp/item/manage/itemmng.jsp?tabIndex=0">预展中的拍品</a></li>
+                        <li style="display:none"><a
+                                href="http://www.artrade.com/jsp/ecp/item/manage/itemmng.jsp">拍卖中的拍品</a></li>
+                        <!--                         <li style="display:none"><a href="#">卖家服务市场</a></li> -->
+                        <!--                         <li style="display:none"><a href="#">卖家培训中心</a></li> -->
                     </ul>
-                </div> 
-                <div id="activeCenter" style="float:left;">
-                  <a href="http://www.artrade.com/jsp/ecp/buyer/myasset/active.jsp" target="_self">活动中心</a>&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
                 </div>
-               
-                
+                <div id="activeCenter" style="float:left;">
+                    <a href="http://www.artrade.com/jsp/ecp/buyer/myasset/active.jsp" target="_self">活动中心</a>&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+                </div>
+
+
                 <div id="mavinDiv" style="cursor: pointer;float:left;position:relative;display:none;">
-                                                    专家中心<img src="myclinch_files/pulldown.png">&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+                    专家中心<img src="myclinch_files/pulldown.png">&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
                     <ul id="mavinUlDiv" class="headerMenu_ul" style="position:absolute;z-index:1001;left:-20px;">
-                        <li style="display:none"><a href="http://www.artrade.com/jsp/ecp/mavin/center/mavinindex.jsp">专家首页</a></li>
-                        <li style="display:none"><a href="http://www.artrade.com/jsp/ecp/buyer/trademng/myauct.jsp">我的服务</a></li>
-                        <li style="display:none"><a href="http://www.artrade.com/jsp/ecp/buyer/trademng/myclinch.jsp">myclinch</a></li>
-                        <li style="display:none"><a href="http://www.artrade.com/jsp/ecp/buyer/myasset/margin.jsp">我的保证金</a></li>
-                        
+                        <li style="display:none"><a href="http://www.artrade.com/jsp/ecp/mavin/center/mavinindex.jsp">专家首页</a>
+                        </li>
+                        <li style="display:none"><a
+                                href="http://www.artrade.com/jsp/ecp/buyer/trademng/myauct.jsp">我的服务</a></li>
+                        <li style="display:none"><a href="http://www.artrade.com/jsp/ecp/buyer/trademng/myclinch.jsp">myclinch</a>
+                        </li>
+                        <li style="display:none"><a
+                                href="http://www.artrade.com/jsp/ecp/buyer/myasset/margin.jsp">我的保证金</a></li>
+
                     </ul>
-                </div> 
+                </div>
                 <div id="helpCenterDiv" style="cursor: pointer;float:left;position:relative;">
-                                                       帮助中心<img src="myclinch_files/pulldown.png">
+                    帮助中心<img src="myclinch_files/pulldown.png">
                     <ul id="helpCenter" class="headerMenu_ul" style="position:absolute;z-index:1001;left:-20px;">
-                        <li style="display:none"><a target="_blank" href="http://www.artrade.com/jsp/ecp/helpdoc/helpcenter.jsp?menuId=2">买家帮助</a></li>
-                        <li style="display:none"><a target="_blank" href="http://www.artrade.com/jsp/ecp/helpdoc/helpcenter.jsp?parId=0">卖家帮助</a></li>
-                        <li style="display:none"><a target="_blank" href="http://www.artrade.com/jsp/ecp/helpdoc/helpcenter.jsp?parId=1">常见问题</a></li>
+                        <li style="display:none"><a target="_blank"
+                                                    href="http://www.artrade.com/jsp/ecp/helpdoc/helpcenter.jsp?menuId=2">买家帮助</a>
+                        </li>
+                        <li style="display:none"><a target="_blank"
+                                                    href="http://www.artrade.com/jsp/ecp/helpdoc/helpcenter.jsp?parId=0">卖家帮助</a>
+                        </li>
+                        <li style="display:none"><a target="_blank"
+                                                    href="http://www.artrade.com/jsp/ecp/helpdoc/helpcenter.jsp?parId=1">常见问题</a>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -191,107 +230,113 @@
 </div>
 
 <script type="text/javascript">
-    function showAccountSettingMenu(){
-    	$("#secCenter").show();
-    	$("#perInfo").show();
-    	$("#accntBind").show();
+    function showAccountSettingMenu() {
+        $("#secCenter").show();
+        $("#perInfo").show();
+        $("#accntBind").show();
     }
-    function hideAccountSettingMenu(){
-    	$("#secCenter").hide();
-    	$("#perInfo").hide();
-    	$("#accntBind").hide();
+
+    function hideAccountSettingMenu() {
+        $("#secCenter").hide();
+        $("#perInfo").hide();
+        $("#accntBind").hide();
     }
-	function getMsgCnt(){
-		doController("ecp/buyer/getmsgcnt.action",null,function(_response){
-			if(_response.result){
-				if(_response.data>0){
-					$("#msgDiv").removeClass().addClass("buySeledMenuMsgCls");
-					$("#msgDiv").html("站内信（"+_response.data+"条）<img src='"+baseUrl+"/image/new1.gif'/>");
-					$("#msgDiv").bind("click",function(){
-						var custWind = top.showEcpWinForm({
-							header:{
-								height:30,
-								background:"#E8E8E8"
-							},
-							title:"站内信",
-							width: 750,
-							height: 510,
-							url: baseUrl + "/jsp/ecp/buyer/cstmsrvmng/messagelist.jsp",
-							listeners: {
-								"sure":{
-									text:"关闭",
-									execute:function(_val,_obj){
-										getMsgCnt();
-										return true;
-									}
-								}
-							}
-						});
-					});
-				}else{
-					$("#msgDiv").removeClass().addClass("buyMenuCls");
+
+    function getMsgCnt() {
+        doController("ecp/buyer/getmsgcnt.action", null, function (_response) {
+            if (_response.result) {
+                if (_response.data > 0) {
+                    $("#msgDiv").removeClass().addClass("buySeledMenuMsgCls");
+                    $("#msgDiv").html("站内信（" + _response.data + "条）<img src='" + baseUrl + "/image/new1.gif'/>");
+                    $("#msgDiv").bind("click", function () {
+                        var custWind = top.showEcpWinForm({
+                            header: {
+                                height: 30,
+                                background: "#E8E8E8"
+                            },
+                            title: "站内信",
+                            width: 750,
+                            height: 510,
+                            url: baseUrl + "/jsp/ecp/buyer/cstmsrvmng/messagelist.jsp",
+                            listeners: {
+                                "sure": {
+                                    text: "关闭",
+                                    execute: function (_val, _obj) {
+                                        getMsgCnt();
+                                        return true;
+                                    }
+                                }
+                            }
+                        });
+                    });
+                } else {
+                    $("#msgDiv").removeClass().addClass("buyMenuCls");
                     $("#msgDiv").html("站内信");
                     $("#msgDiv").unbind("click");
-				}
-			}
-		});
-	}
-	$(function(){
-		//1:获取未阅读的站内信
-		getMsgCnt();
-	});
-</script>	
+                }
+            }
+        });
+    }
+
+    $(function () {
+        //1:获取未阅读的站内信
+        getMsgCnt();
+    });
+</script>
 <div class="buyDivCls">
-	<div style="width: 1200px;margin:0 auto;">
-		<div class="buyLogoDivCls">
-			<a href="http://www.artrade.com/index.jsp"><div class="buyLogoImgDivCls"></div></a>
-			<div class="pageTitleDivCls">买家中心</div>
-		</div>
-		<div class="buyCenterMenuDiv">
-			<div class="buyCenterMenuMid">
-				<div class="buySeledMenuCls" onclick="window.location.href='/jsp/ecp/buyer/buyerindex.jsp' ">首页</div>
-				<div class="buyMenuCls" onmouseenter="showAccountSettingMenu()" onmouseleave="hideAccountSettingMenu()">
-					账户设置<img src="myclinch_files/pulldownwhite.png">
-					
-					 <ul id="secCenter" class="buyMenuDetailCls" style="left: -100px; top: 20px; border-left: 1px solid black; display: none;">
+    <div style="width: 1200px;margin:0 auto;">
+        <div class="buyLogoDivCls">
+            <a href="http://www.artrade.com/index.jsp">
+                <div class="buyLogoImgDivCls"></div>
+            </a>
+            <div class="pageTitleDivCls">买家中心</div>
+        </div>
+        <div class="buyCenterMenuDiv">
+            <div class="buyCenterMenuMid">
+                <div class="buySeledMenuCls" onclick="window.location.href='/jsp/ecp/buyer/buyerindex.jsp' ">首页</div>
+                <div class="buyMenuCls" onmouseenter="showAccountSettingMenu()" onmouseleave="hideAccountSettingMenu()">
+                    账户设置<img src="myclinch_files/pulldownwhite.png">
+
+                    <ul id="secCenter" class="buyMenuDetailCls"
+                        style="left: -100px; top: 20px; border-left: 1px solid black; display: none;">
                         <li style="color:#000000;cursor:default;"><b>安全设置</b></li>
-                        <li><a href="http://www.artrade.com/jsp/ecp/buyer/apl2seller/certification.jsp?apltype=0002">实名认证</a></li>
+                        <li><a href="http://www.artrade.com/jsp/ecp/buyer/apl2seller/certification.jsp?apltype=0002">实名认证</a>
+                        </li>
                         <li><a href="http://www.artrade.com/jsp/ecp/buyer/infomng/acntsec.jsp">修改登录密码</a></li>
                         <li><a href="http://www.artrade.com/jsp/ecp/buyer/infomng/acntsec.jsp">设置支付密码</a></li>
-                     </ul>
-                     <ul id="perInfo" class="buyMenuDetailCls" style="left: 40px; top: 20px; display: none;">
+                    </ul>
+                    <ul id="perInfo" class="buyMenuDetailCls" style="left: 40px; top: 20px; display: none;">
                         <li style="color:#000000;cursor:default;"><b>个人资料</b></li>
                         <li><a href="http://www.artrade.com/jsp/ecp/buyer/infomng/memberinfo.jsp">修改个人信息</a></li>
-                     </ul>
-                     <ul id="accntBind" class="buyMenuDetailCls" style="left: 180px; top: 20px; border-right: 1px solid black; display: none;">
+                    </ul>
+                    <ul id="accntBind" class="buyMenuDetailCls"
+                        style="left: 180px; top: 20px; border-right: 1px solid black; display: none;">
                         <li style="color:#000000;cursor:default;"><b>账号绑定</b></li>
                         <li><a href="http://www.artrade.com/jsp/ecp/buyer/infomng/acntsec.jsp">手机绑定</a></li>
-                     </ul>
-				</div>
-				<div class="buyMenuCls" id="msgDiv">站内信</div>
+                    </ul>
+                </div>
+                <div class="buyMenuCls" id="msgDiv">站内信</div>
             </div>
-		</div>
-		<div class="buySearchDivCls">
-		   <!--   modify by zxt 2016/12/17
-			<div class="buySearchMainCls">
-				<div class="buySearchInputDivCls">
-					<input type="text" class="buySearchInputCls" />
-				</div>
-				<div class="buySearchBtnDivCls">搜索</div>
-			</div>-->
-		</div>
-	</div>
+        </div>
+        <div class="buySearchDivCls">
+            <!--   modify by zxt 2016/12/17
+             <div class="buySearchMainCls">
+                 <div class="buySearchInputDivCls">
+                     <input type="text" class="buySearchInputCls" />
+                 </div>
+                 <div class="buySearchBtnDivCls">搜索</div>
+             </div>-->
+        </div>
+    </div>
 </div>
-
-
 
 
 <script type="text/javascript" src="myclinch_files/echarts.js.下载"></script>
 
 <script type="text/javascript" src="myclinch_files/buyerinfo.js.下载"></script>
 <script>
-var mbrType = "0001";
-var idVerify = "" ;
+    var mbrType = "0001";
+    var idVerify = "";
 </script>
 <!-- <div class="sellCenterUserInfoDIvCls">
 	<div class="ecpMainCls">
@@ -405,138 +450,341 @@ var idVerify = "" ;
     </div>
 </div> -->
 <div class="MainBodyDiv">
-	<div class="Main1200Div">
-   		 
+    <div class="Main1200Div">
 
 
-<script type="text/javascript" src="myclinch_files/buycntleftmenu.js.下载"></script>
+        <script type="text/javascript" src="myclinch_files/buycntleftmenu.js.下载"></script>
 
 
-<div class="sellCenterLeftMenuBodyCls" style="height:auto">
-	<ul class="sellCenterLeftMenu1Cls">
-    	<li class="jyglIconCls sellCenterLeftMenu1Cls">交易管理</li>
-        <li class="sellCenterLeftMenu2Cls "><a href="html/focusauct.html">我的竞拍</a></li>
-    	<li class="sellCenterLeftMenu2Cls " onclick="buyCenterLeftMenu.doClickMenuHander(1.2)">代理竞价</li>
-    	<li class="sellCenterLeftMenu2Cls sellCenterLeftMenu2SelectedCls"><a href="html/myclinch.html">我的成交</a></li>
-    	<li class="sellCenterLeftMenu2Cls "><a href="html/myorder.html">我的订单</a></li>
-    	<li class="sellCenterLeftMenu2Cls " onclick="buyCenterLeftMenu.doClickMenuHander(1.8)">我的退货</li>
-		<li class="sellCenterLeftMenu2Cls " onclick="buyCenterLeftMenu.doClickMenuHander(1.9)">我的证书</li>
-    	
-    	<li class="sellCenterLeftMenuUnderLineCls"></li>
-    </ul>
-	<ul class="sellCenterLeftMenu1Cls">
-    	<li class="buyFocusCenterIconCls sellCenterLeftMenu1Cls">关注中心</li>
-    	<li class="sellCenterLeftMenu2Cls "><a href="html/focusauct.html">关注的拍品</a></li>
-    	
-    	<li class="sellCenterLeftMenuUnderLineCls"></li>
-    </ul>
-    
-    <ul class="sellCenterLeftMenu1Cls">
-        <li class="zhglIconCls sellCenterLeftMenu1Cls">我的资产</li>
-        <li class="sellCenterLeftMenu2Cls " onclick="buyCenterLeftMenu.doClickMenuHander(3.1)">资金账户</li>
-        <li class="sellCenterLeftMenu2Cls " onclick="buyCenterLeftMenu.doClickMenuHander(3.2)">保证金</li>
-        <li class="sellCenterLeftMenu2Cls " onclick="buyCenterLeftMenu.doClickMenuHander(3.3)">优惠券</li>
-        <li class="sellCenterLeftMenu2Cls " onclick="buyCenterLeftMenu.doClickMenuHander(3.5)">提现记录</li>
-        <li class="sellCenterLeftMenu2Cls " onclick="buyCenterLeftMenu.doClickMenuHander(3.6)">绑定银行卡</li>
-        <li class="sellCenterLeftMenuUnderLineCls"></li>
-    </ul>
-    
-    <ul class="sellCenterLeftMenu1Cls">
-        <li class="kfglIconCls sellCenterLeftMenu1Cls">客服管理</li>
-        <li class="sellCenterLeftMenu2Cls " onclick="buyCenterLeftMenu.doClickMenuHander(4.3)">留言</li>
-        <li class="sellCenterLeftMenu2Cls " onclick="buyCenterLeftMenu.doClickMenuHander(4.4)">站内信</li>
-        <li class="sellCenterLeftMenuUnderLineCls"></li>
-    </ul>
-    
-	<ul class="sellCenterLeftMenu1Cls">
-    	<li class="buyUserInfoMngIconCls sellCenterLeftMenu1Cls">信息管理</li>
-    	<li class="sellCenterLeftMenu2Cls " onclick="buyCenterLeftMenu.doClickMenuHander(5.1)">个人信息</li>
-    	<li class="sellCenterLeftMenu2Cls " onclick="buyCenterLeftMenu.doClickMenuHander(5.2)">账户安全</li>
-    	<li class="sellCenterLeftMenu2Cls " onclick="buyCenterLeftMenu.doClickMenuHander(5.3)">收货地址</li>
-    	<li class="sellCenterLeftMenu2Cls " onclick="buyCenterLeftMenu.doClickMenuHander(5.4)">实名认证</li>
-    </ul>
-	
-<!-- 	<ul class="sellCenterLeftMenu1Cls"> -->
-<!--     	<li style="cursor:pointer;" onclick="buyCenterLeftMenu.doClickMenuHander(6.0)">申请成为卖家</li> -->
-<!--     </ul> -->
-    
-</div>
+        <div class="sellCenterLeftMenuBodyCls" style="height:auto">
+            <ul class="sellCenterLeftMenu1Cls">
+                <li class="jyglIconCls sellCenterLeftMenu1Cls">交易管理</li>
+                <li class="sellCenterLeftMenu2Cls "><a href="userCenter/auction">我的竞拍</a></li>
+                <li class="sellCenterLeftMenu2Cls " onclick="buyCenterLeftMenu.doClickMenuHander(1.2)">代理竞价</li>
+                <li class="sellCenterLeftMenu2Cls sellCenterLeftMenu2SelectedCls"><a href="userCenter/clinch">我的成交</a>
+                </li>
+                <li class="sellCenterLeftMenu2Cls "><a href="userCenter/myorder">我的订单</a></li>
+                <li class="sellCenterLeftMenu2Cls " onclick="buyCenterLeftMenu.doClickMenuHander(1.8)">我的退货</li>
+                <li class="sellCenterLeftMenu2Cls " onclick="buyCenterLeftMenu.doClickMenuHander(1.9)">我的证书</li>
+
+                <li class="sellCenterLeftMenuUnderLineCls"></li>
+            </ul>
+            <ul class="sellCenterLeftMenu1Cls">
+                <li class="buyFocusCenterIconCls sellCenterLeftMenu1Cls">关注中心</li>
+                <li class="sellCenterLeftMenu2Cls "><a href="html/focusauct.html">关注的拍品</a></li>
+
+                <li class="sellCenterLeftMenuUnderLineCls"></li>
+            </ul>
+
+            <ul class="sellCenterLeftMenu1Cls">
+                <li class="zhglIconCls sellCenterLeftMenu1Cls">我的资产</li>
+                <li class="sellCenterLeftMenu2Cls " onclick="buyCenterLeftMenu.doClickMenuHander(3.1)">资金账户</li>
+                <li class="sellCenterLeftMenu2Cls " onclick="buyCenterLeftMenu.doClickMenuHander(3.2)">保证金</li>
+                <li class="sellCenterLeftMenu2Cls " onclick="buyCenterLeftMenu.doClickMenuHander(3.3)">优惠券</li>
+                <li class="sellCenterLeftMenu2Cls " onclick="buyCenterLeftMenu.doClickMenuHander(3.5)">提现记录</li>
+                <li class="sellCenterLeftMenu2Cls " onclick="buyCenterLeftMenu.doClickMenuHander(3.6)">绑定银行卡</li>
+                <li class="sellCenterLeftMenuUnderLineCls"></li>
+            </ul>
+
+            <ul class="sellCenterLeftMenu1Cls">
+                <li class="kfglIconCls sellCenterLeftMenu1Cls">客服管理</li>
+                <li class="sellCenterLeftMenu2Cls " onclick="buyCenterLeftMenu.doClickMenuHander(4.3)">留言</li>
+                <li class="sellCenterLeftMenu2Cls " onclick="buyCenterLeftMenu.doClickMenuHander(4.4)">站内信</li>
+                <li class="sellCenterLeftMenuUnderLineCls"></li>
+            </ul>
+
+            <ul class="sellCenterLeftMenu1Cls">
+                <li class="buyUserInfoMngIconCls sellCenterLeftMenu1Cls">信息管理</li>
+                <li class="sellCenterLeftMenu2Cls " onclick="buyCenterLeftMenu.doClickMenuHander(5.1)">个人信息</li>
+                <li class="sellCenterLeftMenu2Cls " onclick="buyCenterLeftMenu.doClickMenuHander(5.2)">账户安全</li>
+                <li class="sellCenterLeftMenu2Cls " onclick="buyCenterLeftMenu.doClickMenuHander(5.3)">收货地址</li>
+                <li class="sellCenterLeftMenu2Cls " onclick="buyCenterLeftMenu.doClickMenuHander(5.4)">实名认证</li>
+            </ul>
+
+            <!-- 	<ul class="sellCenterLeftMenu1Cls"> -->
+            <!--     	<li style="cursor:pointer;" onclick="buyCenterLeftMenu.doClickMenuHander(6.0)">申请成为卖家</li> -->
+            <!--     </ul> -->
+
+        </div>
 
         <div class="split20pxCls"></div>
-          <div class="mainCenterBodyCls">
-	    	<div class="tabUnderlineHeaderDivCls">
-            	<ul class="noul padding0 margin0">
-                	<li id="isOrder_All" class="floatLeft pointer tabUnderlineHeaderItemUnSelectedCls" onclick="doQueryTab3(this)">
-                		<div>所有成交</div>
-                	</li>
-                	<li id="isOrder_N" class="floatLeft pointer tabUnderlineHeaderItemSelectedCls" onclick="doQueryTab1(this)">
-                		<div>未生成订单</div>
-                	</li>
-                	<li id="isOrder_Y" class="floatLeft pointer tabUnderlineHeaderItemUnSelectedCls" onclick="doQueryTab2(this)">
-                		<div>已生成订单</div>
-                	</li>
-        			<li><div style="line-height: 22px;text-align: center;"><span style="padding-left: 60px;color: #ff0000;">买受人须在成功竞买到拍品后的10个自然日付款，如果买受人未足额支付成交价款，逾期系统将自动扣除相当于拍品落槌价20%的保证金。（2017年6月19日零点以后成交的拍品）</span></div></li>
-                	
+        <div class="mainCenterBodyCls">
+            <div class="tabUnderlineHeaderDivCls">
+                <ul class="noul padding0 margin0">
+                    <li id="isOrder_3" class="floatLeft pointer  tabUnderlineHeaderItemSelectedCls"
+                        onclick="doQueryTab(3)">
+                        <div>所有成交</div>
+                    </li>
+                    <li id="isOrder_0" class="floatLeft pointer tabUnderlineHeaderItemUnSelectedCls"
+                        onclick="doQueryTab(0)">
+                        <div>未生成订单</div>
+                    </li>
+                    <li id="isOrder_1" class="floatLeft pointer tabUnderlineHeaderItemUnSelectedCls"
+                        onclick="doQueryTab(1)">
+                        <div>已生成订单</div>
+                    </li>
+                    <li>
+                        <div style="line-height: 22px;text-align: center;"><span
+                                style="padding-left: 60px;color: #ff0000;">买受人须在成功竞买到拍品后的10个自然日付款，如果买受人未足额支付成交价款，逾期系统将自动扣除相当于拍品落槌价20%的保证金。（2017年6月19日零点以后成交的拍品）</span>
+                        </div>
+                    </li>
+
                 </ul>
             </div>
             <!-- 查询条件DIV： -->
-			<div class="queryDiv">
-			<form id="form">
-				<table class="tableCls">
-					
-					<tbody><tr class="timeDiv">
-				      <td valign="top" colspan="4"><span style="color: #ff0000;">请点击右侧时间选项来选择您需要支付的拍品款项！目前仅显示您最近一月的查询结果。</span></td>
-					  <td valign="top"><div class="find1Div findCss" onclick="updateCss(this,'2','1');">最近一月</div></td>
-					  <td valign="top"><div class="find2Div" onclick="updateCss(this,'2','3');">最近三月</div></td>
-					  <td valign="top"><div class="find3Div" onclick="updateCss(this,'2','12');">最近一年</div></td>
-					  <td valign="top"><div comname="DateSelBox" clickfun="dateSelBoxClickFun" class="find4Div"><div>更早</div><div class="dateSelBoxCls" style="display: none; position: absolute; top: 438px;"><div class="selCls">更早</div><div dateval="2018" class="yearGCls">2018年</div><div dateval="2017" class="yearGCls">2017年</div><div dateval="2016" class="yearGCls">2016年</div><div dateval="2015" class="yearGCls">2015年</div><div dateval="2014" beforeflag="1" class="yearGCls">2015年以前</div></div></div></td>
-					</tr>
-		    	</tbody></table>
-	    	</form>
-			</div>
+            <div class="queryDiv">
+                <form id="form">
+                    <table class="tableCls">
+
+                        <tbody>
+                        <tr class="timeDiv">
+                            <td valign="top" colspan="4"><span style="color: #ff0000;">请点击右侧时间选项来选择您需要支付的拍品款项！目前仅显示您最近一月的查询结果。</span>
+                            </td>
+                            <td valign="top">
+                                <div class="find1Div findCss" onclick="updateCss(this,'2','1');">最近一月</div>
+                            </td>
+                            <td valign="top">
+                                <div class="find2Div" onclick="updateCss(this,'2','3');">最近三月</div>
+                            </td>
+                            <td valign="top">
+                                <div class="find3Div" onclick="updateCss(this,'2','12');">最近一年</div>
+                            </td>
+                            <td valign="top">
+                                <div comname="DateSelBox" clickfun="dateSelBoxClickFun" class="find4Div">
+                                    <div>更早</div>
+                                    <div class="dateSelBoxCls" style="display: none; position: absolute; top: 438px;">
+                                        <div class="selCls">更早</div>
+                                        <div dateval="2018" class="yearGCls">2018年</div>
+                                        <div dateval="2017" class="yearGCls">2017年</div>
+                                        <div dateval="2016" class="yearGCls">2016年</div>
+                                        <div dateval="2015" class="yearGCls">2015年</div>
+                                        <div dateval="2014" beforeflag="1" class="yearGCls">2015年以前</div>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </form>
+            </div>
             <!-- 未生成订单表格  -->
-           	<div id="table_tab_1">
-            	<div style="width:974px;" comname="ScsdTable" setting="{id:&quot;mySoldQueryTable1&quot;,queryId:&quot;mySoldNoOrderQuery&quot;,controllerPath:&quot;ecp/transaction/sold/querysold.action&quot;,render:&quot;mySoldQueryRender&quot;,cacheSelected:&quot;true&quot;,pkKey:&quot;LOTID&quot;,onCheckedFun:&quot;onCheckedFun&quot;,page:{currentPage:1,pageCount:0,recordCount:0,pageSize:50},checkMode:&quot;checkbox&quot;,isGroup:&quot;false&quot;,columns:[{&quot;border&quot;:null,&quot;groupOrDetail&quot;:&quot;group&quot;,&quot;hidden&quot;:&quot;true&quot;,&quot;columnHeader&quot;:null,&quot;toDetail&quot;:null,&quot;width&quot;:null,&quot;format&quot;:null,&quot;valign&quot;:null,&quot;align&quot;:null,&quot;dictType&quot;:null,&quot;columnName&quot;:&quot;BUYERID&quot;},{&quot;border&quot;:null,&quot;groupOrDetail&quot;:&quot;group&quot;,&quot;hidden&quot;:&quot;true&quot;,&quot;columnHeader&quot;:null,&quot;toDetail&quot;:null,&quot;width&quot;:null,&quot;format&quot;:null,&quot;valign&quot;:null,&quot;align&quot;:null,&quot;dictType&quot;:null,&quot;columnName&quot;:&quot;LOTID&quot;},{&quot;border&quot;:null,&quot;groupOrDetail&quot;:&quot;group&quot;,&quot;hidden&quot;:&quot;true&quot;,&quot;columnHeader&quot;:null,&quot;toDetail&quot;:null,&quot;width&quot;:null,&quot;format&quot;:null,&quot;valign&quot;:null,&quot;align&quot;:null,&quot;dictType&quot;:null,&quot;columnName&quot;:&quot;ITEMID&quot;},{&quot;border&quot;:null,&quot;groupOrDetail&quot;:&quot;group&quot;,&quot;hidden&quot;:&quot;true&quot;,&quot;columnHeader&quot;:null,&quot;toDetail&quot;:null,&quot;width&quot;:null,&quot;format&quot;:null,&quot;valign&quot;:null,&quot;align&quot;:null,&quot;dictType&quot;:null,&quot;columnName&quot;:&quot;ITEMPICPATH&quot;},{&quot;border&quot;:null,&quot;groupOrDetail&quot;:&quot;group&quot;,&quot;hidden&quot;:&quot;true&quot;,&quot;columnHeader&quot;:null,&quot;toDetail&quot;:null,&quot;width&quot;:null,&quot;format&quot;:null,&quot;valign&quot;:null,&quot;align&quot;:null,&quot;dictType&quot;:null,&quot;columnName&quot;:&quot;GLIDEMARK&quot;},{&quot;border&quot;:null,&quot;groupOrDetail&quot;:&quot;group&quot;,&quot;hidden&quot;:&quot;false&quot;,&quot;columnHeader&quot;:&quot;拍品&quot;,&quot;toDetail&quot;:null,&quot;width&quot;:&quot;60%&quot;,&quot;format&quot;:null,&quot;valign&quot;:null,&quot;align&quot;:&quot;left&quot;,&quot;dictType&quot;:null,&quot;columnName&quot;:&quot;ITEMNAME&quot;},{&quot;border&quot;:null,&quot;groupOrDetail&quot;:&quot;group&quot;,&quot;hidden&quot;:&quot;false&quot;,&quot;columnHeader&quot;:&quot;落槌价(元)&quot;,&quot;toDetail&quot;:null,&quot;width&quot;:&quot;10%&quot;,&quot;format&quot;:null,&quot;valign&quot;:null,&quot;align&quot;:&quot;center&quot;,&quot;dictType&quot;:null,&quot;columnName&quot;:&quot;HAMMERPRICE&quot;},{&quot;border&quot;:null,&quot;groupOrDetail&quot;:&quot;group&quot;,&quot;hidden&quot;:&quot;false&quot;,&quot;columnHeader&quot;:&quot;成交价(元)&quot;,&quot;toDetail&quot;:null,&quot;width&quot;:&quot;10%&quot;,&quot;format&quot;:null,&quot;valign&quot;:null,&quot;align&quot;:&quot;center&quot;,&quot;dictType&quot;:null,&quot;columnName&quot;:&quot;SOLDPRICE&quot;},{&quot;border&quot;:null,&quot;groupOrDetail&quot;:&quot;group&quot;,&quot;hidden&quot;:&quot;false&quot;,&quot;columnHeader&quot;:&quot;成交日期&quot;,&quot;toDetail&quot;:null,&quot;width&quot;:&quot;20%&quot;,&quot;format&quot;:null,&quot;valign&quot;:null,&quot;align&quot;:&quot;center&quot;,&quot;dictType&quot;:null,&quot;columnName&quot;:&quot;HAMMERTIME&quot;}]}" id="mySoldQueryTable1">    <div class="tableHeaderCls" style="">        <table class="padding0 margin0" width="100%" cellpadding="0" cellspacing="0" border="0">        	<tbody><tr>            <td class="tableXZColumnHeaderCls" align="center" valign="middle"><input checktype="allCheck" class="middleCheckbox" name="scsdTable_checkMode_mySoldQueryTable1" type="checkbox"></td><td class="tableColumnHeaderCls" style="width:60%;">拍品</td><td class="tableColumnHeaderCls" style="width:10%;">落槌价(元)</td><td class="tableColumnHeaderCls" style="width:10%;">成交价(元)</td><td class="tableColumnHeaderCls" style="width:20%;">成交日期</td>            </tr>        </tbody></table>    </div>    <div class="rowSplitCls10"></div>        <div class="tableContentBoxCls" style=""><table class="tableRowItemCls" cellpadding="0" cellspacing="0" border="0"><tbody><tr><td class="aligncenter valignmiddle tableColItemRBCheckboxCls"><input rownum="0" name="scsdTable_checkMode_mySoldQueryTable1" type="checkbox"></td><td style="width:60%" class="alignleft valigncenter tableColItemRBCls"><a target="_blank" href="http://www.artrade.com/jsp/ecp/public/auction.jsp?lotid=973476012"><div class="itemDiv"><div class="itemPic"><img src="myclinch_files/z00000003_s.jpg"></div><div class="itemName">z00000003 佚名 内部测试3 勿点</div></div></a></td><td style="width:10%" class="aligncenter valigncenter tableColItemRBCls">1.00</td><td style="width:10%" class="aligncenter valigncenter tableColItemRBCls">1.10</td><td style="width:20%" class="aligncenter valigncenter tableColItemRBCls">2019-05-15 00:14:03</td></tr></tbody></table></div>        <div class="rowSplitCls10"></div>        <div class="tablePageToolbarCls">        <table style="width:100%;">            <tbody><tr>                <td class="font14" align="left">每页显示                    <select class="font14">                        <option value="10" selected="selected">10</option>                        <option value="20">20</option>                        <option value="50">50</option>                        <option value="100">100</option>                        <option value="200">200</option>                    </select>条记录，                    共<span class="recordCountSpan font14">1</span>条                </td>                <td class="tablePageBtnToolBarCls" align="right">                    <div class="font14" style="float: right;"><table class="tablePageBtnTdCls"><tbody><tr><td style="display:none;" gotopage="1" btntype="first"><span class="tablePageBtnDisabledCls">首页</span></td><td gotopage="0" btntype="pre"><span class="tablePageBtnDisabledCls">上一页</span></td><td gotopage="1" id="toPage" btntype="page" class="backPageCls">1</td><td gotopage="2" btntype="next"><span class="tablePageBtnDisabledCls">下一页</span></td><td style="display:none;" gotopage="1" btntype="last"><span class="tablePageBtnDisabledCls">尾页</span></td></tr></tbody></table></div>                </td>                <!--<td class="font14 tablePageInfoCls">总共<span class="recordCountSpan font14"></span>条，每页<span class="pageSizeSpan font14"></span>条， <span class="currentPageSpan font14"></span>/<span class="pageCountSpan font14"></span></td>-->                <!--<td class="tablePageBtnTdCls"><span class="tablePageBtnDisabledCls">上一页</span></td>-->                <!--<td class="tablePageBtnTdCls"><span class="tablePageBtnCls">下一页</span></td>-->            </tr>        </tbody></table>    </div></div>
+            <div id="table_tab_1">
+                <div style="width:974px;" comname="ScsdTable"
+                     setting="{id:&quot;mySoldQueryTable1&quot;,queryId:&quot;mySoldNoOrderQuery&quot;,controllerPath:&quot;ecp/transaction/sold/querysold.action&quot;,render:&quot;mySoldQueryRender&quot;,cacheSelected:&quot;true&quot;,pkKey:&quot;LOTID&quot;,onCheckedFun:&quot;onCheckedFun&quot;,page:{currentPage:1,pageCount:0,recordCount:0,pageSize:50},checkMode:&quot;checkbox&quot;,isGroup:&quot;false&quot;,columns:[{&quot;border&quot;:null,&quot;groupOrDetail&quot;:&quot;group&quot;,&quot;hidden&quot;:&quot;true&quot;,&quot;columnHeader&quot;:null,&quot;toDetail&quot;:null,&quot;width&quot;:null,&quot;format&quot;:null,&quot;valign&quot;:null,&quot;align&quot;:null,&quot;dictType&quot;:null,&quot;columnName&quot;:&quot;BUYERID&quot;},{&quot;border&quot;:null,&quot;groupOrDetail&quot;:&quot;group&quot;,&quot;hidden&quot;:&quot;true&quot;,&quot;columnHeader&quot;:null,&quot;toDetail&quot;:null,&quot;width&quot;:null,&quot;format&quot;:null,&quot;valign&quot;:null,&quot;align&quot;:null,&quot;dictType&quot;:null,&quot;columnName&quot;:&quot;LOTID&quot;},{&quot;border&quot;:null,&quot;groupOrDetail&quot;:&quot;group&quot;,&quot;hidden&quot;:&quot;true&quot;,&quot;columnHeader&quot;:null,&quot;toDetail&quot;:null,&quot;width&quot;:null,&quot;format&quot;:null,&quot;valign&quot;:null,&quot;align&quot;:null,&quot;dictType&quot;:null,&quot;columnName&quot;:&quot;ITEMID&quot;},{&quot;border&quot;:null,&quot;groupOrDetail&quot;:&quot;group&quot;,&quot;hidden&quot;:&quot;true&quot;,&quot;columnHeader&quot;:null,&quot;toDetail&quot;:null,&quot;width&quot;:null,&quot;format&quot;:null,&quot;valign&quot;:null,&quot;align&quot;:null,&quot;dictType&quot;:null,&quot;columnName&quot;:&quot;ITEMPICPATH&quot;},{&quot;border&quot;:null,&quot;groupOrDetail&quot;:&quot;group&quot;,&quot;hidden&quot;:&quot;true&quot;,&quot;columnHeader&quot;:null,&quot;toDetail&quot;:null,&quot;width&quot;:null,&quot;format&quot;:null,&quot;valign&quot;:null,&quot;align&quot;:null,&quot;dictType&quot;:null,&quot;columnName&quot;:&quot;GLIDEMARK&quot;},{&quot;border&quot;:null,&quot;groupOrDetail&quot;:&quot;group&quot;,&quot;hidden&quot;:&quot;false&quot;,&quot;columnHeader&quot;:&quot;拍品&quot;,&quot;toDetail&quot;:null,&quot;width&quot;:&quot;60%&quot;,&quot;format&quot;:null,&quot;valign&quot;:null,&quot;align&quot;:&quot;left&quot;,&quot;dictType&quot;:null,&quot;columnName&quot;:&quot;ITEMNAME&quot;},{&quot;border&quot;:null,&quot;groupOrDetail&quot;:&quot;group&quot;,&quot;hidden&quot;:&quot;false&quot;,&quot;columnHeader&quot;:&quot;落槌价(元)&quot;,&quot;toDetail&quot;:null,&quot;width&quot;:&quot;10%&quot;,&quot;format&quot;:null,&quot;valign&quot;:null,&quot;align&quot;:&quot;center&quot;,&quot;dictType&quot;:null,&quot;columnName&quot;:&quot;HAMMERPRICE&quot;},{&quot;border&quot;:null,&quot;groupOrDetail&quot;:&quot;group&quot;,&quot;hidden&quot;:&quot;false&quot;,&quot;columnHeader&quot;:&quot;成交价(元)&quot;,&quot;toDetail&quot;:null,&quot;width&quot;:&quot;10%&quot;,&quot;format&quot;:null,&quot;valign&quot;:null,&quot;align&quot;:&quot;center&quot;,&quot;dictType&quot;:null,&quot;columnName&quot;:&quot;SOLDPRICE&quot;},{&quot;border&quot;:null,&quot;groupOrDetail&quot;:&quot;group&quot;,&quot;hidden&quot;:&quot;false&quot;,&quot;columnHeader&quot;:&quot;成交日期&quot;,&quot;toDetail&quot;:null,&quot;width&quot;:&quot;20%&quot;,&quot;format&quot;:null,&quot;valign&quot;:null,&quot;align&quot;:&quot;center&quot;,&quot;dictType&quot;:null,&quot;columnName&quot;:&quot;HAMMERTIME&quot;}]}"
+                     id="mySoldQueryTable1">
+                    <div class="tableHeaderCls" style="">
+                        <table class="padding0 margin0" width="100%" cellpadding="0" cellspacing="0" border="0">
+                            <tbody>
+                            <tr>
+                                <td class="tableXZColumnHeaderCls" align="center" valign="middle"><input
+                                        checktype="allCheck" class="middleCheckbox"
+                                        name="scsdTable_checkMode_mySoldQueryTable1" type="checkbox"></td>
+                                <td class="tableColumnHeaderCls" style="width:30%;">拍品</td>
+                                <td class="tableColumnHeaderCls" style="width:30%;">订单号</td>
+                                <td class="tableColumnHeaderCls" style="width:10%;">落槌价(元)</td>
+                                <td class="tableColumnHeaderCls" style="width:10%;">成交价(元)</td>
+                                <td class="tableColumnHeaderCls" style="width:20%;">成交日期</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="rowSplitCls10"></div>
+                    <div id="clinchsList">
+                    <div class="tableContentBoxCls" style="" th:fragment="tableContentBoxCls" >
+                        <table class="tableRowItemCls" cellpadding="0" cellspacing="0" border="0" th:each="clinchs:${myClinchList}">
+                            <tbody>
+                            <tr>
+                                <td class="aligncenter valignmiddle tableColItemRBCheckboxCls"><input rownum="0"
+                                                                                                      name="scsdTable_checkMode_mySoldQueryTable1"
+                                                                                                      type="checkbox"  th:value="${clinchs.orderNo}">
+                                </td>
+                                <td style="width:30%" class="alignleft valigncenter tableColItemRBCls"><a
+                                        target="_blank"
+                                        href="http://www.artrade.com/jsp/ecp/public/auction.jsp?lotid=973476012">
+                                    <div class="itemDiv">
+                                        <div class="itemPic"><img src="myclinch_files/z00000003_s.jpg"></div>
+                                        <div class="itemName" th:text="${clinchs.goodsName}">z00000003 佚名 内部测试3 勿点</div>
+                                    </div>
+                                </a></td>
+                                <td style="width:30%" class="alignleft valigncenter tableColItemRBCls" th:text="${clinchs.orderNo}"></td>
+                                <td style="width:10%" class="aligncenter valigncenter tableColItemRBCls" th:text="${clinchs.auctionPrice}">1.00</td>
+                                <td style="width:10%" class="aligncenter valigncenter tableColItemRBCls" th:text="${clinchs.transactionPrice}">1.10</td>
+                                <td style="width:20%" class="aligncenter valigncenter tableColItemRBCls">2019-05-15
+                                    00:14:03
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    </div>
+                    <div class="rowSplitCls10"></div>
+                    <div class="tablePageToolbarCls">
+                        <table style="width:100%;">
+                            <tbody>
+                            <tr>
+                                <td class="font14" align="left">每页显示 <select class="font14">
+                                    <option value="10" selected="selected">10</option>
+                                    <option value="20">20</option>
+                                    <option value="50">50</option>
+                                    <option value="100">100</option>
+                                    <option value="200">200</option>
+                                </select>条记录， 共<span class="recordCountSpan font14">1</span>条
+                                </td>
+                                <td class="tablePageBtnToolBarCls" align="right">
+                                    <div class="font14" style="float: right;">
+                                        <table class="tablePageBtnTdCls">
+                                            <tbody>
+                                            <tr>
+                                                <td style="display:none;" gotopage="1" btntype="first"><span
+                                                        class="tablePageBtnDisabledCls">首页</span></td>
+                                                <td gotopage="0" btntype="pre"><span
+                                                        class="tablePageBtnDisabledCls">上一页</span></td>
+                                                <td gotopage="1" id="toPage" btntype="page" class="backPageCls">1</td>
+                                                <td gotopage="2" btntype="next"><span class="tablePageBtnDisabledCls">下一页</span>
+                                                </td>
+                                                <td style="display:none;" gotopage="1" btntype="last"><span
+                                                        class="tablePageBtnDisabledCls">尾页</span></td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </td>
+                                <!--<td class="font14 tablePageInfoCls">总共<span class="recordCountSpan font14"></span>条，每页<span class="pageSizeSpan font14"></span>条， <span class="currentPageSpan font14"></span>/<span class="pageCountSpan font14"></span></td>-->
+                                <!--<td class="tablePageBtnTdCls"><span class="tablePageBtnDisabledCls">上一页</span></td>-->
+                                <!--<td class="tablePageBtnTdCls"><span class="tablePageBtnCls">下一页</span></td>--></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
 
-	    	</div>
-	    	<div id="table_bottom" class="table_bottom">
+            </div>
+            <div id="table_bottom" class="table_bottom"  style="display:none">
 
-	    		<div id="makeOrderBtn1" class="table_bottom_right" onclick="doMakeOrder()">去结算</div>
-	    	</div>
-	    	<!-- 已生成订单表格  -->
-	    	<div id="table_tab_2" style="display: none;">
-            	<div style="width:974px;" comname="ScsdTable" setting="{id:&quot;mySoldQueryTable2&quot;,queryId:&quot;mySoldAndOrderQuery&quot;,controllerPath:&quot;ecp/transaction/sold/querysold.action&quot;,render:&quot;mySoldQueryRender&quot;,page:{currentPage:1,pageCount:0,recordCount:0,pageSize:50},isGroup:&quot;false&quot;,columns:[{&quot;border&quot;:null,&quot;groupOrDetail&quot;:&quot;group&quot;,&quot;hidden&quot;:&quot;true&quot;,&quot;columnHeader&quot;:null,&quot;toDetail&quot;:null,&quot;width&quot;:null,&quot;format&quot;:null,&quot;valign&quot;:null,&quot;align&quot;:null,&quot;dictType&quot;:null,&quot;columnName&quot;:&quot;BUYERID&quot;},{&quot;border&quot;:null,&quot;groupOrDetail&quot;:&quot;group&quot;,&quot;hidden&quot;:&quot;true&quot;,&quot;columnHeader&quot;:null,&quot;toDetail&quot;:null,&quot;width&quot;:null,&quot;format&quot;:null,&quot;valign&quot;:null,&quot;align&quot;:null,&quot;dictType&quot;:null,&quot;columnName&quot;:&quot;LOTID&quot;},{&quot;border&quot;:null,&quot;groupOrDetail&quot;:&quot;group&quot;,&quot;hidden&quot;:&quot;true&quot;,&quot;columnHeader&quot;:null,&quot;toDetail&quot;:null,&quot;width&quot;:null,&quot;format&quot;:null,&quot;valign&quot;:null,&quot;align&quot;:null,&quot;dictType&quot;:null,&quot;columnName&quot;:&quot;ITEMID&quot;},{&quot;border&quot;:null,&quot;groupOrDetail&quot;:&quot;group&quot;,&quot;hidden&quot;:&quot;true&quot;,&quot;columnHeader&quot;:null,&quot;toDetail&quot;:null,&quot;width&quot;:null,&quot;format&quot;:null,&quot;valign&quot;:null,&quot;align&quot;:null,&quot;dictType&quot;:null,&quot;columnName&quot;:&quot;ITEMPICPATH&quot;},{&quot;border&quot;:null,&quot;groupOrDetail&quot;:&quot;group&quot;,&quot;hidden&quot;:&quot;true&quot;,&quot;columnHeader&quot;:null,&quot;toDetail&quot;:null,&quot;width&quot;:null,&quot;format&quot;:null,&quot;valign&quot;:null,&quot;align&quot;:null,&quot;dictType&quot;:null,&quot;columnName&quot;:&quot;GLIDEMARK&quot;},{&quot;border&quot;:null,&quot;groupOrDetail&quot;:&quot;group&quot;,&quot;hidden&quot;:&quot;false&quot;,&quot;columnHeader&quot;:&quot;订单编号&quot;,&quot;toDetail&quot;:null,&quot;width&quot;:&quot;15%&quot;,&quot;format&quot;:null,&quot;valign&quot;:null,&quot;align&quot;:&quot;center&quot;,&quot;dictType&quot;:null,&quot;columnName&quot;:&quot;ORDERID&quot;},{&quot;border&quot;:null,&quot;groupOrDetail&quot;:&quot;group&quot;,&quot;hidden&quot;:&quot;false&quot;,&quot;columnHeader&quot;:&quot;拍品&quot;,&quot;toDetail&quot;:null,&quot;width&quot;:&quot;30%&quot;,&quot;format&quot;:null,&quot;valign&quot;:null,&quot;align&quot;:&quot;left&quot;,&quot;dictType&quot;:null,&quot;columnName&quot;:&quot;ITEMNAME&quot;},{&quot;border&quot;:null,&quot;groupOrDetail&quot;:&quot;group&quot;,&quot;hidden&quot;:&quot;false&quot;,&quot;columnHeader&quot;:&quot;落槌价(元)&quot;,&quot;toDetail&quot;:null,&quot;width&quot;:&quot;8%&quot;,&quot;format&quot;:null,&quot;valign&quot;:null,&quot;align&quot;:&quot;center&quot;,&quot;dictType&quot;:null,&quot;columnName&quot;:&quot;HAMMERPRICE&quot;},{&quot;border&quot;:null,&quot;groupOrDetail&quot;:&quot;group&quot;,&quot;hidden&quot;:&quot;false&quot;,&quot;columnHeader&quot;:&quot;佣金(元)&quot;,&quot;toDetail&quot;:null,&quot;width&quot;:&quot;6%&quot;,&quot;format&quot;:null,&quot;valign&quot;:null,&quot;align&quot;:&quot;center&quot;,&quot;dictType&quot;:null,&quot;columnName&quot;:&quot;LOTCMMSSN&quot;},{&quot;border&quot;:null,&quot;groupOrDetail&quot;:&quot;group&quot;,&quot;hidden&quot;:&quot;false&quot;,&quot;columnHeader&quot;:&quot;成交价(元)&quot;,&quot;toDetail&quot;:null,&quot;width&quot;:&quot;8%&quot;,&quot;format&quot;:null,&quot;valign&quot;:null,&quot;align&quot;:&quot;center&quot;,&quot;dictType&quot;:null,&quot;columnName&quot;:&quot;SOLDPRICE&quot;},{&quot;border&quot;:null,&quot;groupOrDetail&quot;:&quot;group&quot;,&quot;hidden&quot;:&quot;false&quot;,&quot;columnHeader&quot;:&quot;证书费(元)&quot;,&quot;toDetail&quot;:null,&quot;width&quot;:&quot;6%&quot;,&quot;format&quot;:null,&quot;valign&quot;:null,&quot;align&quot;:&quot;center&quot;,&quot;dictType&quot;:null,&quot;columnName&quot;:&quot;CERTFEE&quot;},{&quot;border&quot;:null,&quot;groupOrDetail&quot;:&quot;group&quot;,&quot;hidden&quot;:&quot;false&quot;,&quot;columnHeader&quot;:&quot;保费(元)&quot;,&quot;toDetail&quot;:null,&quot;width&quot;:&quot;6%&quot;,&quot;format&quot;:null,&quot;valign&quot;:null,&quot;align&quot;:&quot;center&quot;,&quot;dictType&quot;:null,&quot;columnName&quot;:&quot;INSRFEE&quot;},{&quot;border&quot;:null,&quot;groupOrDetail&quot;:&quot;group&quot;,&quot;hidden&quot;:&quot;false&quot;,&quot;columnHeader&quot;:&quot;总价(元)&quot;,&quot;toDetail&quot;:null,&quot;width&quot;:&quot;6%&quot;,&quot;format&quot;:null,&quot;valign&quot;:null,&quot;align&quot;:&quot;center&quot;,&quot;dictType&quot;:null,&quot;columnName&quot;:&quot;TOTALPRICE&quot;},{&quot;border&quot;:null,&quot;groupOrDetail&quot;:&quot;group&quot;,&quot;hidden&quot;:&quot;false&quot;,&quot;columnHeader&quot;:&quot;成交时间&quot;,&quot;toDetail&quot;:null,&quot;width&quot;:&quot;12%&quot;,&quot;format&quot;:null,&quot;valign&quot;:null,&quot;align&quot;:&quot;center&quot;,&quot;dictType&quot;:null,&quot;columnName&quot;:&quot;HAMMERTIME&quot;}]}" id="mySoldQueryTable2">    <div class="tableHeaderCls" style="">        <table class="padding0 margin0" width="100%" cellpadding="0" cellspacing="0" border="0">        	<tbody><tr>            <td class="tableColumnHeaderCls" style="width:15%;">订单编号</td><td class="tableColumnHeaderCls" style="width:30%;">拍品</td><td class="tableColumnHeaderCls" style="width:8%;">落槌价(元)</td><td class="tableColumnHeaderCls" style="width:6%;">佣金(元)</td><td class="tableColumnHeaderCls" style="width:8%;">成交价(元)</td><td class="tableColumnHeaderCls" style="width:6%;">证书费(元)</td><td class="tableColumnHeaderCls" style="width:6%;">保费(元)</td><td class="tableColumnHeaderCls" style="width:6%;">总价(元)</td><td class="tableColumnHeaderCls" style="width:12%;">成交时间</td>            </tr>        </tbody></table>    </div>    <div class="rowSplitCls10"></div>        <div class="tableContentBoxCls" style="">                                </div>        <div class="rowSplitCls10"></div>        <div class="tablePageToolbarCls">        <table style="width:100%;">            <tbody><tr>                <td class="font14" align="left">每页显示                    <select class="font14">                        <option value="10" selected="selected">10</option>                        <option value="20">20</option>                        <option value="50">50</option>                        <option value="100">100</option>                        <option value="200">200</option>                    </select>条记录，                    共<span class="recordCountSpan font14">0</span>条                </td>                <td class="tablePageBtnToolBarCls" align="right">                    <div class="font14" style="float: right;"></div>                </td>                <!--<td class="font14 tablePageInfoCls">总共<span class="recordCountSpan font14"></span>条，每页<span class="pageSizeSpan font14"></span>条， <span class="currentPageSpan font14"></span>/<span class="pageCountSpan font14"></span></td>-->                <!--<td class="tablePageBtnTdCls"><span class="tablePageBtnDisabledCls">上一页</span></td>-->                <!--<td class="tablePageBtnTdCls"><span class="tablePageBtnCls">下一页</span></td>-->            </tr>        </tbody></table>    </div></div>
+                <div class="table_bottom_right"  onclick="doMakeOrder()">去结算</div>
+            </div>
+            <!--&lt;!&ndash; 已生成订单表格  &ndash;&gt;
+            <div id="table_tab_2" style="display: none;">
+                <div style="width:974px;" comname="ScsdTable"
+                     setting="{id:&quot;mySoldQueryTable2&quot;,queryId:&quot;mySoldAndOrderQuery&quot;,controllerPath:&quot;ecp/transaction/sold/querysold.action&quot;,render:&quot;mySoldQueryRender&quot;,page:{currentPage:1,pageCount:0,recordCount:0,pageSize:50},isGroup:&quot;false&quot;,columns:[{&quot;border&quot;:null,&quot;groupOrDetail&quot;:&quot;group&quot;,&quot;hidden&quot;:&quot;true&quot;,&quot;columnHeader&quot;:null,&quot;toDetail&quot;:null,&quot;width&quot;:null,&quot;format&quot;:null,&quot;valign&quot;:null,&quot;align&quot;:null,&quot;dictType&quot;:null,&quot;columnName&quot;:&quot;BUYERID&quot;},{&quot;border&quot;:null,&quot;groupOrDetail&quot;:&quot;group&quot;,&quot;hidden&quot;:&quot;true&quot;,&quot;columnHeader&quot;:null,&quot;toDetail&quot;:null,&quot;width&quot;:null,&quot;format&quot;:null,&quot;valign&quot;:null,&quot;align&quot;:null,&quot;dictType&quot;:null,&quot;columnName&quot;:&quot;LOTID&quot;},{&quot;border&quot;:null,&quot;groupOrDetail&quot;:&quot;group&quot;,&quot;hidden&quot;:&quot;true&quot;,&quot;columnHeader&quot;:null,&quot;toDetail&quot;:null,&quot;width&quot;:null,&quot;format&quot;:null,&quot;valign&quot;:null,&quot;align&quot;:null,&quot;dictType&quot;:null,&quot;columnName&quot;:&quot;ITEMID&quot;},{&quot;border&quot;:null,&quot;groupOrDetail&quot;:&quot;group&quot;,&quot;hidden&quot;:&quot;true&quot;,&quot;columnHeader&quot;:null,&quot;toDetail&quot;:null,&quot;width&quot;:null,&quot;format&quot;:null,&quot;valign&quot;:null,&quot;align&quot;:null,&quot;dictType&quot;:null,&quot;columnName&quot;:&quot;ITEMPICPATH&quot;},{&quot;border&quot;:null,&quot;groupOrDetail&quot;:&quot;group&quot;,&quot;hidden&quot;:&quot;true&quot;,&quot;columnHeader&quot;:null,&quot;toDetail&quot;:null,&quot;width&quot;:null,&quot;format&quot;:null,&quot;valign&quot;:null,&quot;align&quot;:null,&quot;dictType&quot;:null,&quot;columnName&quot;:&quot;GLIDEMARK&quot;},{&quot;border&quot;:null,&quot;groupOrDetail&quot;:&quot;group&quot;,&quot;hidden&quot;:&quot;false&quot;,&quot;columnHeader&quot;:&quot;订单编号&quot;,&quot;toDetail&quot;:null,&quot;width&quot;:&quot;15%&quot;,&quot;format&quot;:null,&quot;valign&quot;:null,&quot;align&quot;:&quot;center&quot;,&quot;dictType&quot;:null,&quot;columnName&quot;:&quot;ORDERID&quot;},{&quot;border&quot;:null,&quot;groupOrDetail&quot;:&quot;group&quot;,&quot;hidden&quot;:&quot;false&quot;,&quot;columnHeader&quot;:&quot;拍品&quot;,&quot;toDetail&quot;:null,&quot;width&quot;:&quot;30%&quot;,&quot;format&quot;:null,&quot;valign&quot;:null,&quot;align&quot;:&quot;left&quot;,&quot;dictType&quot;:null,&quot;columnName&quot;:&quot;ITEMNAME&quot;},{&quot;border&quot;:null,&quot;groupOrDetail&quot;:&quot;group&quot;,&quot;hidden&quot;:&quot;false&quot;,&quot;columnHeader&quot;:&quot;落槌价(元)&quot;,&quot;toDetail&quot;:null,&quot;width&quot;:&quot;8%&quot;,&quot;format&quot;:null,&quot;valign&quot;:null,&quot;align&quot;:&quot;center&quot;,&quot;dictType&quot;:null,&quot;columnName&quot;:&quot;HAMMERPRICE&quot;},{&quot;border&quot;:null,&quot;groupOrDetail&quot;:&quot;group&quot;,&quot;hidden&quot;:&quot;false&quot;,&quot;columnHeader&quot;:&quot;佣金(元)&quot;,&quot;toDetail&quot;:null,&quot;width&quot;:&quot;6%&quot;,&quot;format&quot;:null,&quot;valign&quot;:null,&quot;align&quot;:&quot;center&quot;,&quot;dictType&quot;:null,&quot;columnName&quot;:&quot;LOTCMMSSN&quot;},{&quot;border&quot;:null,&quot;groupOrDetail&quot;:&quot;group&quot;,&quot;hidden&quot;:&quot;false&quot;,&quot;columnHeader&quot;:&quot;成交价(元)&quot;,&quot;toDetail&quot;:null,&quot;width&quot;:&quot;8%&quot;,&quot;format&quot;:null,&quot;valign&quot;:null,&quot;align&quot;:&quot;center&quot;,&quot;dictType&quot;:null,&quot;columnName&quot;:&quot;SOLDPRICE&quot;},{&quot;border&quot;:null,&quot;groupOrDetail&quot;:&quot;group&quot;,&quot;hidden&quot;:&quot;false&quot;,&quot;columnHeader&quot;:&quot;证书费(元)&quot;,&quot;toDetail&quot;:null,&quot;width&quot;:&quot;6%&quot;,&quot;format&quot;:null,&quot;valign&quot;:null,&quot;align&quot;:&quot;center&quot;,&quot;dictType&quot;:null,&quot;columnName&quot;:&quot;CERTFEE&quot;},{&quot;border&quot;:null,&quot;groupOrDetail&quot;:&quot;group&quot;,&quot;hidden&quot;:&quot;false&quot;,&quot;columnHeader&quot;:&quot;保费(元)&quot;,&quot;toDetail&quot;:null,&quot;width&quot;:&quot;6%&quot;,&quot;format&quot;:null,&quot;valign&quot;:null,&quot;align&quot;:&quot;center&quot;,&quot;dictType&quot;:null,&quot;columnName&quot;:&quot;INSRFEE&quot;},{&quot;border&quot;:null,&quot;groupOrDetail&quot;:&quot;group&quot;,&quot;hidden&quot;:&quot;false&quot;,&quot;columnHeader&quot;:&quot;总价(元)&quot;,&quot;toDetail&quot;:null,&quot;width&quot;:&quot;6%&quot;,&quot;format&quot;:null,&quot;valign&quot;:null,&quot;align&quot;:&quot;center&quot;,&quot;dictType&quot;:null,&quot;columnName&quot;:&quot;TOTALPRICE&quot;},{&quot;border&quot;:null,&quot;groupOrDetail&quot;:&quot;group&quot;,&quot;hidden&quot;:&quot;false&quot;,&quot;columnHeader&quot;:&quot;成交时间&quot;,&quot;toDetail&quot;:null,&quot;width&quot;:&quot;12%&quot;,&quot;format&quot;:null,&quot;valign&quot;:null,&quot;align&quot;:&quot;center&quot;,&quot;dictType&quot;:null,&quot;columnName&quot;:&quot;HAMMERTIME&quot;}]}"
+                     id="mySoldQueryTable2">
+                    <div class="tableHeaderCls" style="">
+                        <table class="padding0 margin0" width="100%" cellpadding="0" cellspacing="0" border="0">
+                            <tbody>
+                            <tr>
+                                <td class="tableColumnHeaderCls" style="width:15%;">订单编号</td>
+                                <td class="tableColumnHeaderCls" style="width:30%;">拍品</td>
+                                <td class="tableColumnHeaderCls" style="width:8%;">落槌价(元)</td>
+                                <td class="tableColumnHeaderCls" style="width:6%;">佣金(元)</td>
+                                <td class="tableColumnHeaderCls" style="width:8%;">成交价(元)</td>
+                                <td class="tableColumnHeaderCls" style="width:6%;">证书费(元)</td>
+                                <td class="tableColumnHeaderCls" style="width:6%;">保费(元)</td>
+                                <td class="tableColumnHeaderCls" style="width:6%;">总价(元)</td>
+                                <td class="tableColumnHeaderCls" style="width:12%;">成交时间</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="rowSplitCls10"></div>
+                    <div class="tableContentBoxCls" style=""></div>
+                    <div class="rowSplitCls10"></div>
+                    <div class="tablePageToolbarCls">
+                        <table style="width:100%;">
+                            <tbody>
+                            <tr>
+                                <td class="font14" align="left">每页显示 <select class="font14">
+                                    <option value="10" selected="selected">10</option>
+                                    <option value="20">20</option>
+                                    <option value="50">50</option>
+                                    <option value="100">100</option>
+                                    <option value="200">200</option>
+                                </select>条记录， 共<span class="recordCountSpan font14">0</span>条
+                                </td>
+                                <td class="tablePageBtnToolBarCls" align="right">
+                                    <div class="font14" style="float: right;"></div>
+                                </td>
+                                &lt;!&ndash;<td class="font14 tablePageInfoCls">总共<span class="recordCountSpan font14"></span>条，每页<span class="pageSizeSpan font14"></span>条， <span class="currentPageSpan font14"></span>/<span class="pageCountSpan font14"></span></td>&ndash;&gt;
+                                &lt;!&ndash;<td class="tablePageBtnTdCls"><span class="tablePageBtnDisabledCls">上一页</span></td>&ndash;&gt;
+                                &lt;!&ndash;<td class="tablePageBtnTdCls"><span class="tablePageBtnCls">下一页</span></td>&ndash;&gt;</tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
 
-	    	</div>
-	    	<!-- 所有订单表格  -->
-	    	<div id="table_tab_3" style="display: none;">
-            	<div style="width:974px;" comname="ScsdTable" setting="{id:&quot;mySoldQueryTable3&quot;,queryId:&quot;mySoldAllQuery&quot;,controllerPath:&quot;ecp/transaction/sold/querysold.action&quot;,render:&quot;mySoldQueryRender&quot;,page:{currentPage:1,pageCount:0,recordCount:0,pageSize:50},isGroup:&quot;false&quot;,columns:[{&quot;border&quot;:null,&quot;groupOrDetail&quot;:&quot;group&quot;,&quot;hidden&quot;:&quot;true&quot;,&quot;columnHeader&quot;:null,&quot;toDetail&quot;:null,&quot;width&quot;:null,&quot;format&quot;:null,&quot;valign&quot;:null,&quot;align&quot;:null,&quot;dictType&quot;:null,&quot;columnName&quot;:&quot;BUYERID&quot;},{&quot;border&quot;:null,&quot;groupOrDetail&quot;:&quot;group&quot;,&quot;hidden&quot;:&quot;true&quot;,&quot;columnHeader&quot;:null,&quot;toDetail&quot;:null,&quot;width&quot;:null,&quot;format&quot;:null,&quot;valign&quot;:null,&quot;align&quot;:null,&quot;dictType&quot;:null,&quot;columnName&quot;:&quot;LOTID&quot;},{&quot;border&quot;:null,&quot;groupOrDetail&quot;:&quot;group&quot;,&quot;hidden&quot;:&quot;true&quot;,&quot;columnHeader&quot;:null,&quot;toDetail&quot;:null,&quot;width&quot;:null,&quot;format&quot;:null,&quot;valign&quot;:null,&quot;align&quot;:null,&quot;dictType&quot;:null,&quot;columnName&quot;:&quot;ITEMID&quot;},{&quot;border&quot;:null,&quot;groupOrDetail&quot;:&quot;group&quot;,&quot;hidden&quot;:&quot;true&quot;,&quot;columnHeader&quot;:null,&quot;toDetail&quot;:null,&quot;width&quot;:null,&quot;format&quot;:null,&quot;valign&quot;:null,&quot;align&quot;:null,&quot;dictType&quot;:null,&quot;columnName&quot;:&quot;ITEMPICPATH&quot;},{&quot;border&quot;:null,&quot;groupOrDetail&quot;:&quot;group&quot;,&quot;hidden&quot;:&quot;true&quot;,&quot;columnHeader&quot;:null,&quot;toDetail&quot;:null,&quot;width&quot;:null,&quot;format&quot;:null,&quot;valign&quot;:null,&quot;align&quot;:null,&quot;dictType&quot;:null,&quot;columnName&quot;:&quot;GLIDEMARK&quot;},{&quot;border&quot;:null,&quot;groupOrDetail&quot;:&quot;group&quot;,&quot;hidden&quot;:&quot;false&quot;,&quot;columnHeader&quot;:&quot;拍品&quot;,&quot;toDetail&quot;:null,&quot;width&quot;:&quot;60%&quot;,&quot;format&quot;:null,&quot;valign&quot;:null,&quot;align&quot;:&quot;left&quot;,&quot;dictType&quot;:null,&quot;columnName&quot;:&quot;ITEMNAME&quot;},{&quot;border&quot;:null,&quot;groupOrDetail&quot;:&quot;group&quot;,&quot;hidden&quot;:&quot;false&quot;,&quot;columnHeader&quot;:&quot;落槌价(元)&quot;,&quot;toDetail&quot;:null,&quot;width&quot;:&quot;10%&quot;,&quot;format&quot;:null,&quot;valign&quot;:null,&quot;align&quot;:&quot;center&quot;,&quot;dictType&quot;:null,&quot;columnName&quot;:&quot;HAMMERPRICE&quot;},{&quot;border&quot;:null,&quot;groupOrDetail&quot;:&quot;group&quot;,&quot;hidden&quot;:&quot;false&quot;,&quot;columnHeader&quot;:&quot;成交价格(元)&quot;,&quot;toDetail&quot;:null,&quot;width&quot;:&quot;10%&quot;,&quot;format&quot;:null,&quot;valign&quot;:null,&quot;align&quot;:&quot;center&quot;,&quot;dictType&quot;:null,&quot;columnName&quot;:&quot;SOLDPRICE&quot;},{&quot;border&quot;:null,&quot;groupOrDetail&quot;:&quot;group&quot;,&quot;hidden&quot;:&quot;false&quot;,&quot;columnHeader&quot;:&quot;状态&quot;,&quot;toDetail&quot;:null,&quot;width&quot;:&quot;8%&quot;,&quot;format&quot;:null,&quot;valign&quot;:null,&quot;align&quot;:&quot;center&quot;,&quot;dictType&quot;:null,&quot;columnName&quot;:&quot;LOTSTATUS&quot;},{&quot;border&quot;:null,&quot;groupOrDetail&quot;:&quot;group&quot;,&quot;hidden&quot;:&quot;false&quot;,&quot;columnHeader&quot;:&quot;成交日期&quot;,&quot;toDetail&quot;:null,&quot;width&quot;:&quot;12%&quot;,&quot;format&quot;:null,&quot;valign&quot;:null,&quot;align&quot;:&quot;center&quot;,&quot;dictType&quot;:null,&quot;columnName&quot;:&quot;HAMMERTIME&quot;}]}" id="mySoldQueryTable3">    <div class="tableHeaderCls" style="">        <table class="padding0 margin0" width="100%" cellpadding="0" cellspacing="0" border="0">        	<tbody><tr>            <td class="tableColumnHeaderCls" style="width:60%;">拍品</td><td class="tableColumnHeaderCls" style="width:10%;">落槌价(元)</td><td class="tableColumnHeaderCls" style="width:10%;">成交价格(元)</td><td class="tableColumnHeaderCls" style="width:8%;">状态</td><td class="tableColumnHeaderCls" style="width:12%;">成交日期</td>            </tr>        </tbody></table>    </div>    <div class="rowSplitCls10"></div>        <div class="tableContentBoxCls" style="">                                </div>        <div class="rowSplitCls10"></div>        <div class="tablePageToolbarCls">        <table style="width:100%;">            <tbody><tr>                <td class="font14" align="left">每页显示                    <select class="font14">                        <option value="10" selected="selected">10</option>                        <option value="20">20</option>                        <option value="50">50</option>                        <option value="100">100</option>                        <option value="200">200</option>                    </select>条记录，                    共<span class="recordCountSpan font14">0</span>条                </td>                <td class="tablePageBtnToolBarCls" align="right">                    <div class="font14" style="float: right;"></div>                </td>                <!--<td class="font14 tablePageInfoCls">总共<span class="recordCountSpan font14"></span>条，每页<span class="pageSizeSpan font14"></span>条， <span class="currentPageSpan font14"></span>/<span class="pageCountSpan font14"></span></td>-->                <!--<td class="tablePageBtnTdCls"><span class="tablePageBtnDisabledCls">上一页</span></td>-->                <!--<td class="tablePageBtnTdCls"><span class="tablePageBtnCls">下一页</span></td>-->            </tr>        </tbody></table>    </div></div>
+            </div>
+            &lt;!&ndash; 所有订单表格  &ndash;&gt;
+            <div id="table_tab_3" style="display: none;">
+                <div style="width:974px;" comname="ScsdTable"
+                     setting="{id:&quot;mySoldQueryTable3&quot;,queryId:&quot;mySoldAllQuery&quot;,controllerPath:&quot;ecp/transaction/sold/querysold.action&quot;,render:&quot;mySoldQueryRender&quot;,page:{currentPage:1,pageCount:0,recordCount:0,pageSize:50},isGroup:&quot;false&quot;,columns:[{&quot;border&quot;:null,&quot;groupOrDetail&quot;:&quot;group&quot;,&quot;hidden&quot;:&quot;true&quot;,&quot;columnHeader&quot;:null,&quot;toDetail&quot;:null,&quot;width&quot;:null,&quot;format&quot;:null,&quot;valign&quot;:null,&quot;align&quot;:null,&quot;dictType&quot;:null,&quot;columnName&quot;:&quot;BUYERID&quot;},{&quot;border&quot;:null,&quot;groupOrDetail&quot;:&quot;group&quot;,&quot;hidden&quot;:&quot;true&quot;,&quot;columnHeader&quot;:null,&quot;toDetail&quot;:null,&quot;width&quot;:null,&quot;format&quot;:null,&quot;valign&quot;:null,&quot;align&quot;:null,&quot;dictType&quot;:null,&quot;columnName&quot;:&quot;LOTID&quot;},{&quot;border&quot;:null,&quot;groupOrDetail&quot;:&quot;group&quot;,&quot;hidden&quot;:&quot;true&quot;,&quot;columnHeader&quot;:null,&quot;toDetail&quot;:null,&quot;width&quot;:null,&quot;format&quot;:null,&quot;valign&quot;:null,&quot;align&quot;:null,&quot;dictType&quot;:null,&quot;columnName&quot;:&quot;ITEMID&quot;},{&quot;border&quot;:null,&quot;groupOrDetail&quot;:&quot;group&quot;,&quot;hidden&quot;:&quot;true&quot;,&quot;columnHeader&quot;:null,&quot;toDetail&quot;:null,&quot;width&quot;:null,&quot;format&quot;:null,&quot;valign&quot;:null,&quot;align&quot;:null,&quot;dictType&quot;:null,&quot;columnName&quot;:&quot;ITEMPICPATH&quot;},{&quot;border&quot;:null,&quot;groupOrDetail&quot;:&quot;group&quot;,&quot;hidden&quot;:&quot;true&quot;,&quot;columnHeader&quot;:null,&quot;toDetail&quot;:null,&quot;width&quot;:null,&quot;format&quot;:null,&quot;valign&quot;:null,&quot;align&quot;:null,&quot;dictType&quot;:null,&quot;columnName&quot;:&quot;GLIDEMARK&quot;},{&quot;border&quot;:null,&quot;groupOrDetail&quot;:&quot;group&quot;,&quot;hidden&quot;:&quot;false&quot;,&quot;columnHeader&quot;:&quot;拍品&quot;,&quot;toDetail&quot;:null,&quot;width&quot;:&quot;60%&quot;,&quot;format&quot;:null,&quot;valign&quot;:null,&quot;align&quot;:&quot;left&quot;,&quot;dictType&quot;:null,&quot;columnName&quot;:&quot;ITEMNAME&quot;},{&quot;border&quot;:null,&quot;groupOrDetail&quot;:&quot;group&quot;,&quot;hidden&quot;:&quot;false&quot;,&quot;columnHeader&quot;:&quot;落槌价(元)&quot;,&quot;toDetail&quot;:null,&quot;width&quot;:&quot;10%&quot;,&quot;format&quot;:null,&quot;valign&quot;:null,&quot;align&quot;:&quot;center&quot;,&quot;dictType&quot;:null,&quot;columnName&quot;:&quot;HAMMERPRICE&quot;},{&quot;border&quot;:null,&quot;groupOrDetail&quot;:&quot;group&quot;,&quot;hidden&quot;:&quot;false&quot;,&quot;columnHeader&quot;:&quot;成交价格(元)&quot;,&quot;toDetail&quot;:null,&quot;width&quot;:&quot;10%&quot;,&quot;format&quot;:null,&quot;valign&quot;:null,&quot;align&quot;:&quot;center&quot;,&quot;dictType&quot;:null,&quot;columnName&quot;:&quot;SOLDPRICE&quot;},{&quot;border&quot;:null,&quot;groupOrDetail&quot;:&quot;group&quot;,&quot;hidden&quot;:&quot;false&quot;,&quot;columnHeader&quot;:&quot;状态&quot;,&quot;toDetail&quot;:null,&quot;width&quot;:&quot;8%&quot;,&quot;format&quot;:null,&quot;valign&quot;:null,&quot;align&quot;:&quot;center&quot;,&quot;dictType&quot;:null,&quot;columnName&quot;:&quot;LOTSTATUS&quot;},{&quot;border&quot;:null,&quot;groupOrDetail&quot;:&quot;group&quot;,&quot;hidden&quot;:&quot;false&quot;,&quot;columnHeader&quot;:&quot;成交日期&quot;,&quot;toDetail&quot;:null,&quot;width&quot;:&quot;12%&quot;,&quot;format&quot;:null,&quot;valign&quot;:null,&quot;align&quot;:&quot;center&quot;,&quot;dictType&quot;:null,&quot;columnName&quot;:&quot;HAMMERTIME&quot;}]}"
+                     id="mySoldQueryTable3">
+                    <div class="tableHeaderCls" style="">
+                        <table class="padding0 margin0" width="100%" cellpadding="0" cellspacing="0" border="0">
+                            <tbody>
+                            <tr>
+                                <td class="tableColumnHeaderCls" style="width:60%;">拍品</td>
+                                <td class="tableColumnHeaderCls" style="width:10%;">落槌价(元)</td>
+                                <td class="tableColumnHeaderCls" style="width:10%;">成交价格(元)</td>
+                                <td class="tableColumnHeaderCls" style="width:8%;">状态</td>
+                                <td class="tableColumnHeaderCls" style="width:12%;">成交日期</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="rowSplitCls10"></div>
+                    <div class="tableContentBoxCls" style="">
 
-	    	</div>
-	     </div>
+
+
+                    </div>
+                    <div class="rowSplitCls10"></div>
+                    <div class="tablePageToolbarCls">
+                        <table style="width:100%;">
+                            <tbody>
+                            <tr>
+                                <td class="font14" align="left">每页显示 <select class="font14">
+                                    <option value="10" selected="selected">10</option>
+                                    <option value="20">20</option>
+                                    <option value="50">50</option>
+                                    <option value="100">100</option>
+                                    <option value="200">200</option>
+                                </select>条记录， 共<span class="recordCountSpan font14">0</span>条
+                                </td>
+                                <td class="tablePageBtnToolBarCls" align="right">
+                                    <div class="font14" style="float: right;"></div>
+                                </td>
+                                &lt;!&ndash;<td class="font14 tablePageInfoCls">总共<span class="recordCountSpan font14"></span>条，每页<span class="pageSizeSpan font14"></span>条， <span class="currentPageSpan font14"></span>/<span class="pageCountSpan font14"></span></td>&ndash;&gt;
+                                &lt;!&ndash;<td class="tablePageBtnTdCls"><span class="tablePageBtnDisabledCls">上一页</span></td>&ndash;&gt;
+                                &lt;!&ndash;<td class="tablePageBtnTdCls"><span class="tablePageBtnCls">下一页</span></td>&ndash;&gt;</tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>-->
+        </div>
     </div>
 </div>
 
 <script type="text/javascript">
-/**
- * 右上方搜索框输入后查询
- */
-function doClickPreQuery() {
-	var val = $("#keywordInput").val();
-	var setting = {
-		"action" : baseUrl
-				+ "/jsp/ecp/item/manage/preitemquerylist.jsp",
-		"datas" : []
-	};
-	simulateFormSubmit(setting);
-}
+    /**
+     * 右上方搜索框输入后查询
+     */
+    function doClickPreQuery() {
+        var val = $("#keywordInput").val();
+        var setting = {
+            "action": baseUrl
+                + "/jsp/ecp/item/manage/preitemquerylist.jsp",
+            "datas": []
+        };
+        simulateFormSubmit(setting);
+    }
 </script>
 <div style="float:left;width:100%;clear:both;">
-	<div class="footLine"></div>
+    <div class="footLine"></div>
     <div class="headAndFoot">
         <!-- 【预,藏,疑】区域 -->
         <table class="linkTable">
-            <tbody><tr>
+            <tbody>
+            <tr>
                 <!-- 预  -->
                 <td width="340px" onclick="doClickPreQuery();">
                     <div class="redCircle"><img src="myclinch_files/circle_yu.png"></div>
@@ -545,11 +793,13 @@ function doClickPreQuery() {
                             <b style="font-size:14px;">拍前预展48小时</b>
                         </div>
                         <div style="font-size: 12px;">嘉德在线拍品，将在开拍前48小时内预展，敬请留意。</div>
-                    </div></td>
-    
-                <td><hr class="logo_hr" size="56px" style="border:none;border-right:solid 1px #e7e7e7;border-left:0px;">
+                    </div>
                 </td>
-    
+
+                <td>
+                    <hr class="logo_hr" size="56px" style="border:none;border-right:solid 1px #e7e7e7;border-left:0px;">
+                </td>
+
                 <!-- 藏  -->
                 <td width="340px" onclick="javascrtpt:window.open('http://epub.artrade.com/epublish/zixun.cfm')">
                     <div class="redCircle" style="margin-left: 50px;"><img src="myclinch_files/circle_cang.png"></div>
@@ -558,9 +808,11 @@ function doClickPreQuery() {
                             <b style="font-size:14px;">艺术品知识堂</b>
                         </div>
                         <div style="font-size: 12px;">收藏、保养、鉴别</div>
-                    </div></td>
-    
-                <td><hr class="logo_hr" size="56px" style="border:none;border-right:solid 1px #e7e7e7;border-left:0px;">
+                    </div>
+                </td>
+
+                <td>
+                    <hr class="logo_hr" size="56px" style="border:none;border-right:solid 1px #e7e7e7;border-left:0px;">
                 </td>
 
                 <!-- 疑  -->
@@ -571,22 +823,29 @@ function doClickPreQuery() {
                             <b style="font-size:14px;">客户答疑</b>
                         </div>
                         <div style="font-size: 12px;">有问题？来看看</div>
-                    </div></td>
-    
+                    </div>
+                </td>
+
             </tr>
-        </tbody></table>
-    
+            </tbody>
+        </table>
+
         <div style="background: #2E2D31; width: 100%; height: 300px; bottom: 0px; left: 0px;">
-    
+
             <div style="width: 1190px; color: #FFFFFF; margin: auto;">
                 <div style="height: 60px;">
                     <div style="float: left; margin-top: 10px;">
                         <div style="font-size: 12px; color: #96928E;">联系电话</div>
-                        <div id="footerMbr_mobile" style="font-size: 18px; font-weight: 500;margin-top:5px;">010-67102935</div>
+                        <div id="footerMbr_mobile" style="font-size: 18px; font-weight: 500;margin-top:5px;">
+                            010-67102935
+                        </div>
                     </div>
                     <div style="float: right; margin-top: 10px;margin-right: 10px;">
-                        <a href="http://weibo.com/artrade" target="_blank"><img style="border:0px;" src="myclinch_files/xlweibo.png"></a>
-                        <a href="http://t.qq.com/artrade" target="_blank"><img style="border:0px;margin-left: 20px; margin-right: 20px;" src="myclinch_files/txweibo.png"></a>
+                        <a href="http://weibo.com/artrade" target="_blank"><img style="border:0px;"
+                                                                                src="myclinch_files/xlweibo.png"></a>
+                        <a href="http://t.qq.com/artrade" target="_blank"><img
+                                style="border:0px;margin-left: 20px; margin-right: 20px;"
+                                src="myclinch_files/txweibo.png"></a>
                         <!-- <a href="http://www.artrade.com/about/weixin.html" target="_blank"><img style="border:0px;" src="/image/ecp/weixin.png" /></a> -->
                     </div>
                 </div>
@@ -595,9 +854,11 @@ function doClickPreQuery() {
                         <img src="myclinch_files/weixinma.jpg" width="80px" height="80px">
                     </div>
                     <div style="float: left; margin-top: 10px; font-size: 12px; color: #96928E;">
-                        <div id="footerAddress" style="margin-top: 10px; margin-left: 10px;">地址：北京崇文门外大街44号大康大厦11层嘉德在线</div>
+                        <div id="footerAddress" style="margin-top: 10px; margin-left: 10px;">地址：北京崇文门外大街44号大康大厦11层嘉德在线
+                        </div>
                         <div id="footerPostCode" style="margin-top: 16px; margin-left: 10px;">邮编：100062</div>
-                        <div id="footerMbr_email" style="margin-top: 16px; margin-left: 10px;">电子邮箱market@artrade.com</div>
+                        <div id="footerMbr_email" style="margin-top: 16px; margin-left: 10px;">电子邮箱market@artrade.com
+                        </div>
                     </div>
                     <div style="float: right; margin-top: 10px; margin-right: 0px; margin-left: 10px;width:720px;">
                         <ul>
@@ -605,65 +866,87 @@ function doClickPreQuery() {
                                 <ul class="footer_ul">
                                     <li>
                                         <h4 style="font-size:14px;">拍卖学堂</h4></li>
-                                    <li><a href="http://www.artrade.com/jsp/ecp/helpdoc/helpcenter.jsp?menuId=2" target="_blank">如何注册</a>
+                                    <li><a href="http://www.artrade.com/jsp/ecp/helpdoc/helpcenter.jsp?menuId=2"
+                                           target="_blank">如何注册</a>
                                     </li>
-                                    <li><a href="http://www.artrade.com/jsp/ecp/helpdoc/helpcenter.jsp?menuId=2" target="_blank">如何买</a>
+                                    <li><a href="http://www.artrade.com/jsp/ecp/helpdoc/helpcenter.jsp?menuId=2"
+                                           target="_blank">如何买</a>
                                     </li>
-                                    <li><a href="http://www.artrade.com/jsp/ecp/helpdoc/helpcenter.jsp?parId=0" target="_blank">如何卖</a>
+                                    <li><a href="http://www.artrade.com/jsp/ecp/helpdoc/helpcenter.jsp?parId=0"
+                                           target="_blank">如何卖</a>
                                     </li>
-                                </ul></li>
+                                </ul>
+                            </li>
                             <li style="float: left;margin-right:30px; list-style: none;">
                                 <ul class="footer_ul">
                                     <li>
                                         <h4 style="font-size:14px;">拍卖支付方式</h4></li>
-                                    <li><a href="http://www.artrade.com/jsp/ecp/helpdoc/helpcenter.jsp?menuId=7" target="_blank">网上付款</a>
+                                    <li><a href="http://www.artrade.com/jsp/ecp/helpdoc/helpcenter.jsp?menuId=7"
+                                           target="_blank">网上付款</a>
                                     </li>
-                                    <li><a href="http://www.artrade.com/jsp/ecp/helpdoc/helpcenter.jsp?menuId=7" target="_blank">亲自到公司付款</a>
+                                    <li><a href="http://www.artrade.com/jsp/ecp/helpdoc/helpcenter.jsp?menuId=7"
+                                           target="_blank">亲自到公司付款</a>
                                     </li>
-                                    <li><a href="http://www.artrade.com/jsp/ecp/helpdoc/helpcenter.jsp?menuId=7" target="_blank">银行汇款</a>
+                                    <li><a href="http://www.artrade.com/jsp/ecp/helpdoc/helpcenter.jsp?menuId=7"
+                                           target="_blank">银行汇款</a>
                                     </li>
-                                </ul></li>
+                                </ul>
+                            </li>
                             <li style="float: left; margin-right:30px;list-style: none;">
                                 <ul class="footer_ul">
                                     <li>
                                         <h4 style="font-size:14px;">配送方式</h4></li>
-                                    <li><a href="http://www.artrade.com/jsp/ecp/helpdoc/helpcenter.jsp?menuId=6" target="_blank">拍品总价组成</a>
+                                    <li><a href="http://www.artrade.com/jsp/ecp/helpdoc/helpcenter.jsp?menuId=6"
+                                           target="_blank">拍品总价组成</a>
                                     </li>
-                                    <li><a href="http://www.artrade.com/jsp/ecp/helpdoc/helpcenter.jsp?menuId=6" target="_blank">计算运费</a>
+                                    <li><a href="http://www.artrade.com/jsp/ecp/helpdoc/helpcenter.jsp?menuId=6"
+                                           target="_blank">计算运费</a>
                                     </li>
-                                    <li><a href="http://www.artrade.com/jsp/ecp/helpdoc/helpcenter.jsp?menuId=6" target="_blank">物流配送方案</a>
+                                    <li><a href="http://www.artrade.com/jsp/ecp/helpdoc/helpcenter.jsp?menuId=6"
+                                           target="_blank">物流配送方案</a>
                                     </li>
-                                    <li><a href="http://www.artrade.com/jsp/ecp/helpdoc/helpcenter.jsp?menuId=6" target="_blank">配送常见问题</a>
+                                    <li><a href="http://www.artrade.com/jsp/ecp/helpdoc/helpcenter.jsp?menuId=6"
+                                           target="_blank">配送常见问题</a>
                                     </li>
-                                </ul></li>
+                                </ul>
+                            </li>
                             <li style="float: left;margin-right:30px; list-style: none;">
                                 <ul class="footer_ul">
                                     <li>
                                         <h4 style="font-size:14px;">账户及服务</h4></li>
-                                    <li><a href="http://www.artrade.com/jsp/ecp/helpdoc/helpcenter.jsp?menuId=10" target="_blank">账户功能</a>
+                                    <li><a href="http://www.artrade.com/jsp/ecp/helpdoc/helpcenter.jsp?menuId=10"
+                                           target="_blank">账户功能</a>
                                     </li>
-                                    <li><a href="http://www.artrade.com/jsp/ecp/helpdoc/helpcenter.jsp?parId=1" target="_blank">常见问题</a>
+                                    <li><a href="http://www.artrade.com/jsp/ecp/helpdoc/helpcenter.jsp?parId=1"
+                                           target="_blank">常见问题</a>
                                     </li>
-                                    <li><a href="http://www.artrade.com/jsp/ecp/helpdoc/helpcenter.jsp?parId=2" target="_blank">联系客服</a>
+                                    <li><a href="http://www.artrade.com/jsp/ecp/helpdoc/helpcenter.jsp?parId=2"
+                                           target="_blank">联系客服</a>
                                     </li>
-                                </ul></li>
+                                </ul>
+                            </li>
                             <li style="float: left;list-style: none;">
                                 <ul class="footer_ul">
                                     <li>
                                         <h4 style="font-size:14px;">网上拍卖规则</h4></li>
-                                    <li><a href="http://www.artrade.com/jsp/ecp/helpdoc/helpcenter.jsp?menuId=1" target="_blank">隐私政策</a>
+                                    <li><a href="http://www.artrade.com/jsp/ecp/helpdoc/helpcenter.jsp?menuId=1"
+                                           target="_blank">隐私政策</a>
                                     </li>
-                                    <li><a href="http://www.artrade.com/jsp/ecp/helpdoc/helpcenter.jsp?menuId=14" target="_blank">艺术品拍卖方式</a>
+                                    <li><a href="http://www.artrade.com/jsp/ecp/helpdoc/helpcenter.jsp?menuId=14"
+                                           target="_blank">艺术品拍卖方式</a>
                                     </li>
-                                    <li><a href="http://www.artrade.com/jsp/ecp/helpdoc/helpcenter.jsp?menuId=0" target="_blank">艺术品拍卖规则</a>
+                                    <li><a href="http://www.artrade.com/jsp/ecp/helpdoc/helpcenter.jsp?menuId=0"
+                                           target="_blank">艺术品拍卖规则</a>
                                     </li>
-                                    <li><a href="http://www.artrade.com/jsp/ecp/helpdoc/helpcenter.jsp?parId=1" target="_blank">更多帮助</a>
+                                    <li><a href="http://www.artrade.com/jsp/ecp/helpdoc/helpcenter.jsp?parId=1"
+                                           target="_blank">更多帮助</a>
                                     </li>
-                                </ul></li>
+                                </ul>
+                            </li>
                         </ul>
                     </div>
                 </div>
-    
+
                 <!-- 关于我们 -->
                 <div style="width: 1190px; height: 1px; background: #444345; margin-top: 20px; margin-bottom: 5px;"></div>
                 <div>
@@ -671,12 +954,18 @@ function doClickPreQuery() {
                         <div>
                             <div style="margin-top:10px;">
                                 <div class="quicklink">
-                                    <a href="http://www.artrade.com/jsp/ecp/helpdoc/about_us.jsp?amenuId=1" id="aboutus" target="_blank">关于我们</a>&nbsp;&nbsp;&nbsp;
-                                    <a href="http://www.artrade.com/jsp/ecp/helpdoc/about_us.jsp?menuId=6" target="_blank">友情链接</a>&nbsp;&nbsp;&nbsp;
-                                    <a href="http://www.artrade.com/jsp/ecp/helpdoc/about_us.jsp?menuId=5" target="_blank">招聘信息</a>&nbsp;&nbsp;&nbsp;
-                                    <a href="http://www.artrade.com/jsp/ecp/helpdoc/about_us.jsp?menuId=2" target="_blank">联系我们</a>&nbsp;&nbsp;&nbsp;
-                                    <a href="http://www.artrade.com/jsp/ecp/helpdoc/about_us.jsp?menuId=3" target="_blank">网站地图</a>&nbsp;&nbsp;&nbsp;
-                                    <a href="http://www.artrade.com/jsp/ecp/helpdoc/about_us.jsp?menuId=7" target="_blank">互联网行为规范</a>
+                                    <a href="http://www.artrade.com/jsp/ecp/helpdoc/about_us.jsp?amenuId=1" id="aboutus"
+                                       target="_blank">关于我们</a>&nbsp;&nbsp;&nbsp;
+                                    <a href="http://www.artrade.com/jsp/ecp/helpdoc/about_us.jsp?menuId=6"
+                                       target="_blank">友情链接</a>&nbsp;&nbsp;&nbsp;
+                                    <a href="http://www.artrade.com/jsp/ecp/helpdoc/about_us.jsp?menuId=5"
+                                       target="_blank">招聘信息</a>&nbsp;&nbsp;&nbsp;
+                                    <a href="http://www.artrade.com/jsp/ecp/helpdoc/about_us.jsp?menuId=2"
+                                       target="_blank">联系我们</a>&nbsp;&nbsp;&nbsp;
+                                    <a href="http://www.artrade.com/jsp/ecp/helpdoc/about_us.jsp?menuId=3"
+                                       target="_blank">网站地图</a>&nbsp;&nbsp;&nbsp;
+                                    <a href="http://www.artrade.com/jsp/ecp/helpdoc/about_us.jsp?menuId=7"
+                                       target="_blank">互联网行为规范</a>
                                 </div>
                                 <div class="quicklink">
                                     <a href="http://www.cguardian.com/" target="_blank">中国嘉德国际拍卖有限公司</a>&nbsp;&nbsp;|&nbsp;
@@ -686,7 +975,12 @@ function doClickPreQuery() {
                                 </div>
                                 <div style="color: #96928E;margin-top:10px;">
                                     <span>Copyright@1999-2019 ARTRADE.COM All Rights Reserved</span><span>北京嘉德在线拍卖有限公司</span><br>
-                                    <span><a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010102002497" target="_blank"><img alt="" style="vertical-align: middle;" src="myclinch_files/artradewjlogo.png">京公网安备 11010102002497号 </a>&nbsp;ICP经营许可证编号:京ICP证010113号</span><span style="margin-left: 10px;">北京市通信公司提供网络带宽</span><span style="margin-left: 10px;">网络文化经营许可证：<a href="http://www.artrade.com/image/ecp/wangwen.jpg" target="_blank">京网文（2016）6577-891号</a></span>
+                                    <span><a
+                                            href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010102002497"
+                                            target="_blank"><img alt="" style="vertical-align: middle;"
+                                                                 src="myclinch_files/artradewjlogo.png">京公网安备 11010102002497号 </a>&nbsp;ICP经营许可证编号:京ICP证010113号</span><span
+                                        style="margin-left: 10px;">北京市通信公司提供网络带宽</span><span style="margin-left: 10px;">网络文化经营许可证：<a
+                                        href="http://www.artrade.com/image/ecp/wangwen.jpg" target="_blank">京网文（2016）6577-891号</a></span>
                                 </div>
                             </div>
                         </div>
@@ -697,4 +991,62 @@ function doClickPreQuery() {
     </div>
 </div>
 
-</body></html>
+<script type="text/javascript">
+    //查询我的成交状态
+    function doQueryTab(id) {
+        var selectedObj = $(".tabUnderlineHeaderItemSelectedCls");
+        selectedObj.removeClass("tabUnderlineHeaderItemSelectedCls")
+        selectedObj.addClass("tabUnderlineHeaderItemUnSelectedCls");
+        $("#isOrder_"+id).removeClass("tabUnderlineHeaderItemUnSelectedCls");
+        $("#isOrder_"+id).addClass("tabUnderlineHeaderItemSelectedCls");
+        $("#clinchsList").load("userCenter/clinchStatus?id="+id,
+        function s() {
+            if(id==0){
+                document.getElementById("table_bottom").style.display="";
+            }else {
+                document.getElementById("table_bottom").style.display="none";
+            }
+        });
+    }
+    //点击结算修改状态
+    function doMakeOrder() {
+        var bool =$("input").prop("checked");
+
+            obj = document.getElementsByName("scsdTable_checkMode_mySoldQueryTable1");
+            check_val = [];
+            for (k in obj) {
+                if (obj[k].checked) {
+                    check_val.push(obj[k].value);
+                }
+            }
+            if(check_val.length==0){
+                alert("请勾选中商品");
+            }else {
+                $.post("userCenter/updateClinch",{orderNo:check_val},function (data) {
+                    if(data.code==1){
+                        alert("请到订单页面查看");
+                    }else{
+                        alert("操作失败");
+                    }
+                })
+            }
+
+
+        /*
+
+            var orderNo = $("[name='scsdTable_checkMode_mySoldQueryTable1']").val();
+            $.post("userCenter/updateClinch",{orderNo:orderNo},function (data) {
+                if(data.code==1){
+                    alert("请到订单页面查看");
+                }else {
+                    alert("操作失败");
+                }
+            })
+        } else {
+
+        }*/
+    }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,610 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0054)http://www.artrade.com/ecp/memaccount/tzpayview.action -->
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+
+
+<!--    <script id="allmobilize" charset="utf-8" src="payment_files/allmobilize.min.js.下载"></script>-->
+    <style type="text/css"></style>
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta http-equiv="Cache-Control" content="no-transform">
+
+    <base th:href="${#request.getContextPath()}+'/'">
+    <link rel="alternate" media="handheld" href="http://www.artrade.com/ecp/memaccount/tzpayview.action#">
+
+
+    <link type="text/css" rel="stylesheet" href="payment_files/base.css">
+    <link type="text/css" rel="stylesheet" href="payment_files/base(1).css">
+    <link type="text/css" rel="stylesheet" href="payment_files/jquery-ui.min.css">
+    <link type="text/css" rel="stylesheet" href="payment_files/jquery-ui-timepicker-addon.css">
+    <!--<script type="text/javascript" src="payment_files/jquery-1.11.3.min.js.下载"></script>
+    <script type="text/javascript" src="payment_files/jquery-1.11.3.extends.js.下载"></script>
+    <script type="text/javascript" src="payment_files/dateextend.js.下载"></script>
+    <script type="text/javascript" src="payment_files/ajaxfileupload.js.下载"></script>
+    <script type="text/javascript" src="payment_files/jquery-ui.min.js.下载"></script>
+    <script type="text/javascript" src="payment_files/jquery.ui.datepicker-zh-cn.js.下载"></script>
+    <script type="text/javascript" src="payment_files/jquery-ui-timepicker-addon.js.下载"></script>
+    <script type="text/javascript" src="payment_files/common.js.下载"></script>
+    <script type="text/javascript" src="payment_files/businesscommon.js.下载"></script>
+    <script src="payment_files/ecpbase.js.下载"></script>
+    <script src="payment_files/ecpValidation.js.下载"></script>-->
+    <link type="text/css" rel="stylesheet" href="payment_files/simpwinform.css">
+    <!--<script type="text/javascript" src="payment_files/simpwinform.js.下载"></script>-->
+    <script>
+        var baseUrl = "";
+        var lotUrl = "/jsp/ecp/public/auction.jsp?lotid=";
+        var chatName = "sala";
+        var chatId = "1497734450";
+    </script>
+
+
+    <link type="text/css" rel="stylesheet" href="payment_files/pay.css">
+    <!--<script type="text/javascript" src="payment_files/pay.js.下载"></script>-->
+    <link type="text/css" rel="stylesheet" href="payment_files/simpwinform.css">
+    <!--    <script type="text/javascript" src="payment_files/simpwinform.js.下载"></script>
+        <script type="text/javascript" src="payment_files/ecpbase.js.下载"></script>-->
+
+    <title>付款</title>
+
+    <script>
+        var orderId = "1128269553676058624";
+        var sign = "090f07561ef564152ea12a28a4699ff8";
+        var acctFund = "";
+
+    </script>
+
+    <!--<script charset="utf-8" src="payment_files/sm.min.js.下载" async=""></script>--></head>
+<body>
+
+
+<!--<script type="text/javascript" src="payment_files/header.js.下载"></script>
+<script type="text/javascript" src="payment_files/jquery.SuperSlide.2.1.1.js.下载"></script>-->
+
+<script>
+    var showNotice = "";
+</script>
+<style>
+    .noticeDivBox {
+        width: 300px;
+        float: left;
+        position: relative;
+        zoom: 1;
+        overflow: hidden;
+    }
+
+    .noticeDivBox:HOVER {
+        content: "";
+        display: block;
+        clear: both;
+    }
+
+    .noticeDiv {
+        width: 220px;
+        float: left;
+        left: 65px;
+
+    }
+
+    .noticeDiv ul {
+        height: 40px;
+        overflow: hidden;
+        zoom: 1;
+    }
+
+    .noticeDiv ul li {
+        height: 40px;
+        line-height: 40px;
+        text-align: center;
+        _display: inline;
+        width: auto !important;
+        max-width: 200px;
+        overflow: hidden; /*内容超出宽度时隐藏超出部分的内容 */
+        text-overflow: ellipsis; /* 当对象内文本溢出时显示省略标记(...) ；需与overflow:hidden;一起使用。*/
+        white-space: nowrap; /*不换行 */
+    }
+
+    /* 用 width:auto !important 覆盖SuperSlide自动生成的宽度，解决文字不衔接问题 */
+
+    .noticeDiv ul li a {
+    }
+
+    .noticeDiv ul li a:visited {
+        COLOR: #000000;
+    }
+
+    .noticeDiv ul li a:hover {
+        COLOR: #c81623;
+    }
+
+    .noticeDiv ul li a:active {
+        COLOR: #c81623;
+    }
+
+    #header_nickName a:hover {
+        text-decoration: underline;
+        color: #E6002D;
+    }
+
+
+</style>
+<div class="headAndFoot" style="background:#F9F4F4;clear:both;">
+    <div style="width:1190px;height:40px;line-height:40px;text-align:center;margin:auto;">
+        <div id="noticeDivBox" class="noticeDivBox"></div>
+        <div id="indexLinkDiv" style="width:100px;float: left;position:relative;">
+
+        </div>
+        <div style="float: right;">
+            <div>
+                <div style="float:left">
+                    您好，&nbsp;<span id="header_nickName">
+                                   <a href="http://www.artrade.com/jsp/ecp/buyer/buyerindex.jsp" target="">sala</a>
+                                </span>
+                    <a id="header_logout" href="http://www.artrade.com/ecp/memaccount/tzpayview.action#"
+                       onclick="logout();" style="">&nbsp;<b>，退出</b></a>
+                    <a id="header_login" href="http://www.artrade.com/jsp/ecp/login.jsp" target="_self"
+                       style="display:none;"><b>请登录</b></a>&nbsp;&nbsp;
+                </div>
+                <div style="float:left;display:none;">
+                    <a href="http://www.artrade.com/jsp/ecp/register.jsp" target="_self"
+                       style="color: #FF003B;font-weight:600;">免费注册</a>&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+                </div>
+                <div id="myDealDiv" style="cursor: pointer;float:left;position:relative;"><a
+                        href="http://www.artrade.com/jsp/ecp/buyer/buyerindex.jsp">买家中心</a><img
+                        src="payment_files/pulldown.png">&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+                    <ul id="myDeal" class="headerMenu_ul" style="position:absolute;z-index:1001;left:-20px;">
+                        <li style="display:none"><a href="http://www.artrade.com/jsp/ecp/buyer/buyerindex.jsp">买家首页</a>
+                        </li>
+                        <li style="display:none"><a
+                                href="http://www.artrade.com/jsp/ecp/buyer/trademng/myauct.jsp">我的竞拍</a></li>
+                        <li style="display:none"><a href="http://www.artrade.com/jsp/ecp/buyer/trademng/myclinch.jsp">我的成交</a>
+                        </li>
+                        <li style="display:none"><a
+                                href="http://www.artrade.com/jsp/ecp/buyer/trademng/mycart.jsp">结算</a></li>
+                        <li style="display:none"><a
+                                href="http://www.artrade.com/jsp/ecp/buyer/myasset/margin.jsp">我的保证金</a></li>
+                    </ul>
+                </div>
+                <div style="float:left;">
+                    <a href="http://www.artrade.com/jsp/ecp/buyer/focuscnt/focusauct.jsp" target="_self">我的关注</a>&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+                </div>
+                <div id="sellerCenterDiv" style="cursor: pointer;float:left;position:relative;display:none;">
+                    <a href="http://www.artrade.com/jsp/ecp/seller/tranm/ordermanagelist.jsp">卖家中心</a><img
+                        src="payment_files/pulldown.png">&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+                    <ul id="sellerCenter" class="headerMenu_ul" style="position:absolute;z-index:1001;left:-20px;">
+                        <li style="display:none"><a
+                                href="http://www.artrade.com/jsp/ecp/seller/tranm/ordermanagelist.jsp">卖家首页</a></li>
+                        <!--                         <li style="display:none"><a href="#">免费开店</a></li> -->
+                        <!--                         <li style="display:none"><a href="#">已卖出的拍品</a></li> -->
+                        <li style="display:none"><a
+                                href="http://www.artrade.com/jsp/ecp/item/manage/itemmng.jsp?tabIndex=0">预展中的拍品</a></li>
+                        <li style="display:none"><a
+                                href="http://www.artrade.com/jsp/ecp/item/manage/itemmng.jsp">拍卖中的拍品</a></li>
+                        <!--                         <li style="display:none"><a href="#">卖家服务市场</a></li> -->
+                        <!--                         <li style="display:none"><a href="#">卖家培训中心</a></li> -->
+                    </ul>
+                </div>
+                <div id="activeCenter" style="float:left;">
+                    <a href="http://www.artrade.com/jsp/ecp/buyer/myasset/active.jsp" target="_self">活动中心</a>&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+                </div>
+
+
+                <div id="mavinDiv" style="cursor: pointer;float:left;position:relative;display:none;">
+                    专家中心<img src="payment_files/pulldown.png">&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+                    <ul id="mavinUlDiv" class="headerMenu_ul" style="position:absolute;z-index:1001;left:-20px;">
+                        <li style="display:none"><a href="http://www.artrade.com/jsp/ecp/mavin/center/mavinindex.jsp">专家首页</a>
+                        </li>
+                        <li style="display:none"><a
+                                href="http://www.artrade.com/jsp/ecp/buyer/trademng/myauct.jsp">我的服务</a></li>
+                        <li style="display:none"><a href="http://www.artrade.com/jsp/ecp/buyer/trademng/myclinch.jsp">我的成交</a>
+                        </li>
+                        <li style="display:none"><a
+                                href="http://www.artrade.com/jsp/ecp/buyer/myasset/margin.jsp">我的保证金</a></li>
+
+                    </ul>
+                </div>
+                <div id="helpCenterDiv" style="cursor: pointer;float:left;position:relative;">
+                    帮助中心<img src="payment_files/pulldown.png">
+                    <ul id="helpCenter" class="headerMenu_ul" style="position:absolute;z-index:1001;left:-20px;">
+                        <li style="display:none"><a target="_blank"
+                                                    href="http://www.artrade.com/jsp/ecp/helpdoc/helpcenter.jsp?menuId=2">买家帮助</a>
+                        </li>
+                        <li style="display:none"><a target="_blank"
+                                                    href="http://www.artrade.com/jsp/ecp/helpdoc/helpcenter.jsp?parId=0">卖家帮助</a>
+                        </li>
+                        <li style="display:none"><a target="_blank"
+                                                    href="http://www.artrade.com/jsp/ecp/helpdoc/helpcenter.jsp?parId=1">常见问题</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="MainBodyDiv">
+    <div class="Main1200Div">
+        <div class="headImgDiv">
+            <div class="topbanner">
+                <div class="logo">
+                    <span class="imgSpan"></span>
+                    <img class="logoImg" src="payment_files/logo.png">
+                </div>
+                <div class="doSearch">
+                    <div class="iconSearchPanel" id="searchIcon" onclick="doSolrQuery();"></div>
+                    <div class="keywordPanel">
+                        <input id="keywordInput" type="text" placeholder="拍品名称/流水号/作者/年代" class="keywordInput">
+                        <div class="searchItemCls" onclick="changeSearchType(this)">所有分类</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="bodyDiv">
+            <!--核心代码区域-->
+            <div class="orderNo" >订单提交成功，请您尽快付款！订单号：<span id="orderNo" th:text="${myOrderAndPrice.orderNo}"></span></div>
+            <div class="orderAmount">应付金额：<em style="font-size:14px;" th:text="${myOrderAndPrice.totalPrice}">¥51.11</em></div>
+            <div class="payInfo">
+                <div style="width:200px;margin-left:30px;margin-top:14px;font-size:15px;font-weight:bold;">支付方式</div>
+                <!--                     <div id="xxzf" onclick="xxzf();" class="payType" style="width:110px;background-image:url('../../image/xx.png');background-repeat:no-repeat;background-position: 16px 7px;"><div style="margin-left:35px;text-align:center;font-size:12px;" >线下支付</div></div> -->
+                <div id="yl" onclick="yl();" class="payType"
+                     style="width: 110px; margin-left: 35px; background-image: url(&quot;../../image/yl.png&quot;); background-repeat: no-repeat; background-position: 25px 7px; height: 26px; border: 1px solid rgb(233, 232, 229);">
+                    <div style="margin-left:30px;text-align:center;font-size:12px;">银联</div>
+                </div>
+                <div id="zfb" onclick="zfb();" class="payType"
+                     style="width: 110px; margin-left: 35px; background-repeat: no-repeat; background-position: 25px 7px; height: 26px; border: 1px solid rgb(233, 232, 229); display: none;">
+                    <div style="margin-left:30px;text-align:center;font-size:12px;">支付宝</div>
+                </div>
+                <div id="wx" onclick="wx();" class="payType"
+                     style="width: 110px; margin-left: 35px; background-repeat: no-repeat; background-position: 25px 7px; height: 26px; border: 1px solid rgb(233, 232, 229); display: none;">
+                    <div style="margin-left:30px;text-align:center;font-size:12px;">微信</div>
+                </div>
+
+                <div id="ye" onclick="ye();" class="payType"
+                     style="width: 110px; margin-left: 35px; background-image: url(&quot;../../image/ye.png&quot;); background-repeat: no-repeat; background-position: 35px 8px; height: 24px; border: 2px solid rgb(255, 129, 148);">
+                    <div style="margin-left:22px;text-align:center;font-size:12px;">余额</div>
+                </div>
+                <div id="qcz" class="payType"
+                     style="width:80px; margin-left:35px;background-repeat:no-repeat;background-position: 35px 8px;border: 2px solid rgb(135,206,250)"
+                     onclick="javascript:window.location.href='/jsp/ecp/buyer/myasset/fundacct/accrecharg.jsp'">
+                    <div style="margin-left:0px;text-align:center;font-size:12px;" id="please"><a href="html/pay.html">去充值</a></div>
+                </div>
+
+                <div style="clear:both"></div>
+                <input type="hidden" id="buyerId" value="1497734450">
+                <input type="hidden" id="orderId" value="1128269553676058624">
+                <input type="hidden" id="userAccountYe" value="0">
+                <input type="hidden" id="np_amount" value="51.11">
+                <input type="hidden" id="payAcctFund" value="51.11">
+                <input type="hidden" id="freight" value="50">
+                <input type="hidden" id="totalCmmssnAmount" value="0.1">
+
+                <div class="acctFund" style="margin-left:60px;font-size: 14px;"><span style="font-size: 14px;">账户当前余额：<b
+                        style="color:red;font-size: 14px;" th:text="${myOrderAndPrice.accountBalance}">0.00</b></span>&nbsp;元
+                </div>
+                <div class="acctFund" style="margin-left:60px;font-size: 14px;">使用余额：<span class="payAcctFund_show" th:text="${myOrderAndPrice.totalPrice}"
+                                                                                           style="color:red;margin-left:6px;text-align:right;font-weight:bolder;font-size: 14px;height:20px;width:71px;">51.11</span>&nbsp;元
+                </div>
+
+                <div style="clear:both;height:10px;"></div>
+
+                <div class="yhDiv" style="margin-bottom:10px;">
+                    <div style="width:120px;margin-left:9px;margin-top:6px;font-size:15px;font-weight:bold;">优惠券/抵用&nbsp;&nbsp;&nbsp;<img
+                            style="position:relative;margin-right:10px;cursor:pointer;" src="payment_files/plusup.png"
+                            onclick="trigger(this)"></div>
+                    <div style="display:none;">
+                        <!--                         <div class="couponTip"><a href="#" class="yh">商品优惠券</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  <a href="#" class="yh">优惠码兑换</a></div> -->
+
+                        <div class="coupon-items">
+                            <ul>
+
+                            </ul>
+                        </div>
+                        <div class="coupon-info"><span>金额抵用&nbsp;&nbsp;<em>￥0.00</em></span></div>
+                        <input type="hidden" id="selCpnCode" name="cpnCode" value="0">
+                    </div>
+                    <div style="clear:both;"></div>
+                    <!-- <div class="hzDiv">
+                        <div class="Amount">还需支付金额： <span id="needPay" style="font-weight:bolder;font-size: 14px;"></span> 元</div>
+                    </div> -->
+                    <div style="clear:both;height:0px;">
+                    </div>
+                </div>
+
+                <form action="http://www.artrade.com/ecp/transaction/order/dopay.action" method="post" id="orderPayForm"
+                      target="_blank">
+                    <input type="hidden" name="strs" id="strs">
+                </form>
+            </div>
+            <div id="sure" style="clear:both;height:140px;padding-top:20px;">
+                <div class="pswd">
+                    支付密码：&nbsp;&nbsp;&nbsp;&nbsp;<input id="mbrMbrPayPasswd" type="password" class="pswdInput" value="">
+                    <font color="red">初始支付密码为初始登录密码</font>
+                    <!-- <span id="forgrtPswd">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;忘记密码?&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><input type="checkbox" />不使用加密协议&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;提示：不安全提示 -->
+                </div>
+                <div class="msgCode">
+                    <div class="msgInputDiv">短信验证码：<input id="msgCode" type="text" value="" class="msgInput"></div>
+                    <div id="getMsgCodeBtn" class="getMsgCodeBtn_clickable">获取短信验证码</div>
+                    <div class="second"><span id="second"></span><span id="secondText"></span></div>
+                </div>
+                <div class="confirmBtn" onclick="payyezf()">确认付款</div>
+            </div>
+
+            <div id="sure1" style="clear:both;height:140px;padding-top:20px;display:none;">
+                <div class="confirmBtn" onclick="payxxzf()">确认付款</div>
+            </div>
+
+            <div id="sure3" style="clear:both;height:140px;padding-top:20px;display:none;">
+                <div class="confirmBtn" onclick="pay('zfbzf')">确认付款</div>
+            </div>
+
+            <div id="sure4" style="clear:both;height:140px;padding-top:20px;display:none;">
+                <div class="confirmBtn" onclick="pay('wxzf')">确认付款</div>
+            </div>
+
+            <div id="sure2" style="clear:both;height:140px;padding-top:20px;display:none;">
+                <div class="confirmBtn" onclick="pay('ylzf')">确认付款</div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        /**
+         * 右上方搜索框输入后查询
+         */
+        function doClickPreQuery() {
+            var val = $("#keywordInput").val();
+            var setting = {
+                "action": baseUrl
+                    + "/jsp/ecp/item/manage/preitemquerylist.jsp",
+                "datas": []
+            };
+            simulateFormSubmit(setting);
+        }
+    </script>
+    <div style="float:left;width:100%;clear:both;">
+        <div class="footLine"></div>
+        <div class="headAndFoot">
+            <!-- 【预,藏,疑】区域 -->
+            <table class="linkTable">
+                <tbody>
+                <tr>
+                    <!-- 预  -->
+                    <td width="340px" onclick="doClickPreQuery();">
+                        <div class="redCircle"><img src="payment_files/circle_yu.png"></div>
+                        <div class="description" style="margin-top: 5px;">
+                            <div>
+                                <b style="font-size:14px;">拍前预展48小时</b>
+                            </div>
+                            <div style="font-size: 12px;">嘉德在线拍品，将在开拍前48小时内预展，敬请留意。</div>
+                        </div>
+                    </td>
+
+                    <td>
+                        <hr class="logo_hr" size="56px"
+                            style="border:none;border-right:solid 1px #e7e7e7;border-left:0px;">
+                    </td>
+
+                    <!-- 藏  -->
+                    <td width="340px"
+                        onclick="javascrtpt:window.open('http://epub.artrade.com/epublish/zixun.cfm')">
+                        <div class="redCircle" style="margin-left: 50px;"><img src="payment_files/circle_cang.png">
+                        </div>
+                        <div class="description" style="margin-top: 10px;">
+                            <div>
+                                <b style="font-size:14px;">艺术品知识堂</b>
+                            </div>
+                            <div style="font-size: 12px;">收藏、保养、鉴别</div>
+                        </div>
+                    </td>
+
+                    <td>
+                        <hr class="logo_hr" size="56px"
+                            style="border:none;border-right:solid 1px #e7e7e7;border-left:0px;">
+                    </td>
+
+                    <!-- 疑  -->
+                    <td width="340px"
+                        onclick="javascrtpt:window.open('/jsp/ecp/helpdoc/helpcenter.jsp?parId=1')">
+                        <div class="redCircle" style="margin-left: 50px;"><img src="payment_files/circle_yi.png"></div>
+                        <div class="description" style="margin-top: 10px;">
+                            <div>
+                                <b style="font-size:14px;">客户答疑</b>
+                            </div>
+                            <div style="font-size: 12px;">有问题？来看看</div>
+                        </div>
+                    </td>
+
+                </tr>
+                </tbody>
+            </table>
+
+            <div style="background: #2E2D31; width: 100%; height: 300px; bottom: 0px; left: 0px;">
+
+                <div style="width: 1190px; color: #FFFFFF; margin: auto;">
+                    <div style="height: 60px;">
+                        <div style="float: left; margin-top: 10px;">
+                            <div style="font-size: 12px; color: #96928E;">联系电话</div>
+                            <div id="footerMbr_mobile" style="font-size: 18px; font-weight: 500;margin-top:5px;">
+                                010-67102935
+                            </div>
+                        </div>
+                        <div style="float: right; margin-top: 10px;margin-right: 10px;">
+                            <a href="http://weibo.com/artrade" target="_blank"><img style="border:0px;"
+                                                                                    src="payment_files/xlweibo.png"></a>
+                            <a href="http://t.qq.com/artrade" target="_blank"><img
+                                    style="border:0px;margin-left: 20px; margin-right: 20px;"
+                                    src="payment_files/txweibo.png"></a>
+                            <!-- <a href="http://www.artrade.com/about/weixin.html" target="_blank"><img style="border:0px;" src="/image/ecp/weixin.png" /></a> -->
+                        </div>
+                    </div>
+                    <div style="height: 120px;">
+                        <div style="float: left; margin-top: 20px;">
+                            <img src="payment_files/weixinma.jpg" width="80px" height="80px">
+                        </div>
+                        <div style="float: left; margin-top: 10px; font-size: 12px; color: #96928E;">
+                            <div id="footerAddress" style="margin-top: 10px; margin-left: 10px;">
+                                地址：北京崇文门外大街44号大康大厦11层嘉德在线
+                            </div>
+                            <div id="footerPostCode" style="margin-top: 16px; margin-left: 10px;">邮编：100062</div>
+                            <div id="footerMbr_email" style="margin-top: 16px; margin-left: 10px;">
+                                电子邮箱market@artrade.com
+                            </div>
+                        </div>
+                        <div style="float: right; margin-top: 10px; margin-right: 0px; margin-left: 10px;width:720px;">
+                            <ul>
+                                <li style="float: left;margin-right:30px; list-style: none;">
+                                    <ul class="footer_ul">
+                                        <li>
+                                            <h4 style="font-size:14px;">拍卖学堂</h4></li>
+                                        <li><a href="http://www.artrade.com/jsp/ecp/helpdoc/helpcenter.jsp?menuId=2"
+                                               target="_blank">如何注册</a>
+                                        </li>
+                                        <li><a href="http://www.artrade.com/jsp/ecp/helpdoc/helpcenter.jsp?menuId=2"
+                                               target="_blank">如何买</a>
+                                        </li>
+                                        <li><a href="http://www.artrade.com/jsp/ecp/helpdoc/helpcenter.jsp?parId=0"
+                                               target="_blank">如何卖</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li style="float: left;margin-right:30px; list-style: none;">
+                                    <ul class="footer_ul">
+                                        <li>
+                                            <h4 style="font-size:14px;">拍卖支付方式</h4></li>
+                                        <li><a href="http://www.artrade.com/jsp/ecp/helpdoc/helpcenter.jsp?menuId=7"
+                                               target="_blank">网上付款</a>
+                                        </li>
+                                        <li><a href="http://www.artrade.com/jsp/ecp/helpdoc/helpcenter.jsp?menuId=7"
+                                               target="_blank">亲自到公司付款</a>
+                                        </li>
+                                        <li><a href="http://www.artrade.com/jsp/ecp/helpdoc/helpcenter.jsp?menuId=7"
+                                               target="_blank">银行汇款</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li style="float: left; margin-right:30px;list-style: none;">
+                                    <ul class="footer_ul">
+                                        <li>
+                                            <h4 style="font-size:14px;">配送方式</h4></li>
+                                        <li><a href="http://www.artrade.com/jsp/ecp/helpdoc/helpcenter.jsp?menuId=6"
+                                               target="_blank">拍品总价组成</a>
+                                        </li>
+                                        <li><a href="http://www.artrade.com/jsp/ecp/helpdoc/helpcenter.jsp?menuId=6"
+                                               target="_blank">计算运费</a>
+                                        </li>
+                                        <li><a href="http://www.artrade.com/jsp/ecp/helpdoc/helpcenter.jsp?menuId=6"
+                                               target="_blank">物流配送方案</a>
+                                        </li>
+                                        <li><a href="http://www.artrade.com/jsp/ecp/helpdoc/helpcenter.jsp?menuId=6"
+                                               target="_blank">配送常见问题</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li style="float: left;margin-right:30px; list-style: none;">
+                                    <ul class="footer_ul">
+                                        <li>
+                                            <h4 style="font-size:14px;">账户及服务</h4></li>
+                                        <li><a href="http://www.artrade.com/jsp/ecp/helpdoc/helpcenter.jsp?menuId=10"
+                                               target="_blank">账户功能</a>
+                                        </li>
+                                        <li><a href="http://www.artrade.com/jsp/ecp/helpdoc/helpcenter.jsp?parId=1"
+                                               target="_blank">常见问题</a>
+                                        </li>
+                                        <li><a href="http://www.artrade.com/jsp/ecp/helpdoc/helpcenter.jsp?parId=2"
+                                               target="_blank">联系客服</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li style="float: left;list-style: none;">
+                                    <ul class="footer_ul">
+                                        <li>
+                                            <h4 style="font-size:14px;">网上拍卖规则</h4></li>
+                                        <li><a href="http://www.artrade.com/jsp/ecp/helpdoc/helpcenter.jsp?menuId=1"
+                                               target="_blank">隐私政策</a>
+                                        </li>
+                                        <li><a href="http://www.artrade.com/jsp/ecp/helpdoc/helpcenter.jsp?menuId=14"
+                                               target="_blank">艺术品拍卖方式</a>
+                                        </li>
+                                        <li><a href="http://www.artrade.com/jsp/ecp/helpdoc/helpcenter.jsp?menuId=0"
+                                               target="_blank">艺术品拍卖规则</a>
+                                        </li>
+                                        <li><a href="http://www.artrade.com/jsp/ecp/helpdoc/helpcenter.jsp?parId=1"
+                                               target="_blank">更多帮助</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- 关于我们 -->
+                    <div style="width: 1190px; height: 1px; background: #444345; margin-top: 20px; margin-bottom: 5px;"></div>
+                    <div>
+                        <div>
+                            <div>
+                                <div style="margin-top:10px;">
+                                    <div class="quicklink">
+                                        <a href="http://www.artrade.com/jsp/ecp/helpdoc/about_us.jsp?amenuId=1"
+                                           id="aboutus" target="_blank">关于我们</a>&nbsp;&nbsp;&nbsp;
+                                        <a href="http://www.artrade.com/jsp/ecp/helpdoc/about_us.jsp?menuId=6"
+                                           target="_blank">友情链接</a>&nbsp;&nbsp;&nbsp;
+                                        <a href="http://www.artrade.com/jsp/ecp/helpdoc/about_us.jsp?menuId=5"
+                                           target="_blank">招聘信息</a>&nbsp;&nbsp;&nbsp;
+                                        <a href="http://www.artrade.com/jsp/ecp/helpdoc/about_us.jsp?menuId=2"
+                                           target="_blank">联系我们</a>&nbsp;&nbsp;&nbsp;
+                                        <a href="http://www.artrade.com/jsp/ecp/helpdoc/about_us.jsp?menuId=3"
+                                           target="_blank">网站地图</a>&nbsp;&nbsp;&nbsp;
+                                        <a href="http://www.artrade.com/jsp/ecp/helpdoc/about_us.jsp?menuId=7"
+                                           target="_blank">互联网行为规范</a>
+                                    </div>
+                                    <div class="quicklink">
+                                        <a href="http://www.cguardian.com/" target="_blank">中国嘉德国际拍卖有限公司</a>&nbsp;&nbsp;|&nbsp;
+                                        <!--a href="http://www.artcool.com/" target="_blank">ARTCOOL</a>&nbsp;&nbsp;|&nbsp;-->
+                                        <a href="http://www.dolcey.com/" target="_blank">道喜红酒网</a>&nbsp;&nbsp;|&nbsp;
+                                        <a href="http://www.e-unionpay.com/" target="_blank">中国银联</a>
+                                    </div>
+                                    <div style="color: #96928E;margin-top:10px;">
+                                        <span>Copyright@1999-2019 ARTRADE.COM All Rights Reserved</span><span>北京嘉德在线拍卖有限公司</span><br>
+                                        <span><a
+                                                href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=11010102002497"
+                                                target="_blank"><img alt="" style="vertical-align: middle;"
+                                                                     src="payment_files/artradewjlogo.png">京公网安备 11010102002497号 </a>&nbsp;ICP经营许可证编号:京ICP证010113号</span><span
+                                            style="margin-left: 10px;">北京市通信公司提供网络带宽</span><span
+                                            style="margin-left: 10px;">网络文化经营许可证：<a
+                                            href="http://www.artrade.com/image/ecp/wangwen.jpg" target="_blank">京网文（2016）6577-891号</a></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript" src="/js/jquery-3.1.1.js"></script>
+    <script type="text/javascript">
+        function payyezf() {
+            var orderNo = window.location.href.split("?")[1].split("=")[1];
+            var password=$("#mbrMbrPayPasswd").val();
+            if(password==""){
+                alert("请填写密码");
+            }else {
+                    $.post("userCenter/pay",{"orderNo":orderNo,"password":password},
+                    function (data) {
+                        if(data==0){
+                            alert(data.msg);
+                            window.location.href="userCenter/myorder";
+                        }else {
+                            alert(data.msg);
+                            window.location.href="userCenter/myorder";
+                        }
+                    })
+            }
+        }
+
+    </script>
+</body>
+</html>
