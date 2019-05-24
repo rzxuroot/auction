@@ -32,7 +32,7 @@ public interface GoodsMapper {
      * 查询历史总数
      * @return
      */
-   int queryCountHistorical();
+   int queryCountHistorical(@Param("goodsId") Long goodsId);
 
     /**
      * 修改商品竞拍结束时间

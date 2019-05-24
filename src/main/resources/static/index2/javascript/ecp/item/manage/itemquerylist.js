@@ -338,7 +338,7 @@ function queryTable(pageNo) {
                /*这里对value中的goodsVOList进行*/
                for(var i = 0;i <array.length;i++){
                    myGoodList += "<li onmouseover='addBorder(this)' onmouseout='removeBorder(this)'>";
-                   myGoodList += "<a href=\""+array[i].goodsId+"\">"
+                   myGoodList += "<a href=\"/dataile/goodsDataile?goodsId="+array[i].goodsId+"\">"
                    myGoodList += "<div>";
                    myGoodList += "<div class=\"goods_img_dic\">";
                    myGoodList += "<img src=\""+array[i].goodsImg+"\">";

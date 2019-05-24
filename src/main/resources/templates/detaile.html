@@ -460,13 +460,13 @@
 
          	<!--2.2.3：出价次数等信息 -->
         	<div class="offerCntRowCls">
-            	<div class="floatLeft offerCntDivCls">出价次数：<span id="bidNumber" th:text="${historicalPriceList[0].hisNumber}">1</span>次</div>
+            	<div class="floatLeft offerCntDivCls">出价次数：<span id="bidNumber" th:text="${countHistorical}">1</span>次</div>
             	<div class="floatLeft firstPersonDivCls">
                 	<span id="blink"></span>
                 </div>
             	<div class="floatLeft firstPersonDivCls">
                     <div style="float:left">领先者：</div>
-                    <div id="bidderName" style="float:left;overflow: hidden;text-overflow:ellipsis;white-space: nowrap; width:100px;" title="sala" th:text="${historicalPriceList.get(0).userName}">sala</div>
+                    <div id="bidderName" style="float:left;overflow: hidden;text-overflow:ellipsis;white-space: nowrap; width:100px;" title="sala" th:text="${historicalPriceList==null||historicalPriceList.size()<=0}?'0':${historicalPriceList.get(0).userName}">sala</div>
                 </div>
             	<div id="bidderId" class="floatLeft firstPersonDivCls" style="text-align: right;display:none;"></div>
             </div>
@@ -477,7 +477,7 @@
                 </div>
             	<div class="floatLeft offerInfoColumnCls">起拍价</div>
             	<div class="floatLeft offerInfoColumnCls">竞价阶梯</div>
-            	<div class="floatLeft offerCurrentPriceValInfoColumnCls" id="currentPrice" th:text="${historicalPriceList.get(0).auctionPrice/100.00}">1.00</div>
+            	<div class="floatLeft offerCurrentPriceValInfoColumnCls" id="currentPrice"  th:text="${historicalPriceList==null||historicalPriceList.size()<=0}?'0':${historicalPriceList.get(0).auctionPrice/100.00}">1.00</div>
             	<div class="floatLeft offerValInfoColumnCls" id="startPrice" th:text="${goods.askingPrice/100.00}">1.00</div>
             	<div class="floatLeft offerValInfoColumnCls" id="incrPrice" th:text="${goods.biddingSteps/100.00}">0.00</div>
             </div>
@@ -504,7 +504,7 @@
             	<div class="floatLeft">
                 	<div class="priceDivCls">
                     	<div class="floatLeft jianBtnCls" id="jianHao">-</div>
-                    	<div class="floatLeft priceContentCls i_973476012" id="selfPrice" th:text="${historicalPriceList.get(0).auctionPrice/100.00}">&nbsp;</div>
+                    	<div class="floatLeft priceContentCls i_973476012" id="selfPrice" th:text="${historicalPriceList==null||historicalPriceList.size()<=0}?'0':${historicalPriceList.get(0).auctionPrice/100.00}">&nbsp;</div>
                     	<div class="floatLeft jiaBtnCls" id="jiaHao">+</div>
                     </div>
                 </div>

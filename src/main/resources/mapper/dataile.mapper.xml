@@ -69,7 +69,7 @@
         auction_price desc LIMIT 0,10;
     </select>
     <select id="queryCountHistorical" resultType="java.lang.Integer">
-        select COUNT(*) his_number from tb_historical_price;
+        select COUNT(*) his_number from tb_historical_price where historical_goods_id=#{goodsId};
     </select>
     <update id="updateGoodsAuctionDeadline">
         update tb_goods set auction_deadline=#{auctionDeadline} where goods_id=#{goodsId}

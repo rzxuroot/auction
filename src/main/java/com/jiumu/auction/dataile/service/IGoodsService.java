@@ -28,7 +28,7 @@ public interface IGoodsService {
      * 查询历史总数
      * @return
      */
-    int queryCountHistorical();
+    int queryCountHistorical( Long goodsId);
 
     /**
      * 修改结束时间

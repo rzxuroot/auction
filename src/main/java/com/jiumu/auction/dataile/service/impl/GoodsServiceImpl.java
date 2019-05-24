@@ -69,8 +69,8 @@ public class GoodsServiceImpl implements IGoodsService {
     }
 
     @Override
-    public int queryCountHistorical() {
-        return goodsMapper.queryCountHistorical();
+    public int queryCountHistorical( Long goodsId) {
+        return goodsMapper.queryCountHistorical(goodsId);
     }
 
     /**

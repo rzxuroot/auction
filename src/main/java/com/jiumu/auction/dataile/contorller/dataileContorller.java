@@ -40,16 +40,19 @@ public class dataileContorller {
         //获取商品对象
         GoodsVO goods = goodsServiceImpl.queryGoodsById(gid);
         //获取历史价格集合
-        List<HistoricalPriceVO> historicalPriceList = goodsServiceImpl.queryHistoricalPriceByGoodsId(1l);
-        int countHistorical = goodsServiceImpl.queryCountHistorical();
-        historicalPriceList.get(0).setHisNumber(countHistorical);
+        List<HistoricalPriceVO> historicalPriceList=null;
+        historicalPriceList = goodsServiceImpl.queryHistoricalPriceByGoodsId(gid);
+        int countHistorical = goodsServiceImpl.queryCountHistorical(gid);
+
+        model.addAttribute("countHistorical",countHistorical);
         //存入model传到前端
         model.addAttribute("historicalPriceList",historicalPriceList);
         logger.info("查询出来的历史价格集合对象"+historicalPriceList);
         //添加我的浏览
         goodsServiceImpl.addBrowse(gid);
         //查询我的浏览
-        List<BrowseVO> browseVOS = goodsServiceImpl.queryBrowseList();
+        List<BrowseVO> browseVOS=null;
+        browseVOS = goodsServiceImpl.queryBrowseList();
         //查询是否关注当前商品
         int isAttentionGoods = attentionServiceImpl.queryAttentionByGoodsIdAndUserId(gid);
         //查询当前商品的关注数
