@@ -341,7 +341,7 @@ function queryTable(pageNo) {
                    myGoodList += "<a href=\"/dataile/goodsDataile?goodsId="+array[i].goodsId+"\">"
                    myGoodList += "<div>";
                    myGoodList += "<div class=\"goods_img_dic\">";
-                   myGoodList += "<img src=\""+array[i].goodsImg+"\">";
+                   myGoodList += "<img src=\"http://139.199.73.166/images/"+array[i].goodsImg+"\">";
                    myGoodList += "</div>";
                    myGoodList += "<div  class=\"goods_text_wrap\">";
                    myGoodList += "<div class=\"goods_text_two\" title='"+array[i].goodsName+"'>"+array[i].goodsName+"</div>";

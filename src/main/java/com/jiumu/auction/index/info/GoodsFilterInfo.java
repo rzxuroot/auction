@@ -12,7 +12,8 @@ public class GoodsFilterInfo {
     private Integer firstCatgId;
     //二级目录id
     private Integer secondCatgId;
-    //全部：all  未结束拍品：now  已结束拍品：注意考虑下线商品不能被查
+    //全部：all  未结束拍品：now  已结束拍品：end 注意查询全
+    // 部拍品时需要剔除已下线的拍品（考虑将已下线的字段设为all）
     private String timeFlag;
     //作者姓名
     private String authorName;

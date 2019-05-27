@@ -140,6 +140,7 @@
         order by g.goods_id limit #{index},#{pageSize}
     </select>
 
+    <!--通过条件筛选拍品-->
     <select id="queryGoodsByFilter" resultType="com.jiumu.auction.index.VO.GoodsVO">
         select
         <include refid="selectSqlMin"/>

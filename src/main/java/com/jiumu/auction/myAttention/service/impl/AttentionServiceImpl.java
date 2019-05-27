@@ -4,7 +4,8 @@ import com.jiumu.auction.myAttention.mapper.AttentionMapper;
 import com.jiumu.auction.myAttention.po.TbAttention;
 import com.jiumu.auction.myAttention.service.IAttentionService;
 import com.jiumu.auction.myAttention.vo.JsonResult;
-import com.jiumu.auction.dataile.po.TbUser;
+import com.jiumu.auction.user.bean.TbUser;
+import com.jiumu.auction.user.dao.UserMapper;
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,9 +14,12 @@ import org.springframework.stereotype.Service;
 public class AttentionServiceImpl implements IAttentionService {
     @Autowired
     private AttentionMapper attentionMapper;
+    @Autowired
+    private UserMapper userMapper;
     @Override
     public JsonResult addAttention(Long goodsId) {
-        TbUser user = (TbUser) SecurityUtils.getSubject().getSession().getAttribute("user");
+        String ss = (String) SecurityUtils.getSubject().getSession().getAttribute("user");
+        TbUser user = userMapper.selectUserByName(ss);
         JsonResult jsonResult = new JsonResult();
         if (user!=null){
             long userId = user.getUserId();
@@ -34,7 +38,8 @@ public class AttentionServiceImpl implements IAttentionService {
 
     @Override
     public void deleteAttention(Long goodsId) {
-        TbUser user = (TbUser) SecurityUtils.getSubject().getSession().getAttribute("user");
+        String ss = (String) SecurityUtils.getSubject().getSession().getAttribute("user");
+        TbUser user = userMapper.selectUserByName(ss);
 
         if (user!=null){
             long userId = user.getUserId();
@@ -50,7 +55,8 @@ public class AttentionServiceImpl implements IAttentionService {
 
     @Override
     public int queryAttentionByGoodsIdAndUserId(Long goodsId) {
-        TbUser user = (TbUser) SecurityUtils.getSubject().getSession().getAttribute("user");
+        String ss = (String) SecurityUtils.getSubject().getSession().getAttribute("user");
+        TbUser user = userMapper.selectUserByName(ss);
 
         if (user!=null){
             long userId = user.getUserId();

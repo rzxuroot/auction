@@ -1,5 +1,7 @@
 ﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
 <head>
 <script id="allmobilize" charset="utf-8" src="http://a.yunshipei.com/e3c4e0ec80096c09c76ebe5e073d2f92/allmobilize.min.js"></script>
 <meta http-equiv="Cache-Control" content="no-siteapp" />
@@ -140,6 +142,12 @@
                                 </span>
                                 <a id="header_logout" href="#" onclick="logout();" style="display:none;">&nbsp;<b>，退出</b></a>
                                 <a id="header_login" href="jsp/ecp/login.jsp" target="_self" style=""><b>请登录</b></a>&nbsp;&nbsp;
+                   <!-- <shiro:user>
+                        <a id="header_logout" href="html/" onclick="logout();"th:text="${session.user}">&nbsp;<b></b></a>
+                    </shiro:user>
+                    <shiro:guest>
+                        <a id="header_login" href="html/login.html" target="_self" style=""><b>请登录</b></a>&nbsp;&nbsp;
+                    </shiro:guest>-->
                 </div>
                 <div style="float:left;">
                     <a href="jsp/ecp/register.jsp"
@@ -212,7 +220,8 @@
            <div style="float:right;margin-left:30px; margin-top:6px;"><img src="/index1/static/images/mobile.png" width="80"></div>
            <div style="float:right;margin-left:30px; margin-top:6px;"><img src="/index1/static/images/wx-xiaochengxu.png" width="80"></div>
 	       <div class="doSearch">
-	           <div class="iconSearchPanel" id="searchIcon" onclick="doSearch();"></div>
+	           <!--<div class="iconSearchPanel" id="searchIcon" onclick="doSearch();"></div>-->
+               <div class="iconSearchPanel" id="searchIcon" onclick="searchGoods();"></div>
 	           <div class="keywordPanel" >
 	             <input id="keywordInput" type="text" placeholder="拍品名称/流水号/作者/年代" class="keywordInput">
 	           </div>
@@ -1528,6 +1537,12 @@ var _hmt = _hmt || [];
   s.parentNode.insertBefore(hm, s);
 })();
 
+</script>
+<script type="text/javascript">
+    function searchGoods() {
+        var keyword = $("#keywordInput").val();
+        location.href="index.html?item="+keyword;
+    }
 </script>
 <!--百度抓取-->
 <script type="text/javascript" src="/index1/javascript/ecp/common/baiduzq.js"></script>

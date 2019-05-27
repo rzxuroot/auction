@@ -2,12 +2,13 @@ package com.jiumu.auction.dataile.contorller;
 
 import com.google.gson.Gson;
 import com.jiumu.auction.dataile.po.TbAccount;
-import com.jiumu.auction.dataile.po.TbUser;
 import com.jiumu.auction.dataile.service.IBidService;
 import com.jiumu.auction.dataile.service.IGoodsService;
 import com.jiumu.auction.dataile.vo.HistoricalPriceVO;
 import com.jiumu.auction.dataile.vo.JsonResult;
 import com.jiumu.auction.myAuction.service.IAuctionService;
+import com.jiumu.auction.user.bean.TbUser;
+import com.jiumu.auction.user.dao.UserMapper;
 import io.goeasy.GoEasy;
 import org.apache.log4j.Logger;
 import org.apache.shiro.SecurityUtils;
@@ -30,6 +31,8 @@ public class bidContorller {
     private IGoodsService goodsServiceImpl;
     @Autowired
     private IAuctionService auctionServiceImpl;
+    @Autowired
+    private UserMapper userMapper;
     private Logger logger= Logger.getLogger(bidContorller.class);
     @RequestMapping("/isBidder")
     @ResponseBody
@@ -46,8 +49,8 @@ public class bidContorller {
         //创建jsong对象
         JsonResult jsonResult=new JsonResult();
         //从session中获取登录对象
-        TbUser user = (TbUser) SecurityUtils.getSubject().getSession().getAttribute("user");
-        long userId = user.getUserId();
+        String ss = (String) SecurityUtils.getSubject().getSession().getAttribute("user");
+        TbUser user = userMapper.selectUserByName(ss);
         //判断是否登录
         if(user==null){
             //如果没有登录返回code为零
@@ -58,6 +61,7 @@ public class bidContorller {
                 //获取用户id
 
             //根据用户id查询用户账户对象
+            long userId = user.getUserId();
             TbAccount account = bidServiceImpl.queryAccountByUserId(userId);
             //获取可用保证金额度
             float availableMarginLimit = (float) (account.getAvailableMarginLimit()/100.00);

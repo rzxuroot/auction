@@ -220,7 +220,7 @@
                 <div style="float:left;display:none;">
                     <a href="http://www.artrade.com/jsp/ecp/register.jsp" target="_self" style="color: #FF003B;font-weight:600;">免费注册</a>&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
                 </div>
-                <div id="myDealDiv" style="cursor: pointer;float:left;position:relative;"><a href="http://www.artrade.com/jsp/ecp/buyer/buyerindex.jsp">买家中心</a><img src="detaile/detaile/pulldown.png">&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+                <div id="myDealDiv" style="cursor: pointer;float:left;position:relative;"><a href="userCenter/myorder">买家中心</a><img src="detaile/detaile/pulldown.png">&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
                     <ul id="myDeal" class="headerMenu_ul" style="position:absolute;z-index:1001;left:-20px;">
                         <li style="display:none"><a href="http://www.artrade.com/jsp/ecp/buyer/buyerindex.jsp">买家首页</a></li>
                         <li style="display:none"><a href="http://www.artrade.com/jsp/ecp/buyer/trademng/myauct.jsp">我的竞拍</a></li>
@@ -1155,6 +1155,17 @@ function doClickPreQuery() {
 <input type="hidden" id="goodsId" th:value="${goods.goodsId}"/>
 <input type="hidden" id="isAttention" th:value="${isAttention}"/>
 <script type="text/javascript">
+    var currPr = $("#currentPrice").text();
+    var startPr = $("#startPrice").text();
+    var selfPr = $("#selfPrice").text();
+    if (selfPr<startPr){
+        $("#selfPrice").text(startPr);
+    }
+    if (currPr<startPr){
+        $("#currentPrice").text(startPr);
+    }
+</script>
+<script type="text/javascript">
     $("#tabul li").mouseover(function () {
         var x = $('#tabul li').index(this);
         $("#tabul li").removeClass("itemDetailTabSelCls").addClass("itemDetailTabCls");
@@ -1548,6 +1559,7 @@ function doClickPreQuery() {
       $("#selfPrice").text(text)
     }
 </script>
+
 </body>
 
 

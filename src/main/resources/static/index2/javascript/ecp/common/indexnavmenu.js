@@ -51,14 +51,23 @@ var IndexNavMenu={
            	  	}
            	   
            	  	//二级菜单点击事件
-				/*$(".shcfy_rig_first_content").bind("click",function(){
+				$(".shcfy_rig_first_content").bind("click",function(){
 				      var _id = $(this).data("id");
 				      var _lev = $(this).data("level");
 				      var _l1Id = $(this).data("l1Id");
 				      var _l1Text = $(this).data("l1Text");
 				      var _l2Id = $(this).data("l2Id");
 				      var _l2Text = $(this).data("l2Text");
-					  var setting={
+						/*将一级目录和二级目录添加到导航条内*/
+                    $("#queryTitle").html("<a  onclick='toList(this)' style=\"color: #d83560; " +
+						"text-decoration:none;cursor:pointer\">"+_l1Text+"</a>"+">"+
+                        _l2Text);
+                    $.post("/queryGoods/query",{"contentName":_l2Text},
+                        function (value) {
+                            IndexNavMenu.initView(value);
+                        })
+
+					  /*var setting={
 			        	"action":baseUrl+"/jsp/ecp/item/manage/itemquerylist.jsp",
 			        	"datas":[{"name":"categoryId","value":_id},
 							     {"name":"l1Id","value":_l1Id},
@@ -68,8 +77,8 @@ var IndexNavMenu={
 								 {"name":"lev","value":_lev}],	
 			            "target":"_self"
 					  };	
-			         simulateFormSubmit(setting);
-				});*/
+			         simulateFormSubmit(setting);*/
+				});
 		
 		         //鼠标经过二级菜单文字事件
 				$(".shcfy_rig_first_content").hover(function() {
@@ -133,7 +142,7 @@ var IndexNavMenu={
 		});
 		
 		   //3：当用户点击一级时，跳转到相应的页面
-	    	/*IndexNavMenu.goToItemQueryList();*/
+	    	IndexNavMenu.goToItemQueryList();
 		
 		
 		
@@ -141,7 +150,7 @@ var IndexNavMenu={
     /**
      * 当用户点击一级或二级拍品分类时，执行
      */
-    /*goToItemQueryList:function(){
+   goToItemQueryList:function(){
     	// 一级菜单点击事件
         $(".showppClassify_ul_li").bind("click",function(){
         	 var _id = $(this).data("id");
@@ -151,8 +160,10 @@ var IndexNavMenu={
 			  var _l1Text = $(this).data("l1Text");
 			  var _l2Id = $(this).data("l2Id");
 			  var _l2Text = $(this).data("l2Text");
+			  /*将一级菜单添加到导航条*/
+            $("#queryTitle").html(_l1Text);
 			 
-			 var setting={
+			 /*var setting={
 	        	"action":baseUrl+"/jsp/ecp/item/manage/itemquerylist.jsp",
 	        	"datas":[{"name":"categoryId","value":_id},
 						 {"name":"l1Id","value":_l1Id},
@@ -162,19 +173,105 @@ var IndexNavMenu={
 						 {"name":"lev","value":_lev}],
 	        	"target":"_self"
 	         };	
-	         simulateFormSubmit(setting);
+	         simulateFormSubmit(setting);*/
+			 /*添加方法*/
+            $.post("/queryGoods/query",{"listName":_l1Text},
+                function (value) {
+                    IndexNavMenu.initView(value);
+                })
 		});
-    },*/
+    },
+    /*点击更改上下箭头*/
     showIcon:function(obj, id){
        var objDiv = $("#" + id + "");
 		if (objDiv.is(":hidden")) {
-			$(obj).attr("src", baseUrl + "/image/ecp/pullup.png");
+			$(obj).attr("src", baseUrl + "/index2/image/ecp/pullup.png");
 			$(objDiv).css("display", "block");
 		} else {
-			$(obj).attr("src", baseUrl + "/image/ecp/pulldown.png");
+			$(obj).attr("src", baseUrl + "/index2/image/ecp/pulldown.png");
 			$(objDiv).css("display", "none");
 		}
+    },
+	initView:function (value) {
+        if(value.totalPage != 0){
+            var mypage = "";
+            mypage += "<nav aria-label=\"Page navigation\">";
+            mypage += " <ul class=\"pagination\" id='pagediv'>";
+            if(1 == value.totalPage ){
+                mypage += "<li class=\"disabled\">";
+                mypage += "<span aria-label=\"Previous\">";
+                mypage += "<span  aria-hidden=\"true\">上一页</span>";
+                mypage += "</span>";
+                mypage += " </li>";
+            }else {
+                mypage += "<li>";
+                mypage += "<span aria-label=\"Previous\">";
+                mypage += "<span onclick=\"changePage(this)\" aria-hidden=\"true\">上一页</span>";
+                mypage += "</span>";
+                mypage += " </li>";
+            }
+
+            for(var i = 1;i<= value.totalPage;i++){
+                if(i == 1){
+                    mypage += "<li class=\"active\">";
+                    mypage += "<span  onclick=\"changePage(this)\">"+i+"</span>"
+                    mypage += "<li>";
+                }else {
+                    mypage += "<li>";
+                    mypage += "<span  onclick=\"changePage(this)\">"+i+"</span>"
+                    mypage += "<li>";
+                }
+            }
+            if(1 == value.totalPage){
+                mypage += "<li class=\"disabled\">";
+                mypage += "<span aria-label=\"Next\">";
+                mypage += "<span  aria-hidden=\"true\">下一页</span>";
+                mypage += "</span>";
+                mypage += " </li>";
+            }else {
+                mypage += "<li>";
+                mypage += "<span aria-label=\"Previous\">";
+                mypage += "<span onclick=\"changePage(this)\" aria-hidden=\"true\">下一页</span>";
+                mypage += "</span>";
+                mypage += " </li>";
+            }
+            mypage += "</ul>";
+            mypage += "</nav>";
+            $("#tablePageToolbarCls").html(mypage);
+        }
+
+        var myGoodList = "";
+        var array = value.goodsVOList;
+        //判断集合是否为null和[]
+        if(array != null && array.length > 0){
+            myGoodList += "<ul class=\"goods_item\" >";
+            for(var i = 0;i <array.length;i++){
+                myGoodList += "<li onmouseover='addBorder(this)' onmouseout='removeBorder(this)'>";
+                myGoodList += "<a href=\"/dataile/goodsDataile?goodsId="+array[i].goodsId+"\">"
+                myGoodList += "<div>";
+                myGoodList += "<div class=\"goods_img_dic\">";
+                myGoodList += "<img src=\""+array[i].goodsImg+"\">";
+                myGoodList += "</div>";
+                myGoodList += "<div  class=\"goods_text_wrap\">";
+                myGoodList += "<div class=\"goods_text_two\" title='"+array[i].goodsName+"'>"+array[i].goodsName+"</div>";
+                myGoodList += "<div class=\"goods_text_one\">";
+                myGoodList += "<span class=\"goods_title\">当前价:</span>";
+                myGoodList += "<span class=\"goods_detail\">"+array[i].askingPrice+"</span>";
+                myGoodList += "</div>";
+                myGoodList += "<div class=\"goods_text_three\">";
+                myGoodList += "<span class=\"goods_title\">下线时间:</span>";
+                var formattime = formatUnixtimestamp(array[i].logoutTime);
+                myGoodList += "<span class=\"goods_title2\" >"+formattime+"</span>";
+                myGoodList += "</div>";
+                myGoodList += "</div>";
+                myGoodList += "</div>";
+                myGoodList += "</li>";
+            }
+            myGoodList += "</ul>";
+            $("#goodsListTable").html(myGoodList);
+        }
     }
+
 }
 
 $(function() {

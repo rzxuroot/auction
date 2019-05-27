@@ -2,11 +2,12 @@ package com.jiumu.auction.dataile.service.impl;
 
 import com.jiumu.auction.dataile.mapper.GoodsMapper;
 import com.jiumu.auction.dataile.po.TbBrowse;
-import com.jiumu.auction.dataile.po.TbUser;
+import com.jiumu.auction.user.bean.TbUser;
 import com.jiumu.auction.dataile.service.IGoodsService;
 import com.jiumu.auction.dataile.vo.BrowseVO;
 import com.jiumu.auction.dataile.vo.GoodsVO;
 import com.jiumu.auction.dataile.vo.HistoricalPriceVO;
+import com.jiumu.auction.user.dao.UserMapper;
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
@@ -21,6 +22,8 @@ import java.util.List;
 public class GoodsServiceImpl implements IGoodsService {
     @Autowired
     private GoodsMapper goodsMapper;
+    @Autowired
+    private UserMapper userMapper;
     @Autowired
     private StringRedisTemplate redisTemplate;
     @Override
@@ -86,12 +89,16 @@ public class GoodsServiceImpl implements IGoodsService {
     @Override
     public void addBrowse(Long goodsId) {
         //获取用户
-        TbUser user = (TbUser) SecurityUtils.getSubject().getSession().getAttribute("user");
-        //判断用户是否为空
-        if (user!=null){
+        String user = (String) SecurityUtils.getSubject().getSession().getAttribute("user");
 
+
+        TbUser tbUser = userMapper.selectUserByName(user);
+
+        //判断用户是否为空
+        if (tbUser!=null){
+            long userId = tbUser.getUserId();
             //获得用户id
-            long userId = user.getUserId();
+            /*long userId = user.getUserId();*/
             String goodsIdAndUserIdBrowes = redisTemplate.boundValueOps(goodsId + "-browse-" + userId).get();
             if (!"1".equals(goodsIdAndUserIdBrowes)) {
                 //创建我的浏览对象
